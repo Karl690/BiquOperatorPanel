@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BiquOperatorPanel", "BiquOperatorPanel\BiquOperatorPanel.vcxproj", "{555A85A7-F635-44CB-AA1C-F660DD02BF02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|VisualGDB = Debug|VisualGDB
+		Release|VisualGDB = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Release|VisualGDB.Build.0 = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {444A3F49-4470-455D-A4CD-E20C9960069A}
+	EndGlobalSection
+EndGlobal
