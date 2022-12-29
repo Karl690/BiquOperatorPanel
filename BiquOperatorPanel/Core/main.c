@@ -2,10 +2,14 @@
 #include "main.h"
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/GUI/gui.h"
-
+#include "TouchLCD/GUI/display.h"
+#include "TouchLCD/GUI/DisplayList.h"
+#include "TouchLCD/GUI/MainView.h"
+#include "UI/ui.h"
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
+uint32_t HeartBeat = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,13 +61,22 @@ int main(void)
 	//LCD_SET_BRIGHTNESS(100);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-	  //HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
-    /* USER CODE BEGIN 3 */
-	  HAL_Delay(100);
-  }
+	//GUI_FillRect(10, 10, 200, 200, COLOR_CYAN);
+	//UpdateMainView();
+	//GUI_DrawString(10, 10, "Hello world", COLOR_GREEN);
+	ui_init();
+	
+	while (1)
+	{
+		/* USER CODE END WHILE */
+		 //HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
+	 /* USER CODE BEGIN 3 */
+	  
+		HeartBeat++;
+		if (BarValue > 3.3) BarValue = 0;
+		BarValue += 0.1;
+		HAL_Delay(100);
+	}
   /* USER CODE END 3 */
 }
 

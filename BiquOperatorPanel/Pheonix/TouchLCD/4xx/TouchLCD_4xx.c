@@ -154,47 +154,7 @@ void Setup_LCD_Hardware()
 #endif
 	GPIO_InitSet(PD7, MGPIO_MODE_AF_PP, GPIO_AF_FSMC);
 	
-//	FSMC_NORSRAM_InitTypeDef FSMC_NORSRAMInitStructure;
-//	FSMC_NORSRAM_TimingTypeDef readWriteTiming, writeTiming;
-//	
-//	readWriteTiming.AddressSetupTime = 0x01; // Address setup time (ADDSET) is 2 HCLK 1 / 36M = 27ns
-//	readWriteTiming.AddressHoldTime = 0x00;
-//	readWriteTiming.DataSetupTime = 0x0f;
-//	readWriteTiming.BusTurnAroundDuration = 0x00;
-//	readWriteTiming.CLKDivision = 0x00;
-//	readWriteTiming.DataLatency = 0x00;
-//	readWriteTiming.AccessMode = FSMC_ACCESS_MODE_A; // Mode A
-//	
-//	writeTiming.AddressSetupTime = 0x00; // Address setup time (ADDSET) is 1 HCLK
-//	writeTiming.AddressHoldTime = 0x00;
-//	writeTiming.DataSetupTime =  255;//TFTLCD_DRIVER_SPEED; // Data save time
-//	writeTiming.BusTurnAroundDuration = 0x00;
-//	writeTiming.CLKDivision = 0x00;
-//	writeTiming.DataLatency = 0x00;
-//	writeTiming.AccessMode = FSMC_ACCESS_MODE_A; // Mode A
-//	
-//	hsram1.Instance = FSMC_NORSRAM_DEVICE;
-//	hsram1.Init.NSBank = FSMC_NORSRAM_BANK1; // Select the address of the external storage area
-//	hsram1.Init.DataAddressMux = FSMC_DATA_ADDRESS_MUX_DISABLE; // Configure whether the data and address lines are multiplexed
-//	hsram1.Init.MemoryType = FSMC_MEMORY_TYPE_SRAM;
-//	hsram1.Init.MemoryType = FSMC_MEMORY_TYPE_NOR; // Configure the type of external storage
-//	hsram1.Init.MemoryDataWidth = FSMC_NORSRAM_MEM_BUS_WIDTH_16; // Set the data width of the FSMC interface
-//
-//	hsram1.Init.BurstAccessMode = FSMC_BURST_ACCESS_MODE_DISABLE; // Configure access mode
-//	hsram1.Init.WaitSignalPolarity = FSMC_WAIT_SIGNAL_POLARITY_LOW; // Configure the polarity of the wait signal
-//	hsram1.Init.WrapMode = FSMC_WRAP_MODE_DISABLE; // Configure whether to use non-alignment
-//	hsram1.Init.AsynchronousWait = FSMC_ASYNCHRONOUS_WAIT_DISABLE;
-//	hsram1.Init.WaitSignalActive = FSMC_WAIT_TIMING_BEFORE_WS; // Configure when to wait for signals
-//	hsram1.Init.WaitSignal = FSMC_WAIT_SIGNAL_DISABLE; // Configure whether to use wait signals
-//	hsram1.Init.WriteBurst = FSMC_WRITE_BURST_DISABLE; // Configure whether to allow burst writes
-//
-//	hsram1.Init.WriteOperation = FSMC_WRITE_OPERATION_ENABLE; // Configuration write operation enabled
-//	hsram1.Init.ExtendedMode = FSMC_EXTENDED_MODE_ENABLE; // Configure whether to use extended mode
-//
-//	//FSMC_NORSRAMInitStructure.ReadWriteTimingStruct = &readWriteTiming; // Read timing
-//	//FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &writeTiming; // Write timing
-//	HAL_SRAM_Init(&hsram1, &readWriteTiming, &writeTiming);
-	
+
 	FSMC_NORSRAMInitTypeDef FSMC_NORSRAMInitStructure;
 	FSMC_NORSRAMTimingInitTypeDef readWriteTiming, writeTiming;
 

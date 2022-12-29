@@ -68,7 +68,7 @@ void Init_LCD()
 	Setup_LCD_Hardware();
 	Setup_LCD_Driver();
 	
-	GUI_Clear(0xF800); // I changed this color .. LCD works weelll , now.
+	GUI_Clear(COLOR_BLACK); // I changed this color .. LCD works weelll , now.
 	
 	
 #ifdef STM32_HAS_FSMC

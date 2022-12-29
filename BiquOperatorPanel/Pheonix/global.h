@@ -1,4 +1,6 @@
+
 #pragma  once
+#include <stdint.h>
 #define LCD_DRIVER_IS(n)  ((TFTLCD_DRIVER) == (n))
 #define LCD_DRIVER_HAS(n) (((TFTLCD_DRIVER) & (n)) == (n))
 
