@@ -5,16 +5,30 @@ VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BiquOperatorPanel", "BiquOperatorPanel\BiquOperatorPanel.vcxproj", "{555A85A7-F635-44CB-AA1C-F660DD02BF02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "png2c", "png2c\png2c.csproj", "{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|VisualGDB = Debug|VisualGDB
+		Release|Any CPU = Release|Any CPU
 		Release|VisualGDB = Release|VisualGDB
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Debug|Any CPU.ActiveCfg = Debug|VisualGDB
 		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
 		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Release|Any CPU.ActiveCfg = Release|VisualGDB
 		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
 		{555A85A7-F635-44CB-AA1C-F660DD02BF02}.Release|VisualGDB.Build.0 = Release|VisualGDB
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Debug|VisualGDB.ActiveCfg = Debug|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Debug|VisualGDB.Build.0 = Debug|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Release|VisualGDB.ActiveCfg = Release|Any CPU
+		{EF7F9D17-E2A5-417C-A7F3-0B86FB97686C}.Release|VisualGDB.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
