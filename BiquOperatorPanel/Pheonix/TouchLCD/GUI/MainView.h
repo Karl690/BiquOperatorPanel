@@ -1,4 +1,4 @@
 #include "configure.h"
 #include "global.h"
 
-void UpdateMainView();
+void Init_MainView();

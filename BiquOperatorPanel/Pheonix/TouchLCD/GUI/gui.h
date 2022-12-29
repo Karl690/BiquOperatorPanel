@@ -40,6 +40,8 @@
 #define COLOR_PLUM				0xDD1B //COLOR_PLUM = 30,
 #define COLOR_BEIGE				0xF7BB //COLOR_BEIGE = 31,
 
+#define RGB16(r, g, b) (((r & 0x1F) << 11) | ((g & 0x3F) << 5) | (b & 0x1F))
+
 void GUI_Clear(uint16_t color);
 void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color);
 void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color);
