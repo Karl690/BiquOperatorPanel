@@ -359,7 +359,7 @@
     <ClInclude Include="ICONS\icons.h">
       <Filter>Icons</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\MainView.h">
+    <ClInclude Include="Pheonix\TouchLCD\GUI\PanelMain.designer.h">
       <Filter>Pheonix\TouchLCD\GUI</Filter>
     </ClInclude>
     <ClInclude Include="Pheonix\TouchLCD\Widgets\label.h">
@@ -511,7 +511,7 @@
     <ClCompile Include="ICONS\icon_start.c">
       <Filter>Icons</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\GUI\MainView.c">
+    <ClCompile Include="Pheonix\TouchLCD\GUI\PanelMain.designer.c">
       <Filter>Pheonix\TouchLCD\GUI</Filter>
     </ClCompile>
     <ClCompile Include="Pheonix\TouchLCD\Widgets\label.c">

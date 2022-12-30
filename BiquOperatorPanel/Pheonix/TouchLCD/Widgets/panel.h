@@ -3,8 +3,15 @@
 #include "widget.h"
 typedef struct tagPanel
 {
-	Widget Parent;
-	Widget* Children[256];
+	WIDGETTYPE Type;
+	Point Location;
+	Size	Size;
+	uint16_t BackgroundColor;
+	uint16_t ForegroundColor;
+	uint16_t BorderWidth;
+	uint16_t BorderColor;
+	char* Text;
+	void* Children[64];
 	uint16_t ChildrenNum;
 }Panel;
 

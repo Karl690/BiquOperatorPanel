@@ -22,13 +22,11 @@ typedef enum
 
 typedef struct tagWidget
 {
+	WIDGETTYPE Type;
 	Point Location;
 	Size	Size;
 	uint16_t BackgroundColor;
 	uint16_t ForegroundColor;
-	uint16_t Boarder;
-	uint16_t BorderColor;
-	uint16_t CornerRadius;
-	char* Text;
-	WIDGETTYPE Type;
+	uint16_t BorderWidth;
+	uint16_t BorderColor;	
 }Widget;

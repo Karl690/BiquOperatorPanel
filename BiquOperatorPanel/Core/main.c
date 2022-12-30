@@ -3,8 +3,8 @@
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/GUI/gui.h"
 #include "TouchLCD/GUI/display.h"
-#include "TouchLCD/GUI/DisplayList.h"
-#include "TouchLCD/GUI/MainView.h"
+
+#include "TouchLCD/GUI/PanelMain.designer.h"
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
@@ -61,7 +61,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	//GUI_FillRect(10, 10, 200, 200, COLOR_CYAN);
-	Init_MainView();
+	InitPanelMain();
 	//GUI_DrawString(10, 10, "Hello world", COLOR_GREEN);
 	
 	
