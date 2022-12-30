@@ -3,15 +3,8 @@
 #include "widget.h"
 typedef struct tagButton
 {
-	Point Location;
-	Size	Size;
-	uint16_t BackgroundColor;
-	uint16_t ForegroundColor;
-	uint16_t Boarder;
-	uint16_t BorderColor;
-	uint16_t CornerRadius;
-	char* Text;
+	Widget Parent;
 }Button;
 
 
-void button_draw(Button* button);
+void button_on_paint(Button* button);

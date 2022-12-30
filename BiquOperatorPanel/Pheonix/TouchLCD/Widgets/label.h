@@ -3,14 +3,8 @@
 #include "widget.h"
 typedef struct tagLabel
 {
-	Point Location;
-	Size	Size;	
-	uint16_t ForegroundColor;
-	uint16_t Boarder;
-	uint16_t BorderColor;
-	uint16_t CornerRadius;
-	char* Text;
+	Widget Parent;
 }Label;
 
 
-void label_draw(Label* button);
+void label_on_paint(Label* button);

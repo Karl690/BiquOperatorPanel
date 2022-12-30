@@ -110,6 +110,7 @@
     <ClCompile Include="Pheonix\TouchLCD\lcd_dma.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\button.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\label.c" />
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\panel.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\widget.c" />
     <ClInclude Include="Core\main.h" />
     <ClInclude Include="Core\stm32f4xx_hal_conf.h" />
@@ -202,6 +203,7 @@
     <ClInclude Include="Pheonix\TouchLCD\lcd_dma.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\button.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\label.h" />
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\panel.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\widget.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
