@@ -17,6 +17,6 @@ typedef struct tagPanel
 
 void panel_init(Panel* panel);
 void panel_add_child(Panel* panel, void* child);
-void panel_on_paint(Panel* panel);
+void panel_on_paint(Panel* panel, Point);
 
 

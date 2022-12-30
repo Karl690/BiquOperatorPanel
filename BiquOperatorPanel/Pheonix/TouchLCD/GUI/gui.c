@@ -66,6 +66,7 @@ void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t c
 {
 	uint16_t i = 0, j = 0;
 	LCD_SetWindow(sx, sy, ex - 1, ey - 1);
+	
 	for (i = sx; i < ex; i++)
 	{
 		for (j = sy; j < ey; j++)

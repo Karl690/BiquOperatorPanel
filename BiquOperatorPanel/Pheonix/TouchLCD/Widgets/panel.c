@@ -1,3 +1,4 @@
+#include "widget.h"
 #include "panel.h"
 #include "label.h"
 #include "button.h"
@@ -13,9 +14,10 @@ void panel_add_child(Panel* panel, void* child)
 	panel->ChildrenNum++;
 }
 
-void panel_on_paint(Panel* panel) 
+void panel_on_paint(Panel* panel, Point posParent) 
 {
-	GUI_FillRect(panel->Location.x, panel->Location.y, panel->Location.x + panel->Size.width, panel->Location.y + panel->Size.height, panel->BackgroundColor);
+	Point pos = { panel->Location.x + posParent.x, panel->Location.y + posParent.y };
+	GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackgroundColor);
 	
 	
 	uint16_t ChildIndex = 0;
@@ -26,10 +28,10 @@ void panel_on_paint(Panel* panel)
 		switch (child->Type)
 		{
 		case BUTTON:
-			button_on_paint((Button*)child);
+			button_on_paint((Button*)child, pos);
 			break;
 		case LABEL:
-			label_on_paint((Label*)child);
+			label_on_paint((Label*)child, pos);
 			break;
 		default:
 			break;

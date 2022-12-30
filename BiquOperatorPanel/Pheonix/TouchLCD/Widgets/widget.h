@@ -4,12 +4,12 @@
 
 typedef struct
 {
-	float x, y;
+	uint16_t x, y;
 }Point;
 
 typedef struct
 {
-	float width, height;
+	uint16_t width, height;
 }Size;
 
 typedef enum

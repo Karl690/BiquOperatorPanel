@@ -1,13 +1,14 @@
 #include "../GUI/gui.h"
 #include "label.h"
 
-void label_on_paint(Label* label)
+void label_on_paint(Label* label, Point posParent)
 {	
-	//GUI_FillRect(parent->Location.x, parent->Location.y, parent->Location.x + parent->Size.width, parent->Location.y + parent->Size.height, parent->BackgroundColor);
+	Point pos = { posParent.x + label->Location.x, posParent.y + label->Location.y };
+	GUI_FillRect(pos.x, pos.y, pos.x + label->Size.width, pos.y + label->Size.height, label->BackgroundColor);
 	if (label->BorderWidth > 0)
 	{
-		GUI_DrawRect(label->Location.x, label->Location.y, label->Location.x + label->Size.width, label->Location.y + label->Size.height, label->BorderColor);
+		GUI_DrawRect(pos.x, pos.y, pos.x + label->Size.width, pos.y + label->Size.height, label->BorderColor);
 	}
-	GUI_DrawString(label->Location.x + 2, label->Location.y + 2, label->Text, label->ForegroundColor);
+	GUI_DrawString(pos.x, pos.y, label->Text, label->ForegroundColor);
 		
 }

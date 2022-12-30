@@ -14,4 +14,4 @@ typedef struct tagLabel
 }Label;
 
 
-void label_on_paint(Label* button);
+void label_on_paint(Label*, Point);

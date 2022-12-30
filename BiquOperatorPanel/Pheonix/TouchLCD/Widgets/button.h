@@ -14,4 +14,4 @@ typedef struct tagButton
 }Button;
 
 
-void button_on_paint(Button* button);
+void button_on_paint(Button*, Point);

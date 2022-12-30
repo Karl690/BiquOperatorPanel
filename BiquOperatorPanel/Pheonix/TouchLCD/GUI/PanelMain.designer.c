@@ -9,7 +9,9 @@ void InitPanelMain()
 	
 	Panel MainPanel;
 	panel_init(&MainPanel);
-	MainPanel.Location = (Point){ .x = 20, .y = 20 };
+	MainPanel.Location = (Point){ .x = 50, .y = 20 };
+	MainPanel.Size = (Size){ .width = 700, .height = 400};
+	MainPanel.BackgroundColor = COLOR_GREEN;
 	
 	Label XPosLabel;
 	XPosLabel.Type = LABEL;
@@ -49,7 +51,7 @@ void InitPanelMain()
 	
 	panel_add_child(&MainPanel, &StopButton);
 	
-	panel_on_paint(&MainPanel);
+	panel_on_paint(&MainPanel, (Point){0,0});
 	
 	//GUI_WriteBuffer(100, 100, IconStart.width, IconStart.height, IconStart.buffer);
 }
