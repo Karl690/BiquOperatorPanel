@@ -197,6 +197,9 @@
     <ClInclude Include="Pheonix\TouchLCD\GUI\display.h" />
     <ClInclude Include="Pheonix\TouchLCD\GUI\DisplayList.h" />
     <ClInclude Include="Pheonix\TouchLCD\GUI\font.h" />
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontAvenirNext20.h" />
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontComicSansMS20.h" />
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontMenlo32.h" />
     <ClInclude Include="Pheonix\TouchLCD\GUI\gui.h" />
     <ClInclude Include="Pheonix\TouchLCD\GUI\PanelMain.designer.h" />
     <ClInclude Include="Pheonix\TouchLCD\lcd.h" />

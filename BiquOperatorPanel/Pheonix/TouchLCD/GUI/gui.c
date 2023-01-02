@@ -1,6 +1,5 @@
 ﻿#include "main.h"
 #include <math.h>
-#include "font.h"
 #include "gui.h"
 
 void GUI_Clear(uint16_t color)
@@ -137,74 +136,52 @@ void GUI_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t c
 	}
 }
 
-void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color)
+void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color)
 {
-	//gui_draw_char(X, Y, chr, GUI_FONT_SIZE, color);
-
-	uint8_t temp, t1, t;
-	uint16_t y0 = Y;
-	uint16_t x0 = X;
-	uint32_t h, w;
-
-	//uint16_t write[GUI_FONT_SIZE][GUI_FONT_SIZE==12?6:8];
-	uint16_t count;
-
-	w = LCD_WIDTH;
-	h = LCD_LINESIZE;
-
-	chr = chr - ' ';
-	count = 0;
-	extern const unsigned char asc2_1206[95][12];
-	extern const unsigned char asc2_1608[95][16];
-	for (t = 0; t < GUI_FONT_SIZE; t++)
+	if (!font) return;
+	uint8_t width = font->Width;
+	uint8_t height = font->Height;	
+	uint8_t offset =  8 *((width + 7)/8) -  width ;
+	uint32_t counterh = 0, counterw = 0, index = 0;
+	
+	uint8_t* pChar = &font->pFontData[(chr - ' ') * height * ((width + 7) / 8)];
+	uint8_t *pchar = NULL;
+	uint32_t line = 0;
+	for (counterh = 0; counterh < height; counterh++)
 	{
-		if (GUI_FONT_SIZE == 12)temp = asc2_1206[chr][t]; //����1206����
-		else temp = asc2_1608[chr][t]; //����1608����
-
-		for (t1 = 0; t1 < 8; t1++)
+		pchar = (pChar + (width + 7) / 8 * counterh);
+		// REPLACE: little-endian swapping
+		int bytes = ((width + 7) / 8);
+		line = 0;
+		for (int i = 0; i < bytes; i++) {
+			line <<= 8;
+			line |= pchar[i];
+		}
+		
+		for (counterw = 0; counterw < width; counterw++)
 		{
-			if (temp & 0x80)
+			
+			if (line & (1 << (width - counterw + offset - 1))) 
 			{
-				uint16_t yindex = (uint16_t)(y0 + count); // * MAX_LCD_SIZE);
-				uint16_t xindex = x0 + t / 2;
-				//GUI_BUF[yindex][xindex] = color;
-				GUI_DrawPoint(xindex, yindex, color);
+				GUI_DrawPoint(X + counterw, Y + counterh, color);
 			}
-			else {
-				
-			}
-			count++;
-			if (count >= GUI_FONT_SIZE) count = 0;
-
-			temp <<= 1;
-			Y++;
-			if (Y >= h)
-			{
-				return;
-			}
-			if ((Y - y0) == GUI_FONT_SIZE)
-			{
-				Y = y0;
-				X++;
-				if (X >= w)
-				{
-					return;
-				}
-				break;
-			}
+//			else
+//			{
+//				GUI_DrawPoint(X + counterw, Y + counterh, COLOR_BLACK);
+//			} 
 		}
 	}
 }
 
-void GUI_DrawString(uint16_t X, uint16_t Y, char *str, uint16_t color)
+void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t color)
 {
 	uint16_t x0 = X;
 	while ((*str <= '~')&&(*str >= ' '))
 	{
-		if (X >= LCD_WIDTH){X = x0; Y += GUI_FONT_SIZE; }
-		if (Y >= LCD_LINESIZE)break;//�˳�
-		GUI_DrawChar(X, Y, *str, color);
-		X += GUI_FONT_SIZE / 2;
+		if (X >= LCD_WIDTH){X = x0; Y += font->Height; }
+		if (Y >= LCD_HEIGHT) break;//�˳�
+		GUI_DrawChar(X, Y, *str, font, color);
+		X += 21;//fontSize / 2;
 		str++;
 	}
 }

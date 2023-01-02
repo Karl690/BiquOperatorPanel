@@ -17,7 +17,7 @@ void panel_add_child(Panel* panel, void* child)
 void panel_on_paint(Panel* panel, Point posParent) 
 {
 	Point pos = { panel->Location.x + posParent.x, panel->Location.y + posParent.y };
-	GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackgroundColor);
+	GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackColor);
 	
 	
 	uint16_t ChildIndex = 0;

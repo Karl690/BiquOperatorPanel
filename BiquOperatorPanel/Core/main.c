@@ -62,7 +62,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	//GUI_FillRect(10, 10, 200, 200, COLOR_CYAN);
 	InitPanelMain();
-	//GUI_DrawString(10, 10, "Hello world", COLOR_GREEN);
+	//GUI_DrawString(100, 100, "Hello world", 32, COLOR_GREEN);
 	
 	
 	while (1)

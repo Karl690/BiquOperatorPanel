@@ -1,3 +1,4 @@
+#pragma once
 #include <stdint.h>
 
 #define LEFT_PADDING 5
@@ -42,6 +43,25 @@
 
 #define RGB16(r, g, b) (((r & 0x1F) << 11) | ((g & 0x3F) << 5) | (b & 0x1F))
 
+
+typedef struct
+{
+	uint16_t x, y;
+}Point;
+
+typedef struct
+{
+	uint16_t width, height;
+}Size;
+
+
+typedef struct tagFontType
+{
+	uint8_t Width;
+	uint8_t Height;
+	uint8_t* pFontData;
+}Font;
+
 void GUI_Clear(uint16_t color);
 void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color);
 void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color);
@@ -50,6 +70,6 @@ void GUI_DrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t c
 void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color);
 void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t* data);
 void GUI_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, uint16_t color);
-void GUI_DrawString(uint16_t X, uint16_t Y, char *str, uint16_t color);
+void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color); // fontSize must be 20 or 32
+void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t color);
 

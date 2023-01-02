@@ -374,6 +374,15 @@
     <ClInclude Include="Pheonix\TouchLCD\Widgets\panel.h">
       <Filter>Pheonix\TouchLCD\Widgets</Filter>
     </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontMenlo32.h">
+      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontComicSansMS20.h">
+      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontAvenirNext20.h">
+      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pheonix\TouchLCD\4xx\TouchLCD_4xx.c">
