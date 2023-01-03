@@ -13,6 +13,8 @@ typedef struct tagButton
 	uint16_t BorderColor;
 	char Text[32];
 	Font* Font;
+	TEXT_ALIGN	TextAlign;
+	PADDING		Padding;
 }Button;
 
 

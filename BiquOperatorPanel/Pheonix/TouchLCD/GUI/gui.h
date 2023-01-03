@@ -3,7 +3,6 @@
 
 #define LEFT_PADDING 5
 #define RIGHT_PADDING 5
-#define PADDING 5
 #define VALUE_POS	100
 #define LCD_LINESIZE	18
 #define GUI_FONT_SIZE	16
@@ -61,6 +60,11 @@ typedef struct tagFontType
 	uint8_t Height;
 	uint8_t* pFontData;
 }Font;
+
+typedef struct tagPadding
+{
+	uint8_t left, top, right, bottom;
+}PADDING;
 
 void GUI_Clear(uint16_t color);
 void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color);

@@ -377,10 +377,7 @@
     <ClInclude Include="Pheonix\TouchLCD\GUI\FontMenlo32.h">
       <Filter>Pheonix\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\FontComicSansMS20.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\FontAvenirNext20.h">
+    <ClInclude Include="Pheonix\TouchLCD\GUI\FontArial.h">
       <Filter>Pheonix\TouchLCD\GUI</Filter>
     </ClInclude>
   </ItemGroup>

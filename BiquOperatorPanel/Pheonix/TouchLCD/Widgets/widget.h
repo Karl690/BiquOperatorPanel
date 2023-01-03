@@ -10,6 +10,19 @@ typedef enum
 	CHECKBOX,
 }WIDGETTYPE;
 
+typedef enum
+{
+	TopLeft,
+	TopCenter,
+	TopRight,
+	MiddleLeft,
+	MiddleCenter,
+	MiddleRight,
+	BottomLeft,
+	BottomCenter,
+	BottomRight,
+}TEXT_ALIGN;
+
 
 typedef struct tagWidget
 {

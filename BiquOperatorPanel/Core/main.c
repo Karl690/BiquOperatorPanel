@@ -64,7 +64,6 @@ int main(void)
 	InitPanelMain();
 	//GUI_DrawString(100, 100, "Hello world", 32, COLOR_GREEN);
 	
-	
 	while (1)
 	{
 		/* USER CODE END WHILE */

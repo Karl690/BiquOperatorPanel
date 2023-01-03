@@ -28,11 +28,13 @@ void InitPanelMain()
 	label1.Type = LABEL;
 	label1.BackColor = RGB16(8, 16, 8);
 	label1.ForeColor = RGB16(24, 63, 31);
-	label1.BorderWidth = 1;
+	label1.BorderWidth = 0;
 	label1.BorderColor = COLOR_BLACK;
-	label1.Location = (Point){ .x = 206, .y = 5 };
+	label1.Location = (Point){ .x = 206, .y = 0 };
 	label1.Size = (Size){ .width = 357, .height = 44 };
-	label1.Font = &FontMenlo32;
+	label1.Font = &Font24;
+	label1.Padding = (PADDING) { 2, 2, 2, 2};
+	label1.TextAlign = MiddleCenter;
 	strcpy(label1.Text, "PCT Megaconic 23000");
 	panel_add_child(&panelHeader, &label1); //add to the panel
 
@@ -51,7 +53,9 @@ void InitPanelMain()
 	button7.BorderColor = COLOR_BLACK;
 	button7.Location = (Point){ .x = 0, .y = 313 };
 	button7.Size = (Size){ .width = 80, .height = 50 };
-	button7.Font = &FontMenlo32;
+	button7.Font = &Font16;
+	button7.Padding = (PADDING) { 2, 2, 2, 2 };
+	button7.TextAlign = MiddleCenter;
 	strcpy(button7.Text, "<<<");
 	panel_add_child(&panelTabSelect, &button7); //add to the panel
 
@@ -63,7 +67,8 @@ void InitPanelMain()
 	button6.BorderColor = COLOR_BLACK;
 	button6.Location = (Point){ .x = 0, .y = 366 };
 	button6.Size = (Size){ .width = 80, .height = 50 };
-	button6.Font = &FontAvenirNext20;
+	button6.Font = &Font16;
+	button6.TextAlign = MiddleCenter;
 	strcpy(button6.Text, "<<<");
 	panel_add_child(&panelTabSelect, &button6); //add to the panel
 
@@ -75,7 +80,8 @@ void InitPanelMain()
 	button5.BorderColor = COLOR_BLACK;
 	button5.Location = (Point){ .x = 0, .y = 419 };
 	button5.Size = (Size){ .width = 80, .height = 50 };
-	button5.Font = &FontAvenirNext20;
+	button5.Font = &Font16;
+	button5.TextAlign = MiddleCenter;
 	strcpy(button5.Text, "<<<");
 	panel_add_child(&panelTabSelect, &button5); //add to the panel
 
@@ -87,7 +93,8 @@ void InitPanelMain()
 	buttonFreqncies.BorderColor = COLOR_BLACK;
 	buttonFreqncies.Location = (Point){ .x = 0, .y = 101 };
 	buttonFreqncies.Size = (Size){ .width = 80, .height = 50 };
-	buttonFreqncies.Font = &FontAvenirNext20;
+	buttonFreqncies.Font = &Font16;
+	buttonFreqncies.TextAlign = MiddleCenter;
 	strcpy(buttonFreqncies.Text, "<<<");
 	panel_add_child(&panelTabSelect, &buttonFreqncies); //add to the panel
 
@@ -99,7 +106,8 @@ void InitPanelMain()
 	buttonDiangositcs.BorderColor = COLOR_BLACK;
 	buttonDiangositcs.Location = (Point){ .x = 0, .y = 154 };
 	buttonDiangositcs.Size = (Size){ .width = 80, .height = 50 };
-	buttonDiangositcs.Font = &FontAvenirNext20;
+	buttonDiangositcs.Font = &Font16;
+	buttonDiangositcs.TextAlign = MiddleCenter;
 	strcpy(buttonDiangositcs.Text, "<<<");
 	panel_add_child(&panelTabSelect, &buttonDiangositcs); //add to the panel
 
@@ -111,7 +119,8 @@ void InitPanelMain()
 	buttonManualControl.BorderColor = COLOR_BLACK;
 	buttonManualControl.Location = (Point){ .x = 0, .y = 260 };
 	buttonManualControl.Size = (Size){ .width = 80, .height = 50 };
-	buttonManualControl.Font = &FontAvenirNext20;
+	buttonManualControl.Font = &Font16;
+	buttonManualControl.TextAlign = MiddleCenter;
 	strcpy(buttonManualControl.Text, "<<<");
 	panel_add_child(&panelTabSelect, &buttonManualControl); //add to the panel
 
@@ -123,7 +132,8 @@ void InitPanelMain()
 	buttonTune.BorderColor = COLOR_BLACK;
 	buttonTune.Location = (Point){ .x = 0, .y = 207 };
 	buttonTune.Size = (Size){ .width = 80, .height = 50 };
-	buttonTune.Font = &FontAvenirNext20;
+	buttonTune.Font = &Font16;
+	buttonTune.TextAlign = MiddleCenter;
 	strcpy(buttonTune.Text, "<<<");
 	panel_add_child(&panelTabSelect, &buttonTune); //add to the panel
 
@@ -135,7 +145,8 @@ void InitPanelMain()
 	buttonLSecs.BorderColor = COLOR_BLACK;
 	buttonLSecs.Location = (Point){ .x = 0, .y = 48 };
 	buttonLSecs.Size = (Size){ .width = 80, .height = 50 };
-	buttonLSecs.Font = &FontAvenirNext20;
+	buttonLSecs.Font = &Font16;
+	buttonLSecs.TextAlign = MiddleCenter;
 	strcpy(buttonLSecs.Text, "<<<");
 	panel_add_child(&panelTabSelect, &buttonLSecs); //add to the panel
 
@@ -147,7 +158,8 @@ void InitPanelMain()
 	buttonHome.BorderColor = COLOR_BLACK;
 	buttonHome.Location = (Point){ .x = 0, .y = -5 };
 	buttonHome.Size = (Size){ .width = 80, .height = 50 };
-	buttonHome.Font = &FontAvenirNext20;
+	buttonHome.Font = &Font16;
+	buttonHome.TextAlign = MiddleCenter;
 	strcpy(buttonHome.Text, ">>>");
 	panel_add_child(&panelTabSelect, &buttonHome); //add to the panel
 

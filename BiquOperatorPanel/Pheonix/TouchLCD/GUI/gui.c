@@ -181,7 +181,7 @@ void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t colo
 		if (X >= LCD_WIDTH){X = x0; Y += font->Height; }
 		if (Y >= LCD_HEIGHT) break;//�˳�
 		GUI_DrawChar(X, Y, *str, font, color);
-		X += 21;//fontSize / 2;
+		X += font->Width;//fontSize / 2;
 		str++;
 	}
 }
