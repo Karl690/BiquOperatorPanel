@@ -21,7 +21,7 @@ void panel_on_paint(Panel* panel, Point posParent)
 	
 	
 	uint16_t ChildIndex = 0;
-	for (ChildIndex = 0; ChildIndex < panel->ChildrenNum; ChildIndex++)
+	for (ChildIndex = 0; ChildIndex < panel->ChildrenNum; ChildIndex ++)
 	{
 		Widget* child = panel->Children[ChildIndex];
 		

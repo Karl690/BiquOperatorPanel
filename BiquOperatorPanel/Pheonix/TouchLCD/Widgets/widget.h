@@ -23,6 +23,7 @@ typedef enum
 	BottomRight,
 }TEXT_ALIGN;
 
+typedef void(*CallbackEventFunction)();
 
 typedef struct tagWidget
 {
@@ -34,3 +35,6 @@ typedef struct tagWidget
 	uint16_t BorderWidth;
 	uint16_t BorderColor;	
 }Widget;
+
+
+#define NULL 0

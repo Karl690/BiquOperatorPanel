@@ -11,10 +11,15 @@ typedef struct tagLabel
 	uint16_t	ForeColor;
 	uint16_t	BorderWidth;
 	uint16_t	BorderColor;
+	uint16_t CornerRadius;
 	char		Text[32];
 	Font*		Font;
 	TEXT_ALIGN	TextAlign;
 	PADDING		Padding;
+	
+	CallbackEventFunction	Event_Down;
+	CallbackEventFunction	Event_Hold;
+	CallbackEventFunction	Event_Up;
 }Label;
 
 

@@ -40,8 +40,8 @@
 #define COLOR_PLUM				0xDD1B //COLOR_PLUM = 30,
 #define COLOR_BEIGE				0xF7BB //COLOR_BEIGE = 31,
 
-#define RGB16(r, g, b) (((r & 0x1F) << 11) | ((g & 0x3F) << 5) | (b & 0x1F))
-
+//#define RGB16(r, g, b) (((r & 0x1F) << 11) | ((g & 0x3F) << 5) | (b & 0x1F))
+#define  RGB16(r, g, b)  ((r & 0b11111000) << 8) | ((g & 0b11111100) << 3) | (b >> 3)
 
 typedef struct
 {
