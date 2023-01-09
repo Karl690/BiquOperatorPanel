@@ -1,0 +1,6 @@
+C:\Users\karl6\Documents\GitHub\BiquOperatorPanel\bin\png2c.exe.config
+C:\Users\karl6\Documents\GitHub\BiquOperatorPanel\bin\png2c.exe
+C:\Users\karl6\Documents\GitHub\BiquOperatorPanel\bin\png2c.pdb
+C:\Users\karl6\Documents\GitHub\BiquOperatorPanel\png2c\obj\Debug\png2c.csproj.CoreCompileInputs.cache
+C:\Users\karl6\Documents\GitHub\BiquOperatorPanel\png2c\obj\Debug\png2c.exe
+C:\Users\karl6\Documents\GitHub\BiquOperatorPanel\png2c\obj\Debug\png2c.pdb

@@ -1,6 +1,6 @@
 #pragma once
 
-extern int counter;
+extern int EncoderCount;
 extern int encoderSt; 
 
 void EncoderButtonDownEvent();

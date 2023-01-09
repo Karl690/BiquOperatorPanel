@@ -9,7 +9,7 @@
 #include "TouchLCD/lcd_encoder.h"
 char logtext[255] = { 0 };
 ControlUpdateInfo MainCtrlUpdateInfo[] = { 
-	{ 0, &counter, "gL_Label5" }, 
+	{ 0, &EncoderCount, "gL_Label5" }, 
 	{ 0, &encoderSt, "gL_Label4" },
 	{0, NULL, ""},
 };
@@ -147,6 +147,7 @@ void main_screen_loop_update_value()
 	char str_value[32] = { 0 };
 	while (1)
 	{
+		//gL_Button1->Location()
 		if (!MainCtrlUpdateInfo[i].point_for_value) break;
 		if (MainCtrlUpdateInfo[i].cur_value != *MainCtrlUpdateInfo[i].point_for_value)
 		{//it need to update.

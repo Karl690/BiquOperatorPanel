@@ -26,7 +26,7 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 	Spare,
 	Spare,
 	Spare,
-	Spare,
+	EncoderWheelMove,
 	Spare,
 	Spare,
 	Spare,
@@ -37,7 +37,7 @@ const PFUNC F100HZ[NUM_100HZ] =
 	Spare,//loop_100Hz_simple_work, // keep as last call in this array
 	Spare,
 	Spare,
-	EncoderWheelMove,
+	Spare,
 	Spare,
 	Spare,
 	CheckEncoderButton,
