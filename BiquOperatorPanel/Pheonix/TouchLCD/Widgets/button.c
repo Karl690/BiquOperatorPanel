@@ -1,6 +1,20 @@
 #include "../GUI/gui.h"
 #include "button.h"
 
+Button* button_init(Widget* parent)
+{
+	Button* button = (Button*)malloc(sizeof(Button));
+	button->Type = LABEL;
+	button->Location = (Point) { 0, 0 };
+	button->Size = (Size) { 0, 0 };
+	button->Parent = parent;
+	return button;
+}
+void button_destory(Button* button)
+{
+	free(button);
+}
+
 void button_on_paint(Button* button, Point posParent)
 {
 	Point pos = { posParent.x + button->Location.x, posParent.y + button->Location.y };
@@ -53,6 +67,6 @@ void button_on_paint(Button* button, Point posParent)
 		pos.y += button->Padding.top;
 		break;
 	}
-	GUI_DrawString(pos.x, pos.y, button->Text, button->Font, button->ForeColor);
+	GUI_DrawString(pos.x, pos.y, button->Text, button->Font, button->ForeColor, button->BackColor);
 		
 }

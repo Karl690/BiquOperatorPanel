@@ -40,3 +40,5 @@ void Setup_LCD_Driver();
 void LCD_Init(void);
 void LCD_RefreshDirection(uint8_t rotate);
 void LCD_SetWindow(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey);
+
+void LCD_ProcessTouchEvent();

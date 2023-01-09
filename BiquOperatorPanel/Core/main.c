@@ -1,33 +1,23 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "GPIO/pininit.h"
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/GUI/gui.h"
 #include "TouchLCD/GUI/display.h"
-
+#include "TouchLCD/lcd_touch.h"
 #include "TouchLCD/GUI/PanelMain.designer.h"
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
 uint32_t HeartBeat = 0;
-/* USER CODE END PV */
-
+SCREEN_TYPE CurretScreenType = SCREEN_MAIN;
+SCREEN_TYPE NewScreenType = SCREEN_MAIN;
+Panel* ActivPanel = NULL;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_FSMC_Init(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -57,25 +47,57 @@ int main(void)
 	W25Qxx_Init();
 	Init_LCD();   // their code
 	
-	//LCD_SET_BRIGHTNESS(100);
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-	//GUI_FillRect(10, 10, 200, 200, COLOR_CYAN);
-	InitPanelMain();
-	//GUI_DrawString(100, 100, "Hello world", 32, COLOR_GREEN);
+	Init_GPIO();
+	
+	
+	lcd_touch_calibration_screen(0);
+	
+	NewScreenType = SCREEN_MAIN;
+	CurretScreenType = SCREEN_MAIN;
+	ActivPanel = InitPanelMain();
+	panel_on_paint(ActivPanel, (Point){ 0, 0 });
 	
 	while (1)
 	{
-		/* USER CODE END WHILE */
-		 //HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_13);
-	 /* USER CODE BEGIN 3 */
-	  
+		if(CurretScreenType != NewScreenType) // it need to transform screen
+		{
+			switch (NewScreenType)
+			{
+			case SCREEN_TOUCH_CALIBRATION:
+				lcd_touch_calibration_screen(1);
+				NewScreenType = SCREEN_MAIN;			
+			default:
+				break;
+			}	
+			CurretScreenType = NewScreenType;
+			GUI_Clear(COLOR_BLACK);
+			switch (CurretScreenType)
+			{
+			case SCREEN_MAIN:
+				panel_on_paint(ActivPanel, (Point){ 0, 0 });
+				CurretScreenType = NewScreenType;
+				panel_touch_event_to_control(ActivPanel);
+			default:
+				break;
+			}
+		}else
+		{
+			switch (CurretScreenType)
+			{
+			case SCREEN_MAIN:
+				main_screen_loop_update_value();
+				break;
+			default:
+				break;
+			}
+			
+		}
+	
 		HeartBeat++;
 		if (BarValue > 3.3) BarValue = 0;
 		BarValue += 0.1;
 		HAL_Delay(100);
 	}
-  /* USER CODE END 3 */
 }
 
 /**

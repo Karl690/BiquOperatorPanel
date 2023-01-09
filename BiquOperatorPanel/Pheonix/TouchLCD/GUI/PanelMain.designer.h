@@ -1,4 +1,4 @@
 #include "configure.h"
 #include "global.h"
-
-void InitPanelMain();
+#include "../Widgets/panel.h"
+Panel* InitPanelMain();

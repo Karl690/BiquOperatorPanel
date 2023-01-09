@@ -77,6 +77,12 @@
     <Filter Include="Pheonix\TouchLCD\Widgets">
       <UniqueIdentifier>{053ea268-dcc7-4384-9ade-07d8295c696c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pheonix\FLASH">
+      <UniqueIdentifier>{c1b9d653-8d4b-4f14-bed3-66d0056914d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pheonix\FLASH\4xx">
+      <UniqueIdentifier>{218811fc-a7b4-4cd8-a602-dadcb8158e84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="BiquOperatorPanel-Debug.vgdbsettings">
@@ -374,11 +380,26 @@
     <ClInclude Include="Pheonix\TouchLCD\Widgets\panel.h">
       <Filter>Pheonix\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\FontMenlo32.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="Pheonix\TouchLCD\GUI\FontArial.h">
       <Filter>Pheonix\TouchLCD\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\taskmanager.h">
+      <Filter>Pheonix</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\RevisionHistory.h">
+      <Filter>Pheonix</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\lcd_touch.h">
+      <Filter>Pheonix\TouchLCD</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\FLASH\4xx\flash_4xx.h">
+      <Filter>Pheonix\FLASH\4xx</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\GPIO\pininit.h">
+      <Filter>Pheonix\GPIO</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\lcd_encoder.h">
+      <Filter>Pheonix\TouchLCD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -531,6 +552,21 @@
     </ClCompile>
     <ClCompile Include="Pheonix\TouchLCD\Widgets\panel.c">
       <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\taskmanager.c">
+      <Filter>Pheonix</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\TouchLCD\lcd_touch.c">
+      <Filter>Pheonix\TouchLCD</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\FLASH\4xx\flash_4xx.c">
+      <Filter>Pheonix\FLASH\4xx</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\GPIO\pininit.c">
+      <Filter>Pheonix\GPIO</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\TouchLCD\lcd_encoder.c">
+      <Filter>Pheonix\TouchLCD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

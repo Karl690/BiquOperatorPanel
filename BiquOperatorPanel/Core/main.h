@@ -39,8 +39,18 @@ extern "C" {
 #include "SPI/w25qxx.h"
 
 #define VECT_TAB_FLASH 0x08008000UL
-		
-/* Exported functions prototypes ---------------------------------------------*/
+
+typedef enum 
+{
+	SCREEN_TOUCH_CALIBRATION,
+	SCREEN_MAIN
+}SCREEN_TYPE;
+	
+	
+	
+extern SCREEN_TYPE CurretScreenType;
+extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.
+
 void Error_Handler(void);
 
 	

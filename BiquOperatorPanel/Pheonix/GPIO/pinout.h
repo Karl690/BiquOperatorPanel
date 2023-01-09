@@ -13,3 +13,7 @@
 #define W25Qxx_SPEED  0
 #define W25Qxx_SPI    _SPI3
 #define W25Qxx_CS_PIN PB6
+
+#define LCD_ENCA_PIN   PA8
+#define LCD_ENCB_PIN   PC9
+#define LCD_BTN_PIN    PC8

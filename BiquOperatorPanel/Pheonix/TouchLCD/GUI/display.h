@@ -1,3 +1,4 @@
+#pragma once
 #include "configure.h"
 #include "global.h"
 #include "displaylist.h"

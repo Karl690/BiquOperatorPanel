@@ -1,6 +1,20 @@
 #include "../GUI/gui.h"
 #include "label.h"
 
+Label* label_init(Widget* parent)
+{
+	Label* label = (Label*)malloc(sizeof(Label));
+	label->Type = LABEL;
+	label->Location = (Point) { 0, 0 };
+	label->Size = (Size) { 0, 0 };
+	label->Parent = parent;
+	return label;
+}
+void label_destory(Label* label)
+{
+	free(label);
+}
+
 void label_on_paint(Label* label, Point posParent)
 {	
 	
@@ -55,6 +69,6 @@ void label_on_paint(Label* label, Point posParent)
 		pos.y += label->Padding.top;
 		break;
 	}
-	GUI_DrawString(pos.x, pos.y, label->Text, label->Font, label->ForeColor);
+	GUI_DrawString(pos.x, pos.y, label->Text, label->Font, label->ForeColor, label->BackColor);
 		
 }

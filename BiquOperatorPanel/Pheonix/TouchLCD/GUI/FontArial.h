@@ -1,6 +1,4 @@
-#pragma once
 #include <stdint.h>
-#include "gui.h"
 
 const uint8_t Font8_Table[] = 
 {
@@ -22654,7 +22652,7 @@ const uint8_t Font24_Table[] =
 	0x01,
 	0x80,
 	0x00,
-	//        ##        
+	//        ##     
 	0x03,
 	0x80,
 	0x00,

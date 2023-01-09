@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
-#include "../GUI/FontAvenirNext20.h"
-#include "../GUI/FontComicSansMS20.h"
-#include "../GUI/FontMenlo32.h"
-#include "../GUI/FontArial.h"
+//#include "FontArial.h"
+extern Font Font8;
+extern Font Font12;
+extern Font Font16;
+extern Font Font20;
+extern Font Font24;
