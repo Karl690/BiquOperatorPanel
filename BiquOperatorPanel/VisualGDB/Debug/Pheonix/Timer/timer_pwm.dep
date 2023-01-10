@@ -43,7 +43,12 @@ VisualGDB/Debug/Pheonix/Timer/timer_pwm.o: Pheonix/Timer/timer_pwm.c \
  Pheonix/GPIO/pins.h Pheonix/GPIO/GPIO_Init.h Pheonix/GPIO/pins.h \
  Pheonix/GPIO/pinout.h Pheonix/TouchLCD/lcd.h \
  Pheonix/TouchLCD/Drivers/SSD1963.h Pheonix/SPI/spi.h \
- Pheonix/SPI/w25qxx.h
+ Pheonix/SPI/w25qxx.h Pheonix/TouchLCD/GUI/PanelMain.designer.h \
+ Pheonix/TouchLCD/GUI/../Widgets/Widget.h \
+ Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h \
+ Pheonix/TouchLCD/GUI/../Widgets/panel.h \
+ Pheonix/TouchLCD/GUI/../Widgets/label.h \
+ Pheonix/TouchLCD/GUI/../Widgets/button.h
 Pheonix/Timer/timer_pwm.h:
 c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h:
@@ -98,3 +103,9 @@ Pheonix/TouchLCD/lcd.h:
 Pheonix/TouchLCD/Drivers/SSD1963.h:
 Pheonix/SPI/spi.h:
 Pheonix/SPI/w25qxx.h:
+Pheonix/TouchLCD/GUI/PanelMain.designer.h:
+Pheonix/TouchLCD/GUI/../Widgets/Widget.h:
+Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h:
+Pheonix/TouchLCD/GUI/../Widgets/panel.h:
+Pheonix/TouchLCD/GUI/../Widgets/label.h:
+Pheonix/TouchLCD/GUI/../Widgets/button.h:

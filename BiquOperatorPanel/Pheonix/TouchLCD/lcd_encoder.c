@@ -30,6 +30,7 @@ void EncoderWheelMove()
 		encoderlastRead = st;
 		
 		widget_update_value_int((Widget*)&gL_Label5, EncoderCount);
+		Refresh = 1;//tell them we need to redraw the screen
 		//sprintf(gL_Label5.Text, "%d", EncoderCount);
 		//gL_Label5.RedrawMe = 1;
 		

@@ -26,7 +26,7 @@ void widget_update_value_int(Widget* widget, uint32_t value)
 	widget->RedrawMe = 1;
 }
 
-uint8_t widget_is_redraw(Widget* widget, uint8_t forceRedraw)
+uint8_t Refresh_Widget(Widget* widget, uint8_t forceRedraw)
 {
 	if (widget->Visible && forceRedraw) return 1;
 	if (widget->RedrawMe && widget->Visible) return 1;

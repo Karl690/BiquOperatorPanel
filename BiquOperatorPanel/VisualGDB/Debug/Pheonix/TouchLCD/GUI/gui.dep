@@ -43,7 +43,13 @@ VisualGDB/Debug/Pheonix/TouchLCD/GUI/gui.o: Pheonix/TouchLCD/GUI/gui.c \
  Pheonix/GPIO/pins.h Pheonix/GPIO/GPIO_Init.h Pheonix/GPIO/pins.h \
  Pheonix/GPIO/pinout.h Pheonix/TouchLCD/lcd.h \
  Pheonix/TouchLCD/Drivers/SSD1963.h Pheonix/SPI/spi.h \
- Pheonix/SPI/w25qxx.h c:\sysgcc\arm-eabi\arm-none-eabi\include\math.h \
+ Pheonix/SPI/w25qxx.h Pheonix/TouchLCD/GUI/PanelMain.designer.h \
+ Pheonix/TouchLCD/GUI/../Widgets/Widget.h \
+ Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h \
+ Pheonix/TouchLCD/GUI/../Widgets/panel.h \
+ Pheonix/TouchLCD/GUI/../Widgets/label.h \
+ Pheonix/TouchLCD/GUI/../Widgets/button.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\math.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h \
@@ -53,8 +59,7 @@ VisualGDB/Debug/Pheonix/TouchLCD/GUI/gui.o: Pheonix/TouchLCD/GUI/gui.c \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h \
- c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
- Pheonix/TouchLCD/GUI/gui.h
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h
 Core/main.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/stm32f4xx_hal_conf.h:
@@ -108,6 +113,12 @@ Pheonix/TouchLCD/lcd.h:
 Pheonix/TouchLCD/Drivers/SSD1963.h:
 Pheonix/SPI/spi.h:
 Pheonix/SPI/w25qxx.h:
+Pheonix/TouchLCD/GUI/PanelMain.designer.h:
+Pheonix/TouchLCD/GUI/../Widgets/Widget.h:
+Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h:
+Pheonix/TouchLCD/GUI/../Widgets/panel.h:
+Pheonix/TouchLCD/GUI/../Widgets/label.h:
+Pheonix/TouchLCD/GUI/../Widgets/button.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\math.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
@@ -119,4 +130,3 @@ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
-Pheonix/TouchLCD/GUI/gui.h:

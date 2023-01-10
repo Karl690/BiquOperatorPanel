@@ -7,8 +7,10 @@ typedef struct tagLabel
 	//Commone properties
 	WIDGETTYPE Type;
 	char Name[32];
+	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
+	uint8_t Visible;
 	Point Location;
-	Size	Size;
+	Size	Size;	
 	uint16_t BackColor;
 	uint16_t ForeColor;
 	uint16_t BorderWidth;
@@ -18,8 +20,7 @@ typedef struct tagLabel
 	char Text[32];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
-	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
-	uint8_t Visible;
+
 	void* Parent;
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;

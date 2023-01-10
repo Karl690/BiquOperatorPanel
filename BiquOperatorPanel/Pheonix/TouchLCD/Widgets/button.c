@@ -17,6 +17,7 @@ void button_destory(Button* button)
 
 void button_on_paint(Button* button, Point posParent)
 {
+	button->RedrawMe = 0;//we are repainting this, so turn off the redraw property
 	Point pos = { posParent.x + button->Location.x, posParent.y + button->Location.y };
 	GUI_FillRect(pos.x, pos.y, pos.x + button->Size.width, pos.y + button->Size.height, button->BackColor);
 	if (button->BorderWidth > 0)

@@ -54,7 +54,7 @@ extern SCREEN_TYPE CurretScreenType;
 extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.
 
 void Error_Handler(void);
-
+	extern uint16_t	Refresh;
 	
 
 #ifdef __cplusplus

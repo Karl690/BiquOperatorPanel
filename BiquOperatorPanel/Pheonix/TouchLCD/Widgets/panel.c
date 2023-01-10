@@ -35,19 +35,25 @@ void panel_add_child(Panel* panel, void* child)
 
 void panel_on_paint(Panel* panel, Point posParent, uint8_t forceRedraw) 
 {
-	//if forceRedraw is 1, it would redraw all controls regardless of RedrawMe property of control.
-	Point pos = { panel->Location.x + posParent.x, panel->Location.y + posParent.y };
-	if (widget_is_redraw((Widget*)panel, forceRedraw)) {		
-		GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackColor);
-		panel->RedrawMe = 0;
+	uint16_t ChildIndex = 0;
+	Point pos = (Point) { panel->Location.x + posParent.x, panel->Location.y + posParent.y };
+	//at this point we have been asked to paint a Panel and all children in the panel
+	if (!panel->Visible)return;//dont draw unless we have permission
+
+	if (panel->RedrawMe||forceRedraw)
+	{//going to rdraw the entire panel, so go ahead and paint the background first
+
+		if (Refresh_Widget((Widget*)panel, forceRedraw)) {		
+			GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackColor);
+			panel->RedrawMe = 0;
+		}
+		forceRedraw = 1;
 	}
 	
-	
-	uint16_t ChildIndex = 0;
 	for (ChildIndex = 0; ChildIndex < panel->ChildrenNum; ChildIndex ++)
 	{
 		Widget* child = panel->Children[ChildIndex];
-		if (!widget_is_redraw(child, forceRedraw)) continue;
+		if (!Refresh_Widget(child, forceRedraw)) continue;
 		child->RedrawMe = 0;
 		switch (child->Type)
 		{
@@ -57,6 +63,10 @@ void panel_on_paint(Panel* panel, Point posParent, uint8_t forceRedraw)
 		case LABEL:
 			label_on_paint((Label*)child, pos);
 			break;
+		case PANEL:
+			panel_on_paint((Panel*)child, pos, forceRedraw);
+			break;
+
 		default:
 			break;
 		}

@@ -13,6 +13,10 @@ uint32_t HeartBeat = 0;
 SCREEN_TYPE CurretScreenType = SCREEN_MAIN;
 SCREEN_TYPE NewScreenType = SCREEN_MAIN;
 Panel* ActivPanel = NULL;
+
+uint16_t Refresh = 0;
+uint32_t *PanelDisplayIndex = 0; //start by pointing to the root display panel
+
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -48,44 +52,48 @@ int main(void)
 	Init_LCD();   // their code
 	
 	Init_GPIO();
-	
+	InitPanelMain();//set up gid widgets
 	
 	lcd_touch_calibration_screen(0);
 	
-	NewScreenType = SCREEN_MAIN;
-	CurretScreenType = SCREEN_MAIN;
-	ActivPanel = InitPanelMain();
-	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
-	
+	ActivPanel = &Root_Panel; //set the top panel as boot screen
+//	NewScreenType = SCREEN_MAIN;
+//	CurretScreenType = SCREEN_MAIN;
+//	ActivPanel = InitPanelMain();
+//	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
+	panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 1); //draw whole panel this time
 	while (1)
 	{
-		if(CurretScreenType != NewScreenType) // it need to transform screen
-		{
-			switch (NewScreenType)
-			{
-			case SCREEN_TOUCH_CALIBRATION:
-				lcd_touch_calibration_screen(1);
-				NewScreenType = SCREEN_MAIN;			
-			default:
-				break;
-			}	
-			CurretScreenType = NewScreenType;
-			GUI_Clear(COLOR_BLACK);
-			switch (CurretScreenType)
-			{
-			case SCREEN_MAIN:
-				panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
-				CurretScreenType = NewScreenType;
-				panel_touch_event_to_control(ActivPanel);
-			default:
-				break;
-			}
-		}else
-		{
-			panel_on_paint(ActivPanel, (Point){ 0, 0 }, 0);
-			panel_touch_event_to_control(ActivPanel);
-			
-		}
+		panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 0); //redraw as required..
+		Refresh = 0;
+//		switch (PanelDisplayIndex)
+//		if(CurretScreenType != NewScreenType) // it need to transform screen
+//		{
+//			switch (NewScreenType)
+//			{
+//			case SCREEN_TOUCH_CALIBRATION:
+//				lcd_touch_calibration_screen(1);
+//				NewScreenType = SCREEN_MAIN;			
+//			default:
+//				break;
+//			}	
+//			CurretScreenType = NewScreenType;
+//			GUI_Clear(COLOR_BLACK);
+//			switch (CurretScreenType)
+//			{
+//			case SCREEN_MAIN:
+//				panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
+//				CurretScreenType = NewScreenType;
+//				panel_touch_event_to_control(ActivPanel);
+//			default:
+//				break;
+//			}
+//		}else
+//		{
+//			panel_on_paint(ActivPanel, (Point){ 0, 0 }, 0);
+//			panel_touch_event_to_control(ActivPanel);
+//			
+//		}
 	
 		HeartBeat++;
 		if (BarValue > 3.3) BarValue = 0;
