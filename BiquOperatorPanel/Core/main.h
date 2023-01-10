@@ -38,6 +38,8 @@ extern "C" {
 #include "SPI/spi.h"
 #include "SPI/w25qxx.h"
 
+#include "TouchLCD/GUI/PanelMain.designer.h"	
+	
 #define VECT_TAB_FLASH 0x08008000UL
 
 typedef enum 

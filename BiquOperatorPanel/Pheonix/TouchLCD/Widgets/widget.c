@@ -14,21 +14,21 @@ void widget_get_control_coodination(Widget* widget, Point* pos)
 		widget_get_control_coodination(widget->Parent, pos);
 	}
 }
-void widget_update_value(Widget* widget, char* value)
+
+void widget_update_value_string(Widget* widget, uint32_t value)
 {
 	strcpy(widget->Text, value);
-	
-	Point pos = { 0, 0 };
-	widget_get_control_coodination(widget, &pos);
-	switch (widget->Type)
-	{
-	case BUTTON:
-		button_on_paint((Button*)widget, pos);
-		break;
-	case LABEL:
-		label_on_paint((Label*)widget, pos);
-		break;
-	default:
-		break;
-	}
+	widget->RedrawMe = 1;
+}
+void widget_update_value_int(Widget* widget, uint32_t value)
+{
+	sprintf(widget->Text, "%d", value);
+	widget->RedrawMe = 1;
+}
+
+uint8_t widget_is_redraw(Widget* widget, uint8_t forceRedraw)
+{
+	if (widget->Visible && forceRedraw) return 1;
+	if (widget->RedrawMe && widget->Visible) return 1;
+	return 0;
 }

@@ -41,19 +41,16 @@ typedef struct tagWidget
 	char Text[32];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
+	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
+	uint8_t Visible;
 	void* Parent;
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
 }Widget;
 
-typedef struct
-{
-	uint32_t cur_value;
-	uint32_t* point_for_value;
-	char control_name[32];
-}ControlUpdateInfo;
-
 #define NULL 0
 
-void widget_update_value(Widget* widget, char* value);
+uint8_t widget_is_redraw(Widget* widget, uint8_t forceRedraw);
+void widget_update_value_int(Widget* widget, uint32_t value);
+void widget_update_value_string(Widget* widget, uint32_t value);

@@ -17,7 +17,9 @@ typedef struct tagPanel
 	char Text[32];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
+	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	
+	uint8_t Visible;
 	void* Parent;
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
@@ -35,7 +37,7 @@ typedef struct tagPanel
 Panel* panel_init();
 void panel_destory(Panel* panel);
 void panel_add_child(Panel* panel, void* child);
-void panel_on_paint(Panel* panel, Point);
+void panel_on_paint(Panel* panel, Point, uint8_t);
 
 void panel_touch_event_to_control(Panel* panel);
 void panel_update_control_value(Panel* panel, char* name, char* value);

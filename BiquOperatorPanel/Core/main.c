@@ -55,7 +55,7 @@ int main(void)
 	NewScreenType = SCREEN_MAIN;
 	CurretScreenType = SCREEN_MAIN;
 	ActivPanel = InitPanelMain();
-	panel_on_paint(ActivPanel, (Point){ 0, 0 });
+	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
 	
 	while (1)
 	{
@@ -74,7 +74,7 @@ int main(void)
 			switch (CurretScreenType)
 			{
 			case SCREEN_MAIN:
-				panel_on_paint(ActivPanel, (Point){ 0, 0 });
+				panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
 				CurretScreenType = NewScreenType;
 				panel_touch_event_to_control(ActivPanel);
 			default:
@@ -82,14 +82,8 @@ int main(void)
 			}
 		}else
 		{
-			switch (CurretScreenType)
-			{
-			case SCREEN_MAIN:
-				main_screen_loop_update_value();
-				break;
-			default:
-				break;
-			}
+			panel_on_paint(ActivPanel, (Point){ 0, 0 }, 0);
+			panel_touch_event_to_control(ActivPanel);
 			
 		}
 	

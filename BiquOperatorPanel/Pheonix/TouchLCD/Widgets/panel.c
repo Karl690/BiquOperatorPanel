@@ -30,17 +30,25 @@ void panel_add_child(Panel* panel, void* child)
 	panel->ChildrenNum++;
 }
 
-void panel_on_paint(Panel* panel, Point posParent) 
+
+
+
+void panel_on_paint(Panel* panel, Point posParent, uint8_t forceRedraw) 
 {
+	//if forceRedraw is 1, it would redraw all controls regardless of RedrawMe property of control.
 	Point pos = { panel->Location.x + posParent.x, panel->Location.y + posParent.y };
-	GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackColor);
+	if (widget_is_redraw((Widget*)panel, forceRedraw)) {		
+		GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackColor);
+		panel->RedrawMe = 0;
+	}
 	
 	
 	uint16_t ChildIndex = 0;
 	for (ChildIndex = 0; ChildIndex < panel->ChildrenNum; ChildIndex ++)
 	{
 		Widget* child = panel->Children[ChildIndex];
-		
+		if (!widget_is_redraw(child, forceRedraw)) continue;
+		child->RedrawMe = 0;
 		switch (child->Type)
 		{
 		case BUTTON:

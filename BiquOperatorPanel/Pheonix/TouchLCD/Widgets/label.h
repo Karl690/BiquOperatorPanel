@@ -18,6 +18,8 @@ typedef struct tagLabel
 	char Text[32];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
+	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
+	uint8_t Visible;
 	void* Parent;
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;

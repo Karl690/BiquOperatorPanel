@@ -16,8 +16,6 @@ void EncoderWheelMove()
 { 
 	int a = GPIO_GetLevel(LCD_ENCA_PIN);
 	int b = GPIO_GetLevel(LCD_ENCB_PIN);
-	
-	
 	int st = (b << 1) | a;
 	if (st == 3)
 	{	
@@ -30,6 +28,10 @@ void EncoderWheelMove()
 		if (a == 0)EncoderCount++;
 		if (b == 0)EncoderCount--;
 		encoderlastRead = st;
+		
+		widget_update_value_int((Widget*)&gL_Label5, EncoderCount);
+		//sprintf(gL_Label5.Text, "%d", EncoderCount);
+		//gL_Label5.RedrawMe = 1;
+		
 	}
-	return;
 }
