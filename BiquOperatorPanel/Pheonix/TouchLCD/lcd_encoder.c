@@ -5,6 +5,7 @@
 uint8_t FiredEncodeButtonEvent = 0;
 void EncoderButtonDownEvent()
 {
+	CalibrateScreenFlag = 1;
 	FiredEncodeButtonEvent = 1;
 }
 

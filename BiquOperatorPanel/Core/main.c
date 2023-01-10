@@ -15,6 +15,7 @@ SCREEN_TYPE NewScreenType = SCREEN_MAIN;
 Panel* ActivPanel = NULL;
 
 uint16_t Refresh = 0;
+uint16_t CalibrateScreenFlag = 0;
 uint32_t *PanelDisplayIndex = 0; //start by pointing to the root display panel
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,6 +65,12 @@ int main(void)
 	panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 1); //draw whole panel this time
 	while (1)
 	{
+		if (CalibrateScreenFlag)
+		{
+			lcd_touch_calibration_screen(1);
+			CalibrateScreenFlag = 0;
+			panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 1); 
+		}
 		panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 0); //redraw as required..
 		Refresh = 0;
 //		switch (PanelDisplayIndex)

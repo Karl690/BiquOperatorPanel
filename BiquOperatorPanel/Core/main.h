@@ -55,6 +55,7 @@ extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.
 
 void Error_Handler(void);
 	extern uint16_t	Refresh;
+	extern uint16_t CalibrateScreenFlag;
 	
 
 #ifdef __cplusplus

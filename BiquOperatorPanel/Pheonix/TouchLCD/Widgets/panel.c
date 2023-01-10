@@ -53,7 +53,7 @@ void panel_on_paint(Panel* panel, Point posParent, uint8_t forceRedraw)
 	for (ChildIndex = 0; ChildIndex < panel->ChildrenNum; ChildIndex ++)
 	{
 		Widget* child = panel->Children[ChildIndex];
-		if (!Refresh_Widget(child, forceRedraw)) continue;
+		if (child->Type != PANEL && !Refresh_Widget(child, forceRedraw)) continue;
 		child->RedrawMe = 0;
 		switch (child->Type)
 		{
