@@ -25,6 +25,12 @@ void widget_update_value_int(Widget* widget, uint32_t value)
 	sprintf(widget->Text, "%d", value);
 	widget->RedrawMe = 1;
 }
+void widget_ToggleVisible(Widget* widget)
+{
+	widget->Visible++;
+	widget->Visible &= 1;
+	widget->RedrawMe = 1;
+}
 
 uint8_t Refresh_Widget(Widget* widget, uint8_t forceRedraw)
 {

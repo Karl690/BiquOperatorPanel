@@ -37,7 +37,7 @@ typedef struct tagPanel
 Panel* panel_init();
 void panel_destory(Panel* panel);
 void panel_add_child(Panel* panel, void* child);
-void panel_on_paint(Panel* panel, Point, uint8_t);
+void panel_on_paint(Panel* panel, Panel* Parent, uint8_t);
 
 void panel_touch_event_to_control(Panel* panel);
 void panel_update_control_value(Panel* panel, char* name, char* value);

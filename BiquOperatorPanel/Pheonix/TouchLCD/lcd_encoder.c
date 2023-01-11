@@ -36,4 +36,5 @@ void EncoderWheelMove()
 		//gL_Label5.RedrawMe = 1;
 		
 	}
+	
 }

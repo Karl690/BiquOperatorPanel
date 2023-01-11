@@ -12,6 +12,7 @@
 #include "main.h"
 #include "taskmanager.h"
 #include "TouchLCD/lcd_encoder.h"
+#include "TouchLCD/Widgets/button.h"
 
 uint32_t Seconds = 0;               // needed for heartbeat (number of seconds since boot)
 uint16_t SliceCnt = 0;              // current slice being processed
@@ -60,7 +61,7 @@ const PFUNC F1HZ[NUM_1HZ] =
 {
 	Spare,
 	Spare,
-	Spare,
+	blink,
 	Spare,
 	Spare,
 	Spare,
@@ -110,6 +111,12 @@ void Spare (void)
 {
 	// placeholder call for empty slice
 }
+void blink(void)
+{
+    widget_ToggleVisible((Widget*)&gL_Button1);
+	Refresh = 1; //tell them we need to redraw the screen
+}
+
 void BlinkHeartBeat(void)
 {
 	HeartBeat++;

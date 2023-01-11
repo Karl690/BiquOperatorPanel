@@ -63,6 +63,7 @@ extern float BarFloat[];
 
 void func_SystickCallback(void);
 void Spare (void);
+void Blink(void);
 void Execute1000HzTask(void);
 void Execute100HzTask(void);
 void Execute10HzTask(void);
@@ -70,3 +71,4 @@ void Execute1HzTask(void);
 void BlinkHeartBeat(void);
 
 void CheckEncoderButton(void);
+void blink(void);

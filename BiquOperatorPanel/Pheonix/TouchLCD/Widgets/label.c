@@ -1,5 +1,6 @@
 #include "../GUI/gui.h"
 #include "label.h"
+#include "Panel.h"
 
 Label* label_init(Widget* parent)
 {
@@ -15,10 +16,10 @@ void label_destory(Label* label)
 	free(label);
 }
 
-void label_on_paint(Label* label, Point posParent)
+void label_on_paint(Label* label, Panel* Parent)
 {	
 	label->RedrawMe = 0;
-	Point pos = { posParent.x + label->Location.x, posParent.y + label->Location.y };
+	Point pos = { Parent->Location.x + label->Location.x, Parent->Location.y + label->Location.y };
 	GUI_FillRect(pos.x, pos.y, pos.x + label->Size.width, pos.y + label->Size.height, label->BackColor);
 	if (label->BorderWidth > 0)
 	{

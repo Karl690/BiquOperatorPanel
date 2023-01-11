@@ -55,3 +55,4 @@ typedef struct tagWidget
 uint8_t Refresh_Widget(Widget* widget, uint8_t forceRedraw);
 void widget_update_value_int(Widget* widget, uint32_t value);
 void widget_update_value_string(Widget* widget, uint32_t value);
+void widget_ToggleVisible(Widget* widget);

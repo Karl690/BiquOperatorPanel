@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include "widget.h"
+#include "panel.h"
 
 
 typedef struct tagButton
@@ -35,4 +36,4 @@ typedef struct tagButton
 }Button;
 
 Button* button_init(Widget* parent);
-void button_on_paint(Button*, Point);
+void button_on_paint(Button*, Panel*);

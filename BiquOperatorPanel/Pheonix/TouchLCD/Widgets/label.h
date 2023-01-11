@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include "widget.h"
+#include "panel.h"
 
 typedef struct tagLabel
 {
@@ -36,4 +37,4 @@ typedef struct tagLabel
 Label* label_init();
 void label_destory(Label* label);
 
-void label_on_paint(Label*, Point);
+void label_on_paint(Label*, Panel*);

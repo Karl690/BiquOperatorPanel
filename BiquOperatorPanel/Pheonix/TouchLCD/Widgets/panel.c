@@ -2,7 +2,7 @@
 #include "panel.h"
 #include "label.h"
 #include "button.h"
-
+#include "panel.h"
 #include "../lcd_touch.h"
 
 
@@ -33,10 +33,10 @@ void panel_add_child(Panel* panel, void* child)
 
 
 
-void panel_on_paint(Panel* panel, Point posParent, uint8_t forceRedraw) 
+void panel_on_paint(Panel* panel, Panel* Parent, uint8_t forceRedraw) 
 {
 	uint16_t ChildIndex = 0;
-	Point pos = (Point) { panel->Location.x + posParent.x, panel->Location.y + posParent.y };
+	Point pos = (Point) { panel->Location.x + Parent->Location.x, panel->Location.y + Parent->Location.y };
 	//at this point we have been asked to paint a Panel and all children in the panel
 	if (!panel->Visible)return;//dont draw unless we have permission
 
@@ -49,26 +49,43 @@ void panel_on_paint(Panel* panel, Point posParent, uint8_t forceRedraw)
 		}
 		forceRedraw = 1;
 	}
+	//
+//	if (widget->Visible == 0)return 0;
+//	if (forceRedraw || widget->RedrawMe) return 1;
+//	return 0;
 	
+	//there are several possibilitys
+	//1. we want to refresh the whole screen, that is forceRedraw flag
+	//2. we want to redraw just this component, that is the redraw screen
+	//3. we want to hide this component, set the .visible=0, redraw to 1;
 	for (ChildIndex = 0; ChildIndex < panel->ChildrenNum; ChildIndex ++)
 	{
 		Widget* child = panel->Children[ChildIndex];
-		if (child->Type != PANEL && !Refresh_Widget(child, forceRedraw)) continue;
-		child->RedrawMe = 0;
-		switch (child->Type)
+		//if (child->Type != PANEL && !Refresh_Widget(child, forceRedraw)) continue;
+		//if (child->Type != PANEL && !Refresh_Widget(child, forceRedraw)) continue;
+		if (child->Type == PANEL)
 		{
-		case BUTTON:
-			button_on_paint((Button*)child, pos);
-			break;
-		case LABEL:
-			label_on_paint((Label*)child, pos);
-			break;
-		case PANEL:
-			panel_on_paint((Panel*)child, pos, forceRedraw);
-			break;
+			panel_on_paint((Panel*)child, panel, forceRedraw);
+			continue;
+		}
+		if (child->RedrawMe || forceRedraw)
+		{
 
-		default:
-			break;
+			//ok so we need to redraw here, but if it is 
+			switch (child->Type)
+			{
+			case BUTTON:
+				button_on_paint((Button*)child, panel);
+				break;
+			case LABEL:
+				label_on_paint((Label*)child, panel);
+				break;
+//			case PANEL:
+//				panel_on_paint((Panel*)child, panel, forceRedraw);
+//				break;
+			default:
+				break;
+			}
 		}
 		
 	}

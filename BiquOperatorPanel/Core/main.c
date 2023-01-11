@@ -6,6 +6,7 @@
 #include "TouchLCD/GUI/display.h"
 #include "TouchLCD/lcd_touch.h"
 #include "TouchLCD/GUI/PanelMain.designer.h"
+#include "TouchLCD/Widgets/panel.h"
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
@@ -62,16 +63,16 @@ int main(void)
 //	CurretScreenType = SCREEN_MAIN;
 //	ActivPanel = InitPanelMain();
 //	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
-	panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 1); //draw whole panel this time
+	panel_on_paint((Panel*)ActivPanel, (Panel*)&Root_Panel, 1); //draw whole panel this time
 	while (1)
 	{
 		if (CalibrateScreenFlag)
 		{
 			lcd_touch_calibration_screen(1);
 			CalibrateScreenFlag = 0;
-			panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 1); 
+			panel_on_paint((Panel*)ActivPanel, (Panel*)&Root_Panel, 1); 
 		}
-		panel_on_paint((Panel*)ActivPanel, (Point){ 0, 0 }, 0); //redraw as required..
+		panel_on_paint((Panel*)ActivPanel,(Panel*)&Root_Panel,0); //redraw as required..
 		Refresh = 0;
 //		switch (PanelDisplayIndex)
 //		if(CurretScreenType != NewScreenType) // it need to transform screen
