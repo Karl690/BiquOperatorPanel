@@ -114,7 +114,9 @@
     <ClCompile Include="Pheonix\TouchLCD\lcd_encoder.c" />
     <ClCompile Include="Pheonix\TouchLCD\lcd_touch.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\button.c" />
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\edit.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\label.c" />
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\listbox.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\panel.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\widget.c" />
     <ClInclude Include="Core\main.h" />
@@ -214,7 +216,9 @@
     <ClInclude Include="Pheonix\TouchLCD\lcd_encoder.h" />
     <ClInclude Include="Pheonix\TouchLCD\lcd_touch.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\button.h" />
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\edit.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\label.h" />
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\listbox.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\panel.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\widget.h" />
     <ClInclude Include="resource.h" />

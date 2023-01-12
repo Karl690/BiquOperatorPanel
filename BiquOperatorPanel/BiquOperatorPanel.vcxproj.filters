@@ -401,6 +401,12 @@
     <ClInclude Include="Pheonix\TouchLCD\lcd_encoder.h">
       <Filter>Pheonix\TouchLCD</Filter>
     </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\edit.h">
+      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\listbox.h">
+      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pheonix\TouchLCD\4xx\TouchLCD_4xx.c">
@@ -567,6 +573,12 @@
     </ClCompile>
     <ClCompile Include="Pheonix\TouchLCD\lcd_encoder.c">
       <Filter>Pheonix\TouchLCD</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\edit.c">
+      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\listbox.c">
+      <Filter>Pheonix\TouchLCD\Widgets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

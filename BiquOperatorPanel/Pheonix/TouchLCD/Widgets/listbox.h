@@ -3,9 +3,9 @@
 #include "widget.h"
 #include "panel.h"
 
-
-typedef struct tagButton
+typedef struct tagListbox
 {
+	//Commone properties
 	WIDGETTYPE Type;
 	char Name[32];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
@@ -17,26 +17,18 @@ typedef struct tagButton
 	Color16 BorderWidth;
 	Color16 BorderColor;
 	PADDING		Padding;
+	
 	char Text[32];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
 
-	
 	void* Parent;
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
-	
-	
-	//Button properties
-	uint16_t CornerRadius;
-	
-	Color16	CheckedColor;
-	Color16	CheckedForeColor;
-	Color16		Checked;
-	
-	
-}Button;
+	//Listbox properties
+}Listbox;
 
-Button* button_init(Widget* parent);
-void button_on_paint(Button*, Panel*);
+void listbox_destory(Listbox* edit);
+
+void listbox_on_paint(Listbox*, Panel*);

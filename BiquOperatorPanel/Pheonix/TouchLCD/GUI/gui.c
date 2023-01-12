@@ -136,6 +136,16 @@ void GUI_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t c
 	}
 }
 
+void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset)
+{
+	Point pt = points[0];
+	for (int i = 1; i < num; i++)
+	{
+		GUI_DrawLine(offset.x + pt.x, offset.y + pt.y, offset.x + points[i].x, offset.y + points[i].y, color);
+		pt = points[i];
+	}
+}
+
 void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor)
 {
 	if (!font) return;
@@ -181,7 +191,7 @@ void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t colo
 		if (X >= LCD_WIDTH){X = x0; Y += font->Height; }
 		if (Y >= LCD_HEIGHT) break;//�˳�
 		GUI_DrawChar(X, Y, *str, font, color, bgcolor);
-		X += font->Width;//fontSize / 2;
+		X += font->Width-2;//fontSize / 2;
 		str++;
 	}
 }

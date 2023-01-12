@@ -12,10 +12,10 @@ typedef struct tagLabel
 	uint8_t Visible;
 	Point Location;
 	Size	Size;	
-	uint16_t BackColor;
-	uint16_t ForeColor;
+	Color16 BackColor;
+	Color16 ForeColor;
 	uint16_t BorderWidth;
-	uint16_t BorderColor;
+	Color16 BorderColor;
 	PADDING		Padding;
 	
 	char Text[32];

@@ -8,6 +8,8 @@ typedef enum
 	PANEL,
 	BUTTON,
 	LABEL,
+	EDIT,
+	LISTBOX,
 	CHECKBOX,
 }WIDGETTYPE;
 
@@ -35,11 +37,10 @@ typedef struct tagWidget
 	uint8_t Visible;
 	Point Location;
 	Size	Size;	
-	uint16_t BackColor;
-	uint16_t ForeColor;
-	//
+	Color16 BackColor;
+	Color16 ForeColor;
 	uint16_t BorderWidth;
-	uint16_t BorderColor;
+	Color16 BorderColor;
 	PADDING		Padding;
 	char Text[32];
 	Font* Font;
@@ -56,3 +57,5 @@ uint8_t Refresh_Widget(Widget* widget, uint8_t forceRedraw);
 void widget_update_value_int(Widget* widget, uint32_t value);
 void widget_update_value_string(Widget* widget, uint32_t value);
 void widget_ToggleVisible(Widget* widget);
+void widget_draw_string(char* string, uint16_t x, uint16_t y, uint16_t w, uint16_t h, 
+	PADDING* padding,Font* font,TEXT_ALIGN align, Color16 foreColor,Color16 backColor);

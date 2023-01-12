@@ -1,27 +1,14 @@
 #include "widget.h"
 #include "panel.h"
 #include "label.h"
+#include "edit.h"
 #include "button.h"
 #include "panel.h"
 #include "../lcd_touch.h"
 
-
-Panel* panel_init(Widget* parent)
-{
-	Panel* panel = (Panel*)malloc(sizeof(Panel));
-	panel->Type = PANEL;
-	panel->Location = (Point) { 0, 0 };
-	panel->Size = (Size) { 0, 0};
-	panel->Parent = parent;
-	panel->ChildrenNum = 0;
-	return panel;
-}
 void panel_destory(Panel* panel)
 {
-	for (uint16_t i = 0; i < panel->ChildrenNum; i++)
-	{
-		
-	}
+	
 	free(panel);
 }
 void panel_add_child(Panel* panel, void* child)
@@ -30,22 +17,60 @@ void panel_add_child(Panel* panel, void* child)
 	panel->ChildrenNum++;
 }
 
-
-
-
+void panel_update(Panel* panel)
+{
+	uint16_t ypos = 0;
+	if (panel->Font) ypos = panel->Font->Height / 2;	
+	//update corner points.
+	panel->CornerPoints[0] = (Point) { 3* panel->CornerRadius, ypos };
+	panel->CornerPoints[1] = (Point) { panel->CornerRadius, ypos };
+	panel->CornerPoints[2] = (Point) { 0, panel->CornerRadius + ypos};
+	panel->CornerPoints[3] = (Point){ 0, panel->Size.height - panel->CornerRadius - 1 };
+	panel->CornerPoints[4] = (Point) { panel->CornerRadius, panel->Size.height-1};
+	panel->CornerPoints[5] = (Point) { panel->Size.width - panel->CornerRadius -1, panel->Size.height - 1 };
+	panel->CornerPoints[6] = (Point) { panel->Size.width - 1, panel->Size.height - panel->CornerRadius - 1 };
+	panel->CornerPoints[7] = (Point) { panel->Size.width - 1, panel->CornerRadius + ypos};
+	panel->CornerPoints[8] = (Point) { panel->Size.width - panel->CornerRadius - 1, ypos};
+	
+	uint8_t len = strlen(panel->Text);	
+	uint8_t char_width = 0;
+	if (panel->Font) char_width = panel->Font->Width - 2;	
+	
+	uint16_t end_pos = char_width* len;
+	if (len > 0) end_pos += char_width;
+	
+	panel->CornerPoints[9] = (Point) { 3* panel->CornerRadius + end_pos, ypos };
+}
 void panel_on_paint(Panel* panel, Panel* Parent, uint8_t forceRedraw) 
 {
 	uint16_t ChildIndex = 0;
 	Point pos = (Point) { panel->Location.x + Parent->Location.x, panel->Location.y + Parent->Location.y };
+	
+	if (!panel->Visible || panel->RedrawMe) {
+		GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, Parent->BackColor);
+		
+		panel->RedrawMe = 0;
+	}
 	//at this point we have been asked to paint a Panel and all children in the panel
-	if (!panel->Visible)return;//dont draw unless we have permission
+	if (!panel->Visible) return;//dont draw unless we have permission
 
 	if (panel->RedrawMe||forceRedraw)
 	{//going to rdraw the entire panel, so go ahead and paint the background first
 
 		if (Refresh_Widget((Widget*)panel, forceRedraw)) {		
 			GUI_FillRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BackColor);
+			
+			if (panel->BorderWidth > 0)
+			{
+				//GUI_DrawRect(pos.x, pos.y, pos.x + panel->Size.width, pos.y + panel->Size.height, panel->BorderColor);
+				GUI_DrawPolygon(panel->CornerPoints, sizeof(panel->CornerPoints) / sizeof(Point), panel->BorderColor, pos);
+				if(strlen(panel->Text) > 0)
+					GUI_DrawString(pos.x + panel->CornerPoints[0].x + panel->CornerRadius, pos.y, panel->Text, panel->Font, panel->ForeColor, panel->BackColor);
+				
+			}
 			panel->RedrawMe = 0;
+			
+			
 		}
 		forceRedraw = 1;
 	}
@@ -80,9 +105,9 @@ void panel_on_paint(Panel* panel, Panel* Parent, uint8_t forceRedraw)
 			case LABEL:
 				label_on_paint((Label*)child, panel);
 				break;
-//			case PANEL:
-//				panel_on_paint((Panel*)child, panel, forceRedraw);
-//				break;
+			case EDIT:
+				edit_on_paint((Edit*)child, panel);
+				break;
 			default:
 				break;
 			}
@@ -118,6 +143,5 @@ void panel_update_control_value(Panel* panel, char* name, char* value)
 		Widget* child = panel->Children[ChildIndex];
 		if(strcmp(name, child->Name) == 0)
 			widget_update_value(child, value);
-		
 	}
 }

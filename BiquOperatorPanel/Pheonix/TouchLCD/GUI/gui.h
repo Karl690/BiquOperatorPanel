@@ -43,6 +43,8 @@
 //#define RGB16(r, g, b) (((r & 0x1F) << 11) | ((g & 0x3F) << 5) | (b & 0x1F))
 #define  RGB16(r, g, b)  ((r & 0b11111000) << 8) | ((g & 0b11111100) << 3) | (b >> 3)
 
+typedef uint16_t Color16;
+
 typedef struct
 {
 	uint16_t x, y;
@@ -74,6 +76,7 @@ void GUI_DrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t c
 void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color);
 void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t* data);
 void GUI_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
+void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset);
 void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor); // fontSize must be 20 or 32
 void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor);
 

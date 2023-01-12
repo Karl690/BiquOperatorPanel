@@ -8,7 +8,7 @@ typedef void (*PFUNC)(void);
 #define NUM_1HZ                 8     // must remain 10 otherwise loop timing will not be correct
 #define ADC_CHANNELS			3
 
-//#define SYSTICKS_PER_SECOND     (NUM_1000HZ * NUM_100HZ * NUM_10HZ * NUM_1HZ)
+#define SYSTICKS_PER_SECOND     (NUM_1000HZ * NUM_100HZ * NUM_10HZ * NUM_1HZ)
 #define TASK_MAXCOUNT	0xFFFF
 
 typedef enum {

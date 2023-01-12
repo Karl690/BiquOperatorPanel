@@ -7,6 +7,7 @@
 #include "TouchLCD/lcd_touch.h"
 #include "TouchLCD/GUI/PanelMain.designer.h"
 #include "TouchLCD/Widgets/panel.h"
+#include "taskmanager.h"
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
@@ -37,6 +38,8 @@ int main(void)
 	
   /* Configure the system clock */
     SystemClock_Config();
+	
+	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
 	//SCB->VTOR = VECT_TAB_FLASH;
 	
 	__HAL_RCC_GPIOA_CLK_ENABLE();
