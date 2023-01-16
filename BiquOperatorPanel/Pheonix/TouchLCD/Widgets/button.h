@@ -7,7 +7,7 @@
 typedef struct tagButton
 {
 	WIDGETTYPE Type;
-	char Name[32];
+	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;
 	Point Location;
@@ -17,7 +17,7 @@ typedef struct tagButton
 	Color16 BorderWidth;
 	Color16 BorderColor;
 	PADDING		Padding;
-	char Text[32];
+	char Text[WIDGET_MAX_TEXT_LENGTH];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
 
@@ -39,4 +39,4 @@ typedef struct tagButton
 }Button;
 
 Button* button_init(Widget* parent);
-void button_on_paint(Button*, Panel*);
+void button_on_paint(Button* button, Point offset, Color16  backcolor);

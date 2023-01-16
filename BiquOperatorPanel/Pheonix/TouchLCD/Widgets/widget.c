@@ -95,3 +95,9 @@ void widget_draw_string(char* string, uint16_t x, uint16_t y, uint16_t w, uint16
 	GUI_DrawString(x, y, string, font, foreColor, backColor);
 	
 }
+
+uint8_t widget_is_point_in_rect(uint32_t x, uint32_t y, uint16_t rx, uint16_t ry, uint16_t rw, uint16_t rh)
+{
+	if (x >= rx && x <= rx + rw && y >= ry && y <= ry + rh) return 1;
+	return 0;
+}

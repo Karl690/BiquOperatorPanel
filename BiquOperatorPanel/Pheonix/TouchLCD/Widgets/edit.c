@@ -19,10 +19,10 @@ void edit_update(Edit* edit)
 	edit->CornerPoints[7] = (Point) { edit->CornerRadius, 0 };
 	edit->CornerPoints[8] = (Point) { 0, edit->CornerRadius };
 }
-void edit_on_paint(Edit* edit, Panel* Parent)
+void edit_on_paint(Edit* edit, Point offset, Color16  backcolor)
 {	
 	edit->RedrawMe = 0;
-	Point pos = { Parent->Location.x + edit->Location.x, Parent->Location.y + edit->Location.y };
+	Point pos = { offset.x + edit->Location.x, offset.y + edit->Location.y };
 	GUI_FillRect(pos.x, pos.y, pos.x + edit->Size.width, pos.y + edit->Size.height, edit->BackColor);
 	if (edit->BorderWidth > 0)
 	{

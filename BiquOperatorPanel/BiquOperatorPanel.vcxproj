@@ -118,6 +118,7 @@
     <ClCompile Include="Pheonix\TouchLCD\Widgets\label.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\listbox.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\panel.c" />
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\tabcontrol.c" />
     <ClCompile Include="Pheonix\TouchLCD\Widgets\widget.c" />
     <ClInclude Include="Core\main.h" />
     <ClInclude Include="Core\stm32f4xx_hal_conf.h" />
@@ -220,11 +221,13 @@
     <ClInclude Include="Pheonix\TouchLCD\Widgets\label.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\listbox.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\panel.h" />
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\tabcontrol.h" />
     <ClInclude Include="Pheonix\TouchLCD\Widgets\widget.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <None Include="BiquOperatorPanel-Debug.vgdbsettings" />
     <None Include="BiquOperatorPanel-Release.vgdbsettings" />
+    <None Include="stm32.props" />
     <None Include="stm32.xml" />
   </ItemGroup>
 </Project>

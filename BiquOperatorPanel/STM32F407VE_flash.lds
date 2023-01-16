@@ -48,7 +48,7 @@ MEMORY
   CCMRAM    (xrw)    : ORIGIN = 0x10000000,   LENGTH = 64K
   RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 128K
   FLASH    (rx)    : ORIGIN = 0x8000000,   LENGTH = 896K
-  DATA (rx)       : ORIGIN = 0x080E0000, LENGTH = 128K
+  user_data (rx)       : ORIGIN = 0x80E0000, LENGTH = 128K
 }
 
 /* Sections */
@@ -198,7 +198,7 @@ SECTIONS
   .user_data (NOLOAD):
 {
    KEEP(*(.user_data))  
-} >DATA
+} >user_data
 
   /* Remove information from the compiler libraries */
   /DISCARD/ :

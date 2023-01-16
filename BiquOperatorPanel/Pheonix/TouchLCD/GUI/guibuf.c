@@ -1,29 +1,21 @@
 ﻿#include "main.h"
 #include <math.h>
-#include "gui.h"
+#include "guibuf.h"
 
-//uint16_t GUI_ScreenBuffer[LCD_WIDTH * LCD_HEIGHT] __attribute__((section(".user_data")));
-
-void GUI_Init()
+void GUIBUF_Clear(uint16_t color, uint16_t* buf, Size bufsize)
 {
-	//GUI_ScreenBuffer = (uint16_t*)malloc(LCD_WIDTH * LCD_HEIGHT * 2);
-	//GUI_Clear(COLOR_BEIGE);
-}
-void GUI_Clear(uint16_t color)
-{
-	uint32_t index = 0;
-	LCD_SetWindow(0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
+	uint32_t index = 0;	
 	for (uint16_t y = 0; y < LCD_HEIGHT; y++)
-		for (uint16_t x = 0; x < LCD_WIDTH; x++)
-			LCD_WR_16BITS_DATA(color);
-			//GUI_ScreenBuffer[y * LCD_WIDTH + x] = color;
+		for (uint16_t x = 0; x < LCD_WIDTH; x++)			
+			buf[y * bufsize.width + x] = color;
 	
 }
 
-void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color)
+void GUIBUF_DrawPoint(uint16_t x, uint16_t y, uint16_t color, uint16_t* buf, Size bufsize)
 {
-	LCD_SetWindow(x, y, x, y);
-	LCD_WR_16BITS_DATA(color);
+	if(x >=0 && x < bufsize.width && y >= 0 && y < bufsize.height) {
+		buf[y * bufsize.width + x] = color;	
+	}
 	//GUI_ScreenBuffer[y*LCD_WIDTH +x] = color;
 }
 
@@ -32,14 +24,14 @@ void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color)
  * @param y - y point of line start
  * @param x2 - x point of line end
 */
-void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color)
+void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color, uint16_t* buf, Size bufsize)
 {
 	uint16_t i = 0;
-	LCD_SetWindow(x1, y, x2 - 1, y);
+	
 	for (i = x1; i < x2; i++)
 	{
-		LCD_WR_16BITS_DATA(color);
-		//GUI_ScreenBuffer[y + LCD_WIDTH + i] = color;
+		//LCD_WR_16BITS_DATA(color);
+		buf[y * bufsize.width + i] = color;
 	}
 }
 
@@ -48,14 +40,13 @@ void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color)
  * @param y1 - y point of line start
  * @param y2 - y point of line end
 */
-void GUI_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color)
+void GUI_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color, uint16_t* buf, Size bufsize)
 {
 	uint16_t i = 0;
 	LCD_SetWindow(x, y1, x, y2 - 1);
 	for (i = y1; i < y2; i++)
 	{
-		LCD_WR_16BITS_DATA(color);
-		//GUI_ScreenBuffer[i*LCD_WIDTH  + x] = color;
+		buf[i * bufsize.width + x] = color;
 	}
 }
 
@@ -65,14 +56,14 @@ void GUI_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color)
  * @param x2 - x point of bottom right corner
  * @param y2 - y point of bottom right corner
 */
-void GUI_DrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color)
+void GUI_DrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color, uint16_t* buf, Size bufsize)
 {
 	GUI_HLine(x1, y1, x2, color);
 	GUI_HLine(x1, y2 - 1, x2, color);
 	GUI_VLine(x1, y1, y2, color);
 	GUI_VLine(x2 - 1, y1, y2, color);
 }
-void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color)
+void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color, uint16_t* buf, Size bufsize)
 {
 	uint16_t i = 0, j = 0;
 	LCD_SetWindow(sx, sy, ex - 1, ey - 1);
@@ -81,13 +72,12 @@ void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t c
 	{
 		for (j = sy; j < ey; j++)
 		{
-			LCD_WR_16BITS_DATA(color);
-			//GUI_ScreenBuffer[i*LCD_WIDTH  +j] = color;
+			buf[j * bufsize.width + i] = color;
 		}
 	}
 }
 
-void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t* data)
+void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t* data, uint16_t* buf, Size bufsize)
 {
 	uint16_t i = 0, j = 0;
 	LCD_SetWindow(sx, sy, sx + ex - 1, sy + ey - 1);
@@ -97,8 +87,7 @@ void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t
 		for (j = sx; j < sx + ex; j++)
 		{
 			color = data[0] + (data[1] << 8);
-			//GUI_ScreenBuffer[i*LCD_WIDTH + j] = color;
-			LCD_WR_16BITS_DATA(color);
+			buf[i*bufsize.width + j] = color;			
 			data += 2;
 		}
 	}

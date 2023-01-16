@@ -6,6 +6,7 @@
 #include "../Widgets/edit.h"
 #include "../Widgets/button.h"
 #include "../Widgets/listbox.h"
+#include "../Widgets/tabcontrol.h"
 
 extern Panel Root_Panel;
 extern Button gL_Button3;
@@ -14,7 +15,7 @@ extern Button gL_Button1;
 extern Label lblTitle;
 extern Panel gL_Panel3;
 extern Panel gL_Panel2;
-extern Listbox gL_Listbox1;
+//extern Listbox gL_Listbox1;
 extern Button gL_Button5;
 extern Button gL_Button4;
 extern Panel gL_Panel1;
@@ -41,5 +42,12 @@ extern Label gL_Label4;
 extern Label gL_Label3;
 extern Label gL_Label2;
 
+extern TabControl gL_TabControl1;
+
 
 void  InitPanelMain();
+
+
+//Touch Event Handler
+void gL_tabpanel1Button1_TouchEventHandler(uint16_t x, uint16_t y);
+void gL_tabpanel2Button2_TouchEventHandler(uint16_t x, uint16_t y);

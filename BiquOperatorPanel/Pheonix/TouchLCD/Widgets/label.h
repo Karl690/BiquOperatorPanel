@@ -7,7 +7,7 @@ typedef struct tagLabel
 {
 	//Commone properties
 	WIDGETTYPE Type;
-	char Name[32];
+	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;
 	Point Location;
@@ -18,7 +18,7 @@ typedef struct tagLabel
 	Color16 BorderColor;
 	PADDING		Padding;
 	
-	char Text[32];
+	char Text[WIDGET_MAX_TEXT_LENGTH];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
 
@@ -37,4 +37,4 @@ typedef struct tagLabel
 Label* label_init();
 void label_destory(Label* label);
 
-void label_on_paint(Label*, Panel*);
+void label_on_paint(Label* label, Point offset, Color16  backcolor);

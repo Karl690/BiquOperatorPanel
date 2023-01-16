@@ -41,7 +41,9 @@ Label gL_Label4;
 Label gL_Label3;
 Label gL_Label2;
 
-
+TabControl gL_TabControl1;
+Button		gL_tabPanel1Button1;
+Button		gL_tabPanel2Button2;
 
 void  InitPanelMain()
 {
@@ -182,93 +184,6 @@ void  InitPanelMain()
 	panel_update(&gL_Panel3);
 
 	panel_add_child(&Root_Panel, &gL_Panel3); //add to the panel
-
-	gL_Panel2.Type = PANEL;
-	strcpy(gL_Panel2.Name, "gL_Panel2");
-	gL_Panel2.BackColor = RGB16(0, 22, 34);
-	gL_Panel2.ForeColor = RGB16(122, 225, 255);
-	gL_Panel2.BorderColor = RGB16(37, 87, 103);
-	gL_Panel2.BorderWidth = 1;
-	gL_Panel2.Location = (Point){ .x = 364, .y = 52 };
-	gL_Panel2.Size = (Size){ .width = 411, .height = 290 };
-	gL_Panel2.StackIndex = -1;
-	gL_Panel2.CornerRadius = 5;
-	gL_Panel2.Font = &Font16;
-	strcpy(gL_Panel2.Text, "MESSAGE");
-	gL_Panel2.Visible = 1;
-	gL_Panel2.RedrawMe = 1;
-	//add click event callbacks
-	gL_Panel2.Event_Down = NULL;
-	gL_Panel2.Event_Hold = NULL;
-	gL_Panel2.Event_Up = NULL;
-	//Components in this panel
-	panel_update(&gL_Panel2);
-
-	gL_Listbox1.Type = LISTBOX;
-	strcpy(gL_Listbox1.Name, "gL_Listbox1");
-	gL_Listbox1.BackColor = RGB16(10, 22, 34);
-	gL_Listbox1.ForeColor = RGB16(122, 225, 255);
-	gL_Listbox1.BorderColor = RGB16(0, 0, 0);
-	gL_Listbox1.BorderWidth = 0;
-	gL_Listbox1.Font = &Font16;
-	gL_Listbox1.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Listbox1.Visible = 1;
-	gL_Listbox1.RedrawMe = 1;
-	gL_Listbox1.Location = (Point){ .x = 9, .y = 50 };
-	gL_Listbox1.Size = (Size){ .width = 393, .height = 227 };
-	edit_update(&gL_Listbox1);
-
-	panel_add_child(&gL_Panel2, &gL_Listbox1); //add to the panel
-
-	gL_Button5.Type = BUTTON;
-	strcpy(gL_Button5.Name, "gL_Button5");
-	gL_Button5.Event_Down = NULL;
-	gL_Button5.Event_Hold = NULL;
-	gL_Button5.Event_Up   = NULL;
-	gL_Button5.BackColor = RGB16(4, 38, 52);
-	gL_Button5.ForeColor = RGB16(132, 225, 255);
-	gL_Button5.BorderColor = RGB16(1, 103, 137);
-	gL_Button5.CheckedColor = RGB16(62, 209, 255);
-	gL_Button5.CheckedForeColor = RGB16(2, 46, 61);
-	gL_Button5.BorderWidth = 1;
-	gL_Button5.CornerRadius = 0;
-	gL_Button5.Font = &Font16;
-	gL_Button5.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Button5.TextAlign = MiddleCenter;
-	gL_Button5.Visible = 1;
-	gL_Button5.RedrawMe = 1;
-	gL_Button5.Location = (Point){ .x = 121, .y = 19 };
-	gL_Button5.Size = (Size){ .width = 120, .height = 24 };
-	strcpy(gL_Button5.Text, "STATISTICS");
-	gL_Button5.Checked = 0;
-
-	panel_add_child(&gL_Panel2, &gL_Button5); //add to the panel
-
-	gL_Button4.Type = BUTTON;
-	strcpy(gL_Button4.Name, "gL_Button4");
-	gL_Button4.Event_Down = NULL;
-	gL_Button4.Event_Hold = NULL;
-	gL_Button4.Event_Up   = NULL;
-	gL_Button4.BackColor = RGB16(4, 38, 52);
-	gL_Button4.ForeColor = RGB16(132, 225, 255);
-	gL_Button4.BorderColor = RGB16(1, 103, 137);
-	gL_Button4.CheckedColor = RGB16(62, 209, 255);
-	gL_Button4.CheckedForeColor = RGB16(2, 46, 61);
-	gL_Button4.BorderWidth = 1;
-	gL_Button4.CornerRadius = 0;
-	gL_Button4.Font = &Font16;
-	gL_Button4.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Button4.TextAlign = MiddleCenter;
-	gL_Button4.Visible = 1;
-	gL_Button4.RedrawMe = 1;
-	gL_Button4.Location = (Point){ .x = 13, .y = 19 };
-	gL_Button4.Size = (Size){ .width = 110, .height = 24 };
-	strcpy(gL_Button4.Text, "GENERAL LOG");
-	gL_Button4.Checked = 1;
-
-	panel_add_child(&gL_Panel2, &gL_Button4); //add to the panel
-
-	panel_add_child(&Root_Panel, &gL_Panel2); //add to the panel
 
 	gL_Panel1.Type = PANEL;
 	strcpy(gL_Panel1.Name, "gL_Panel1");
@@ -739,8 +654,159 @@ void  InitPanelMain()
 	gL_Label2.Event_Down = NULL;
 	gL_Label2.Event_Hold = NULL;
 	gL_Label2.Event_Up = NULL;
-
+	
 	panel_add_child(&gL_Panel1, &gL_Label2); //add to the panel
+	
+	gL_TabControl1.Type = TABCONTROL;
+	strcpy(gL_TabControl1.Name, "gL_TabControl1");
+	gL_TabControl1.BackColor = RGB16(0, 22, 34);
+	gL_TabControl1.ForeColor = RGB16(122, 225, 255);
+	gL_TabControl1.BorderColor = RGB16(0, 0, 0);
+	gL_TabControl1.BorderWidth = 0;
+	gL_TabControl1.Font = &Font16;
+	gL_TabControl1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_TabControl1.Visible = 1;
+	gL_TabControl1.RedrawMe = 1;
+	gL_TabControl1.Location = (Point){ .x = 364, .y = 52 };
+	gL_TabControl1.Size = (Size){ .width = 411, .height = 290 };
+	gL_TabControl1.ChildrenNum = 0;
+	gL_TabControl1.StackIndex = 0;
+	
+	//make the two buttons and two panel for tab control.
+	Button *tabButton = malloc(sizeof(Button));
+	tabButton->Type = BUTTON;
+	strcpy(tabButton->Name, "Button1");
+	
+	tabButton->BackColor = RGB16(4, 38, 52);
+	tabButton->ForeColor = RGB16(132, 225, 255);
+	tabButton->BorderColor = RGB16(1, 103, 137);
+	tabButton->CheckedColor = RGB16(62, 209, 255);
+	tabButton->CheckedForeColor = RGB16(2, 46, 61);
+	tabButton->BorderWidth = 1;
+	tabButton->CornerRadius = 0;
+	tabButton->Font = &Font16;
+	tabButton->Padding = (PADDING) { 0, 0, 0, 0 };
+	tabButton->TextAlign = MiddleCenter;
+	tabButton->Visible = 1;
+	tabButton->RedrawMe = 1;
+	tabButton->Checked = 0;
+	tabButton->Location = (Point){ .x = 1, .y = 1 };
+	tabButton->Size = (Size){ .width = 110, .height = 24 };
+	strcpy(tabButton->Text, "TAB 01");
+	
+	Panel* tabPanel = malloc(sizeof(Panel));
+	tabPanel->Type = PANEL;
+	strcpy(tabPanel->Name, "tabPanel1");
+	tabPanel->BackColor = RGB16(0, 22, 34);
+	tabPanel->ForeColor = RGB16(122, 225, 255);
+	tabPanel->BorderColor = RGB16(37, 87, 103);
+	tabPanel->BorderWidth = 1;
+	tabPanel->Location = (Point){ .x = 1, .y = 25 };
+	tabPanel->Size = (Size){ .width = gL_TabControl1.Size.width, .height = gL_TabControl1.Size.height - 25 };
+	tabPanel->CornerRadius = 5;
+	tabPanel->Font = &Font16;
+	strcpy(tabPanel->Text, "TAB PANEL 01");
+	tabPanel->Visible = 1;
+	tabPanel->RedrawMe = 1;
+	tabPanel->ChildrenNum = 0;
+	//Components in this panel
+	panel_update(tabPanel);
+	
+	gL_tabPanel1Button1.Type = BUTTON;
+	strcpy(gL_tabPanel1Button1.Name, "gL_tabPanel1Button1");
+	gL_tabPanel1Button1.Event_Down = gL_tabpanel1Button1_TouchEventHandler;
+	gL_tabPanel1Button1.Event_Hold = NULL;
+	gL_tabPanel1Button1.Event_Up   = NULL;
+	gL_tabPanel1Button1.BackColor = RGB16(4, 38, 52);
+	gL_tabPanel1Button1.ForeColor = RGB16(132, 225, 255);
+	gL_tabPanel1Button1.BorderColor = RGB16(1, 103, 137);
+	gL_tabPanel1Button1.CheckedColor = RGB16(62, 209, 255);
+	gL_tabPanel1Button1.CheckedForeColor = RGB16(2, 46, 61);
+	gL_tabPanel1Button1.BorderWidth = 1;
+	gL_tabPanel1Button1.CornerRadius = 0;
+	gL_tabPanel1Button1.Font = &Font16;
+	gL_tabPanel1Button1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_tabPanel1Button1.TextAlign = MiddleCenter;
+	gL_tabPanel1Button1.Visible = 1;
+	gL_tabPanel1Button1.RedrawMe = 1;
+	gL_tabPanel1Button1.Location = (Point){ .x = 118, .y = 39 };
+	gL_tabPanel1Button1.Size = (Size){ .width = 120, .height = 24 };
+	strcpy(gL_tabPanel1Button1.Text, "TAB1-BUTTON");
+	gL_tabPanel1Button1.Checked = 0;
+
+	panel_add_child(tabPanel, &gL_tabPanel1Button1); //add to the panel
+	tabcontrol_add_child(&gL_TabControl1, tabButton, tabPanel);
+	
+	tabButton = malloc(sizeof(Button));
+	tabButton->Type = BUTTON;
+	strcpy(tabButton->Name, "Button2");
+	
+	tabButton->BackColor = RGB16(4, 38, 52);
+	tabButton->ForeColor = RGB16(132, 225, 255);
+	tabButton->BorderColor = RGB16(1, 103, 137);
+	tabButton->CheckedColor = RGB16(62, 209, 255);
+	tabButton->CheckedForeColor = RGB16(2, 46, 61);
+	tabButton->BorderWidth = 1;
+	tabButton->CornerRadius = 0;
+	tabButton->Font = &Font16;
+	tabButton->Padding = (PADDING) { 0, 0, 0, 0 };
+	tabButton->TextAlign = MiddleCenter;
+	tabButton->Visible = 1;
+	tabButton->RedrawMe = 1;
+	tabButton->Checked = 0;
+	tabButton->Location = (Point){ .x = 112, .y = 1 };
+	tabButton->Size = (Size){ .width = 110, .height = 24 };
+	strcpy(tabButton->Text, "TAB 02");
+	
+	tabPanel = malloc(sizeof(Panel));
+	tabPanel->Type = PANEL;
+	strcpy(tabPanel->Name, "tabPanel2");
+	tabPanel->BackColor = RGB16(0, 22, 34);
+	tabPanel->ForeColor = RGB16(122, 225, 255);
+	tabPanel->BorderColor = RGB16(37, 87, 103);
+	tabPanel->BorderWidth = 1;
+	tabPanel->Location = (Point){ .x = 1, .y = 25 };
+	tabPanel->Size = (Size){ .width = gL_TabControl1.Size.width, .height = gL_TabControl1.Size.height - 25 };
+	tabPanel->CornerRadius = 5;
+	tabPanel->Font = &Font16;
+	strcpy(tabPanel->Text, "TAB PANEL 02");
+	tabPanel->Visible = 1;
+	tabPanel->RedrawMe = 1;
+	tabPanel->ChildrenNum = 0;
+	//Components in this panel
+	panel_update(tabPanel);
+	
+	gL_tabPanel2Button2.Type = BUTTON;
+	strcpy(gL_tabPanel2Button2.Name, "gL_tabPanel1Button1");
+	gL_tabPanel2Button2.Event_Down = gL_tabpanel2Button2_TouchEventHandler;
+	gL_tabPanel2Button2.Event_Hold = NULL;
+	gL_tabPanel2Button2.Event_Up   = NULL;
+	gL_tabPanel2Button2.BackColor = RGB16(4, 38, 52);
+	gL_tabPanel2Button2.ForeColor = RGB16(132, 225, 255);
+	gL_tabPanel2Button2.BorderColor = RGB16(1, 103, 137);
+	gL_tabPanel2Button2.CheckedColor = RGB16(62, 209, 255);
+	gL_tabPanel2Button2.CheckedForeColor = RGB16(2, 46, 61);
+	gL_tabPanel2Button2.BorderWidth = 1;
+	gL_tabPanel2Button2.CornerRadius = 0;
+	gL_tabPanel2Button2.Font = &Font16;
+	gL_tabPanel2Button2.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_tabPanel2Button2.TextAlign = MiddleCenter;
+	gL_tabPanel2Button2.Visible = 1;
+	gL_tabPanel2Button2.RedrawMe = 1;
+	gL_tabPanel2Button2.Location = (Point){ .x = 118, .y = 39 };
+	gL_tabPanel2Button2.Size = (Size){ .width = 120, .height = 24 };
+	strcpy(gL_tabPanel2Button2.Text, "TAB2-BUTTON");
+	gL_tabPanel2Button2.Checked = 0;
+
+	panel_add_child(tabPanel, &gL_tabPanel2Button2); //add to the panel
+	tabcontrol_update(&gL_TabControl1);
+	tabcontrol_add_child(&gL_TabControl1, tabButton, tabPanel);
+	tabcontrol_select_panel(&gL_TabControl1, 0); // select the first panel
+
+	panel_add_child(&Root_Panel, &gL_TabControl1);
+	/////////////
+	
+	
 
 	panel_add_child(&Root_Panel, &gL_Panel1); //add to the panel
 
@@ -748,5 +814,18 @@ void  InitPanelMain()
 	PanelHandleList[1] = (uint32_t*)&gL_Panel3;
 	PanelHandleList[2] = (uint32_t*)&gL_Panel2;
 	PanelHandleList[3] = (uint32_t*)&gL_Panel1;
+}
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/*							Define Touch event handler												*/
+
+void gL_tabpanel1Button1_TouchEventHandler(uint16_t x, uint16_t y)
+{
+	widget_update_value_int(&gL_Edit1, x);
+	widget_update_value_int(&gL_Edit2, y);
+}
+void gL_tabpanel2Button2_TouchEventHandler(uint16_t x, uint16_t y)
+{
+	widget_update_value_int(&gL_Edit3, x);
+	widget_update_value_int(&gL_Edit4, y);
 }

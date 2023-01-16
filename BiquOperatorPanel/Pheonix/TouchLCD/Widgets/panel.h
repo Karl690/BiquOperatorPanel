@@ -1,6 +1,9 @@
 #pragma once
 #include <stdint.h>
 #include "widget.h"
+
+#define PANEL_MAX_CHILDREN 64
+
 typedef struct tagPanel
 {
 	//Commone properties
@@ -16,7 +19,7 @@ typedef struct tagPanel
 	Color16 BorderColor;
 	PADDING		Padding;
 	
-	char Text[32];
+	char Text[WIDGET_MAX_TEXT_LENGTH];
 	Font* Font;
 	TEXT_ALIGN	TextAlign;	
 	
@@ -29,7 +32,7 @@ typedef struct tagPanel
 	uint16_t CornerRadius;
 	Point	CornerPoints[10];
 	
-	void* Children[64];
+	void* Children[PANEL_MAX_CHILDREN];
 	uint16_t ChildrenNum;
 	uint16_t StackIndex;
 	
@@ -38,7 +41,7 @@ typedef struct tagPanel
 Panel* panel_init();
 void panel_destory(Panel* panel);
 void panel_add_child(Panel* panel, void* child);
-void panel_on_paint(Panel* panel, Panel* Parent, uint8_t);
+void panel_on_paint(Panel* panel, Point offset, Color16  backcolor, uint8_t forceRedraw);
 
-void panel_touch_event_to_control(Panel* panel);
+void panel_touch_event_to_control(Panel* panel, Point offset);
 void panel_update_control_value(Panel* panel, char* name, char* value);

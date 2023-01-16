@@ -7,10 +7,10 @@ void label_destory(Label* label)
 	free(label);
 }
 
-void label_on_paint(Label* label, Panel* Parent)
+void label_on_paint(Label* label, Point offset, Color16  backcolor)
 {	
 	label->RedrawMe = 0;
-	Point pos = { Parent->Location.x + label->Location.x, Parent->Location.y + label->Location.y };
+	Point pos = { offset.x + label->Location.x, offset.y + label->Location.y };
 	GUI_FillRect(pos.x, pos.y, pos.x + label->Size.width, pos.y + label->Size.height, label->BackColor);
 	if (label->BorderWidth > 0)
 	{

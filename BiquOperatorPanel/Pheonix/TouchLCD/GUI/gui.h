@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include "configure.h"
 
 #define LEFT_PADDING 5
 #define RIGHT_PADDING 5
@@ -68,6 +69,8 @@ typedef struct tagPadding
 	uint8_t left, top, right, bottom;
 }PADDING;
 
+
+void GUI_Init();
 void GUI_Clear(uint16_t color);
 void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color);
 void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color);
@@ -80,3 +83,7 @@ void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset);
 void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor); // fontSize must be 20 or 32
 void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor);
 
+
+//Update the screen with buffer
+void GUI_Update_Screen();
+void GUI_Update_ScreenRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
