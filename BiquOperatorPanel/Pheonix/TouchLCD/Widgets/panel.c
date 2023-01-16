@@ -125,7 +125,7 @@ void panel_on_paint(Panel* panel, Point offset, Color16  backcolor, uint8_t forc
 
 void panel_touch_event_to_control(Panel* panel, Point offset)
 {
-	if (!touchScreenIsPress) return;
+	if (!touchScreenIsPress) return; //do nothing before getting touch event.
 	Point pos = (Point) { panel->Location.x + offset.x, panel->Location.y + offset.y};
 	for (int i = 0; i < panel->ChildrenNum; i++)
 	{

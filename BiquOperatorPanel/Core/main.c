@@ -76,7 +76,10 @@ int main(void)
 			panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); 
 		}
 		panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 0); //redraw as required..
-		panel_touch_event_to_control(ActivPanel, (Point){0, 0});
+		
+		if(touchScreenIsPress)
+			panel_touch_event_to_control(ActivPanel, (Point){0, 0});
+		
 		Refresh = 0;
 //		switch (PanelDisplayIndex)
 //		if(CurretScreenType != NewScreenType) // it need to transform screen

@@ -14,6 +14,7 @@ void tabcontrol_destory(TabControl* tab)
 }
 void tabcontrol_add_child(TabControl* tab, void* button, void* panel)
 {
+	if (tab->ChildrenNum >= TAB_MAX_PANEL_NUM) return; //do nothing in this case.
 	tab->Buttons[tab->ChildrenNum] = button;
 	tab->Panels[tab->ChildrenNum] = panel;
 	tab->ChildrenNum++;
@@ -21,7 +22,7 @@ void tabcontrol_add_child(TabControl* tab, void* button, void* panel)
 
 void tabcontrol_update(TabControl* tab)
 {	
-	tab->StackIndex = 0xffff;
+	tab->StackIndex = 0xff;
 }
 void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint8_t forceRedraw)
 {
@@ -67,18 +68,25 @@ void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint
 	tab->RedrawMe = 0;
 }
 
-void tabcontrol_select_panel(TabControl* tab, uint16_t  index)
+void tabcontrol_select_panel(TabControl* tab, uint16_t New_index)
 {
-	if (index == tab->StackIndex) return;
-	for (uint16_t i = 0; i < tab->ChildrenNum; i++)
+	uint16_t old_index = tab->StackIndex;
+	if (New_index == old_index) return;//if the same as before,return without processing.
+	if (old_index < TAB_MAX_PANEL_NUM)
 	{
-		((Button*)tab->Buttons[i])->Checked = index == i ? 1 : 0;
-		((Button*)tab->Buttons[i])->RedrawMe = 1;
-		((Panel*)tab->Panels[i])->Visible = index == i? 1: 0;
-		((Panel*)tab->Panels[i])->RedrawMe = 1;
+		((Button*)tab->Buttons[old_index])->Checked = 0; //turn off previous selection button
+		((Button*)tab->Buttons[old_index])->RedrawMe = 1;
 		
 	}
-	tab->StackIndex = index;
+	((Button*)tab->Buttons[New_index])->Checked = 1; //turn off previous selection button
+	((Button*)tab->Buttons[New_index])->RedrawMe = 1;	
+	
+	if (old_index < TAB_MAX_PANEL_NUM)
+		((Panel*)tab->Panels[old_index])->Visible =  0; //turn off old panel refresh
+	((Panel*)tab->Panels[New_index])->Visible = 1;
+	((Panel*)tab->Panels[New_index])->RedrawMe = 1;
+	
+	tab->StackIndex = New_index;
 	tab->RedrawMe = 1;
 }
 
