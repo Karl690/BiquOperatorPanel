@@ -9,18 +9,23 @@
 #include "../Widgets/tabcontrol.h"
 
 extern Panel Root_Panel;
-extern Button gL_Button3;
-extern Button gL_Button2;
-extern Button gL_Button1;
 extern Label lblTitle;
+extern TabControl gL_TabControl1;
+extern Button gL_TabControl1Tab_0;
+extern Panel gL_TabControl1Panel_0;
+extern Button gL_Button3;
+extern Button gL_Button1;
+extern Button gL_Button2;
+extern Button gL_TabControl1Tab_1;
+extern Panel gL_TabControl1Panel_1;
 extern Panel gL_Panel3;
-extern Panel gL_Panel2;
-//extern Listbox gL_Listbox1;
-extern Button gL_Button5;
-extern Button gL_Button4;
+extern Label gL_Label2;
+extern Button gL_TabControl1Tab_2;
+extern Panel gL_TabControl1Panel_2;
 extern Panel gL_Panel1;
 extern Edit gL_Edit11;
 extern Edit gL_Edit10;
+extern Label gL_Label3;
 extern Edit gL_Edit9;
 extern Edit gL_Edit8;
 extern Edit gL_Edit7;
@@ -39,15 +44,6 @@ extern Label gL_Label9;
 extern Label gL_Label8;
 extern Label gL_Label5;
 extern Label gL_Label4;
-extern Label gL_Label3;
-extern Label gL_Label2;
-
-extern TabControl gL_TabControl1;
 
 
 void  InitPanelMain();
-
-
-//Touch Event Handler
-void gL_tabpanel1Button1_TouchEventHandler(uint16_t x, uint16_t y);
-void gL_tabpanel2Button2_TouchEventHandler(uint16_t x, uint16_t y);

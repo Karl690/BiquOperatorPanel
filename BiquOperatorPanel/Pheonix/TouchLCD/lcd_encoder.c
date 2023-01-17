@@ -30,7 +30,7 @@ void EncoderWheelMove()
 		if (b == 0)EncoderCount--;
 		encoderlastRead = st;
 		
-		widget_update_value_int((Widget*)&gL_Label5, EncoderCount);
+		//widget_update_value_int((Widget*)&gL_Label5, EncoderCount);
 		
 		//if(a == 0) listbox_append_row(&gL_Listbox1, "AAAAAAAAAAAAA");
 		//if (b == 0) listbox_remove_row(&gL_Listbox1, 0);

@@ -113,7 +113,7 @@ void Spare (void)
 }
 void blink(void)
 {
-    widget_ToggleVisible((Widget*)&gL_Button1);
+    //widget_ToggleVisible((Widget*)&gL_Button1);
 	Refresh = 1; //tell them we need to redraw the screen
 }
 
