@@ -80,9 +80,9 @@ void  InitPanelMain()
 
 	glBtnPlus.Type = BUTTON;
 	strcpy(glBtnPlus.Name, "glBtnPlus");
-	glBtnPlus.Event_Down = NULL;
+	glBtnPlus.Event_Down = glBtnPlus_TouchEvent;
 	glBtnPlus.Event_Hold = NULL;
-	glBtnPlus.Event_Up   = glBtnPlus_TouchEvent;
+	glBtnPlus.Event_Up   = NULL;
 	glBtnPlus.BackColor = RGB16(0, 22, 34);
 	glBtnPlus.ForeColor = RGB16(132, 225, 255);
 	glBtnPlus.BorderColor = RGB16(1, 103, 137);
@@ -107,9 +107,9 @@ void  InitPanelMain()
 
 	glBtnMinus.Type = BUTTON;
 	strcpy(glBtnMinus.Name, "glBtnMinus");
-	glBtnMinus.Event_Down = NULL;
+	glBtnMinus.Event_Down = glBtnMinus_TouchEvent;
 	glBtnMinus.Event_Hold = NULL;
-	glBtnMinus.Event_Up   = glBtnMinus_TouchEvent;
+	glBtnMinus.Event_Up   = NULL;
 	glBtnMinus.BackColor = RGB16(0, 22, 34);
 	glBtnMinus.ForeColor = RGB16(132, 225, 255);
 	glBtnMinus.BorderColor = RGB16(1, 103, 137);

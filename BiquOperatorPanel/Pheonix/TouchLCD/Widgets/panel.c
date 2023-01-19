@@ -177,10 +177,7 @@ void panel_touch_event_to_control(Panel* panel, Point offset)
 				
 				widget->Event_Down(widget, TouchPointX - offset.x, TouchPointY - offset.y);
 			}
-			if (widget->Event_Up) {
-				
-				widget->Event_Up(widget, TouchPointX - offset.x, TouchPointY - offset.y);
-			}
+			
 		}
 	}
 	//touchScreenIsPress = 0;
