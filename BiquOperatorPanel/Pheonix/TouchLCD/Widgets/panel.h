@@ -38,6 +38,7 @@ typedef struct tagPanel
 	
 }Panel;
 
+extern Widget* FocusedWidget;
 Panel* panel_init();
 void panel_destory(Panel* panel);
 void panel_add_child(Panel* panel, void* child);

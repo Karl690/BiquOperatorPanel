@@ -411,6 +411,12 @@
     <ClInclude Include="Pheonix\TouchLCD\Widgets\tabcontrol.h">
       <Filter>Pheonix\TouchLCD\Widgets</Filter>
     </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\Widgets\numeric.h">
+      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Pheonix\TouchLCD\GUI\PanelMain.event.h">
+      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pheonix\TouchLCD\4xx\TouchLCD_4xx.c">
@@ -586,6 +592,12 @@
     </ClCompile>
     <ClCompile Include="Pheonix\TouchLCD\Widgets\tabcontrol.c">
       <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\TouchLCD\Widgets\numeric.c">
+      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Pheonix\TouchLCD\GUI\PanelMain.event.c">
+      <Filter>Pheonix\TouchLCD\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

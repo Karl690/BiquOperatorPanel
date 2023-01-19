@@ -6,7 +6,10 @@
 #include "listbox.h"
 #include "panel.h"
 #include "tabcontrol.h"
+#include "numeric.h"
 #include "../lcd_touch.h"
+
+Widget* FocusedWidget = NULL;
 
 void panel_destory(Panel* panel)
 {
@@ -92,6 +95,11 @@ void panel_on_paint(Panel* panel, Point offset, Color16  backcolor, uint8_t forc
 			panel_on_paint((Panel*)child, pos, backcolor, forceRedraw);
 			continue;
 		}
+		else if (child->Type == TABCONTROL)
+		{
+			tabcontrol_on_paint((TabControl*)child, pos, panel->BackColor, forceRedraw);
+			continue;
+		}
 		if (child->RedrawMe || forceRedraw)
 		{
 
@@ -107,11 +115,11 @@ void panel_on_paint(Panel* panel, Point offset, Color16  backcolor, uint8_t forc
 			case EDIT:
 				edit_on_paint((Edit*)child, pos, panel->BackColor);
 				break;
+			case NUMERIC:
+				numeric_on_paint((Numeric*)child, pos, panel->BackColor);
+				break;
 			case LISTBOX:
 				listbox_on_paint((Listbox*)child, pos, panel->BackColor);
-				break;
-			case TABCONTROL:
-				tabcontrol_on_paint((TabControl*)child, pos, panel->BackColor, forceRedraw);
 				break;
 			default:
 				break;
@@ -136,7 +144,43 @@ void panel_touch_event_to_control(Panel* panel, Point offset)
 		{
 			if (widget->Type == PANEL) panel_touch_event_to_control((Panel*)widget, pos);
 			else if (widget->Type == TABCONTROL) tabcontrol_touch_event_to_control((TabControl*)widget, pos);
-			else if (widget->Event_Down) widget->Event_Down(TouchPointX - offset.x, TouchPointY - offset.y);
+			else
+			{
+				if (widget->Type == NUMERIC || widget->Type == EDIT)
+				{
+					if (FocusedWidget != widget)
+					{
+						//old widget's focus flag release
+						if (FocusedWidget->Type == NUMERIC)
+						{
+							((Numeric*)FocusedWidget)->IsFocus = 0;
+							((Numeric*)FocusedWidget)->RedrawMe = 1;
+						}
+						//the case of the different focus
+						switch (widget->Type)
+						{
+						case NUMERIC:
+							FocusedWidget = widget;
+							((Numeric*)FocusedWidget)->IsFocus = 1;
+							((Numeric*)FocusedWidget)->RedrawMe = 1;
+							break;
+						case EDIT:
+							//FocusedWidget = widget;
+							break;
+						default:						
+							break;
+						}	
+					}
+				}
+			}
+			if (widget->Event_Down) {
+				
+				widget->Event_Down(widget, TouchPointX - offset.x, TouchPointY - offset.y);
+			}
+			if (widget->Event_Up) {
+				
+				widget->Event_Up(widget, TouchPointX - offset.x, TouchPointY - offset.y);
+			}
 		}
 	}
 	//touchScreenIsPress = 0;

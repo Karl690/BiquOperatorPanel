@@ -11,6 +11,7 @@ typedef enum
 	EDIT,
 	LISTBOX,
 	TABCONTROL,
+	NUMERIC,
 }WIDGETTYPE;
 
 typedef enum
@@ -26,7 +27,7 @@ typedef enum
 	BottomRight,
 }TEXT_ALIGN;
 
-typedef void(*CallbackTouchEventFunction)(uint32_t, uint32_t);
+typedef void(*CallbackTouchEventFunction)(void*, uint32_t, uint32_t);
 
 typedef struct tagWidget
 {

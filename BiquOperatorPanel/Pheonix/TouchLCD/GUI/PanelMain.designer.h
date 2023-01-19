@@ -7,22 +7,26 @@
 #include "../Widgets/button.h"
 #include "../Widgets/listbox.h"
 #include "../Widgets/tabcontrol.h"
-
+#include "../Widgets/numeric.h"
 extern Panel Root_Panel;
+extern Button glBtnPlus;
+extern Button glBtnMinus;
 extern Panel gL_Panel4;
 extern Panel gL_Panel3;
 extern Label lblTitle;
 extern TabControl glTabMain;
 extern Button glTabMainTab_0;
 extern Panel glTabMainPanel_0;
-extern Button gL_Button2;
-extern Button gL_Button1;
+extern Panel gL_Panel7;
+extern Label gL_Label15;
+extern Label gL_Label2;
+extern Numeric gL_Numeric1;
+extern Numeric gL_Numeric2;
 extern Panel gL_Panel5;
 extern Label gL_Label17;
-extern Label gL_Label18;
-extern Panel gL_Panel2;
+extern Numeric glNumeric_SimpleBaud;
 extern Label gL_Label16;
-extern Label gL_Label15;
+extern Numeric glNumeric_SimplePort;
 extern Button glTabMainTab_1;
 extern Panel glTabMainPanel_1;
 extern Button glTabMainTab_2;
@@ -50,6 +54,5 @@ extern Label gL_Label9;
 extern Label gL_Label8;
 extern Label gL_Label5;
 extern Label gL_Label4;
-
 
 void  InitPanelMain();

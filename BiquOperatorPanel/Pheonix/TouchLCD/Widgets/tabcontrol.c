@@ -31,8 +31,6 @@ void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint
 	
 	if (!tab->Visible || tab->RedrawMe) {
 		GUI_FillRect(pos.x, pos.y, pos.x + tab->Size.width, pos.y + tab->Size.height, backcolor);
-		
-		tab->RedrawMe = 0;
 	}
 	//at this point we have been asked to paint a Panel and all children in the panel
 	if (!tab->Visible) return;//dont draw unless we have permission
@@ -43,8 +41,6 @@ void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint
 		if (Refresh_Widget((Widget*)tab, forceRedraw)) {		
 			GUI_FillRect(pos.x, pos.y, pos.x + tab->Size.width, pos.y + tab->Size.height, tab->BackColor);
 			tab->RedrawMe = 0;
-			
-			
 		}
 		forceRedraw = 1;
 	}
@@ -55,9 +51,10 @@ void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint
 	//3. we want to hide this component, set the .visible=0, redraw to 1;
 	for (ChildIndex = 0; ChildIndex < tab->ChildrenNum; ChildIndex ++)
 	{
-		button_on_paint(tab->Buttons[ChildIndex], pos, tab->BackColor);
+		if (tab->RedrawMe || forceRedraw)
+			button_on_paint(tab->Buttons[ChildIndex], pos, tab->BackColor);
 		
-		if(ChildIndex == tab->StackIndex) // draw only the selected panel
+		if (ChildIndex == tab->StackIndex) // draw only the selected panel
 			panel_on_paint(tab->Panels[ChildIndex], pos, tab->BackColor, forceRedraw);
 	}
 	tab->RedrawMe = 0;

@@ -30,13 +30,13 @@ void EncoderWheelMove()
 		if (b == 0)EncoderCount--;
 		encoderlastRead = st;
 		
-		//widget_update_value_int((Widget*)&gL_Label5, EncoderCount);
 		
-		//if(a == 0) listbox_append_row(&gL_Listbox1, "AAAAAAAAAAAAA");
-		//if (b == 0) listbox_remove_row(&gL_Listbox1, 0);
-		Refresh = 1;//tell them we need to redraw the screen
-		//sprintf(gL_Label5.Text, "%d", EncoderCount);
-		//gL_Label5.RedrawMe = 1;
+		if (FocusedWidget && FocusedWidget->Type == NUMERIC)
+		{
+			if (a == 0) numeric_increment((Numeric*)FocusedWidget);	
+			if (b == 0) numeric_decrement((Numeric*)FocusedWidget);	
+		}
+		//Refresh = 1;//tell them we need to redraw the screen
 		
 	}
 	
