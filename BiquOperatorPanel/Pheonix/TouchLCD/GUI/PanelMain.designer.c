@@ -8,22 +8,28 @@ char logtext[255] = { 0 };
 uint32_t *PanelHandleList[32]; //empty panel list, pointer handles to structures
 
 Panel Root_Panel;
-Label lblTitle;
-TabControl gL_TabControl1;
-Button gL_TabControl1Tab_0;
-Panel gL_TabControl1Panel_0;
-Button gL_Button3;
-Button gL_Button1;
-Button gL_Button2;
-Button gL_TabControl1Tab_1;
-Panel gL_TabControl1Panel_1;
+Panel gL_Panel4;
 Panel gL_Panel3;
-Label gL_Label2;
-Button gL_TabControl1Tab_2;
-Panel gL_TabControl1Panel_2;
+Label lblTitle;
+TabControl glTabMain;
+Button glTabMainTab_0;
+Panel glTabMainPanel_0;
+Button gL_Button2;
+Button gL_Button1;
+Panel gL_Panel5;
+Label gL_Label17;
+Label gL_Label18;
+Panel gL_Panel2;
+Label gL_Label16;
+Label gL_Label15;
+Button glTabMainTab_1;
+Panel glTabMainPanel_1;
+Button glTabMainTab_2;
+Panel glTabMainPanel_2;
 Panel gL_Panel1;
 Edit gL_Edit11;
 Edit gL_Edit10;
+Label gL_Label1;
 Label gL_Label3;
 Edit gL_Edit9;
 Edit gL_Edit8;
@@ -70,6 +76,60 @@ void  InitPanelMain()
 	//Components in this panel
 	panel_update(&Root_Panel);
 
+	gL_Panel4.Type = PANEL;
+	strcpy(gL_Panel4.Name, "gL_Panel4");
+	gL_Panel4.BackColor = RGB16(0, 22, 34);
+	gL_Panel4.ForeColor = RGB16(122, 225, 255);
+	gL_Panel4.BorderColor = RGB16(37, 87, 103);
+	gL_Panel4.BorderWidth = 1;
+	gL_Panel4.Location = (Point){ .x = 378, .y = 42 };
+	gL_Panel4.Size = (Size){ .width = 401, .height = 312 };
+	gL_Panel4.StackIndex = -1;
+	gL_Panel4.CornerRadius = 5;
+	gL_Panel4.Font = &Font16;
+	strcpy(gL_Panel4.Text, "MESSAGES");
+	gL_Panel4.Visible = 1;
+	gL_Panel4.RedrawMe = 1;
+	//add click event callbacks
+	gL_Panel4.Event_Down = NULL;
+	gL_Panel4.Event_Hold = NULL;
+	gL_Panel4.Event_Up = NULL;
+	//Components in this panel
+	panel_update(&gL_Panel4);
+
+	panel_add_child(&Root_Panel, &gL_Panel4); //add to the panel
+
+
+
+
+
+	gL_Panel3.Type = PANEL;
+	strcpy(gL_Panel3.Name, "gL_Panel3");
+	gL_Panel3.BackColor = RGB16(0, 22, 34);
+	gL_Panel3.ForeColor = RGB16(122, 225, 255);
+	gL_Panel3.BorderColor = RGB16(37, 87, 103);
+	gL_Panel3.BorderWidth = 1;
+	gL_Panel3.Location = (Point){ .x = 378, .y = 362 };
+	gL_Panel3.Size = (Size){ .width = 401, .height = 105 };
+	gL_Panel3.StackIndex = -1;
+	gL_Panel3.CornerRadius = 5;
+	gL_Panel3.Font = &Font16;
+	strcpy(gL_Panel3.Text, "DEVICE INFO");
+	gL_Panel3.Visible = 1;
+	gL_Panel3.RedrawMe = 1;
+	//add click event callbacks
+	gL_Panel3.Event_Down = NULL;
+	gL_Panel3.Event_Hold = NULL;
+	gL_Panel3.Event_Up = NULL;
+	//Components in this panel
+	panel_update(&gL_Panel3);
+
+	panel_add_child(&Root_Panel, &gL_Panel3); //add to the panel
+
+
+
+
+
 	lblTitle.Type = LABEL;
 	strcpy(lblTitle.Name, "lblTitle");
 	lblTitle.BackColor = RGB16(0, 22, 34);
@@ -95,92 +155,39 @@ void  InitPanelMain()
 
 
 
-	gL_TabControl1.Type = TABCONTROL;
-	strcpy(gL_TabControl1.Name, "gL_TabControl1");
-	gL_TabControl1.BackColor = RGB16(0, 22, 34);
-	gL_TabControl1.BorderColor = RGB16(13, 49, 61);
-	gL_TabControl1.BorderWidth = 1;
-	gL_TabControl1.Visible = 1;
-	gL_TabControl1.RedrawMe = 1;
-	gL_TabControl1.Location = (Point){ .x = 19, .y = 54 };
-	gL_TabControl1.Size = (Size){ .width = 382, .height = 385 };
-	gL_TabControl1.StackIndex = 0;
+	glTabMain.Type = TABCONTROL;
+	strcpy(glTabMain.Name, "glTabMain");
+	glTabMain.BackColor = RGB16(0, 22, 34);
+	glTabMain.BorderColor = RGB16(13, 49, 61);
+	glTabMain.BorderWidth = 1;
+	glTabMain.Visible = 1;
+	glTabMain.RedrawMe = 1;
+	glTabMain.Location = (Point){ .x = 11, .y = 42 };
+	glTabMain.Size = (Size){ .width = 363, .height = 425 };
+	glTabMain.ItemSize = (Size){ .width = 100, .height = 35 };
+	glTabMain.StackIndex = 0;
 
-	gL_TabControl1Tab_0.Type = BUTTON;
-	strcpy(gL_TabControl1Tab_0.Name, "gL_TabControl1Tab_0");
-	gL_TabControl1Tab_0.Event_Down = NULL;
-	gL_TabControl1Tab_0.Event_Hold = NULL;
-	gL_TabControl1Tab_0.Event_Up   = NULL;
-	gL_TabControl1Tab_0.BackColor = RGB16(2, 46, 61);
-	gL_TabControl1Tab_0.ForeColor = RGB16(132, 225, 255);
-	gL_TabControl1Tab_0.BorderColor = RGB16(1, 103, 137);
-	gL_TabControl1Tab_0.CheckedColor = RGB16(62, 209, 255);
-	gL_TabControl1Tab_0.CheckedForeColor = RGB16(2, 46, 61);
-	gL_TabControl1Tab_0.BorderWidth = 1;
-	gL_TabControl1Tab_0.CornerRadius = 0;
-	gL_TabControl1Tab_0.Font = &Font16;
-	gL_TabControl1Tab_0.Padding = (PADDING) { 4, 4, 4, 4 };
-	gL_TabControl1Tab_0.TextAlign = MiddleCenter;
-	gL_TabControl1Tab_0.Visible = 1;
-	gL_TabControl1Tab_0.RedrawMe = 1;
-	gL_TabControl1Tab_0.Location = (Point){ .x = 0, .y = 0 };
-	gL_TabControl1Tab_0.Size = (Size){ .width = 100, .height = 30 };
-	strcpy(gL_TabControl1Tab_0.Text, "tabPage1");
-	gL_TabControl1Tab_0.Checked = 0;
-
-
-	gL_Button3.Type = BUTTON;
-	strcpy(gL_Button3.Name, "gL_Button3");
-	gL_Button3.Event_Down = NULL;
-	gL_Button3.Event_Hold = NULL;
-	gL_Button3.Event_Up   = NULL;
-	gL_Button3.BackColor = RGB16(4, 38, 52);
-	gL_Button3.ForeColor = RGB16(132, 225, 255);
-	gL_Button3.BorderColor = RGB16(1, 103, 137);
-	gL_Button3.CheckedColor = RGB16(62, 209, 255);
-	gL_Button3.CheckedForeColor = RGB16(2, 46, 61);
-	gL_Button3.BorderWidth = 1;
-	gL_Button3.CornerRadius = 0;
-	gL_Button3.Font = &Font16;
-	gL_Button3.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Button3.TextAlign = MiddleCenter;
-	gL_Button3.Visible = 1;
-	gL_Button3.RedrawMe = 1;
-	gL_Button3.Location = (Point){ .x = 149, .y = 61 };
-	gL_Button3.Size = (Size){ .width = 120, .height = 24 };
-	strcpy(gL_Button3.Text, "Frequencies");
-	gL_Button3.Checked = 0;
-
-	panel_add_child(&gL_TabControl1Panel_0, &gL_Button3); //add to the panel
-
-
-
-
-	gL_Button1.Type = BUTTON;
-	strcpy(gL_Button1.Name, "gL_Button1");
-	gL_Button1.Event_Down = NULL;
-	gL_Button1.Event_Hold = NULL;
-	gL_Button1.Event_Up   = NULL;
-	gL_Button1.BackColor = RGB16(4, 38, 52);
-	gL_Button1.ForeColor = RGB16(132, 225, 255);
-	gL_Button1.BorderColor = RGB16(1, 103, 137);
-	gL_Button1.CheckedColor = RGB16(62, 209, 255);
-	gL_Button1.CheckedForeColor = RGB16(2, 46, 61);
-	gL_Button1.BorderWidth = 1;
-	gL_Button1.CornerRadius = 0;
-	gL_Button1.Font = &Font16;
-	gL_Button1.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Button1.TextAlign = MiddleCenter;
-	gL_Button1.Visible = 1;
-	gL_Button1.RedrawMe = 1;
-	gL_Button1.Location = (Point){ .x = 20, .y = 13 };
-	gL_Button1.Size = (Size){ .width = 110, .height = 24 };
-	strcpy(gL_Button1.Text, "Live Data");
-	gL_Button1.Checked = 1;
-
-	panel_add_child(&gL_TabControl1Panel_0, &gL_Button1); //add to the panel
-
-
+	glTabMainTab_0.Type = BUTTON;
+	strcpy(glTabMainTab_0.Name, "glTabMainTab_0");
+	glTabMainTab_0.Event_Down = NULL;
+	glTabMainTab_0.Event_Hold = NULL;
+	glTabMainTab_0.Event_Up   = NULL;
+	glTabMainTab_0.BackColor = RGB16(2, 46, 61);
+	glTabMainTab_0.ForeColor = RGB16(132, 225, 255);
+	glTabMainTab_0.BorderColor = RGB16(1, 103, 137);
+	glTabMainTab_0.CheckedColor = RGB16(62, 209, 255);
+	glTabMainTab_0.CheckedForeColor = RGB16(2, 46, 61);
+	glTabMainTab_0.BorderWidth = 1;
+	glTabMainTab_0.CornerRadius = 0;
+	glTabMainTab_0.Font = &Font16;
+	glTabMainTab_0.Padding = (PADDING) { 4, 4, 4, 4 };
+	glTabMainTab_0.TextAlign = MiddleCenter;
+	glTabMainTab_0.Visible = 1;
+	glTabMainTab_0.RedrawMe = 1;
+	glTabMainTab_0.Location = (Point){ .x = 0, .y = 0 };
+	glTabMainTab_0.Size = (Size){ .width = 100, .height = 35 };
+	strcpy(glTabMainTab_0.Text, "Connection");
+	glTabMainTab_0.Checked = 0;
 
 
 	gL_Button2.Type = BUTTON;
@@ -188,7 +195,7 @@ void  InitPanelMain()
 	gL_Button2.Event_Down = NULL;
 	gL_Button2.Event_Hold = NULL;
 	gL_Button2.Event_Up   = NULL;
-	gL_Button2.BackColor = RGB16(4, 38, 52);
+	gL_Button2.BackColor = RGB16(0, 22, 34);
 	gL_Button2.ForeColor = RGB16(132, 225, 255);
 	gL_Button2.BorderColor = RGB16(1, 103, 137);
 	gL_Button2.CheckedColor = RGB16(62, 209, 255);
@@ -200,188 +207,387 @@ void  InitPanelMain()
 	gL_Button2.TextAlign = MiddleCenter;
 	gL_Button2.Visible = 1;
 	gL_Button2.RedrawMe = 1;
-	gL_Button2.Location = (Point){ .x = 128, .y = 13 };
-	gL_Button2.Size = (Size){ .width = 120, .height = 24 };
-	strcpy(gL_Button2.Text, "Recipe Data");
+	gL_Button2.Location = (Point){ .x = 61, .y = 339 };
+	gL_Button2.Size = (Size){ .width = 47, .height = 36 };
+	strcpy(gL_Button2.Text, "-");
 	gL_Button2.Checked = 0;
 
-	panel_add_child(&gL_TabControl1Panel_0, &gL_Button2); //add to the panel
+	panel_add_child(&glTabMainPanel_0, &gL_Button2); //add to the panel
 
 
 
 
-	gL_TabControl1Panel_0.Type = PANEL;
-	strcpy(gL_TabControl1Panel_0.Name, "gL_TabControl1Panel_0");
-	gL_TabControl1Panel_0.BackColor = RGB16(105, 105, 105);
-	gL_TabControl1Panel_0.ForeColor = RGB16(0, 0, 0);
-	gL_TabControl1Panel_0.BorderColor = RGB16(255, 255, 255);
-	gL_TabControl1Panel_0.BorderWidth = 0;
-	gL_TabControl1Panel_0.Location = (Point){ .x = 0, .y = 30 };
-	gL_TabControl1Panel_0.Size = (Size){ .width = 374, .height = 349 };
-	gL_TabControl1Panel_0.StackIndex = -1;
-	gL_TabControl1Panel_0.CornerRadius = 0;
-	gL_TabControl1Panel_0.Font = &Font12;
-	strcpy(gL_TabControl1Panel_0.Text, "");
-	gL_TabControl1Panel_0.Visible = 1;
-	gL_TabControl1Panel_0.RedrawMe = 1;
+	gL_Button1.Type = BUTTON;
+	strcpy(gL_Button1.Name, "gL_Button1");
+	gL_Button1.Event_Down = NULL;
+	gL_Button1.Event_Hold = NULL;
+	gL_Button1.Event_Up   = NULL;
+	gL_Button1.BackColor = RGB16(0, 22, 34);
+	gL_Button1.ForeColor = RGB16(132, 225, 255);
+	gL_Button1.BorderColor = RGB16(1, 103, 137);
+	gL_Button1.CheckedColor = RGB16(62, 209, 255);
+	gL_Button1.CheckedForeColor = RGB16(2, 46, 61);
+	gL_Button1.BorderWidth = 1;
+	gL_Button1.CornerRadius = 0;
+	gL_Button1.Font = &Font16;
+	gL_Button1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Button1.TextAlign = MiddleCenter;
+	gL_Button1.Visible = 1;
+	gL_Button1.RedrawMe = 1;
+	gL_Button1.Location = (Point){ .x = 8, .y = 339 };
+	gL_Button1.Size = (Size){ .width = 47, .height = 36 };
+	strcpy(gL_Button1.Text, "+");
+	gL_Button1.Checked = 0;
+
+	panel_add_child(&glTabMainPanel_0, &gL_Button1); //add to the panel
+
+
+
+
+	gL_Panel5.Type = PANEL;
+	strcpy(gL_Panel5.Name, "gL_Panel5");
+	gL_Panel5.BackColor = RGB16(0, 22, 34);
+	gL_Panel5.ForeColor = RGB16(122, 225, 255);
+	gL_Panel5.BorderColor = RGB16(37, 87, 103);
+	gL_Panel5.BorderWidth = 1;
+	gL_Panel5.Location = (Point){ .x = 8, .y = 148 };
+	gL_Panel5.Size = (Size){ .width = 337, .height = 125 };
+	gL_Panel5.StackIndex = -1;
+	gL_Panel5.CornerRadius = 5;
+	gL_Panel5.Font = &Font16;
+	strcpy(gL_Panel5.Text, "SIMPLE SERIAL");
+	gL_Panel5.Visible = 1;
+	gL_Panel5.RedrawMe = 1;
 	//add click event callbacks
-	gL_TabControl1Panel_0.Event_Down = NULL;
-	gL_TabControl1Panel_0.Event_Hold = NULL;
-	gL_TabControl1Panel_0.Event_Up = NULL;
+	gL_Panel5.Event_Down = NULL;
+	gL_Panel5.Event_Hold = NULL;
+	gL_Panel5.Event_Up = NULL;
 	//Components in this panel
-	panel_update(&gL_TabControl1Panel_0);
+	panel_update(&gL_Panel5);
 
-	tabcontrol_add_child(&gL_TabControl1, &gL_TabControl1Tab_0, &gL_TabControl1Panel_0);
-
-	gL_TabControl1Tab_1.Type = BUTTON;
-	strcpy(gL_TabControl1Tab_1.Name, "gL_TabControl1Tab_1");
-	gL_TabControl1Tab_1.Event_Down = NULL;
-	gL_TabControl1Tab_1.Event_Hold = NULL;
-	gL_TabControl1Tab_1.Event_Up   = NULL;
-	gL_TabControl1Tab_1.BackColor = RGB16(2, 46, 61);
-	gL_TabControl1Tab_1.ForeColor = RGB16(132, 225, 255);
-	gL_TabControl1Tab_1.BorderColor = RGB16(1, 103, 137);
-	gL_TabControl1Tab_1.CheckedColor = RGB16(62, 209, 255);
-	gL_TabControl1Tab_1.CheckedForeColor = RGB16(2, 46, 61);
-	gL_TabControl1Tab_1.BorderWidth = 1;
-	gL_TabControl1Tab_1.CornerRadius = 0;
-	gL_TabControl1Tab_1.Font = &Font16;
-	gL_TabControl1Tab_1.Padding = (PADDING) { 4, 4, 4, 4 };
-	gL_TabControl1Tab_1.TextAlign = MiddleCenter;
-	gL_TabControl1Tab_1.Visible = 1;
-	gL_TabControl1Tab_1.RedrawMe = 1;
-	gL_TabControl1Tab_1.Location = (Point){ .x = 100, .y = 0 };
-	gL_TabControl1Tab_1.Size = (Size){ .width = 100, .height = 30 };
-	strcpy(gL_TabControl1Tab_1.Text, "tabPage2");
-	gL_TabControl1Tab_1.Checked = 0;
-
-
-	gL_Panel3.Type = PANEL;
-	strcpy(gL_Panel3.Name, "gL_Panel3");
-	gL_Panel3.BackColor = RGB16(0, 22, 34);
-	gL_Panel3.ForeColor = RGB16(122, 225, 255);
-	gL_Panel3.BorderColor = RGB16(37, 87, 103);
-	gL_Panel3.BorderWidth = 1;
-	gL_Panel3.Location = (Point){ .x = 4, .y = 248 };
-	gL_Panel3.Size = (Size){ .width = 401, .height = 105 };
-	gL_Panel3.StackIndex = -1;
-	gL_Panel3.CornerRadius = 5;
-	gL_Panel3.Font = &Font16;
-	strcpy(gL_Panel3.Text, "DEVICE INFO");
-	gL_Panel3.Visible = 1;
-	gL_Panel3.RedrawMe = 1;
+	gL_Label17.Type = LABEL;
+	strcpy(gL_Label17.Name, "gL_Label17");
+	gL_Label17.BackColor = RGB16(0, 22, 34);
+	gL_Label17.ForeColor = RGB16(122, 225, 255);
+	gL_Label17.BorderColor = RGB16(0, 0, 0);
+	gL_Label17.BorderWidth = 0;
+	gL_Label17.CornerRadius = 0;
+	gL_Label17.Font = &Font16;
+	gL_Label17.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label17.TextAlign = TopLeft;
+	gL_Label17.Visible = 1;
+	gL_Label17.RedrawMe = 1;
+	gL_Label17.Location = (Point){ .x = 19, .y = 65 };
+	gL_Label17.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label17.Text, "Baud");
 	//add click event callbacks
-	gL_Panel3.Event_Down = NULL;
-	gL_Panel3.Event_Hold = NULL;
-	gL_Panel3.Event_Up = NULL;
+	gL_Label17.Event_Down = NULL;
+	gL_Label17.Event_Hold = NULL;
+	gL_Label17.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel5, &gL_Label17); //add to the panel
+
+
+
+
+	gL_Label18.Type = LABEL;
+	strcpy(gL_Label18.Name, "gL_Label18");
+	gL_Label18.BackColor = RGB16(0, 22, 34);
+	gL_Label18.ForeColor = RGB16(122, 225, 255);
+	gL_Label18.BorderColor = RGB16(0, 0, 0);
+	gL_Label18.BorderWidth = 0;
+	gL_Label18.CornerRadius = 0;
+	gL_Label18.Font = &Font16;
+	gL_Label18.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label18.TextAlign = TopLeft;
+	gL_Label18.Visible = 1;
+	gL_Label18.RedrawMe = 1;
+	gL_Label18.Location = (Point){ .x = 19, .y = 33 };
+	gL_Label18.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label18.Text, "Port");
+	//add click event callbacks
+	gL_Label18.Event_Down = NULL;
+	gL_Label18.Event_Hold = NULL;
+	gL_Label18.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel5, &gL_Label18); //add to the panel
+
+
+
+
+
+	gL_Label17.Type = LABEL;
+	strcpy(gL_Label17.Name, "gL_Label17");
+	gL_Label17.BackColor = RGB16(0, 22, 34);
+	gL_Label17.ForeColor = RGB16(122, 225, 255);
+	gL_Label17.BorderColor = RGB16(0, 0, 0);
+	gL_Label17.BorderWidth = 0;
+	gL_Label17.CornerRadius = 0;
+	gL_Label17.Font = &Font16;
+	gL_Label17.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label17.TextAlign = TopLeft;
+	gL_Label17.Visible = 1;
+	gL_Label17.RedrawMe = 1;
+	gL_Label17.Location = (Point){ .x = 19, .y = 65 };
+	gL_Label17.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label17.Text, "Baud");
+	//add click event callbacks
+	gL_Label17.Event_Down = NULL;
+	gL_Label17.Event_Hold = NULL;
+	gL_Label17.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel5, &gL_Label17); //add to the panel
+
+
+
+
+	gL_Label18.Type = LABEL;
+	strcpy(gL_Label18.Name, "gL_Label18");
+	gL_Label18.BackColor = RGB16(0, 22, 34);
+	gL_Label18.ForeColor = RGB16(122, 225, 255);
+	gL_Label18.BorderColor = RGB16(0, 0, 0);
+	gL_Label18.BorderWidth = 0;
+	gL_Label18.CornerRadius = 0;
+	gL_Label18.Font = &Font16;
+	gL_Label18.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label18.TextAlign = TopLeft;
+	gL_Label18.Visible = 1;
+	gL_Label18.RedrawMe = 1;
+	gL_Label18.Location = (Point){ .x = 19, .y = 33 };
+	gL_Label18.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label18.Text, "Port");
+	//add click event callbacks
+	gL_Label18.Event_Down = NULL;
+	gL_Label18.Event_Hold = NULL;
+	gL_Label18.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel5, &gL_Label18); //add to the panel
+
+
+
+	panel_add_child(&glTabMainPanel_0, &gL_Panel5); //add to the panel
+
+
+
+
+
+	gL_Panel2.Type = PANEL;
+	strcpy(gL_Panel2.Name, "gL_Panel2");
+	gL_Panel2.BackColor = RGB16(0, 22, 34);
+	gL_Panel2.ForeColor = RGB16(122, 225, 255);
+	gL_Panel2.BorderColor = RGB16(37, 87, 103);
+	gL_Panel2.BorderWidth = 1;
+	gL_Panel2.Location = (Point){ .x = 8, .y = 8 };
+	gL_Panel2.Size = (Size){ .width = 338, .height = 125 };
+	gL_Panel2.StackIndex = -1;
+	gL_Panel2.CornerRadius = 5;
+	gL_Panel2.Font = &Font16;
+	strcpy(gL_Panel2.Text, "SECS SERIAL");
+	gL_Panel2.Visible = 1;
+	gL_Panel2.RedrawMe = 1;
+	//add click event callbacks
+	gL_Panel2.Event_Down = NULL;
+	gL_Panel2.Event_Hold = NULL;
+	gL_Panel2.Event_Up = NULL;
 	//Components in this panel
-	panel_update(&gL_Panel3);
+	panel_update(&gL_Panel2);
 
-	panel_add_child(&gL_TabControl1Panel_1, &gL_Panel3); //add to the panel
-
-
-
-
-
-	gL_Label2.Type = LABEL;
-	strcpy(gL_Label2.Name, "gL_Label2");
-	gL_Label2.BackColor = RGB16(255, 255, 255);
-	gL_Label2.ForeColor = RGB16(122, 225, 255);
-	gL_Label2.BorderColor = RGB16(0, 0, 0);
-	gL_Label2.BorderWidth = 0;
-	gL_Label2.CornerRadius = 0;
-	gL_Label2.Font = &Font16;
-	gL_Label2.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Label2.TextAlign = TopLeft;
-	gL_Label2.Visible = 1;
-	gL_Label2.RedrawMe = 1;
-	gL_Label2.Location = (Point){ .x = 483, .y = 331 };
-	gL_Label2.Size = (Size){ .width = 160, .height = 22 };
-	strcpy(gL_Label2.Text, "Amplifier Unit#");
+	gL_Label16.Type = LABEL;
+	strcpy(gL_Label16.Name, "gL_Label16");
+	gL_Label16.BackColor = RGB16(0, 22, 34);
+	gL_Label16.ForeColor = RGB16(122, 225, 255);
+	gL_Label16.BorderColor = RGB16(0, 0, 0);
+	gL_Label16.BorderWidth = 0;
+	gL_Label16.CornerRadius = 0;
+	gL_Label16.Font = &Font16;
+	gL_Label16.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label16.TextAlign = TopLeft;
+	gL_Label16.Visible = 1;
+	gL_Label16.RedrawMe = 1;
+	gL_Label16.Location = (Point){ .x = 19, .y = 65 };
+	gL_Label16.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label16.Text, "Baud");
 	//add click event callbacks
-	gL_Label2.Event_Down = NULL;
-	gL_Label2.Event_Hold = NULL;
-	gL_Label2.Event_Up = NULL;
+	gL_Label16.Event_Down = NULL;
+	gL_Label16.Event_Hold = NULL;
+	gL_Label16.Event_Up = NULL;
 
-	panel_add_child(&gL_TabControl1Panel_1, &gL_Label2); //add to the panel
-
-
+	panel_add_child(&gL_Panel2, &gL_Label16); //add to the panel
 
 
-	gL_TabControl1Panel_1.Type = PANEL;
-	strcpy(gL_TabControl1Panel_1.Name, "gL_TabControl1Panel_1");
-	gL_TabControl1Panel_1.BackColor = RGB16(105, 105, 105);
-	gL_TabControl1Panel_1.ForeColor = RGB16(0, 0, 0);
-	gL_TabControl1Panel_1.BorderColor = RGB16(255, 255, 255);
-	gL_TabControl1Panel_1.BorderWidth = 0;
-	gL_TabControl1Panel_1.Location = (Point){ .x = 0, .y = 30 };
-	gL_TabControl1Panel_1.Size = (Size){ .width = 374, .height = 349 };
-	gL_TabControl1Panel_1.StackIndex = -1;
-	gL_TabControl1Panel_1.CornerRadius = 0;
-	gL_TabControl1Panel_1.Font = &Font12;
-	strcpy(gL_TabControl1Panel_1.Text, "");
-	gL_TabControl1Panel_1.Visible = 1;
-	gL_TabControl1Panel_1.RedrawMe = 1;
+
+
+	gL_Label15.Type = LABEL;
+	strcpy(gL_Label15.Name, "gL_Label15");
+	gL_Label15.BackColor = RGB16(0, 22, 34);
+	gL_Label15.ForeColor = RGB16(122, 225, 255);
+	gL_Label15.BorderColor = RGB16(0, 0, 0);
+	gL_Label15.BorderWidth = 0;
+	gL_Label15.CornerRadius = 0;
+	gL_Label15.Font = &Font16;
+	gL_Label15.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label15.TextAlign = TopLeft;
+	gL_Label15.Visible = 1;
+	gL_Label15.RedrawMe = 1;
+	gL_Label15.Location = (Point){ .x = 19, .y = 33 };
+	gL_Label15.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label15.Text, "Port");
 	//add click event callbacks
-	gL_TabControl1Panel_1.Event_Down = NULL;
-	gL_TabControl1Panel_1.Event_Hold = NULL;
-	gL_TabControl1Panel_1.Event_Up = NULL;
+	gL_Label15.Event_Down = NULL;
+	gL_Label15.Event_Hold = NULL;
+	gL_Label15.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel2, &gL_Label15); //add to the panel
+
+
+
+
+
+	gL_Label16.Type = LABEL;
+	strcpy(gL_Label16.Name, "gL_Label16");
+	gL_Label16.BackColor = RGB16(0, 22, 34);
+	gL_Label16.ForeColor = RGB16(122, 225, 255);
+	gL_Label16.BorderColor = RGB16(0, 0, 0);
+	gL_Label16.BorderWidth = 0;
+	gL_Label16.CornerRadius = 0;
+	gL_Label16.Font = &Font16;
+	gL_Label16.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label16.TextAlign = TopLeft;
+	gL_Label16.Visible = 1;
+	gL_Label16.RedrawMe = 1;
+	gL_Label16.Location = (Point){ .x = 19, .y = 65 };
+	gL_Label16.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label16.Text, "Baud");
+	//add click event callbacks
+	gL_Label16.Event_Down = NULL;
+	gL_Label16.Event_Hold = NULL;
+	gL_Label16.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel2, &gL_Label16); //add to the panel
+
+
+
+
+	gL_Label15.Type = LABEL;
+	strcpy(gL_Label15.Name, "gL_Label15");
+	gL_Label15.BackColor = RGB16(0, 22, 34);
+	gL_Label15.ForeColor = RGB16(122, 225, 255);
+	gL_Label15.BorderColor = RGB16(0, 0, 0);
+	gL_Label15.BorderWidth = 0;
+	gL_Label15.CornerRadius = 0;
+	gL_Label15.Font = &Font16;
+	gL_Label15.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label15.TextAlign = TopLeft;
+	gL_Label15.Visible = 1;
+	gL_Label15.RedrawMe = 1;
+	gL_Label15.Location = (Point){ .x = 19, .y = 33 };
+	gL_Label15.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label15.Text, "Port");
+	//add click event callbacks
+	gL_Label15.Event_Down = NULL;
+	gL_Label15.Event_Hold = NULL;
+	gL_Label15.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel2, &gL_Label15); //add to the panel
+
+
+
+	panel_add_child(&glTabMainPanel_0, &gL_Panel2); //add to the panel
+
+
+
+
+
+	glTabMainPanel_0.Type = PANEL;
+	strcpy(glTabMainPanel_0.Name, "glTabMainPanel_0");
+	glTabMainPanel_0.BackColor = RGB16(0, 22, 34);
+	glTabMainPanel_0.ForeColor = RGB16(105, 105, 105);
+	glTabMainPanel_0.BorderColor = RGB16(13, 49, 61);
+	glTabMainPanel_0.BorderWidth = 1;
+	glTabMainPanel_0.Location = (Point){ .x = 0, .y = 35 };
+	glTabMainPanel_0.Size = (Size){ .width = 355, .height = 382 };
+	glTabMainPanel_0.StackIndex = -1;
+	glTabMainPanel_0.CornerRadius = 0;
+	glTabMainPanel_0.Font = &Font12;
+	strcpy(glTabMainPanel_0.Text, "");
+	glTabMainPanel_0.Visible = 1;
+	glTabMainPanel_0.RedrawMe = 1;
+	//add click event callbacks
+	glTabMainPanel_0.Event_Down = NULL;
+	glTabMainPanel_0.Event_Hold = NULL;
+	glTabMainPanel_0.Event_Up = NULL;
 	//Components in this panel
-	panel_update(&gL_TabControl1Panel_1);
+	panel_update(&glTabMainPanel_0);
 
-	tabcontrol_add_child(&gL_TabControl1, &gL_TabControl1Tab_1, &gL_TabControl1Panel_1);
+	tabcontrol_add_child(&glTabMain, &glTabMainTab_0, &glTabMainPanel_0);
 
-	gL_TabControl1Tab_2.Type = BUTTON;
-	strcpy(gL_TabControl1Tab_2.Name, "gL_TabControl1Tab_2");
-	gL_TabControl1Tab_2.Event_Down = NULL;
-	gL_TabControl1Tab_2.Event_Hold = NULL;
-	gL_TabControl1Tab_2.Event_Up   = NULL;
-	gL_TabControl1Tab_2.BackColor = RGB16(2, 46, 61);
-	gL_TabControl1Tab_2.ForeColor = RGB16(132, 225, 255);
-	gL_TabControl1Tab_2.BorderColor = RGB16(1, 103, 137);
-	gL_TabControl1Tab_2.CheckedColor = RGB16(62, 209, 255);
-	gL_TabControl1Tab_2.CheckedForeColor = RGB16(2, 46, 61);
-	gL_TabControl1Tab_2.BorderWidth = 1;
-	gL_TabControl1Tab_2.CornerRadius = 0;
-	gL_TabControl1Tab_2.Font = &Font16;
-	gL_TabControl1Tab_2.Padding = (PADDING) { 4, 4, 4, 4 };
-	gL_TabControl1Tab_2.TextAlign = MiddleCenter;
-	gL_TabControl1Tab_2.Visible = 1;
-	gL_TabControl1Tab_2.RedrawMe = 1;
-	gL_TabControl1Tab_2.Location = (Point){ .x = 200, .y = 0 };
-	gL_TabControl1Tab_2.Size = (Size){ .width = 100, .height = 30 };
-	strcpy(gL_TabControl1Tab_2.Text, "tabPage3");
-	gL_TabControl1Tab_2.Checked = 0;
+	glTabMainTab_1.Type = BUTTON;
+	strcpy(glTabMainTab_1.Name, "glTabMainTab_1");
+	glTabMainTab_1.Event_Down = NULL;
+	glTabMainTab_1.Event_Hold = NULL;
+	glTabMainTab_1.Event_Up   = NULL;
+	glTabMainTab_1.BackColor = RGB16(2, 46, 61);
+	glTabMainTab_1.ForeColor = RGB16(132, 225, 255);
+	glTabMainTab_1.BorderColor = RGB16(1, 103, 137);
+	glTabMainTab_1.CheckedColor = RGB16(62, 209, 255);
+	glTabMainTab_1.CheckedForeColor = RGB16(2, 46, 61);
+	glTabMainTab_1.BorderWidth = 1;
+	glTabMainTab_1.CornerRadius = 0;
+	glTabMainTab_1.Font = &Font16;
+	glTabMainTab_1.Padding = (PADDING) { 4, 4, 4, 4 };
+	glTabMainTab_1.TextAlign = MiddleCenter;
+	glTabMainTab_1.Visible = 1;
+	glTabMainTab_1.RedrawMe = 1;
+	glTabMainTab_1.Location = (Point){ .x = 100, .y = 0 };
+	glTabMainTab_1.Size = (Size){ .width = 100, .height = 35 };
+	strcpy(glTabMainTab_1.Text, "Functions");
+	glTabMainTab_1.Checked = 0;
 
 
-	gL_TabControl1Panel_2.Type = PANEL;
-	strcpy(gL_TabControl1Panel_2.Name, "gL_TabControl1Panel_2");
-	gL_TabControl1Panel_2.BackColor = RGB16(105, 105, 105);
-	gL_TabControl1Panel_2.ForeColor = RGB16(0, 0, 0);
-	gL_TabControl1Panel_2.BorderColor = RGB16(255, 255, 255);
-	gL_TabControl1Panel_2.BorderWidth = 0;
-	gL_TabControl1Panel_2.Location = (Point){ .x = 0, .y = 30 };
-	gL_TabControl1Panel_2.Size = (Size){ .width = 374, .height = 349 };
-	gL_TabControl1Panel_2.StackIndex = -1;
-	gL_TabControl1Panel_2.CornerRadius = 0;
-	gL_TabControl1Panel_2.Font = &Font12;
-	strcpy(gL_TabControl1Panel_2.Text, "");
-	gL_TabControl1Panel_2.Visible = 1;
-	gL_TabControl1Panel_2.RedrawMe = 1;
+	glTabMainPanel_1.Type = PANEL;
+	strcpy(glTabMainPanel_1.Name, "glTabMainPanel_1");
+	glTabMainPanel_1.BackColor = RGB16(0, 22, 34);
+	glTabMainPanel_1.ForeColor = RGB16(105, 105, 105);
+	glTabMainPanel_1.BorderColor = RGB16(13, 49, 61);
+	glTabMainPanel_1.BorderWidth = 1;
+	glTabMainPanel_1.Location = (Point){ .x = 0, .y = 35 };
+	glTabMainPanel_1.Size = (Size){ .width = 355, .height = 382 };
+	glTabMainPanel_1.StackIndex = -1;
+	glTabMainPanel_1.CornerRadius = 0;
+	glTabMainPanel_1.Font = &Font12;
+	strcpy(glTabMainPanel_1.Text, "");
+	glTabMainPanel_1.Visible = 1;
+	glTabMainPanel_1.RedrawMe = 1;
 	//add click event callbacks
-	gL_TabControl1Panel_2.Event_Down = NULL;
-	gL_TabControl1Panel_2.Event_Hold = NULL;
-	gL_TabControl1Panel_2.Event_Up = NULL;
+	glTabMainPanel_1.Event_Down = NULL;
+	glTabMainPanel_1.Event_Hold = NULL;
+	glTabMainPanel_1.Event_Up = NULL;
 	//Components in this panel
-	panel_update(&gL_TabControl1Panel_2);
+	panel_update(&glTabMainPanel_1);
 
-	tabcontrol_add_child(&gL_TabControl1, &gL_TabControl1Tab_2, &gL_TabControl1Panel_2);
-	tabcontrol_update(&gL_TabControl1);
-	tabcontrol_select_panel(&gL_TabControl1, 0);
+	tabcontrol_add_child(&glTabMain, &glTabMainTab_1, &glTabMainPanel_1);
 
-	panel_add_child(&Root_Panel, &gL_TabControl1); //add to the panel
-
-
+	glTabMainTab_2.Type = BUTTON;
+	strcpy(glTabMainTab_2.Name, "glTabMainTab_2");
+	glTabMainTab_2.Event_Down = NULL;
+	glTabMainTab_2.Event_Hold = NULL;
+	glTabMainTab_2.Event_Up   = NULL;
+	glTabMainTab_2.BackColor = RGB16(2, 46, 61);
+	glTabMainTab_2.ForeColor = RGB16(132, 225, 255);
+	glTabMainTab_2.BorderColor = RGB16(1, 103, 137);
+	glTabMainTab_2.CheckedColor = RGB16(62, 209, 255);
+	glTabMainTab_2.CheckedForeColor = RGB16(2, 46, 61);
+	glTabMainTab_2.BorderWidth = 1;
+	glTabMainTab_2.CornerRadius = 0;
+	glTabMainTab_2.Font = &Font16;
+	glTabMainTab_2.Padding = (PADDING) { 4, 4, 4, 4 };
+	glTabMainTab_2.TextAlign = MiddleCenter;
+	glTabMainTab_2.Visible = 1;
+	glTabMainTab_2.RedrawMe = 1;
+	glTabMainTab_2.Location = (Point){ .x = 200, .y = 0 };
+	glTabMainTab_2.Size = (Size){ .width = 100, .height = 35 };
+	strcpy(glTabMainTab_2.Text, "Variables");
+	glTabMainTab_2.Checked = 0;
 
 
 	gL_Panel1.Type = PANEL;
@@ -390,8 +596,8 @@ void  InitPanelMain()
 	gL_Panel1.ForeColor = RGB16(122, 225, 255);
 	gL_Panel1.BorderColor = RGB16(37, 87, 103);
 	gL_Panel1.BorderWidth = 1;
-	gL_Panel1.Location = (Point){ .x = 426, .y = 56 };
-	gL_Panel1.Size = (Size){ .width = 346, .height = 383 };
+	gL_Panel1.Location = (Point){ .x = 7, .y = 7 };
+	gL_Panel1.Size = (Size){ .width = 346, .height = 373 };
 	gL_Panel1.StackIndex = -1;
 	gL_Panel1.CornerRadius = 5;
 	gL_Panel1.Font = &Font16;
@@ -417,7 +623,7 @@ void  InitPanelMain()
 	gL_Edit11.TextAlign = MiddleRight;
 	gL_Edit11.Visible = 1;
 	gL_Edit11.RedrawMe = 1;
-	gL_Edit11.Location = (Point){ .x = 223, .y = 342 };
+	gL_Edit11.Location = (Point){ .x = 223, .y = 334 };
 	gL_Edit11.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit11.Text, "###");
 	edit_update(&gL_Edit11);
@@ -439,12 +645,37 @@ void  InitPanelMain()
 	gL_Edit10.TextAlign = MiddleRight;
 	gL_Edit10.Visible = 1;
 	gL_Edit10.RedrawMe = 1;
-	gL_Edit10.Location = (Point){ .x = 223, .y = 311 };
+	gL_Edit10.Location = (Point){ .x = 223, .y = 303 };
 	gL_Edit10.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit10.Text, "###");
 	edit_update(&gL_Edit10);
 
 	panel_add_child(&gL_Panel1, &gL_Edit10); //add to the panel
+
+
+
+
+	gL_Label1.Type = LABEL;
+	strcpy(gL_Label1.Name, "gL_Label1");
+	gL_Label1.BackColor = RGB16(0, 22, 34);
+	gL_Label1.ForeColor = RGB16(122, 225, 255);
+	gL_Label1.BorderColor = RGB16(0, 0, 0);
+	gL_Label1.BorderWidth = 0;
+	gL_Label1.CornerRadius = 0;
+	gL_Label1.Font = &Font16;
+	gL_Label1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label1.TextAlign = TopLeft;
+	gL_Label1.Visible = 1;
+	gL_Label1.RedrawMe = 1;
+	gL_Label1.Location = (Point){ .x = 15, .y = 23 };
+	gL_Label1.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label1.Text, "Amplifier Unit# ");
+	//add click event callbacks
+	gL_Label1.Event_Down = NULL;
+	gL_Label1.Event_Hold = NULL;
+	gL_Label1.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel1, &gL_Label1); //add to the panel
 
 
 
@@ -461,7 +692,7 @@ void  InitPanelMain()
 	gL_Label3.TextAlign = TopLeft;
 	gL_Label3.Visible = 1;
 	gL_Label3.RedrawMe = 1;
-	gL_Label3.Location = (Point){ .x = 15, .y = 62 };
+	gL_Label3.Location = (Point){ .x = 15, .y = 54 };
 	gL_Label3.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label3.Text, "Channel number");
 	//add click event callbacks
@@ -486,7 +717,7 @@ void  InitPanelMain()
 	gL_Edit9.TextAlign = MiddleRight;
 	gL_Edit9.Visible = 1;
 	gL_Edit9.RedrawMe = 1;
-	gL_Edit9.Location = (Point){ .x = 223, .y = 280 };
+	gL_Edit9.Location = (Point){ .x = 223, .y = 272 };
 	gL_Edit9.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit9.Text, "###");
 	edit_update(&gL_Edit9);
@@ -508,7 +739,7 @@ void  InitPanelMain()
 	gL_Edit8.TextAlign = MiddleRight;
 	gL_Edit8.Visible = 1;
 	gL_Edit8.RedrawMe = 1;
-	gL_Edit8.Location = (Point){ .x = 223, .y = 249 };
+	gL_Edit8.Location = (Point){ .x = 223, .y = 241 };
 	gL_Edit8.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit8.Text, "###");
 	edit_update(&gL_Edit8);
@@ -530,7 +761,7 @@ void  InitPanelMain()
 	gL_Edit7.TextAlign = MiddleRight;
 	gL_Edit7.Visible = 1;
 	gL_Edit7.RedrawMe = 1;
-	gL_Edit7.Location = (Point){ .x = 223, .y = 218 };
+	gL_Edit7.Location = (Point){ .x = 223, .y = 210 };
 	gL_Edit7.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit7.Text, "###");
 	edit_update(&gL_Edit7);
@@ -552,7 +783,7 @@ void  InitPanelMain()
 	gL_Edit6.TextAlign = MiddleRight;
 	gL_Edit6.Visible = 1;
 	gL_Edit6.RedrawMe = 1;
-	gL_Edit6.Location = (Point){ .x = 223, .y = 187 };
+	gL_Edit6.Location = (Point){ .x = 223, .y = 179 };
 	gL_Edit6.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit6.Text, "###");
 	edit_update(&gL_Edit6);
@@ -574,7 +805,7 @@ void  InitPanelMain()
 	gL_Edit5.TextAlign = MiddleRight;
 	gL_Edit5.Visible = 1;
 	gL_Edit5.RedrawMe = 1;
-	gL_Edit5.Location = (Point){ .x = 223, .y = 156 };
+	gL_Edit5.Location = (Point){ .x = 223, .y = 148 };
 	gL_Edit5.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit5.Text, "###");
 	edit_update(&gL_Edit5);
@@ -596,7 +827,7 @@ void  InitPanelMain()
 	gL_Edit4.TextAlign = MiddleRight;
 	gL_Edit4.Visible = 1;
 	gL_Edit4.RedrawMe = 1;
-	gL_Edit4.Location = (Point){ .x = 223, .y = 125 };
+	gL_Edit4.Location = (Point){ .x = 223, .y = 117 };
 	gL_Edit4.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit4.Text, "###");
 	edit_update(&gL_Edit4);
@@ -618,7 +849,7 @@ void  InitPanelMain()
 	gL_Edit3.TextAlign = MiddleRight;
 	gL_Edit3.Visible = 1;
 	gL_Edit3.RedrawMe = 1;
-	gL_Edit3.Location = (Point){ .x = 223, .y = 94 };
+	gL_Edit3.Location = (Point){ .x = 223, .y = 86 };
 	gL_Edit3.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit3.Text, "###");
 	edit_update(&gL_Edit3);
@@ -640,7 +871,7 @@ void  InitPanelMain()
 	gL_Edit2.TextAlign = MiddleRight;
 	gL_Edit2.Visible = 1;
 	gL_Edit2.RedrawMe = 1;
-	gL_Edit2.Location = (Point){ .x = 223, .y = 63 };
+	gL_Edit2.Location = (Point){ .x = 223, .y = 55 };
 	gL_Edit2.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit2.Text, "###");
 	edit_update(&gL_Edit2);
@@ -662,7 +893,7 @@ void  InitPanelMain()
 	gL_Edit1.TextAlign = MiddleRight;
 	gL_Edit1.Visible = 1;
 	gL_Edit1.RedrawMe = 1;
-	gL_Edit1.Location = (Point){ .x = 223, .y = 32 };
+	gL_Edit1.Location = (Point){ .x = 223, .y = 24 };
 	gL_Edit1.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit1.Text, "###");
 	edit_update(&gL_Edit1);
@@ -684,7 +915,7 @@ void  InitPanelMain()
 	gL_Label14.TextAlign = TopLeft;
 	gL_Label14.Visible = 1;
 	gL_Label14.RedrawMe = 1;
-	gL_Label14.Location = (Point){ .x = 15, .y = 342 };
+	gL_Label14.Location = (Point){ .x = 15, .y = 334 };
 	gL_Label14.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label14.Text, "Status");
 	//add click event callbacks
@@ -709,7 +940,7 @@ void  InitPanelMain()
 	gL_Label13.TextAlign = TopLeft;
 	gL_Label13.Visible = 1;
 	gL_Label13.RedrawMe = 1;
-	gL_Label13.Location = (Point){ .x = 15, .y = 311 };
+	gL_Label13.Location = (Point){ .x = 15, .y = 303 };
 	gL_Label13.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label13.Text, "TC2");
 	//add click event callbacks
@@ -734,7 +965,7 @@ void  InitPanelMain()
 	gL_Label12.TextAlign = TopLeft;
 	gL_Label12.Visible = 1;
 	gL_Label12.RedrawMe = 1;
-	gL_Label12.Location = (Point){ .x = 15, .y = 280 };
+	gL_Label12.Location = (Point){ .x = 15, .y = 272 };
 	gL_Label12.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label12.Text, "TC1");
 	//add click event callbacks
@@ -759,7 +990,7 @@ void  InitPanelMain()
 	gL_Label11.TextAlign = TopLeft;
 	gL_Label11.Visible = 1;
 	gL_Label11.RedrawMe = 1;
-	gL_Label11.Location = (Point){ .x = 15, .y = 249 };
+	gL_Label11.Location = (Point){ .x = 15, .y = 241 };
 	gL_Label11.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label11.Text, "Bath Temp");
 	//add click event callbacks
@@ -784,7 +1015,7 @@ void  InitPanelMain()
 	gL_Label10.TextAlign = TopLeft;
 	gL_Label10.Visible = 1;
 	gL_Label10.RedrawMe = 1;
-	gL_Label10.Location = (Point){ .x = 15, .y = 218 };
+	gL_Label10.Location = (Point){ .x = 15, .y = 210 };
 	gL_Label10.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label10.Text, "Power2");
 	//add click event callbacks
@@ -809,7 +1040,7 @@ void  InitPanelMain()
 	gL_Label9.TextAlign = TopLeft;
 	gL_Label9.Visible = 1;
 	gL_Label9.RedrawMe = 1;
-	gL_Label9.Location = (Point){ .x = 15, .y = 187 };
+	gL_Label9.Location = (Point){ .x = 15, .y = 179 };
 	gL_Label9.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label9.Text, "Power1");
 	//add click event callbacks
@@ -834,7 +1065,7 @@ void  InitPanelMain()
 	gL_Label8.TextAlign = TopLeft;
 	gL_Label8.Visible = 1;
 	gL_Label8.RedrawMe = 1;
-	gL_Label8.Location = (Point){ .x = 15, .y = 156 };
+	gL_Label8.Location = (Point){ .x = 15, .y = 148 };
 	gL_Label8.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label8.Text, "Frequency 2 ");
 	//add click event callbacks
@@ -859,7 +1090,7 @@ void  InitPanelMain()
 	gL_Label5.TextAlign = TopLeft;
 	gL_Label5.Visible = 1;
 	gL_Label5.RedrawMe = 1;
-	gL_Label5.Location = (Point){ .x = 15, .y = 125 };
+	gL_Label5.Location = (Point){ .x = 15, .y = 117 };
 	gL_Label5.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label5.Text, "TC6");
 	//add click event callbacks
@@ -884,7 +1115,7 @@ void  InitPanelMain()
 	gL_Label4.TextAlign = TopLeft;
 	gL_Label4.Visible = 1;
 	gL_Label4.RedrawMe = 1;
-	gL_Label4.Location = (Point){ .x = 15, .y = 94 };
+	gL_Label4.Location = (Point){ .x = 15, .y = 86 };
 	gL_Label4.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label4.Text, "Frequency 1");
 	//add click event callbacks
@@ -910,7 +1141,7 @@ void  InitPanelMain()
 	gL_Edit11.TextAlign = MiddleRight;
 	gL_Edit11.Visible = 1;
 	gL_Edit11.RedrawMe = 1;
-	gL_Edit11.Location = (Point){ .x = 223, .y = 342 };
+	gL_Edit11.Location = (Point){ .x = 223, .y = 334 };
 	gL_Edit11.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit11.Text, "###");
 	edit_update(&gL_Edit11);
@@ -932,12 +1163,37 @@ void  InitPanelMain()
 	gL_Edit10.TextAlign = MiddleRight;
 	gL_Edit10.Visible = 1;
 	gL_Edit10.RedrawMe = 1;
-	gL_Edit10.Location = (Point){ .x = 223, .y = 311 };
+	gL_Edit10.Location = (Point){ .x = 223, .y = 303 };
 	gL_Edit10.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit10.Text, "###");
 	edit_update(&gL_Edit10);
 
 	panel_add_child(&gL_Panel1, &gL_Edit10); //add to the panel
+
+
+
+
+	gL_Label1.Type = LABEL;
+	strcpy(gL_Label1.Name, "gL_Label1");
+	gL_Label1.BackColor = RGB16(0, 22, 34);
+	gL_Label1.ForeColor = RGB16(122, 225, 255);
+	gL_Label1.BorderColor = RGB16(0, 0, 0);
+	gL_Label1.BorderWidth = 0;
+	gL_Label1.CornerRadius = 0;
+	gL_Label1.Font = &Font16;
+	gL_Label1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label1.TextAlign = TopLeft;
+	gL_Label1.Visible = 1;
+	gL_Label1.RedrawMe = 1;
+	gL_Label1.Location = (Point){ .x = 15, .y = 23 };
+	gL_Label1.Size = (Size){ .width = 160, .height = 22 };
+	strcpy(gL_Label1.Text, "Amplifier Unit# ");
+	//add click event callbacks
+	gL_Label1.Event_Down = NULL;
+	gL_Label1.Event_Hold = NULL;
+	gL_Label1.Event_Up = NULL;
+
+	panel_add_child(&gL_Panel1, &gL_Label1); //add to the panel
 
 
 
@@ -954,7 +1210,7 @@ void  InitPanelMain()
 	gL_Label3.TextAlign = TopLeft;
 	gL_Label3.Visible = 1;
 	gL_Label3.RedrawMe = 1;
-	gL_Label3.Location = (Point){ .x = 15, .y = 62 };
+	gL_Label3.Location = (Point){ .x = 15, .y = 54 };
 	gL_Label3.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label3.Text, "Channel number");
 	//add click event callbacks
@@ -979,7 +1235,7 @@ void  InitPanelMain()
 	gL_Edit9.TextAlign = MiddleRight;
 	gL_Edit9.Visible = 1;
 	gL_Edit9.RedrawMe = 1;
-	gL_Edit9.Location = (Point){ .x = 223, .y = 280 };
+	gL_Edit9.Location = (Point){ .x = 223, .y = 272 };
 	gL_Edit9.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit9.Text, "###");
 	edit_update(&gL_Edit9);
@@ -1001,7 +1257,7 @@ void  InitPanelMain()
 	gL_Edit8.TextAlign = MiddleRight;
 	gL_Edit8.Visible = 1;
 	gL_Edit8.RedrawMe = 1;
-	gL_Edit8.Location = (Point){ .x = 223, .y = 249 };
+	gL_Edit8.Location = (Point){ .x = 223, .y = 241 };
 	gL_Edit8.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit8.Text, "###");
 	edit_update(&gL_Edit8);
@@ -1023,7 +1279,7 @@ void  InitPanelMain()
 	gL_Edit7.TextAlign = MiddleRight;
 	gL_Edit7.Visible = 1;
 	gL_Edit7.RedrawMe = 1;
-	gL_Edit7.Location = (Point){ .x = 223, .y = 218 };
+	gL_Edit7.Location = (Point){ .x = 223, .y = 210 };
 	gL_Edit7.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit7.Text, "###");
 	edit_update(&gL_Edit7);
@@ -1045,7 +1301,7 @@ void  InitPanelMain()
 	gL_Edit6.TextAlign = MiddleRight;
 	gL_Edit6.Visible = 1;
 	gL_Edit6.RedrawMe = 1;
-	gL_Edit6.Location = (Point){ .x = 223, .y = 187 };
+	gL_Edit6.Location = (Point){ .x = 223, .y = 179 };
 	gL_Edit6.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit6.Text, "###");
 	edit_update(&gL_Edit6);
@@ -1067,7 +1323,7 @@ void  InitPanelMain()
 	gL_Edit5.TextAlign = MiddleRight;
 	gL_Edit5.Visible = 1;
 	gL_Edit5.RedrawMe = 1;
-	gL_Edit5.Location = (Point){ .x = 223, .y = 156 };
+	gL_Edit5.Location = (Point){ .x = 223, .y = 148 };
 	gL_Edit5.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit5.Text, "###");
 	edit_update(&gL_Edit5);
@@ -1089,7 +1345,7 @@ void  InitPanelMain()
 	gL_Edit4.TextAlign = MiddleRight;
 	gL_Edit4.Visible = 1;
 	gL_Edit4.RedrawMe = 1;
-	gL_Edit4.Location = (Point){ .x = 223, .y = 125 };
+	gL_Edit4.Location = (Point){ .x = 223, .y = 117 };
 	gL_Edit4.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit4.Text, "###");
 	edit_update(&gL_Edit4);
@@ -1111,7 +1367,7 @@ void  InitPanelMain()
 	gL_Edit3.TextAlign = MiddleRight;
 	gL_Edit3.Visible = 1;
 	gL_Edit3.RedrawMe = 1;
-	gL_Edit3.Location = (Point){ .x = 223, .y = 94 };
+	gL_Edit3.Location = (Point){ .x = 223, .y = 86 };
 	gL_Edit3.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit3.Text, "###");
 	edit_update(&gL_Edit3);
@@ -1133,7 +1389,7 @@ void  InitPanelMain()
 	gL_Edit2.TextAlign = MiddleRight;
 	gL_Edit2.Visible = 1;
 	gL_Edit2.RedrawMe = 1;
-	gL_Edit2.Location = (Point){ .x = 223, .y = 63 };
+	gL_Edit2.Location = (Point){ .x = 223, .y = 55 };
 	gL_Edit2.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit2.Text, "###");
 	edit_update(&gL_Edit2);
@@ -1155,7 +1411,7 @@ void  InitPanelMain()
 	gL_Edit1.TextAlign = MiddleRight;
 	gL_Edit1.Visible = 1;
 	gL_Edit1.RedrawMe = 1;
-	gL_Edit1.Location = (Point){ .x = 223, .y = 32 };
+	gL_Edit1.Location = (Point){ .x = 223, .y = 24 };
 	gL_Edit1.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit1.Text, "###");
 	edit_update(&gL_Edit1);
@@ -1177,7 +1433,7 @@ void  InitPanelMain()
 	gL_Label14.TextAlign = TopLeft;
 	gL_Label14.Visible = 1;
 	gL_Label14.RedrawMe = 1;
-	gL_Label14.Location = (Point){ .x = 15, .y = 342 };
+	gL_Label14.Location = (Point){ .x = 15, .y = 334 };
 	gL_Label14.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label14.Text, "Status");
 	//add click event callbacks
@@ -1202,7 +1458,7 @@ void  InitPanelMain()
 	gL_Label13.TextAlign = TopLeft;
 	gL_Label13.Visible = 1;
 	gL_Label13.RedrawMe = 1;
-	gL_Label13.Location = (Point){ .x = 15, .y = 311 };
+	gL_Label13.Location = (Point){ .x = 15, .y = 303 };
 	gL_Label13.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label13.Text, "TC2");
 	//add click event callbacks
@@ -1227,7 +1483,7 @@ void  InitPanelMain()
 	gL_Label12.TextAlign = TopLeft;
 	gL_Label12.Visible = 1;
 	gL_Label12.RedrawMe = 1;
-	gL_Label12.Location = (Point){ .x = 15, .y = 280 };
+	gL_Label12.Location = (Point){ .x = 15, .y = 272 };
 	gL_Label12.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label12.Text, "TC1");
 	//add click event callbacks
@@ -1252,7 +1508,7 @@ void  InitPanelMain()
 	gL_Label11.TextAlign = TopLeft;
 	gL_Label11.Visible = 1;
 	gL_Label11.RedrawMe = 1;
-	gL_Label11.Location = (Point){ .x = 15, .y = 249 };
+	gL_Label11.Location = (Point){ .x = 15, .y = 241 };
 	gL_Label11.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label11.Text, "Bath Temp");
 	//add click event callbacks
@@ -1277,7 +1533,7 @@ void  InitPanelMain()
 	gL_Label10.TextAlign = TopLeft;
 	gL_Label10.Visible = 1;
 	gL_Label10.RedrawMe = 1;
-	gL_Label10.Location = (Point){ .x = 15, .y = 218 };
+	gL_Label10.Location = (Point){ .x = 15, .y = 210 };
 	gL_Label10.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label10.Text, "Power2");
 	//add click event callbacks
@@ -1302,7 +1558,7 @@ void  InitPanelMain()
 	gL_Label9.TextAlign = TopLeft;
 	gL_Label9.Visible = 1;
 	gL_Label9.RedrawMe = 1;
-	gL_Label9.Location = (Point){ .x = 15, .y = 187 };
+	gL_Label9.Location = (Point){ .x = 15, .y = 179 };
 	gL_Label9.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label9.Text, "Power1");
 	//add click event callbacks
@@ -1327,7 +1583,7 @@ void  InitPanelMain()
 	gL_Label8.TextAlign = TopLeft;
 	gL_Label8.Visible = 1;
 	gL_Label8.RedrawMe = 1;
-	gL_Label8.Location = (Point){ .x = 15, .y = 156 };
+	gL_Label8.Location = (Point){ .x = 15, .y = 148 };
 	gL_Label8.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label8.Text, "Frequency 2 ");
 	//add click event callbacks
@@ -1352,7 +1608,7 @@ void  InitPanelMain()
 	gL_Label5.TextAlign = TopLeft;
 	gL_Label5.Visible = 1;
 	gL_Label5.RedrawMe = 1;
-	gL_Label5.Location = (Point){ .x = 15, .y = 125 };
+	gL_Label5.Location = (Point){ .x = 15, .y = 117 };
 	gL_Label5.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label5.Text, "TC6");
 	//add click event callbacks
@@ -1377,7 +1633,7 @@ void  InitPanelMain()
 	gL_Label4.TextAlign = TopLeft;
 	gL_Label4.Visible = 1;
 	gL_Label4.RedrawMe = 1;
-	gL_Label4.Location = (Point){ .x = 15, .y = 94 };
+	gL_Label4.Location = (Point){ .x = 15, .y = 86 };
 	gL_Label4.Size = (Size){ .width = 160, .height = 22 };
 	strcpy(gL_Label4.Text, "Frequency 1");
 	//add click event callbacks
@@ -1389,17 +1645,50 @@ void  InitPanelMain()
 
 
 
-	panel_add_child(&Root_Panel, &gL_Panel1); //add to the panel
+	panel_add_child(&glTabMainPanel_2, &gL_Panel1); //add to the panel
 
+
+
+
+
+	glTabMainPanel_2.Type = PANEL;
+	strcpy(glTabMainPanel_2.Name, "glTabMainPanel_2");
+	glTabMainPanel_2.BackColor = RGB16(0, 22, 34);
+	glTabMainPanel_2.ForeColor = RGB16(105, 105, 105);
+	glTabMainPanel_2.BorderColor = RGB16(13, 49, 61);
+	glTabMainPanel_2.BorderWidth = 1;
+	glTabMainPanel_2.Location = (Point){ .x = 0, .y = 35 };
+	glTabMainPanel_2.Size = (Size){ .width = 355, .height = 382 };
+	glTabMainPanel_2.StackIndex = -1;
+	glTabMainPanel_2.CornerRadius = 0;
+	glTabMainPanel_2.Font = &Font12;
+	strcpy(glTabMainPanel_2.Text, "");
+	glTabMainPanel_2.Visible = 1;
+	glTabMainPanel_2.RedrawMe = 1;
+	//add click event callbacks
+	glTabMainPanel_2.Event_Down = NULL;
+	glTabMainPanel_2.Event_Hold = NULL;
+	glTabMainPanel_2.Event_Up = NULL;
+	//Components in this panel
+	panel_update(&glTabMainPanel_2);
+
+	tabcontrol_add_child(&glTabMain, &glTabMainTab_2, &glTabMainPanel_2);
+	tabcontrol_update(&glTabMain);
+	tabcontrol_select_panel(&glTabMain, 0);
+
+	panel_add_child(&Root_Panel, &glTabMain); //add to the panel
 
 
 
 
 	PanelHandleList[0] = (uint32_t*)&Root_Panel; //set the root panel
-	PanelHandleList[5] = (uint32_t*)&gL_TabControl1Panel_0;
-	PanelHandleList[11] = (uint32_t*)&gL_TabControl1Panel_1;
-	PanelHandleList[13] = (uint32_t*)&gL_Panel3;
-	PanelHandleList[17] = (uint32_t*)&gL_TabControl1Panel_2;
-	PanelHandleList[19] = (uint32_t*)&gL_Panel1;
+	PanelHandleList[2] = (uint32_t*)&gL_Panel4;
+	PanelHandleList[4] = (uint32_t*)&gL_Panel3;
+	PanelHandleList[9] = (uint32_t*)&glTabMainPanel_0;
+	PanelHandleList[13] = (uint32_t*)&gL_Panel5;
+	PanelHandleList[17] = (uint32_t*)&gL_Panel2;
+	PanelHandleList[22] = (uint32_t*)&glTabMainPanel_1;
+	PanelHandleList[25] = (uint32_t*)&glTabMainPanel_2;
+	PanelHandleList[27] = (uint32_t*)&gL_Panel1;
 
 }

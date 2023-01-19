@@ -22,7 +22,8 @@ void panel_add_child(Panel* panel, void* child)
 void panel_update(Panel* panel)
 {
 	uint16_t ypos = 0;
-	if (panel->Font) ypos = panel->Font->Height / 2;	
+	if (strlen(panel->Text) == 0) ypos = 0;
+	else if (panel->Font) ypos = panel->Font->Height / 2;	
 	//update corner points.
 	panel->CornerPoints[0] = (Point) { 3* panel->CornerRadius, ypos };
 	panel->CornerPoints[1] = (Point) { panel->CornerRadius, ypos };
@@ -88,7 +89,7 @@ void panel_on_paint(Panel* panel, Point offset, Color16  backcolor, uint8_t forc
 		//if (child->Type != PANEL && !Refresh_Widget(child, forceRedraw)) continue;
 		if (child->Type == PANEL)
 		{
-			panel_on_paint((Panel*)child, offset, backcolor, forceRedraw);
+			panel_on_paint((Panel*)child, pos, backcolor, forceRedraw);
 			continue;
 		}
 		if (child->RedrawMe || forceRedraw)

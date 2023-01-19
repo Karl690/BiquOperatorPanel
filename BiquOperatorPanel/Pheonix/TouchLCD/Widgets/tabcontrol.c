@@ -42,11 +42,6 @@ void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint
 
 		if (Refresh_Widget((Widget*)tab, forceRedraw)) {		
 			GUI_FillRect(pos.x, pos.y, pos.x + tab->Size.width, pos.y + tab->Size.height, tab->BackColor);
-			
-			if (tab->BorderWidth > 0)
-			{	
-				GUI_DrawRect(pos.x, pos.y, pos.x + tab->Size.width, pos.y + tab->Size.height, tab->BorderColor);
-			}
 			tab->RedrawMe = 0;
 			
 			

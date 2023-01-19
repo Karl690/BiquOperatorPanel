@@ -34,6 +34,7 @@ typedef struct tagTabControl
 	
 	void* Buttons[TAB_MAX_PANEL_NUM];
 	void* Panels[TAB_MAX_PANEL_NUM];
+	Size ItemSize;
 	uint16_t ChildrenNum;
 	uint16_t StackIndex; //that means the selected panel's index.
 	
