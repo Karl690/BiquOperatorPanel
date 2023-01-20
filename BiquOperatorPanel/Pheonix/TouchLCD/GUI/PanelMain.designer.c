@@ -377,6 +377,7 @@ void  InitPanelMain()
 	 ;
 	gL_Numeric2.IsFocus = 0;
 	gL_Numeric2.Value = 0;
+	gL_Numeric2.Step = 1.5;
 	gL_Numeric2.MinValue = 0;
 	gL_Numeric2.MaxValue = 100;
 	numeric_update(&gL_Numeric2);
@@ -521,6 +522,7 @@ void  InitPanelMain()
 	 ;
 	glNumeric_SimplePort.IsFocus = 0;
 	glNumeric_SimplePort.Value = 0;
+	glNumeric_SimplePort.Step = 3.1;
 	glNumeric_SimplePort.MinValue = 0;
 	glNumeric_SimplePort.MaxValue = 100;
 	numeric_update(&glNumeric_SimplePort);

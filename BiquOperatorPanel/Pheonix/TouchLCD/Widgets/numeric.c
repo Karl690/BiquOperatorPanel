@@ -47,20 +47,30 @@ void numeric_set_min_max(Numeric* obj, int min, int max)
 
 void numeric_increment(Numeric* obj)
 {
-	if (obj->Value + 1<= obj->MaxValue)
+	if (obj->Value == obj->MaxValue) return; // do nothing
+	if (obj->Value + obj->Step <= obj->MaxValue)
 	{
-		obj->Value++;
-		sprintf(obj->Text, "%d", obj->Value);
-		obj->RedrawMe = 1;
+		obj->Value += obj->Step;
 	}
+	else
+	{
+		obj->Value = obj->MaxValue;
+	}
+	sprintf(obj->Text, "%.02f", obj->Value);
+	obj->RedrawMe = 1;
 }
 
 void numeric_decrement(Numeric* obj)
 {
-	if (obj->Value -1>= obj->MinValue)
+	if (obj->Value == obj->MinValue) return; // do nothing
+	if (obj->Value - obj->Step > obj->MinValue)
 	{
-		obj->Value--;
-		sprintf(obj->Text, "%d", obj->Value);
-		obj->RedrawMe = 1;
+		obj->Value -= obj->Step;
 	}
+	else
+	{
+		obj->Value = obj->MinValue;
+	}
+	sprintf(obj->Text, "%.02f", obj->Value);
+	obj->RedrawMe = 1;
 }

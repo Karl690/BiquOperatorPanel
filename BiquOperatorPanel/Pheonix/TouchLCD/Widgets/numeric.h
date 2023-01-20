@@ -35,9 +35,10 @@ typedef struct tagNumeric
 	Color16 FocusBackColor;
 	Color16 FocusForeColor;
 	Color16 FocusBorderColor;
-	int		Value;
-	int		MinValue;
-	int 	MaxValue;
+	float	Value;
+	float		Step;
+	float		MinValue;
+	float 	MaxValue;
 }Numeric;
 Numeric* numeric_init();
 void numeric_destory(Numeric* label);
