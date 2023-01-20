@@ -35,6 +35,6 @@ typedef struct tagLabel
 	
 }Label;
 Label* label_init();
-void label_destory(Label* label);
+void label_destory(Label* obj);
 
-void label_on_paint(Label* label, Point offset, Color16  backcolor);
+void label_on_paint(Label* obj, Point offset, Color16  backcolor);

@@ -8,6 +8,8 @@
 #include "../Widgets/listbox.h"
 #include "../Widgets/tabcontrol.h"
 #include "../Widgets/numeric.h"
+#include "../Widgets/dropdownlist.h"
+
 extern Panel Root_Panel;
 extern Button glBtnPlus;
 extern Button glBtnMinus;
@@ -18,13 +20,13 @@ extern TabControl glTabMain;
 extern Button glTabMainTab_0;
 extern Panel glTabMainPanel_0;
 extern Panel gL_Panel7;
+extern DropdownList gL_DropdownList1;
 extern Label gL_Label15;
 extern Label gL_Label2;
-extern Numeric gL_Numeric1;
 extern Numeric gL_Numeric2;
 extern Panel gL_Panel5;
+extern DropdownList gL_DropdownList2;
 extern Label gL_Label17;
-extern Numeric glNumeric_SimpleBaud;
 extern Label gL_Label16;
 extern Numeric glNumeric_SimplePort;
 extern Button glTabMainTab_1;
@@ -54,5 +56,6 @@ extern Label gL_Label9;
 extern Label gL_Label8;
 extern Label gL_Label5;
 extern Label gL_Label4;
+
 
 void  InitPanelMain();

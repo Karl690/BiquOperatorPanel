@@ -41,11 +41,11 @@ typedef struct tagTabControl
 }TabControl;
 
 TabControl* tabcontrol_init();
-void tabcontrol_update(TabControl* tab);
-void tabcontrol_destory(TabControl* tab);
-void tabcontrol_add_child(TabControl* tab, void* button, void* panel);
-void tabcontrol_on_paint(TabControl* tab, Point offset, Color16  backcolor, uint8_t forceRedraw);
+void tabcontrol_update(TabControl* obj);
+void tabcontrol_destory(TabControl* obj);
+void tabcontrol_add_child(TabControl* obj, void* button, void* panel);
+void tabcontrol_on_paint(TabControl* obj, Point offset, Color16  backcolor, uint8_t forceRedraw);
 
-void tabcontrol_select_panel(TabControl* tab, uint16_t  New_index);
-void* tabcontrol_get_active_panel(TabControl* tab);
-void tabcontrol_touch_event_to_control(TabControl* tab, Point offset);
+void tabcontrol_select_panel(TabControl* obj, uint16_t  New_index);
+void* tabcontrol_get_active_panel(TabControl* obj);
+void tabcontrol_touch_event_to_control(TabControl* obj, Point offset);

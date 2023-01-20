@@ -159,6 +159,16 @@ void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset)
 	}
 }
 
+//uint16_t pointInPolygon(Point* points, uint16_t num, Point pt) {
+//
+//	uint8_t oddNodes = 0, current = points[num - 1] > pt.y?1:0, previous;
+//	for (int i = 0; i < num; i++) {
+//		previous = current; 
+//		current = points[i] > pt.y?1:0; if (current != previous) oddNodes ^= y*multiple[i] + constant[i] < x;
+//	}
+//	return oddNodes;
+//}
+
 void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor)
 {
 	if (!font) return;

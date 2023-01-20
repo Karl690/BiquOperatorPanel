@@ -40,9 +40,9 @@ typedef struct tagPanel
 
 extern Widget* FocusedWidget;
 Panel* panel_init();
-void panel_destory(Panel* panel);
-void panel_add_child(Panel* panel, void* child);
-void panel_on_paint(Panel* panel, Point offset, Color16  backcolor, uint8_t forceRedraw);
+void panel_destory(Panel* obj);
+void panel_add_child(Panel* obj, void* child);
+void panel_on_paint(Panel* obj, Point offset, Color16  backcolor, uint8_t forceRedraw);
 
-void panel_touch_event_to_control(Panel* panel, Point offset);
-void panel_update_control_value(Panel* panel, char* name, char* value);
+void panel_touch_event_to_control(Panel* obj, Point offset);
+void panel_update_control_value(Panel* obj, char* name, char* value);

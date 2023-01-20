@@ -12,6 +12,7 @@ typedef enum
 	LISTBOX,
 	TABCONTROL,
 	NUMERIC,
+	DROPDOWNLIST,
 }WIDGETTYPE;
 
 typedef enum

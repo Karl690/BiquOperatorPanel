@@ -39,4 +39,4 @@ typedef struct tagButton
 }Button;
 
 Button* button_init(Widget* parent);
-void button_on_paint(Button* button, Point offset, Color16  backcolor);
+void button_on_paint(Button* obj, Point offset, Color16  backcolor);

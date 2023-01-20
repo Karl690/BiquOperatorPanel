@@ -2,43 +2,43 @@
 #include "edit.h"
 #include "Panel.h"
 
-void edit_destory(Edit* edit)
+void edit_destory(Edit* obj)
 {
-	free(edit);
+	free(obj);
 }
-void edit_update(Edit* edit)
+void edit_update(Edit* obj)
 {
 	//update corner points.
-	edit->CornerPoints[0] = (Point) { 0, edit->CornerRadius };
-	edit->CornerPoints[1] = (Point){ 0, edit->Size.height - edit->CornerRadius - 1 };
-	edit->CornerPoints[2] = (Point) { edit->CornerRadius, edit->Size.height - 1 };
-	edit->CornerPoints[3] = (Point) { edit->Size.width - edit->CornerRadius - 1, edit->Size.height - 1 };
-	edit->CornerPoints[4] = (Point) { edit->Size.width - 1, edit->Size.height - edit->CornerRadius - 1 };
-	edit->CornerPoints[5] = (Point) { edit->Size.width - 1, edit->CornerRadius };
-	edit->CornerPoints[6] = (Point) { edit->Size.width - edit->CornerRadius - 1, 0 };
-	edit->CornerPoints[7] = (Point) { edit->CornerRadius, 0 };
-	edit->CornerPoints[8] = (Point) { 0, edit->CornerRadius };
+	obj->CornerPoints[0] = (Point) { 0, obj->CornerRadius };
+	obj->CornerPoints[1] = (Point){ 0, obj->Size.height - obj->CornerRadius - 1 };
+	obj->CornerPoints[2] = (Point) { obj->CornerRadius, obj->Size.height - 1 };
+	obj->CornerPoints[3] = (Point) { obj->Size.width - obj->CornerRadius - 1, obj->Size.height - 1 };
+	obj->CornerPoints[4] = (Point) { obj->Size.width - 1, obj->Size.height - obj->CornerRadius - 1 };
+	obj->CornerPoints[5] = (Point) { obj->Size.width - 1, obj->CornerRadius };
+	obj->CornerPoints[6] = (Point) { obj->Size.width - obj->CornerRadius - 1, 0 };
+	obj->CornerPoints[7] = (Point) { obj->CornerRadius, 0 };
+	obj->CornerPoints[8] = (Point) { 0, obj->CornerRadius };
 }
-void edit_on_paint(Edit* edit, Point offset, Color16  backcolor)
+void edit_on_paint(Edit* obj, Point offset, Color16  backcolor)
 {	
-	edit->RedrawMe = 0;
-	Point pos = { offset.x + edit->Location.x, offset.y + edit->Location.y };
-	GUI_FillRect(pos.x, pos.y, pos.x + edit->Size.width, pos.y + edit->Size.height, edit->BackColor);
-	if (edit->BorderWidth > 0)
+	obj->RedrawMe = 0;
+	Point pos = { offset.x + obj->Location.x, offset.y + obj->Location.y };
+	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BackColor);
+	if (obj->BorderWidth > 0)
 	{
-		//GUI_DrawRect(pos.x, pos.y, pos.x + edit->Size.width, pos.y + edit->Size.height, edit->BorderColor);
-		GUI_DrawPolygon(edit->CornerPoints, sizeof(edit->CornerPoints) / sizeof(Point), edit->BorderColor, pos);
+		//GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BorderColor);
+		GUI_DrawPolygon(obj->CornerPoints, sizeof(obj->CornerPoints) / sizeof(Point), obj->BorderColor, pos);
 	}
-	if (!edit->Text) return;
-	widget_draw_string(edit->Text,
+	if (!obj->Text) return;
+	widget_draw_string(obj->Text,
 		pos.x,
 		pos.y,
-		edit->Size.width,
-		edit->Size.height,
-		&edit->Padding,
-		edit->Font,
-		edit->TextAlign, 
-		edit->ForeColor,
-		edit->BackColor);
+		obj->Size.width,
+		obj->Size.height,
+		&obj->Padding,
+		obj->Font,
+		obj->TextAlign, 
+		obj->ForeColor,
+		obj->BackColor);
 		
 }

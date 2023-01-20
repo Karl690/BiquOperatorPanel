@@ -2,30 +2,30 @@
 #include "label.h"
 #include "Panel.h"
 
-void label_destory(Label* label)
+void label_destory(Label* obj)
 {
-	free(label);
+	free(obj);
 }
 
-void label_on_paint(Label* label, Point offset, Color16  backcolor)
+void label_on_paint(Label* obj, Point offset, Color16  backcolor)
 {	
-	label->RedrawMe = 0;
-	Point pos = { offset.x + label->Location.x, offset.y + label->Location.y };
-	GUI_FillRect(pos.x, pos.y, pos.x + label->Size.width, pos.y + label->Size.height, label->BackColor);
-	if (label->BorderWidth > 0)
+	obj->RedrawMe = 0;
+	Point pos = { offset.x + obj->Location.x, offset.y + obj->Location.y };
+	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BackColor);
+	if (obj->BorderWidth > 0)
 	{
-		GUI_DrawRect(pos.x, pos.y, pos.x + label->Size.width, pos.y + label->Size.height, label->BorderColor);
+		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BorderColor);
 	}
-	if (!label->Text) return;
-	widget_draw_string(label->Text,
+	if (!obj->Text) return;
+	widget_draw_string(obj->Text,
 		pos.x,
 		pos.y,
-		label->Size.width,
-		label->Size.height,
-		&label->Padding,
-		label->Font,
-		label->TextAlign, 
-		label->ForeColor,
-		label->BackColor);
+		obj->Size.width,
+		obj->Size.height,
+		&obj->Padding,
+		obj->Font,
+		obj->TextAlign, 
+		obj->ForeColor,
+		obj->BackColor);
 		
 }

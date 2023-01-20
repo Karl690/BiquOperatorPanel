@@ -9,6 +9,7 @@
 #include "../Widgets/tabcontrol.h"
 #include "../Widgets/panel.h"
 #include "../Widgets/numeric.h"
+#include "../Widgets/dropdownlist.h"
 
 
 void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y)
@@ -17,11 +18,19 @@ void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 	{
 		numeric_increment((Numeric*)FocusedWidget);
 	}
+	else if (FocusedWidget && FocusedWidget->Type == DROPDOWNLIST)
+	{
+		dropdownlist_select_nextitem((DropdownList*)FocusedWidget);
+	}
 }
 void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 {
 	if (FocusedWidget && FocusedWidget->Type == NUMERIC)
 	{
 		numeric_decrement((Numeric*)FocusedWidget);
+	}
+	else if (FocusedWidget && FocusedWidget->Type == DROPDOWNLIST)
+	{
+		dropdownlist_select_previtem ((DropdownList*)FocusedWidget);
 	}
 }

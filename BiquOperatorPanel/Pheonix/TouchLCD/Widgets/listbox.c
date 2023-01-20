@@ -3,87 +3,87 @@
 #include "Panel.h"
 
 uint16_t* list_row_buffer = NULL;
-void listbox_destory(Listbox* listbox)
+void listbox_destory(Listbox* obj)
 {
-	free(listbox);
+	free(obj);
 }
-void listbox_update(Listbox* listbox)
+void listbox_update(Listbox* obj)
 {
 	//update corner points.
-	listbox->CurrentDrawYPos = 0;
-	uint16_t row_height = listbox->Font->Height + 4;
-	list_row_buffer = (uint16_t*)malloc(row_height * listbox->Size.width * 2);
+	obj->CurrentDrawYPos = 0;
+	uint16_t row_height = obj->Font->Height + 4;
+	list_row_buffer = (uint16_t*)malloc(row_height * obj->Size.width * 2);
 }
-void listbox_remove_row(Listbox* listbox, uint16_t index)
+void listbox_remove_row(Listbox* obj, uint16_t index)
 {
-	if (index == 0 && listbox->RowCount == 1)
+	if (index == 0 && obj->RowCount == 1)
 	{
-		listbox->RowCount = 0;
-		listbox->RedrawMe = 1;
+		obj->RowCount = 0;
+		obj->RedrawMe = 1;
 		return;
 		
 	}
-	if (index >= listbox->RowCount) return;
+	if (index >= obj->RowCount) return;
 	uint16_t i;
-	for (i = index + 1; i < listbox->RowCount; i++)
+	for (i = index + 1; i < obj->RowCount; i++)
 	{
-		strcpy(listbox->RowData[i - 1], listbox->RowData[i]);
+		strcpy(obj->RowData[i - 1], obj->RowData[i]);
 	}
-	listbox->RowCount--;
-	listbox->RedrawMe = 1;
+	obj->RowCount--;
+	obj->RedrawMe = 1;
 }
-void listbox_append_row(Listbox* listbox, char* data)
+void listbox_append_row(Listbox* obj, char* data)
 {
-	if (listbox->RowCount > LISTBOX_MAX_ROWS)
+	if (obj->RowCount > LISTBOX_MAX_ROWS)
 	{	
 		//remove the first element
 		for (uint16_t i = 1; i < LISTBOX_MAX_ROWS; i++)
 		{
-			strcpy(listbox->RowData[i - 1], listbox->RowData[i]);
+			strcpy(obj->RowData[i - 1], obj->RowData[i]);
 		}
 		//add the data at the last element
-		strcpy(listbox->RowData[LISTBOX_MAX_ROWS - 1], data);
+		strcpy(obj->RowData[LISTBOX_MAX_ROWS - 1], data);
 	}
 	else
 	{	
-		strcpy(listbox->RowData[listbox->RowCount], data);
-		listbox->RowCount++;
+		strcpy(obj->RowData[obj->RowCount], data);
+		obj->RowCount++;
 	}
-	listbox->RedrawMe = 1;
+	obj->RedrawMe = 1;
 }
-void listbox_on_paint(Listbox* listbox, Point offset, Color16  backcolor)
+void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 {	
-	listbox->RedrawMe = 0;
-	Point pos = { offset.x + listbox->Location.x, offset.y + listbox->Location.y };
-	GUI_FillRect(pos.x, pos.y, pos.x + listbox->Size.width, pos.y + listbox->Size.height, listbox->BackColor);
-	if (listbox->BorderWidth > 0)
+	obj->RedrawMe = 0;
+	Point pos = { offset.x + obj->Location.x, offset.y + obj->Location.y };
+	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BackColor);
+	if (obj->BorderWidth > 0)
 	{
-		GUI_DrawRect(pos.x, pos.y, pos.x + listbox->Size.width, pos.y + listbox->Size.height, listbox->BorderColor);
+		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BorderColor);
 	}
 	
-	uint16_t row_height = listbox->Font->Height + 4;
-	uint16_t row_bottom = listbox->CurrentDrawYPos;
+	uint16_t row_height = obj->Font->Height + 4;
+	uint16_t row_bottom = obj->CurrentDrawYPos;
 	uint16_t row_index = 0;
 	while (1)
 	{
-		if (row_index >= listbox->RowCount) break;
-		if (row_bottom >= listbox->Size.height) break;
+		if (row_index >= obj->RowCount) break;
+		if (row_bottom >= obj->Size.height) break;
 		if (row_bottom >= 0) 
 		{
 			if (row_index % 2 == 0)
 			{
 				GUI_FillRect(pos.x,
 					pos.y +row_bottom, 
-					pos.x + listbox->Size.width,
+					pos.x + obj->Size.width,
 					pos.y+row_bottom + row_height, 
-					row_index %2 == 1? listbox->RowEvenColor: listbox->RowOddColor);	
+					row_index %2 == 1? obj->RowEvenColor: obj->RowOddColor);	
 			}
 			GUI_DrawString(pos.x + 2,
 				pos.y + 2 + row_bottom,
-				listbox->RowData[row_index],
-				listbox->Font,
-				listbox->ForeColor,
-				row_index %2 == 1? listbox->RowEvenColor: listbox->RowOddColor);
+				obj->RowData[row_index],
+				obj->Font,
+				obj->ForeColor,
+				row_index %2 == 1? obj->RowEvenColor: obj->RowOddColor);
 		}
 		row_bottom += row_height;
 		row_index++;

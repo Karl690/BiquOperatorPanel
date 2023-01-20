@@ -48,7 +48,7 @@ typedef uint16_t Color16;
 
 typedef struct
 {
-	uint16_t x, y;
+	int16_t x, y;
 }Point;
 
 typedef struct

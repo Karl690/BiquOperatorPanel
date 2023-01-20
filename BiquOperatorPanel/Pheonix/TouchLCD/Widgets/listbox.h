@@ -36,8 +36,8 @@ typedef struct tagListbox
 	uint16_t RowCount;
 }Listbox;
 
-void listbox_destory(Listbox* );
-void listbox_update(Listbox* );
-void listbox_on_paint(Listbox* listbox, Point offset, Color16  backcolor);
-void listbox_append_row(Listbox*, char*);
-void listbox_remove_row(Listbox* listbox, uint16_t index);
+void listbox_destory(Listbox* obj);
+void listbox_update(Listbox* obj);
+void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor);
+void listbox_append_row(Listbox* obj, char*);
+void listbox_remove_row(Listbox* obj, uint16_t index);

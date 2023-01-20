@@ -35,6 +35,6 @@ typedef struct tagEdit
 	
 }Edit;
 
-void edit_destory(Edit* edit);
-void edit_Update(Edit*);
-void edit_on_paint(Edit* edit, Point offset, Color16  backcolor);
+void edit_destory(Edit* obj);
+void edit_Update(Edit* obj);
+void edit_on_paint(Edit* obj, Point offset, Color16  backcolor);

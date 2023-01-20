@@ -7,6 +7,7 @@
 #include "TouchLCD/lcd_encoder.h"
 char logtext[255] = { 0 };
 uint32_t *PanelHandleList[32]; //empty panel list, pointer handles to structures
+
 Panel Root_Panel;
 Button glBtnPlus;
 Button glBtnMinus;
@@ -17,13 +18,13 @@ TabControl glTabMain;
 Button glTabMainTab_0;
 Panel glTabMainPanel_0;
 Panel gL_Panel7;
+DropdownList gL_DropdownList1;
 Label gL_Label15;
 Label gL_Label2;
-Numeric gL_Numeric1;
 Numeric gL_Numeric2;
 Panel gL_Panel5;
+DropdownList gL_DropdownList2;
 Label gL_Label17;
-Numeric glNumeric_SimpleBaud;
 Label gL_Label16;
 Numeric glNumeric_SimplePort;
 Button glTabMainTab_1;
@@ -53,6 +54,7 @@ Label gL_Label9;
 Label gL_Label8;
 Label gL_Label5;
 Label gL_Label4;
+
 
 void  InitPanelMain()
 {
@@ -267,6 +269,42 @@ void  InitPanelMain()
 	//Components in this panel
 	panel_update(&gL_Panel7);
 
+	gL_DropdownList1.Type = DROPDOWNLIST;
+	strcpy(gL_DropdownList1.Name, "gL_DropdownList1");
+	gL_DropdownList1.BackColor = RGB16(0, 22, 34);
+	gL_DropdownList1.ForeColor = RGB16(122, 225, 255);
+	gL_DropdownList1.BorderColor = RGB16(1, 103, 137);
+	gL_DropdownList1.BorderWidth = 1;
+	gL_DropdownList1.CornerRadius = 0;
+	gL_DropdownList1.Font = &Font16;
+	gL_DropdownList1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_DropdownList1.TextAlign = MiddleCenter;
+	gL_DropdownList1.Visible = 1;
+	gL_DropdownList1.RedrawMe = 1;
+	gL_DropdownList1.Location = (Point){ .x = 170, .y = 72 };
+	gL_DropdownList1.Size = (Size){ .width = 120, .height = 32 };
+	gL_DropdownList1.FocusBackColor = RGB16(0, 175, 255); 
+	;
+	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0);
+	 ;
+	gL_DropdownList1.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
+	gL_DropdownList1.IsFocus = 0;
+	gL_DropdownList1.ValueType = DROPDOWNLIST_INT;
+	dropdownlist_add_item(&gL_DropdownList1, "9600");
+	dropdownlist_add_item(&gL_DropdownList1, "14400");
+	dropdownlist_add_item(&gL_DropdownList1, "19200");
+	dropdownlist_add_item(&gL_DropdownList1, "38400");
+	dropdownlist_add_item(&gL_DropdownList1, "57600");
+	dropdownlist_add_item(&gL_DropdownList1, "115200");
+	gL_DropdownList1.SelectedIndex = 0;
+	dropdownlist_update(&gL_DropdownList1);
+
+	panel_add_child(&gL_Panel7, &gL_DropdownList1); //add to the panel
+
+
+
+
 	gL_Label15.Type = LABEL;
 	strcpy(gL_Label15.Name, "gL_Label15");
 	gL_Label15.BackColor = RGB16(0, 22, 34);
@@ -317,37 +355,6 @@ void  InitPanelMain()
 
 
 
-	gL_Numeric1.Type = NUMERIC;
-	strcpy(gL_Numeric1.Name, "gL_Numeric1");
-	gL_Numeric1.BackColor = RGB16(0, 22, 34);
-	gL_Numeric1.ForeColor = RGB16(122, 225, 255);
-	gL_Numeric1.BorderColor = RGB16(1, 103, 137);
-	gL_Numeric1.BorderWidth = 1;
-	gL_Numeric1.CornerRadius = 1;
-	gL_Numeric1.Font = &Font16;
-	gL_Numeric1.Padding = (PADDING) { 5, 5, 5, 5 };
-	gL_Numeric1.TextAlign = MiddleRight;
-	gL_Numeric1.Visible = 1;
-	gL_Numeric1.RedrawMe = 1;
-	gL_Numeric1.Location = (Point){ .x = 172, .y = 65 };
-	gL_Numeric1.Size = (Size){ .width = 118, .height = 29 };
-	gL_Numeric1.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	gL_Numeric1.FocusForeColor = RGB16(0, 0, 0);
-	 ;
-	gL_Numeric1.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
-	gL_Numeric1.IsFocus = 0;
-	gL_Numeric1.Value = 0;
-	gL_Numeric1.MinValue = 0;
-	gL_Numeric1.MaxValue = 100;
-	numeric_update(&gL_Numeric1);
-
-	panel_add_child(&gL_Panel7, &gL_Numeric1); //add to the panel
-
-
-
-
 	gL_Numeric2.Type = NUMERIC;
 	strcpy(gL_Numeric2.Name, "gL_Numeric2");
 	gL_Numeric2.BackColor = RGB16(0, 22, 34);
@@ -360,8 +367,8 @@ void  InitPanelMain()
 	gL_Numeric2.TextAlign = MiddleRight;
 	gL_Numeric2.Visible = 1;
 	gL_Numeric2.RedrawMe = 1;
-	gL_Numeric2.Location = (Point){ .x = 172, .y = 26 };
-	gL_Numeric2.Size = (Size){ .width = 118, .height = 29 };
+	gL_Numeric2.Location = (Point){ .x = 170, .y = 26 };
+	gL_Numeric2.Size = (Size){ .width = 120, .height = 32 };
 	gL_Numeric2.FocusBackColor = RGB16(0, 175, 255); 
 	;
 	gL_Numeric2.FocusForeColor = RGB16(0, 0, 0);
@@ -406,6 +413,42 @@ void  InitPanelMain()
 	//Components in this panel
 	panel_update(&gL_Panel5);
 
+	gL_DropdownList2.Type = DROPDOWNLIST;
+	strcpy(gL_DropdownList2.Name, "gL_DropdownList2");
+	gL_DropdownList2.BackColor = RGB16(0, 22, 34);
+	gL_DropdownList2.ForeColor = RGB16(122, 225, 255);
+	gL_DropdownList2.BorderColor = RGB16(1, 103, 137);
+	gL_DropdownList2.BorderWidth = 1;
+	gL_DropdownList2.CornerRadius = 0;
+	gL_DropdownList2.Font = &Font16;
+	gL_DropdownList2.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_DropdownList2.TextAlign = MiddleCenter;
+	gL_DropdownList2.Visible = 1;
+	gL_DropdownList2.RedrawMe = 1;
+	gL_DropdownList2.Location = (Point){ .x = 172, .y = 70 };
+	gL_DropdownList2.Size = (Size){ .width = 120, .height = 32 };
+	gL_DropdownList2.FocusBackColor = RGB16(0, 175, 255); 
+	;
+	gL_DropdownList2.FocusForeColor = RGB16(0, 0, 0);
+	 ;
+	gL_DropdownList2.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
+	gL_DropdownList2.IsFocus = 0;
+	gL_DropdownList2.ValueType = DROPDOWNLIST_INT;
+	dropdownlist_add_item(&gL_DropdownList2, "9600");
+	dropdownlist_add_item(&gL_DropdownList2, "14400");
+	dropdownlist_add_item(&gL_DropdownList2, "19200");
+	dropdownlist_add_item(&gL_DropdownList2, "38400");
+	dropdownlist_add_item(&gL_DropdownList2, "57600");
+	dropdownlist_add_item(&gL_DropdownList2, "115200");
+	gL_DropdownList2.SelectedIndex = 0;
+	dropdownlist_update(&gL_DropdownList2);
+
+	panel_add_child(&gL_Panel5, &gL_DropdownList2); //add to the panel
+
+
+
+
 	gL_Label17.Type = LABEL;
 	strcpy(gL_Label17.Name, "gL_Label17");
 	gL_Label17.BackColor = RGB16(0, 22, 34);
@@ -427,37 +470,6 @@ void  InitPanelMain()
 	gL_Label17.Event_Up = NULL;
 
 	panel_add_child(&gL_Panel5, &gL_Label17); //add to the panel
-
-
-
-
-	glNumeric_SimpleBaud.Type = NUMERIC;
-	strcpy(glNumeric_SimpleBaud.Name, "glNumeric_SimpleBaud");
-	glNumeric_SimpleBaud.BackColor = RGB16(0, 22, 34);
-	glNumeric_SimpleBaud.ForeColor = RGB16(122, 225, 255);
-	glNumeric_SimpleBaud.BorderColor = RGB16(1, 103, 137);
-	glNumeric_SimpleBaud.BorderWidth = 1;
-	glNumeric_SimpleBaud.CornerRadius = 1;
-	glNumeric_SimpleBaud.Font = &Font16;
-	glNumeric_SimpleBaud.Padding = (PADDING) { 5, 5, 5, 5 };
-	glNumeric_SimpleBaud.TextAlign = MiddleRight;
-	glNumeric_SimpleBaud.Visible = 1;
-	glNumeric_SimpleBaud.RedrawMe = 1;
-	glNumeric_SimpleBaud.Location = (Point){ .x = 172, .y = 65 };
-	glNumeric_SimpleBaud.Size = (Size){ .width = 118, .height = 29 };
-	glNumeric_SimpleBaud.FocusBackColor = RGB16(0, 175, 255); 
-	;
-	glNumeric_SimpleBaud.FocusForeColor = RGB16(0, 0, 0); 
-	;
-	glNumeric_SimpleBaud.FocusBorderColor = RGB16(2, 49, 72); 
-	;
-	glNumeric_SimpleBaud.IsFocus = 0;
-	glNumeric_SimpleBaud.Value = 0;
-	glNumeric_SimpleBaud.MinValue = 0;
-	glNumeric_SimpleBaud.MaxValue = 100;
-	numeric_update(&glNumeric_SimpleBaud);
-
-	panel_add_child(&gL_Panel5, &glNumeric_SimpleBaud); //add to the panel
 
 
 
@@ -501,12 +513,12 @@ void  InitPanelMain()
 	glNumeric_SimplePort.RedrawMe = 1;
 	glNumeric_SimplePort.Location = (Point){ .x = 172, .y = 26 };
 	glNumeric_SimplePort.Size = (Size){ .width = 118, .height = 29 };
-	glNumeric_SimplePort.FocusBackColor = RGB16(0, 175, 255); 
-	;
+	glNumeric_SimplePort.FocusBackColor = RGB16(0, 175, 255);
+	 ;
 	glNumeric_SimplePort.FocusForeColor = RGB16(0, 0, 0);
 	 ;
-	glNumeric_SimplePort.FocusBorderColor = RGB16(2, 49, 72); 
-	;
+	glNumeric_SimplePort.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
 	glNumeric_SimplePort.IsFocus = 0;
 	glNumeric_SimplePort.Value = 0;
 	glNumeric_SimplePort.MinValue = 0;
