@@ -46,3 +46,5 @@ void panel_on_paint(Panel* obj, Point offset, Color16  backcolor, uint8_t forceR
 
 void panel_touch_event_to_control(Panel* obj, Point offset);
 void panel_update_control_value(Panel* obj, char* name, char* value);
+
+void panel_set_focus_widget(Widget* widget);

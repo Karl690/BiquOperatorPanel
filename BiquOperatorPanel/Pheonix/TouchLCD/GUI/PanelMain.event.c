@@ -34,3 +34,13 @@ void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 		dropdownlist_select_previtem ((DropdownList*)FocusedWidget);
 	}
 }
+
+void glBtnSave_TouchEvent(void* sender, uint16_t x, uint16_t y)
+{
+	
+}
+
+void glBtnApply_TouchEvent(void* sender, uint16_t x, uint16_t y)
+{
+	
+}

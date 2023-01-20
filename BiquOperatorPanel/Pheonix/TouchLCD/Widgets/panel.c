@@ -135,10 +135,56 @@ void panel_on_paint(Panel* obj, Point offset, Color16  backcolor, uint8_t forceR
 	obj->RedrawMe = 0;
 }
 
+void panel_set_focus_widget(Widget* widget)
+{
+	//if widget == NULL, it meens that previous focused widget is released.
+	if(widget == NULL || (widget && (widget->Type == NUMERIC || widget->Type == DROPDOWNLIST) ))
+	{
+		if (FocusedWidget)
+		{	
+			//old widget's focus flag release
+			switch (FocusedWidget->Type)
+			{
+			case DROPDOWNLIST:
+				((DropdownList*)FocusedWidget)->IsFocus = 0;
+				((DropdownList*)FocusedWidget)->RedrawMe = 1;
+				break;
+			case NUMERIC:
+				((Numeric*)FocusedWidget)->IsFocus = 0;
+				((Numeric*)FocusedWidget)->RedrawMe = 1;
+				break;
+							
+			}
+		}		
+		if (FocusedWidget != widget && widget)
+		{
+			FocusedWidget = NULL;
+			//the case of the different focus
+			switch (widget->Type)
+			{
+			case DROPDOWNLIST:
+				FocusedWidget = widget;
+				((DropdownList*)FocusedWidget)->IsFocus = 1;
+				((DropdownList*)FocusedWidget)->RedrawMe = 1;
+				break;
+			case NUMERIC:
+				FocusedWidget = widget;
+				((Numeric*)FocusedWidget)->IsFocus = 1;
+				((Numeric*)FocusedWidget)->RedrawMe = 1;
+				break;
+			}		
+		}
+		else
+		{
+			FocusedWidget = NULL;
+		}
+	}
+	
+}
 
 void panel_touch_event_to_control(Panel* obj, Point offset)
 {
-	if (!touchScreenIsPress) return; //do nothing before getting touch event.
+	if (TouchEventStatus == TOUCH_EVENT_NONE) return; //do nothing before getting touch event.
 	Point pos = (Point) { obj->Location.x + offset.x, obj->Location.y + offset.y};
 	for (int i = 0; i < obj->ChildrenNum; i++)
 	{
@@ -150,45 +196,28 @@ void panel_touch_event_to_control(Panel* obj, Point offset)
 			else if (widget->Type == TABCONTROL) tabcontrol_touch_event_to_control((TabControl*)widget, pos);
 			else
 			{
-				if (widget->Type == NUMERIC || widget->Type == DROPDOWNLIST)
-				{
-					if (FocusedWidget && FocusedWidget != widget)
-					{
-						
-						//old widget's focus flag release
-						switch (FocusedWidget->Type)
-						{
-						case DROPDOWNLIST:
-							((DropdownList*)FocusedWidget)->IsFocus = 0;
-							((DropdownList*)FocusedWidget)->RedrawMe = 1;
-							break;
-						case NUMERIC:
-							((Numeric*)FocusedWidget)->IsFocus = 0;
-							((Numeric*)FocusedWidget)->RedrawMe = 1;
-							break;
-							
-						}
-					}
-					//the case of the different focus
-					switch (widget->Type)
-					{
-					case DROPDOWNLIST:
-						FocusedWidget = widget;
-						((DropdownList*)FocusedWidget)->IsFocus = 1;
-						((DropdownList*)FocusedWidget)->RedrawMe = 1;
-						break;
-					case NUMERIC:
-						FocusedWidget = widget;
-						((Numeric*)FocusedWidget)->IsFocus = 1;
-						((Numeric*)FocusedWidget)->RedrawMe = 1;
-						break;
-					}	
+				if(TouchEventStatus == TOUCH_EVENT_DOWN) panel_set_focus_widget(widget);
+			}
+			
+			switch (TouchEventStatus)			
+			{
+			case TOUCH_EVENT_DOWN:
+				if (widget->Event_Down) {
+					widget->Event_Down(widget, TouchPointX - offset.x, TouchPointY - offset.y);
 				}
+				break;
+			case TOUCH_EVENT_HOLD:
+				if (widget->Event_Hold) {
+					widget->Event_Hold(widget, TouchPointX - offset.x, TouchPointY - offset.y);
+				}
+				break;
+			case TOUCH_EVENT_UP:
+				if (widget->Event_Up) {
+					widget->Event_Up(widget, TouchPointX - offset.x, TouchPointY - offset.y);
+				}
+				break;
 			}
-			if (widget->Event_Down) {
-				
-				widget->Event_Down(widget, TouchPointX - offset.x, TouchPointY - offset.y);
-			}
+			
 			
 		}
 	}

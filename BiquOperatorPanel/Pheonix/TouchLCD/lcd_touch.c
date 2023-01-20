@@ -54,6 +54,7 @@ int32_t TSC_Para[7];
 uint16_t TouchPointX = 0;
 uint16_t TouchPointY = 0;
 static uint8_t touch;
+TOUCH_EVENT_TYPE TouchEventStatus;
 void LCD_ProcessTouchEvent()
 {
 	
@@ -61,9 +62,11 @@ void LCD_ProcessTouchEvent()
 	{
 		if (touch >= 10)  // 20ms
 		{
+			if (TouchEventStatus == TOUCH_EVENT_NONE) TouchEventStatus = TOUCH_EVENT_DOWN;
+			else if (TouchEventStatus == TOUCH_EVENT_DOWN) TouchEventStatus = TOUCH_EVENT_HOLD;
+			else TouchEventStatus = TOUCH_EVENT_HOLD;
 			touchScreenIsPress = 1;
 			lcd_touch_get_coordinates(&TouchPointX, &TouchPointY);
-			//GUI_FillRect(TouchPointX, TouchPointY, TouchPointX + 4, TouchPointY + 4, COLOR_YELLOW);
 		}
 		else
 		{
@@ -72,8 +75,30 @@ void LCD_ProcessTouchEvent()
 	}
 	else
 	{
-		touchScreenIsPress = 0;
-		touch = 0;
+		if (TouchEventStatus == TOUCH_EVENT_DOWN || TouchEventStatus == TOUCH_EVENT_HOLD) 
+		{
+			TouchEventStatus = TOUCH_EVENT_UP;
+			touch++;
+		}
+		else if (TouchEventStatus == TOUCH_EVENT_UP)
+		{
+			if (touch >= 10)
+			{
+				TouchEventStatus = TOUCH_EVENT_NONE; // Touch Up event keep for a while.
+				touch = 0;
+			}
+			else
+			{
+				touch++;
+			}
+		}
+		else
+		{
+			TouchEventStatus = TOUCH_EVENT_NONE;
+			touchScreenIsPress = 0;
+			touch = 0;	
+		}
+		
 	}
 }
 

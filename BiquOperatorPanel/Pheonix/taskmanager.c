@@ -137,6 +137,7 @@ void CheckEncoderButton()
 		EncoderPressed++;
 		if (EncoderPressed % 100 == 0) { 
 			NewScreenType = SCREEN_TOUCH_CALIBRATION;
+			CalibrateScreenFlag = 1;
 		}
 		else if (EncoderPressed % 5 == 0) 
 			EncoderButtonDownEvent();

@@ -89,15 +89,18 @@ void* tabcontrol_get_active_panel(TabControl* obj)
 
 void tabcontrol_touch_event_to_control(TabControl* obj, Point offset)
 {
-	if (!touchScreenIsPress) return;
+	if (TouchEventStatus == TOUCH_EVENT_NONE) return; //do nothing before getting touch event.
 	Point pos = (Point) { obj->Location.x + offset.x, obj->Location.y + offset.y };
-	for (uint16_t i = 0; i < obj->ChildrenNum; i++)
+	if (TouchEventStatus == TOUCH_EVENT_DOWN) //only in case of the Touch Donw event, tab page would be changed.
 	{
-		Widget* widget = obj->Buttons[i];
-		if (widget_is_point_in_rect(TouchPointX, TouchPointY, pos.x +  widget->Location.x, pos.y + widget->Location.y, widget->Size.width, widget->Size.height))
+		for (uint16_t i = 0; i < obj->ChildrenNum; i++)
 		{
-			tabcontrol_select_panel(obj, i);
-			break;
+			Widget* widget = obj->Buttons[i];
+			if (widget_is_point_in_rect(TouchPointX, TouchPointY, pos.x +  widget->Location.x, pos.y + widget->Location.y, widget->Size.width, widget->Size.height))
+			{
+				tabcontrol_select_panel(obj, i);
+				break;
+			}
 		}
 	}
 	

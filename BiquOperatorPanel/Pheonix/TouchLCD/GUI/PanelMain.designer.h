@@ -11,6 +11,8 @@
 #include "../Widgets/dropdownlist.h"
 
 extern Panel Root_Panel;
+extern Button gL_Button2;
+extern Button gL_Button1;
 extern Button glBtnPlus;
 extern Button glBtnMinus;
 extern Panel gL_Panel4;

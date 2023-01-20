@@ -9,6 +9,14 @@
 #define CMD_RDY 0x90
 #endif
 
+typedef enum
+{
+	TOUCH_EVENT_NONE,
+	TOUCH_EVENT_DOWN,
+	TOUCH_EVENT_HOLD,
+	TOUCH_EVENT_UP,
+}TOUCH_EVENT_TYPE;
+
 typedef struct tagTouchCalibrationInfo
 {
 	uint8_t IsValid;
@@ -20,6 +28,8 @@ typedef struct tagTouchCalibrationInfo
 extern TouchCalibrationInfo touchCalibrationInfo;
 
 extern uint8_t touchScreenIsPress;
+extern TOUCH_EVENT_TYPE TouchEventStatus;
+
 
 extern uint16_t TouchPointX;
 extern uint16_t TouchPointY;

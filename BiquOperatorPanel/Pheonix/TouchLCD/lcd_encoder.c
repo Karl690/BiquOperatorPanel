@@ -5,8 +5,9 @@
 uint8_t FiredEncodeButtonEvent = 0;
 void EncoderButtonDownEvent()
 {
-	CalibrateScreenFlag = 1;
+	//CalibrateScreenFlag = 1;
 	FiredEncodeButtonEvent = 1;
+	panel_set_focus_widget(NULL);
 }
 
 int EncoderCount = 0;
