@@ -114,7 +114,7 @@ void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 
 void lcd_touch_store_calibration(void)
 {
-	erase_memory();
+	//erase_memory();
 	write_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 }
 uint8_t lcd_touch_read_calibration(void)

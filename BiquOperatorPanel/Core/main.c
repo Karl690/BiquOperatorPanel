@@ -59,6 +59,13 @@ int main(void)
 	Init_GPIO();
 	InitPanelMain();//set up gid widgets
 	
+	//erase_memory(); //at first time, erase and all byte would be 0xff.
+	//return 0;        // at next time, comment  62 and 63 line .
+	uint8_t data[10] = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9 };	
+	write_memory(FLASH_LAST_ADDRESS, data, 10); //Please put a breakpoint. and here you can check the memory map with Memory View.
+	
+	return 0;
+	
 	lcd_touch_calibration_screen(0);
 	
 	ActivPanel = &Root_Panel; //set the top panel as boot screen
@@ -67,6 +74,9 @@ int main(void)
 //	ActivPanel = InitPanelMain();
 //	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
 	panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); //draw whole panel this time
+	
+	
+	
 	while (1)
 	{
 		if (CalibrateScreenFlag)

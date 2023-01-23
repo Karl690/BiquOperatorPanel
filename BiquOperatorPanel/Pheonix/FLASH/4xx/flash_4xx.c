@@ -163,8 +163,8 @@ uint8_t EraseFlash(uint32_t sector)
 {
 	FLASH_Unlock();
 	FLASH_Status status = FLASH_EraseSector(FLASH_LAST_SECTOR, VoltageRange_3);	
-//	status = FLASH_ProgramByte(FLASH_LAST_ADDRESS, 0x50);
-//	status = FLASH_ProgramByte(FLASH_LAST_ADDRESS+1, 0x60);
+	//status = FLASH_ProgramByte(FLASH_LAST_ADDRESS, 0x50);
+	//status = FLASH_ProgramByte(FLASH_LAST_ADDRESS+1, 0x60);
 	FLASH_Lock();
 	return status;
 }
