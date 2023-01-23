@@ -202,5 +202,41 @@ uint8_t erase_memory()
 {
 	EraseFlash(FLASH_LAST_SECTOR);
 }
+
+uint8_t* findCalibrationDataBlockAddress()
+{
+	uint16_t i = 0;	
+	uint8_t* currentcalibrationDataBlockPointer = NULL;
+	for (i = 0; i < CALIBRATIONDATA_SIZE; i += CALIBRATIONDATA_BLOCKSIZE)
+	{
+		currentcalibrationDataBlockPointer = (uint8_t*)(CALIBRATIONDATA_STARTADDRESS + i);
+		if (*currentcalibrationDataBlockPointer != 0x80)
+		{
+			return currentcalibrationDataBlockPointer;
+		}
+	}
+	return NULL; // it need to erase flash.
+}
+uint8_t* getCalibrationDataBlockAddress()
+{
+	uint16_t i = 0;	
+	uint8_t* currentcalibrationDataBlockPointer = NULL;
+	for (i = 0; i < CALIBRATIONDATA_SIZE; i += CALIBRATIONDATA_BLOCKSIZE)
+	{
+		currentcalibrationDataBlockPointer = (uint8_t*)(CALIBRATIONDATA_STARTADDRESS + i);
+		if (*currentcalibrationDataBlockPointer == 0x80)
+		{
+			return currentcalibrationDataBlockPointer;
+		}
+	}
+	return NULL; // it need to erase flash.
+}
+void writeCalibrationdata(uint8_t* address, uint8_t* data, uint16_t datasize)
+{
+	for (uint16_t i = 0; i < datasize; i++)
+	{
+		*(address + i) = data[i];
+	}
+}
 #endif
 //#endif

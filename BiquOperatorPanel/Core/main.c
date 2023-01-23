@@ -61,10 +61,10 @@ int main(void)
 	
 	//erase_memory(); //at first time, erase and all byte would be 0xff.
 	//return 0;        // at next time, comment  62 and 63 line .
-	uint8_t data[10] = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9 };	
-	write_memory(FLASH_LAST_ADDRESS, data, 10); //Please put a breakpoint. and here you can check the memory map with Memory View.
-	
-	return 0;
+//	uint8_t data[10] = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9 };	
+//	write_memory(FLASH_LAST_ADDRESS, data, 10); //Please put a breakpoint. and here you can check the memory map with Memory View.
+//	
+//	return 0;
 	
 	lcd_touch_calibration_screen(0);
 	

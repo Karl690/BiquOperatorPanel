@@ -34,6 +34,7 @@ extern "C" {
 #include "GPIO/pins.h"
 #include "GPIO/GPIO_Init.h"
 #include "GPIO/pinout.h"
+	
 #include "TouchLCD/lcd.h"
 #include "SPI/spi.h"
 #include "SPI/w25qxx.h"

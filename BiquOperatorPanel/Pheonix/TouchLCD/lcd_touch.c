@@ -111,16 +111,30 @@ void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 	*y = (D * tp_x + E * tp_y + F) / K;
 }
 
-
+uint32_t* currentCalibrationAddress = NULL;
 void lcd_touch_store_calibration(void)
 {
 	//erase_memory();
-	write_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+	//write_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+	uint8_t* address = findCalibrationDataBlockAddress();
+	if (address == NULL)
+	{
+		//need to erase flash.
+		address = CALIBRATIONDATA_STARTADDRESS;
+	}
+	else
+	{
+		if (currentCalibrationAddress) *(currentCalibrationAddress) = 0; //release an old flag.(isValid = 0)
+		
+	}
+	writeCalibrationdata(address, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 }
 uint8_t lcd_touch_read_calibration(void)
 {
-	read_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
-	if (touchCalibrationInfo.IsValid != 0x80) return 0;
+	//read_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+	//if (touchCalibrationInfo.IsValid != 0x80) return 0;
+	currentCalibrationAddress  = getCalibrationDataBlockAddress();
+	if (!currentCalibrationAddress) return 0;
 	return 1;
 }
 void lcd_touch_calibration_screen(uint8_t isForce)
