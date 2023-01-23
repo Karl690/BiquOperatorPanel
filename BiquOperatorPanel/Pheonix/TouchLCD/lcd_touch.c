@@ -111,36 +111,70 @@ void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 	*y = (D * tp_x + E * tp_y + F) / K;
 }
 
-uint32_t* currentCalibrationAddress = NULL;
-void lcd_touch_store_calibration(void)
+/*
+ *uint8_t checkForValidLCDCalibrationData();   returns 1 if good and 0 if false, loads data from storage to working structure
+ *getValidlcdDataStorageAddress();   sets variable currentCalibrationAddress to current storage pointer
+ *
+ *saveSoapStringandEraseSector11();   makes copy of soapstring to ram, then erased sector, then moves back
+ *to first soapstring block  sector11+4k
+ *
+ *
+ *
+ *
+ **/
+
+
+
+uint8_t* currentCalibrationAddress = NULL;
+void save_LCD_Touch_Calibration_Data(void)
 {
-	//erase_memory();
-	//write_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
-	uint8_t* address = findCalibrationDataBlockAddress();
+	uint8_t* address = FindCurrentCalibrationDataAddress();//get current pointer in storage
 	if (address == NULL)
 	{
-		//need to erase flash.
+		//no valid data was found;
 		address = CALIBRATIONDATA_STARTADDRESS;
+		if (*address != 0xff)
+		{
+			saveSoapStringandEraseSector11();//erase and copy old soap to new starting block			
+		}
 	}
 	else
-	{
-		if (currentCalibrationAddress) *(currentCalibrationAddress) = 0; //release an old flag.(isValid = 0)
-		
+	{//we have found valid block,now disable it and then incrment to next block
+		*currentCalibrationAddress = 0;//zero out old pointer, data no longer valid
+		currentCalibrationAddress += CALIBRATIONDATA_BLOCKSIZE; //point to next place in storage
+		if (currentCalibrationAddress > CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE)
+		{//now we have reached past the 4k boundry and need to point back to the beginning
+			saveSoapStringandEraseSector11();		
+		}
 	}
-	writeCalibrationdata(address, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+//ok, when you get here, we should be pointing to 0xff values in the target storage memory
+	MoveData(address, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 }
-uint8_t lcd_touch_read_calibration(void)
+
+void saveSoapStringandEraseSector11()
 {
+	//saveSoapStringTobuffer()  ;//todo
+//erase this block();       ;//todo
+//writeOldsoapstringFromBuffertoflashblock[1] ;//todo
+	currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
+}
+uint8_t checkForValidLCDCalibrationData(void)
+{//if it finds it, it will refresh the structure from storage
 	//read_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 	//if (touchCalibrationInfo.IsValid != 0x80) return 0;
-	currentCalibrationAddress  = getCalibrationDataBlockAddress();
-	if (!currentCalibrationAddress) return 0;
-	return 1;
+	//uint32_t* currentCalibrationAddress = NULL;
+	currentCalibrationAddress  = getCalibrationDataBlockAddress();//uint8_t* getCalibrationDataBlockAddress()
+	if (currentCalibrationAddress==0) return 0;//was a disaster and we did not find valid data
+	if (*currentCalibrationAddress == 0x80)
+	{
+		//it is valid data, so lets update
+		MoveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo)); //update working variables from storage
+		return 1;//updated so report successfully found and updated
+	}
 }
-void lcd_touch_calibration_screen(uint8_t isForce)
-{
-	if (!isForce && lcd_touch_read_calibration()) return;
-	
+
+void CalibratLcdTouchPanel()
+{//starts the screen calibration	
 	touchCalibrationInfo.LCD_Corner[0].x = 40;
 	touchCalibrationInfo.LCD_Corner[1].x = LCD_WIDTH - 40;
 	touchCalibrationInfo.LCD_Corner[2].x = LCD_WIDTH - 40;
@@ -159,14 +193,10 @@ void lcd_touch_calibration_screen(uint8_t isForce)
 		GUI_HLine(touchCalibrationInfo.LCD_Corner[tp_num].x - 10, touchCalibrationInfo.LCD_Corner[tp_num].y, touchCalibrationInfo.LCD_Corner[tp_num].x + 10, COLOR_RED);
 		GUI_VLine(touchCalibrationInfo.LCD_Corner[tp_num].x, touchCalibrationInfo.LCD_Corner[tp_num].y-10, touchCalibrationInfo.LCD_Corner[tp_num].y + 10, COLOR_RED);
 	}
-	lcd_touch_loop_calibration_data(isForce);
-}
-
-void lcd_touch_loop_calibration_data(uint8_t isForce)
-{	
+	
 	touchCalibrationCounter = 0;
 	while (touchCalibrationCounter < 3)
-	{
+	{//we loop until 3 points are pressed
 		if (!touchScreenIsPress) continue;
 		touchCalibrationInfo.TP_Points[touchCalibrationCounter].x = XPT2046_Repeated_Compare_AD(CMD_RDX);
 		touchCalibrationInfo.TP_Points[touchCalibrationCounter].y = XPT2046_Repeated_Compare_AD(CMD_RDY);
@@ -190,6 +220,6 @@ void lcd_touch_loop_calibration_data(uint8_t isForce)
 	E = ((X1 - X3) * (YL2 - YL3) - (YL1 - YL3) * (X2 - X3));
 	F = (Y1 * (X3 * YL2 - X2 * YL3) + Y2 * (X1 * YL3 - X3 * YL1) + Y3 * (X2 * YL1 - X1 * YL2));
 	
-	touchCalibrationInfo.IsValid = 0x80;
-	lcd_touch_store_calibration();
+	touchCalibrationInfo.IsValid = 0x80;//update in structure that it is now valid data
+	save_LCD_Touch_Calibration_Data();//save to storage
 }

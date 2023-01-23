@@ -35,8 +35,11 @@ extern uint16_t TouchPointX;
 extern uint16_t TouchPointY;
 void LCD_ProcessTouchEvent();
 void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y);
-void lcd_touch_calibration_screen(uint8_t);
-void lcd_touch_loop_calibration_data(uint8_t);
-void lcd_touch_store_calibration(void);
-uint8_t lcd_touch_read_calibration(void);
+void CheckLCDCalibration();
+void lcd_touch_loop_calibration_data();
+void save_LCD_Touch_Calibration_Data(void);
+uint8_t checkForValidLCDCalibrationData(void);
+void saveSoapStringandEraseSector11(void);
+void CalibratLcdTouchPanel(void);
+
 

@@ -48,7 +48,12 @@ VisualGDB/Debug/Pheonix/taskmanager.o: Pheonix/taskmanager.c Core/main.h \
  Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h \
  Pheonix/TouchLCD/GUI/../Widgets/panel.h \
  Pheonix/TouchLCD/GUI/../Widgets/label.h \
- Pheonix/TouchLCD/GUI/../Widgets/button.h Pheonix/taskmanager.h \
+ Pheonix/TouchLCD/GUI/../Widgets/edit.h \
+ Pheonix/TouchLCD/GUI/../Widgets/button.h \
+ Pheonix/TouchLCD/GUI/../Widgets/listbox.h \
+ Pheonix/TouchLCD/GUI/../Widgets/tabcontrol.h \
+ Pheonix/TouchLCD/GUI/../Widgets/numeric.h \
+ Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h Pheonix/taskmanager.h \
  Pheonix/TouchLCD/lcd_encoder.h
 Core/main.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -108,6 +113,11 @@ Pheonix/TouchLCD/GUI/../Widgets/Widget.h:
 Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h:
 Pheonix/TouchLCD/GUI/../Widgets/panel.h:
 Pheonix/TouchLCD/GUI/../Widgets/label.h:
+Pheonix/TouchLCD/GUI/../Widgets/edit.h:
 Pheonix/TouchLCD/GUI/../Widgets/button.h:
+Pheonix/TouchLCD/GUI/../Widgets/listbox.h:
+Pheonix/TouchLCD/GUI/../Widgets/tabcontrol.h:
+Pheonix/TouchLCD/GUI/../Widgets/numeric.h:
+Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h:
 Pheonix/taskmanager.h:
 Pheonix/TouchLCD/lcd_encoder.h:

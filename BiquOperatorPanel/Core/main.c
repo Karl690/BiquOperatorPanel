@@ -66,8 +66,8 @@ int main(void)
 //	
 //	return 0;
 	
-	lcd_touch_calibration_screen(0);
-	
+	if (!checkForValidLCDCalibrationData()) CalibratLcdTouchPanel(); //if stored data is not good, please force calibration screen
+		
 	ActivPanel = &Root_Panel; //set the top panel as boot screen
 //	NewScreenType = SCREEN_MAIN;
 //	CurretScreenType = SCREEN_MAIN;
@@ -79,11 +79,12 @@ int main(void)
 	
 	while (1)
 	{
+		
 		if (CalibrateScreenFlag)
 		{
-			lcd_touch_calibration_screen(1);
-			CalibrateScreenFlag = 0;
-			panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); 
+			CalibratLcdTouchPanel();//start the touch panel calibration
+			CalibrateScreenFlag = 0;//done calibrating so turn off the flag,
+			panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); //refresh
 		}
 		panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 0); //redraw as required..
 		

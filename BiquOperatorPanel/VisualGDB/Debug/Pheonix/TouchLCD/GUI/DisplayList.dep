@@ -7,8 +7,7 @@ VisualGDB/Debug/Pheonix/TouchLCD/GUI/DisplayList.o: \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\_newlib_version.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_intsup.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_stdint.h \
- Pheonix/TouchLCD/GUI/gui.h Pheonix/TouchLCD/GUI/displaylist.h \
- Pheonix/TouchLCD/GUI/display.h Pheonix/configure.h \
+ Pheonix/TouchLCD/GUI/gui.h Pheonix/configure.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Core/stm32f4xx_hal_conf.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -41,7 +40,8 @@ VisualGDB/Debug/Pheonix/TouchLCD/GUI/DisplayList.o: \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- Pheonix/FLASH/4xx/flash_4xx.h
+ Pheonix/FLASH/4xx/flash_4xx.h Pheonix/TouchLCD/GUI/displaylist.h \
+ Pheonix/TouchLCD/GUI/display.h
 Pheonix/global.h:
 c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h:
@@ -51,8 +51,6 @@ c:\sysgcc\arm-eabi\arm-none-eabi\include\_newlib_version.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_intsup.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_stdint.h:
 Pheonix/TouchLCD/GUI/gui.h:
-Pheonix/TouchLCD/GUI/displaylist.h:
-Pheonix/TouchLCD/GUI/display.h:
 Pheonix/configure.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/stm32f4xx_hal_conf.h:
@@ -89,3 +87,5 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 Pheonix/FLASH/4xx/flash_4xx.h:
+Pheonix/TouchLCD/GUI/displaylist.h:
+Pheonix/TouchLCD/GUI/display.h:

@@ -83,6 +83,6 @@ uint8_t EraseFlash(uint32_t sector);
 #define CALIBRATIONDATA_BLOCKSIZE	128
 #define CALIBRATIONDATA_SIZE		4096	//4k
 uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
-uint8_t* findCalibrationDataBlockAddress(); // find the avaible next address of Calibration
-void writeCalibrationdata(uint8_t* address, uint8_t* data, uint16_t datasize);
+uint8_t* FindCurrentCalibrationDataAddress(); // find the avaible next address of Calibration
+void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
 //#endif
