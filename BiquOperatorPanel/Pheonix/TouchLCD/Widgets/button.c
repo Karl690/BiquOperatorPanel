@@ -37,8 +37,8 @@ void button_on_paint(Button* obj, Point offset, Color16  backcolor)
 		{
 			GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BorderColor);
 		}
-		
-		widget_draw_string(obj->Text,
+		if (strlen(obj->CheckedText) == 0) strcpy(obj->CheckedText, obj->Text);
+		widget_draw_string(obj->Checked?  obj->CheckedText: obj->Text,
 			pos.x,
 			pos.y,
 			obj->Size.width,

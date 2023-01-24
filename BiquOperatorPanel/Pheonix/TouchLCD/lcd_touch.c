@@ -60,7 +60,7 @@ void LCD_ProcessTouchEvent()
 	
 	if (!XPT2046_Read_Pen())
 	{
-		if (touch >= 10)  // 20ms
+		if (touch >= 5)  // 20ms
 		{
 			if (TouchEventStatus == TOUCH_EVENT_NONE) TouchEventStatus = TOUCH_EVENT_DOWN;
 			else if (TouchEventStatus == TOUCH_EVENT_DOWN) TouchEventStatus = TOUCH_EVENT_HOLD;
@@ -82,7 +82,7 @@ void LCD_ProcessTouchEvent()
 		}
 		else if (TouchEventStatus == TOUCH_EVENT_UP)
 		{
-			if (touch >= 10)
+			if (touch >= 5)
 			{
 				TouchEventStatus = TOUCH_EVENT_NONE; // Touch Up event keep for a while.
 				touch = 0;

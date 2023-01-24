@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include "widget.h"
 #include "panel.h"
 #include "button.h"
@@ -100,4 +101,41 @@ uint8_t widget_is_point_in_rect(uint32_t x, uint32_t y, uint16_t rx, uint16_t ry
 {
 	if (x >= rx && x <= rx + rw && y >= ry && y <= ry + rh) return 1;
 	return 0;
+}
+
+
+/*
+ *format: //0x11 0x22 0x33 0x44  0x55 0x66 0x77 0x88	12345667
+ **/
+void buffer2hexstring(uint8_t* buf, uint8_t* hexstring, uint16_t bufsize) 
+{
+	uint16_t count = 0;
+	uint16_t writ_bytes = 0;
+	uint8_t* temp = hexstring;
+	
+	while (count < bufsize)
+	{
+		if (writ_bytes + 3 > WIDGET_MAX_TEXT_LENGTH) break; // return if hexstring's length is more than WIDGET_MAX_LENGTH(32)
+		sprintf(temp, "%02X ", buf[count]); 
+		writ_bytes += 3; // 
+		temp += 3; //incress 3 because of writting 3 byte
+		count++;
+		
+	}
+	
+	int fill = 3 * (8 - count) + 3; //lets see how many characters we need
+	for (count = 0; count < fill; count++)
+	{
+		*temp = ' ';
+		temp++;
+	}
+	
+	for (count = 0; count < bufsize; count ++)
+	{	
+		if(isascii(buf[count]))
+			*temp = buf[count];
+		else 
+			*temp = '.';
+		temp ++;
+	}
 }

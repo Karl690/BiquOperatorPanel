@@ -60,8 +60,8 @@ typedef enum
 
 
 #define FLASH_PAGE_SIZE		0x400
-#define FLASH_LAST_SECTOR 	FLASH_Sector_7
-#define FLASH_LAST_ADDRESS	FLASH_BASE + 0x60000
+#define FLASH_LAST_SECTOR 	FLASH_Sector_11    
+#define FLASH_LAST_ADDRESS	FLASH_BASE + 0xE0000 // if sector is 7, this would be 0x60000
 
 
 #define BYTE2UINT32(a,b,c,d) 			((a << 24) + (b << 16) + (c << 8) + d)

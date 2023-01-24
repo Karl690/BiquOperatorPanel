@@ -605,6 +605,9 @@
     <ClCompile Include="Pheonix\TouchLCD\Widgets\dropdownlist.c">
       <Filter>Pheonix\TouchLCD\Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="Pheonix\global.c">
+      <Filter>Pheonix</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <LinkerScript Include="STM32F407VE_flash.lds">

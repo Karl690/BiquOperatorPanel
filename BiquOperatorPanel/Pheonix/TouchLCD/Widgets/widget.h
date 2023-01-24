@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "../GUI/gui.h"
 #define NULL 0
-#define WIDGET_MAX_TEXT_LENGTH 32
+#define WIDGET_MAX_TEXT_LENGTH 50
 typedef enum
 {
 	PANEL,
@@ -27,6 +27,12 @@ typedef enum
 	BottomCenter,
 	BottomRight,
 }TEXT_ALIGN;
+
+typedef enum
+{
+	DISPLAYMODE_ASCII,
+	DISPLAYMODE_HEX,
+}DISPLAYMODE_TYPE;
 
 typedef void(*CallbackTouchEventFunction)(void*, uint32_t, uint32_t);
 
@@ -62,3 +68,5 @@ void widget_ToggleVisible(Widget* widget);
 void widget_draw_string(char* string, uint16_t x, uint16_t y, uint16_t w, uint16_t h, 
 	PADDING* padding,Font* font,TEXT_ALIGN align, Color16 foreColor,Color16 backColor);
 uint8_t widget_is_point_in_rect(uint32_t x, uint32_t y, uint16_t rx, uint16_t ry, uint16_t rw, uint16_t rh);
+
+void buffer2hexstring(uint8_t* buf, uint8_t* hexstring, uint16_t bufsize);

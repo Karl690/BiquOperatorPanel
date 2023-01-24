@@ -14,6 +14,10 @@ Button gL_Button1;
 Button glBtnPlus;
 Button glBtnMinus;
 Panel gL_Panel4;
+Listbox gL_Listbox1;
+Button gL_Button8;
+Button glBtnSwitchSH;
+Button gL_Button7;
 Panel gL_Panel3;
 Label lblTitle;
 TabControl glTabMain;
@@ -106,6 +110,7 @@ void  InitPanelMain()
 	gL_Button2.Location = (Point){ .x = 574, .y = 3 };
 	gL_Button2.Size = (Size){ .width = 89, .height = 32 };
 	strcpy(gL_Button2.Text, "APPLY");
+	strcpy(gL_Button2.CheckedText, "");
 	gL_Button2.Checked = 0;
 
 	panel_add_child(&Root_Panel, &gL_Button2); //add to the panel
@@ -133,6 +138,7 @@ void  InitPanelMain()
 	gL_Button1.Location = (Point){ .x = 479, .y = 3 };
 	gL_Button1.Size = (Size){ .width = 89, .height = 32 };
 	strcpy(gL_Button1.Text, "SAVE");
+	strcpy(gL_Button1.CheckedText, "");
 	gL_Button1.Checked = 0;
 
 	panel_add_child(&Root_Panel, &gL_Button1); //add to the panel
@@ -160,6 +166,7 @@ void  InitPanelMain()
 	glBtnPlus.Location = (Point){ .x = 679, .y = 3 };
 	glBtnPlus.Size = (Size){ .width = 47, .height = 32 };
 	strcpy(glBtnPlus.Text, "+");
+	strcpy(glBtnPlus.CheckedText, "");
 	glBtnPlus.Checked = 0;
 
 	panel_add_child(&Root_Panel, &glBtnPlus); //add to the panel
@@ -187,6 +194,7 @@ void  InitPanelMain()
 	glBtnMinus.Location = (Point){ .x = 732, .y = 3 };
 	glBtnMinus.Size = (Size){ .width = 47, .height = 32 };
 	strcpy(glBtnMinus.Text, "-");
+	strcpy(glBtnMinus.CheckedText, "");
 	glBtnMinus.Checked = 0;
 
 	panel_add_child(&Root_Panel, &glBtnMinus); //add to the panel
@@ -201,7 +209,7 @@ void  InitPanelMain()
 	gL_Panel4.BorderColor = RGB16(37, 87, 103);
 	gL_Panel4.BorderWidth = 1;
 	gL_Panel4.Location = (Point){ .x = 378, .y = 42 };
-	gL_Panel4.Size = (Size){ .width = 401, .height = 312 };
+	gL_Panel4.Size = (Size){ .width = 401, .height = 328 };
 	gL_Panel4.StackIndex = -1;
 	gL_Panel4.CornerRadius = 5;
 	gL_Panel4.Font = &Font20;
@@ -214,6 +222,110 @@ void  InitPanelMain()
 	gL_Panel4.Event_Up = NULL;
 	//Components in this panel
 	panel_update(&gL_Panel4);
+	gL_Listbox1.Type = LISTBOX;
+	strcpy(gL_Listbox1.Name, "gL_Listbox1");
+	gL_Listbox1.BackColor = RGB16(0, 22, 34);
+	gL_Listbox1.ForeColor = RGB16(122, 225, 255);
+	gL_Listbox1.BorderColor = RGB16(0, 0, 0);
+	gL_Listbox1.BorderWidth = 1;
+	gL_Listbox1.Font = &Font16;
+	gL_Listbox1.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Listbox1.Visible = 1;
+	gL_Listbox1.RedrawMe = 1;
+	gL_Listbox1.RowOddColor = RGB16(0, 22, 34);
+	gL_Listbox1.RowEvenColor = RGB16(10, 32, 34);
+	gL_Listbox1.Location = (Point){ .x = 8, .y = 54 };
+	gL_Listbox1.Size = (Size){ .width = 382, .height = 269 };
+	edit_update(&gL_Listbox1);
+
+	panel_add_child(&gL_Panel4, &gL_Listbox1); //add to the panel
+
+
+
+
+	gL_Button8.Type = BUTTON;
+	strcpy(gL_Button8.Name, "gL_Button8");
+	gL_Button8.Event_Down = PageDownButtonEvent;
+	gL_Button8.Event_Hold = NULL;
+	gL_Button8.Event_Up   = NULL;
+	gL_Button8.BackColor = RGB16(0, 22, 34);
+	gL_Button8.ForeColor = RGB16(132, 225, 255);
+	gL_Button8.BorderColor = RGB16(1, 103, 137);
+	gL_Button8.CheckedColor = RGB16(62, 209, 255);
+	gL_Button8.CheckedForeColor = RGB16(2, 46, 61);
+	gL_Button8.BorderWidth = 1;
+	gL_Button8.CornerRadius = 0;
+	gL_Button8.Font = &Font16;
+	gL_Button8.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Button8.TextAlign = MiddleCenter;
+	gL_Button8.Visible = 1;
+	gL_Button8.RedrawMe = 1;
+	gL_Button8.Location = (Point){ .x = 312, .y = 16 };
+	gL_Button8.Size = (Size){ .width = 75, .height = 32 };
+	strcpy(gL_Button8.Text, "DOWN");
+	strcpy(gL_Button8.CheckedText, "");
+	gL_Button8.Checked = 0;
+
+	panel_add_child(&gL_Panel4, &gL_Button8); //add to the panel
+
+
+
+
+	glBtnSwitchSH.Type = BUTTON;
+	strcpy(glBtnSwitchSH.Name, "glBtnSwitchSH");
+	glBtnSwitchSH.Event_Down = SwitchSHButtonEvent;
+	glBtnSwitchSH.Event_Hold = NULL;
+	glBtnSwitchSH.Event_Up   = NULL;
+	glBtnSwitchSH.BackColor = RGB16(0, 22, 34);
+	glBtnSwitchSH.ForeColor = RGB16(132, 225, 255);
+	glBtnSwitchSH.BorderColor = RGB16(1, 103, 137);
+	glBtnSwitchSH.CheckedColor = RGB16(62, 209, 255);
+	glBtnSwitchSH.CheckedForeColor = RGB16(2, 46, 61);
+	glBtnSwitchSH.BorderWidth = 1;
+	glBtnSwitchSH.CornerRadius = 0;
+	glBtnSwitchSH.Font = &Font16;
+	glBtnSwitchSH.Padding = (PADDING) { 0, 0, 0, 0 };
+	glBtnSwitchSH.TextAlign = MiddleCenter;
+	glBtnSwitchSH.Visible = 1;
+	glBtnSwitchSH.RedrawMe = 1;
+	glBtnSwitchSH.Location = (Point){ .x = 151, .y = 16 };
+	glBtnSwitchSH.Size = (Size){ .width = 75, .height = 32 };
+	strcpy(glBtnSwitchSH.Text, "ASCII");
+	strcpy(glBtnSwitchSH.CheckedText, "HEX");
+	glBtnSwitchSH.Checked = 1;
+
+	panel_add_child(&gL_Panel4, &glBtnSwitchSH); //add to the panel
+
+
+
+
+	gL_Button7.Type = BUTTON;
+	strcpy(gL_Button7.Name, "gL_Button7");
+	gL_Button7.Event_Down = PageUpButtonEvent;
+	gL_Button7.Event_Hold = NULL;
+	gL_Button7.Event_Up   = NULL;
+	gL_Button7.BackColor = RGB16(0, 22, 34);
+	gL_Button7.ForeColor = RGB16(132, 225, 255);
+	gL_Button7.BorderColor = RGB16(1, 103, 137);
+	gL_Button7.CheckedColor = RGB16(62, 209, 255);
+	gL_Button7.CheckedForeColor = RGB16(2, 46, 61);
+	gL_Button7.BorderWidth = 1;
+	gL_Button7.CornerRadius = 0;
+	gL_Button7.Font = &Font16;
+	gL_Button7.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Button7.TextAlign = MiddleCenter;
+	gL_Button7.Visible = 1;
+	gL_Button7.RedrawMe = 1;
+	gL_Button7.Location = (Point){ .x = 232, .y = 16 };
+	gL_Button7.Size = (Size){ .width = 75, .height = 32 };
+	strcpy(gL_Button7.Text, "UP");
+	strcpy(gL_Button7.CheckedText, "");
+	gL_Button7.Checked = 0;
+
+	panel_add_child(&gL_Panel4, &gL_Button7); //add to the panel
+
+
+
 
 	panel_add_child(&Root_Panel, &gL_Panel4); //add to the panel
 
@@ -227,8 +339,8 @@ void  InitPanelMain()
 	gL_Panel3.ForeColor = RGB16(122, 225, 255);
 	gL_Panel3.BorderColor = RGB16(37, 87, 103);
 	gL_Panel3.BorderWidth = 1;
-	gL_Panel3.Location = (Point){ .x = 378, .y = 362 };
-	gL_Panel3.Size = (Size){ .width = 401, .height = 105 };
+	gL_Panel3.Location = (Point){ .x = 378, .y = 378 };
+	gL_Panel3.Size = (Size){ .width = 401, .height = 89 };
 	gL_Panel3.StackIndex = -1;
 	gL_Panel3.CornerRadius = 5;
 	gL_Panel3.Font = &Font20;
@@ -305,6 +417,7 @@ void  InitPanelMain()
 	glTabMainTab_0.Location = (Point){ .x = 0, .y = 0 };
 	glTabMainTab_0.Size = (Size){ .width = 100, .height = 30 };
 	strcpy(glTabMainTab_0.Text, "CONN");
+	strcpy(glTabMainTab_0.CheckedText, "");
 	glTabMainTab_0.Checked = 0;
 
 
@@ -345,10 +458,10 @@ void  InitPanelMain()
 	gL_DropdownList1.Size = (Size){ .width = 120, .height = 32 };
 	gL_DropdownList1.FocusBackColor = RGB16(0, 175, 255);
 	 ;
-	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0);
-	 ;
-	gL_DropdownList1.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
+	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0); 
+	;
+	gL_DropdownList1.FocusBorderColor = RGB16(2, 49, 72); 
+	;
 	gL_DropdownList1.IsFocus = 0;
 	gL_DropdownList1.ValueType = DROPDOWNLIST_INT;
 	dropdownlist_add_item(&gL_DropdownList1, "9600");
@@ -429,12 +542,12 @@ void  InitPanelMain()
 	gL_Numeric2.RedrawMe = 1;
 	gL_Numeric2.Location = (Point){ .x = 170, .y = 26 };
 	gL_Numeric2.Size = (Size){ .width = 120, .height = 32 };
-	gL_Numeric2.FocusBackColor = RGB16(0, 175, 255); 
-	;
-	gL_Numeric2.FocusForeColor = RGB16(0, 0, 0);
+	gL_Numeric2.FocusBackColor = RGB16(0, 175, 255);
 	 ;
-	gL_Numeric2.FocusBorderColor = RGB16(2, 49, 72); 
+	gL_Numeric2.FocusForeColor = RGB16(0, 0, 0); 
 	;
+	gL_Numeric2.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
 	gL_Numeric2.IsFocus = 0;
 	gL_Numeric2.Value = 0;
 	gL_Numeric2.Step = 1.5;
@@ -576,8 +689,8 @@ void  InitPanelMain()
 	glNumeric_SimplePort.Size = (Size){ .width = 118, .height = 29 };
 	glNumeric_SimplePort.FocusBackColor = RGB16(0, 175, 255);
 	 ;
-	glNumeric_SimplePort.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	glNumeric_SimplePort.FocusForeColor = RGB16(0, 0, 0);
+	 ;
 	glNumeric_SimplePort.FocusBorderColor = RGB16(2, 49, 72); 
 	;
 	glNumeric_SimplePort.IsFocus = 0;
@@ -641,14 +754,15 @@ void  InitPanelMain()
 	glTabMainTab_1.Location = (Point){ .x = 100, .y = 0 };
 	glTabMainTab_1.Size = (Size){ .width = 100, .height = 30 };
 	strcpy(glTabMainTab_1.Text, "FUNC");
+	strcpy(glTabMainTab_1.CheckedText, "");
 	glTabMainTab_1.Checked = 0;
 
 
 	gL_Button6.Type = BUTTON;
 	strcpy(gL_Button6.Name, "gL_Button6");
-	gL_Button6.Event_Down = NULL;
+	gL_Button6.Event_Down = displaySoapstringButtonEvent;
 	gL_Button6.Event_Hold = NULL;
-	gL_Button6.Event_Up   = displaySoapstringButtonEvent;
+	gL_Button6.Event_Up   = NULL;
 	gL_Button6.BackColor = RGB16(0, 0, 0);
 	gL_Button6.ForeColor = RGB16(132, 225, 255);
 	gL_Button6.BorderColor = RGB16(255, 255, 0);
@@ -664,6 +778,7 @@ void  InitPanelMain()
 	gL_Button6.Location = (Point){ .x = 16, .y = 233 };
 	gL_Button6.Size = (Size){ .width = 189, .height = 48 };
 	strcpy(gL_Button6.Text, "Display Soap string");
+	strcpy(gL_Button6.CheckedText, "");
 	gL_Button6.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &gL_Button6); //add to the panel
@@ -673,9 +788,9 @@ void  InitPanelMain()
 
 	gL_Button5.Type = BUTTON;
 	strcpy(gL_Button5.Name, "gL_Button5");
-	gL_Button5.Event_Down = NULL;
+	gL_Button5.Event_Down = displayCalibrationButtonEvent;
 	gL_Button5.Event_Hold = NULL;
-	gL_Button5.Event_Up   = displayCalibrationButtonEvent;
+	gL_Button5.Event_Up   = NULL;
 	gL_Button5.BackColor = RGB16(0, 0, 0);
 	gL_Button5.ForeColor = RGB16(132, 225, 255);
 	gL_Button5.BorderColor = RGB16(255, 255, 0);
@@ -691,6 +806,7 @@ void  InitPanelMain()
 	gL_Button5.Location = (Point){ .x = 16, .y = 161 };
 	gL_Button5.Size = (Size){ .width = 189, .height = 48 };
 	strcpy(gL_Button5.Text, "Display Calibration");
+	strcpy(gL_Button5.CheckedText, "");
 	gL_Button5.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &gL_Button5); //add to the panel
@@ -700,9 +816,9 @@ void  InitPanelMain()
 
 	gL_Button4.Type = BUTTON;
 	strcpy(gL_Button4.Name, "gL_Button4");
-	gL_Button4.Event_Down = NULL;
+	gL_Button4.Event_Down = ShiftbitWritetestButtonEvent;
 	gL_Button4.Event_Hold = NULL;
-	gL_Button4.Event_Up   = ShiftbitWritetestButtonEvent;
+	gL_Button4.Event_Up   = NULL;
 	gL_Button4.BackColor = RGB16(0, 0, 0);
 	gL_Button4.ForeColor = RGB16(132, 225, 255);
 	gL_Button4.BorderColor = RGB16(255, 255, 0);
@@ -718,6 +834,7 @@ void  InitPanelMain()
 	gL_Button4.Location = (Point){ .x = 16, .y = 89 };
 	gL_Button4.Size = (Size){ .width = 189, .height = 48 };
 	strcpy(gL_Button4.Text, "ShiftBit write test");
+	strcpy(gL_Button4.CheckedText, "");
 	gL_Button4.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &gL_Button4); //add to the panel
@@ -727,9 +844,9 @@ void  InitPanelMain()
 
 	gL_Button3.Type = BUTTON;
 	strcpy(gL_Button3.Name, "gL_Button3");
-	gL_Button3.Event_Down = NULL;
+	gL_Button3.Event_Down = eraseFlashButonEvent;
 	gL_Button3.Event_Hold = NULL;
-	gL_Button3.Event_Up   = eraseFlashButonEvent;
+	gL_Button3.Event_Up   = NULL;
 	gL_Button3.BackColor = RGB16(0, 0, 0);
 	gL_Button3.ForeColor = RGB16(132, 225, 255);
 	gL_Button3.BorderColor = RGB16(255, 255, 0);
@@ -745,6 +862,7 @@ void  InitPanelMain()
 	gL_Button3.Location = (Point){ .x = 16, .y = 17 };
 	gL_Button3.Size = (Size){ .width = 189, .height = 48 };
 	strcpy(gL_Button3.Text, "Erase Flash");
+	strcpy(gL_Button3.CheckedText, "");
 	gL_Button3.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &gL_Button3); //add to the panel
@@ -795,6 +913,7 @@ void  InitPanelMain()
 	glTabMainTab_2.Location = (Point){ .x = 200, .y = 0 };
 	glTabMainTab_2.Size = (Size){ .width = 100, .height = 30 };
 	strcpy(glTabMainTab_2.Text, "VARS");
+	strcpy(glTabMainTab_2.CheckedText, "");
 	glTabMainTab_2.Checked = 0;
 
 

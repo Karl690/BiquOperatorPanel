@@ -14,6 +14,18 @@ void listbox_update(Listbox* obj)
 	uint16_t row_height = obj->Font->Height + 4;
 	list_row_buffer = (uint16_t*)malloc(row_height * obj->Size.width * 2);
 }
+
+void listbox_clear(Listbox* obj)
+{
+	obj->RowCount = 0;
+	obj->RedrawMe = 1;
+}
+
+void listbox_change_display_mode(Listbox* obj, uint8_t mode)
+{
+	obj->DispMode = mode;
+	obj->RedrawMe = 1;
+}
 void listbox_remove_row(Listbox* obj, uint16_t index)
 {
 	if (index == 0 && obj->RowCount == 1)
@@ -39,14 +51,33 @@ void listbox_append_row(Listbox* obj, char* data)
 		//remove the first element
 		for (uint16_t i = 1; i < LISTBOX_MAX_ROWS; i++)
 		{
-			strcpy(obj->RowData[i - 1], obj->RowData[i]);
+			strcpy((char*)obj->RowData[i - 1], obj->RowData[i]);
 		}
 		//add the data at the last element
-		strcpy(obj->RowData[LISTBOX_MAX_ROWS - 1], data);
+		strcpy((char*)obj->RowData[LISTBOX_MAX_ROWS - 1], data);
 	}
 	else
 	{	
-		strcpy(obj->RowData[obj->RowCount], data);
+		strcpy((char*)obj->RowData[obj->RowCount], data);
+		obj->RowCount++;
+	}
+	obj->RedrawMe = 1;
+}
+void listbox_append_row_buffer(Listbox* obj, uint8_t* data, uint16_t size) //size must be smaller than WIDGET_MAX_TEXT_LENGTH
+{
+	if (obj->RowCount > LISTBOX_MAX_ROWS)
+	{	
+		//remove the first element
+		for (uint16_t i = 1; i < LISTBOX_MAX_ROWS; i++)
+		{
+			memcpy(obj->RowData[i - 1], obj->RowData[i], size);
+		}
+		//add the data at the last element
+		memcpy(obj->RowData[LISTBOX_MAX_ROWS - 1], data, size);
+	}
+	else
+	{	
+		memcpy(obj->RowData[obj->RowCount], data, size);
 		obj->RowCount++;
 	}
 	obj->RedrawMe = 1;
@@ -64,10 +95,11 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	uint16_t row_height = obj->Font->Height + 4;
 	uint16_t row_bottom = obj->CurrentDrawYPos;
 	uint16_t row_index = 0;
+	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
 	while (1)
 	{
 		if (row_index >= obj->RowCount) break;
-		if (row_bottom >= obj->Size.height) break;
+		if (row_bottom + row_height > obj->Size.height) break;
 		if (row_bottom >= 0) 
 		{
 			if (row_index % 2 == 0)
@@ -78,6 +110,8 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 					pos.y+row_bottom + row_height, 
 					row_index %2 == 1? obj->RowEvenColor: obj->RowOddColor);	
 			}
+			
+			
 			GUI_DrawString(pos.x + 2,
 				pos.y + 2 + row_bottom,
 				obj->RowData[row_index],

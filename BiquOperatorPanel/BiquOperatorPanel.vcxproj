@@ -95,6 +95,7 @@
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c" />
     <ClCompile Include="ICONS\icon_start.c" />
     <ClCompile Include="Pheonix\FLASH\4xx\flash_4xx.c" />
+    <ClCompile Include="Pheonix\global.c" />
     <ClCompile Include="Pheonix\GPIO\GPIO_Init.c" />
     <ClCompile Include="Pheonix\GPIO\pininit.c" />
     <ClCompile Include="Pheonix\SPI\spi.c" />

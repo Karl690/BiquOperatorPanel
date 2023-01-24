@@ -30,6 +30,8 @@ extern TouchCalibrationInfo touchCalibrationInfo;
 extern uint8_t touchScreenIsPress;
 extern TOUCH_EVENT_TYPE TouchEventStatus;
 
+extern uint8_t* currentCalibrationAddress;
+extern uint8_t* currentSoapStringAddress;
 
 extern uint16_t TouchPointX;
 extern uint16_t TouchPointY;

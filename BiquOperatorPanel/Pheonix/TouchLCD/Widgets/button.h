@@ -33,7 +33,8 @@ typedef struct tagButton
 	
 	Color16	CheckedColor;
 	Color16	CheckedForeColor;
-	Color16		Checked;
+	uint8_t		Checked;
+	char		CheckedText[WIDGET_MAX_TEXT_LENGTH];
 	
 	
 }Button;

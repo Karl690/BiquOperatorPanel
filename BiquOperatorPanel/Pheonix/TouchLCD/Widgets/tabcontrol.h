@@ -8,7 +8,7 @@ typedef struct tagTabControl
 {
 	//Commone properties
 	WIDGETTYPE Type;
-	char Name[32];
+	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;
 	Point Location;
