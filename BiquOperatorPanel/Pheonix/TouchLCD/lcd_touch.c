@@ -128,12 +128,12 @@ void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 uint8_t* currentCalibrationAddress = NULL;
 void save_LCD_Touch_Calibration_Data(void)
 {
-	uint8_t* address = FindCurrentCalibrationDataAddress();//get current pointer in storage
-	if (address == NULL)
+	currentCalibrationAddress = getCalibrationDataBlockAddress(); //get current pointer in storage
+	if (currentCalibrationAddress == NULL)
 	{
 		//no valid data was found;
-		address = CALIBRATIONDATA_STARTADDRESS;
-		if (*address != 0xff)
+		currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
+		if (*currentCalibrationAddress != 0xff)
 		{
 			saveSoapStringandEraseSector11();//erase and copy old soap to new starting block			
 		}
@@ -142,13 +142,13 @@ void save_LCD_Touch_Calibration_Data(void)
 	{//we have found valid block,now disable it and then incrment to next block
 		*currentCalibrationAddress = 0;//zero out old pointer, data no longer valid
 		currentCalibrationAddress += CALIBRATIONDATA_BLOCKSIZE; //point to next place in storage
-		if (currentCalibrationAddress > CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE)
+		if (currentCalibrationAddress >= CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE)
 		{//now we have reached past the 4k boundry and need to point back to the beginning
 			saveSoapStringandEraseSector11();		
 		}
 	}
 //ok, when you get here, we should be pointing to 0xff values in the target storage memory
-	MoveData(address, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+	MoveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 }
 
 void saveSoapStringandEraseSector11()
@@ -168,9 +168,10 @@ uint8_t checkForValidLCDCalibrationData(void)
 	if (*currentCalibrationAddress == 0x80)
 	{
 		//it is valid data, so lets update
-		MoveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo)); //update working variables from storage
+		MoveData((uint8_t*)&touchCalibrationInfo, currentCalibrationAddress, sizeof(TouchCalibrationInfo)); //update working variables from storage
 		return 1;//updated so report successfully found and updated
 	}
+	return 0; //invalid address
 }
 
 void CalibratLcdTouchPanel()

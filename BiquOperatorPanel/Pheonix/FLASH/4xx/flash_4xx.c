@@ -232,12 +232,12 @@ uint8_t* getCalibrationDataBlockAddress()
 	}
 	return NULL; // it need to erase flash.
 }
-void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize)
+void MoveData(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
 	for (uint16_t i = 0; i < datasize; i++)
 	{
-		*address = data[i];
-		address++;
+		*target = source[i];
+		target++;
 	}
 }
 
