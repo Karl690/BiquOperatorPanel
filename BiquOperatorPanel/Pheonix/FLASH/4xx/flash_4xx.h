@@ -78,11 +78,18 @@ uint8_t WriteFlash(uint32_t address, uint32_t data);
 uint8_t EraseFlash(uint32_t sector);
 
 
-
+/* Macro and function for operating(save/load) Calibration data */
 #define CALIBRATIONDATA_STARTADDRESS 0x20000000 + 0x10000   //we use RAM after 64kbye because the ram before 64k could be already use.
 #define CALIBRATIONDATA_BLOCKSIZE	128
 #define CALIBRATIONDATA_SIZE		4096	//4k
 uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
-uint8_t* FindCurrentCalibrationDataAddress(); // find the avaible next address of Calibration
+
+/* Macro and function for operating(save/load) Calibration data */
+#define SOAPSTRING_STARTADDRESS 0x20000000 + 0x11000   //Soapstring address would be started from 68K(0x11000) range of RAM.
+#define SOAPSTRING_BLOCKSIZE	4096					//4k
+#define SOAPSTRING_ENDADDRESS	0x20000000 + 0x20000	// for 407, RAM size is 128K. 
+#define SOAPSTRING_USABLE_RANGE				60 * 1024	//128-68 = 60K
+
+uint8_t* getSoapstringBlockAddress(); //get the current soap string's address
 void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
 //#endif

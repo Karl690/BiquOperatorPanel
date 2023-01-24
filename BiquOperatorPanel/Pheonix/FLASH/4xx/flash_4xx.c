@@ -1,5 +1,6 @@
 
 #include "configure.h"
+#include <ctype.h>
 //#if defined(FK_407) || defined(CORE_407I)
 #ifdef USE_FLASH
 //#include "taskmanager.h"
@@ -203,21 +204,6 @@ uint8_t erase_memory()
 	EraseFlash(FLASH_LAST_SECTOR);
 }
 
-uint8_t* FindCurrentCalibrationDataAddress()
-{
-	uint16_t i = 0;	
-	uint8_t* currentcalibrationDataBlockPointer = NULL;
-	for (i = 0; i < CALIBRATIONDATA_SIZE; i += CALIBRATIONDATA_BLOCKSIZE)
-	{
-		currentcalibrationDataBlockPointer = (uint8_t*)(CALIBRATIONDATA_STARTADDRESS + i);
-		//three possible values here  0=old table, 0x80=current table,0ff=emptytable 
-		if (*currentcalibrationDataBlockPointer != 0x80)
-		{
-			return currentcalibrationDataBlockPointer;
-		}
-	}
-	return NULL; // it need to erase flash.
-}
 uint8_t* getCalibrationDataBlockAddress()
 {
 	uint16_t i = 0;	
@@ -232,14 +218,31 @@ uint8_t* getCalibrationDataBlockAddress()
 	}
 	return NULL; // it need to erase flash.
 }
+
+
+uint8_t* getSoapstringBlockAddress()  //get the current soap string's address
+{	
+	uint8_t* i = NULL;
+	uint8_t* currentSoapstringBlockPointer = NULL;
+	for (i = 0; i < SOAPSTRING_USABLE_RANGE; i += SOAPSTRING_BLOCKSIZE)
+	{
+		currentSoapstringBlockPointer = (uint8_t*)(SOAPSTRING_STARTADDRESS + i);
+		if (isascii(*currentSoapstringBlockPointer)) //check if the first byte of the block is ascii charactor. 
+		{
+			return currentSoapstringBlockPointer; 
+		}
+	}
+	return NULL; // it need to erase flash.
+}
+
+//move the data from the source address to the target address.
 void MoveData(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
 	for (uint16_t i = 0; i < datasize; i++)
 	{
-		*target = source[i];
+		*target = source[i]; 
 		target++;
 	}
 }
 
 #endif
-//#endif

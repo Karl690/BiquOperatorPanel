@@ -126,6 +126,7 @@ void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 
 
 uint8_t* currentCalibrationAddress = NULL;
+uint8_t* currentSoapStringAddress = NULL;
 void save_LCD_Touch_Calibration_Data(void)
 {
 	currentCalibrationAddress = getCalibrationDataBlockAddress(); //get current pointer in storage
@@ -135,35 +136,78 @@ void save_LCD_Touch_Calibration_Data(void)
 		currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
 		if (*currentCalibrationAddress != 0xff)
 		{
-			saveSoapStringandEraseSector11();//erase and copy old soap to new starting block			
+			saveSoapStringandEraseSector11();//erase and copy old soap to new starting block	
+			return;
 		}
 	}
 	else
 	{//we have found valid block,now disable it and then incrment to next block
 		*currentCalibrationAddress = 0;//zero out old pointer, data no longer valid
 		currentCalibrationAddress += CALIBRATIONDATA_BLOCKSIZE; //point to next place in storage
-		if (currentCalibrationAddress >= CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE)
+		if (currentCalibrationAddress > CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE)
 		{//now we have reached past the 4k boundry and need to point back to the beginning
-			saveSoapStringandEraseSector11();		
+			saveSoapStringandEraseSector11();	
+			return;
 		}
 	}
 //ok, when you get here, we should be pointing to 0xff values in the target storage memory
 	MoveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 }
 
-void saveSoapStringandEraseSector11()
+
+void saveSoapStringTobuffer() //backup Soapstring from storage to FLASH.
 {
-	//saveSoapStringTobuffer()  ;//todo
-//erase this block();       ;//todo
-//writeOldsoapstringFromBuffertoflashblock[1] ;//todo
-	currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
+	currentSoapStringAddress = getSoapstringBlockAddress(); //get the current soapstring in storage.
+	if (!currentSoapStringAddress) {
+		//Soapstring is not exsit in storage.		
+		return; 
+	}
+	MoveData(SoapStringBuffer, currentSoapStringAddress, SOAPSTRING_BLOCKSIZE); // SoapString copy from storage's currentSoapStringAddress.
 }
+
+void writeOldsoapstringFromBuffertoflashblock() //save the soapstring in storage
+{
+	uint8_t* currentSoapstringAddress = getSoapstringBlockAddress(); //get the current soapstring in storage.
+	if (!currentSoapstringAddress)
+	{	
+		currentSoapstringAddress = SOAPSTRING_STARTADDRESS; 
+	}
+	else
+	{
+		*currentSoapstringAddress = 0x0; //set flag as that is old block
+		currentSoapstringAddress += SOAPSTRING_BLOCKSIZE; // move to next block
+		if (currentSoapstringAddress + SOAPSTRING_BLOCKSIZE > SOAPSTRING_ENDADDRESS)
+		{
+			currentSoapstringAddress = SOAPSTRING_STARTADDRESS;
+			saveSoapStringandEraseSector11(); // it need to erase storage.
+			return;
+		}
+	}	
+	//copy the SoapstringBuffer to storage.
+	MoveData(currentSoapstringAddress, (uint8_t*)&SoapStringBuffer, SOAPSTRING_BLOCKSIZE); 
+}
+
+void eraseStorage()
+{
+	/// Erase storaage .. to do
+	currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
+	currentSoapStringAddress = SOAPSTRING_STARTADDRESS;
+}
+void saveSoapStringandEraseSector11() // I think this function name is not correct.
+{
+	saveSoapStringTobuffer();	//backup soapstring in storage to buffer
+	eraseStorage();					//erase the storage and set the address as start.
+	MoveData(currentCalibrationAddress, &touchCalibrationInfo, CALIBRATIONDATA_BLOCKSIZE); //copy calibration buffer  to storage
+	MoveData(currentSoapStringAddress, &SoapStringBuffer, SOAPSTRING_BLOCKSIZE);  //copy soapstring buffer to storage
+	//writeOldsoapstringFromBuffertoflashblock[1] ;//todo
+}
+
 uint8_t checkForValidLCDCalibrationData(void)
 {//if it finds it, it will refresh the structure from storage
 	//read_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 	//if (touchCalibrationInfo.IsValid != 0x80) return 0;
 	//uint32_t* currentCalibrationAddress = NULL;
-	currentCalibrationAddress  = getCalibrationDataBlockAddress();//uint8_t* getCalibrationDataBlockAddress()
+	currentCalibrationAddress  = getCalibrationDataBlockAddress();
 	if (currentCalibrationAddress==0) return 0;//was a disaster and we did not find valid data
 	if (*currentCalibrationAddress == 0x80)
 	{

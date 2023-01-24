@@ -20,6 +20,8 @@ uint16_t Refresh = 0;
 uint16_t CalibrateScreenFlag = 0;
 uint32_t *PanelDisplayIndex = 0; //start by pointing to the root display panel
 
+uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE] = { 0};
+
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
