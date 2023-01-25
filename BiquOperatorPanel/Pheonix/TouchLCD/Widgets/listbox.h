@@ -3,7 +3,7 @@
 #include "widget.h"
 #include "panel.h"
 
-#define LISTBOX_MAX_ROWS 256
+#define LISTBOX_MAX_ROWS 12
 
 typedef struct tagListbox
 {
@@ -35,7 +35,7 @@ typedef struct tagListbox
 	uint8_t RowData[LISTBOX_MAX_ROWS][WIDGET_MAX_TEXT_LENGTH];
 	int16_t CurrentDrawYPos; //when scrolling, 
 	uint16_t RowCount;
-	DISPLAYMODE_TYPE	DispMode; //specify the display mdoe (Ascill or Hex) 
+	uint8_t	DispMode; //specify the display mdoe (Ascill or Hex) 
 }Listbox;
 
 void listbox_destory(Listbox* obj);
@@ -48,3 +48,6 @@ void listbox_remove_row(Listbox* obj, uint16_t index);
 
 void listbox_move_up_line(Listbox* obj);
 void listbox_move_down_line(Listbox* obj);
+
+uint16_t listbox_get_charsofline(Listbox* obj);
+void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress);

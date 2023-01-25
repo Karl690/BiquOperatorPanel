@@ -22,8 +22,6 @@ uint32_t *PanelDisplayIndex = 0; //start by pointing to the root display panel
 
 uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE] = { 0};
 
-
-
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -77,7 +75,7 @@ int main(void)
 //	CurretScreenType = SCREEN_MAIN;
 //	ActivPanel = InitPanelMain();
 //	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
-	panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); //draw whole panel this time
+	//panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); //draw whole panel this time
 	
 	
 	

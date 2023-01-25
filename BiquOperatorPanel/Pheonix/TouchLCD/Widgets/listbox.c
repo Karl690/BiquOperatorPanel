@@ -4,8 +4,6 @@
 
 uint16_t* list_row_buffer = NULL;
 uint8_t DrawMemoryDumpflag = 0;//used to signal that it is time to add 12 lines formatted to this listbox
-uint8_t* MemoryDumpDisplayAddress = 0;
-
 void listbox_destory(Listbox* obj)
 {
 	free(obj);
@@ -147,4 +145,41 @@ void listbox_move_down_line(Listbox* obj)
 		obj->CurrentDrawYPos += row_height;	
 		obj->RedrawMe = 1;	
 	}
+}
+
+
+//get the number of characters for a line
+uint16_t listbox_get_charsofline(Listbox* obj) 
+{
+	uint16_t DisplayDataLength = WIDGET_MAX_TEXT_LENGTH;
+	if (obj->DispMode == DISPLAYMODE_Raw_ASCII) DisplayDataLength = 32; //raw ascii, only 32 bytes per line, plus address
+	else if(obj->DispMode ==  DISPLAYMODE_HEX)		DisplayDataLength = 8; //hex ascii, only 8 bytes per line, plus address
+	return DisplayDataLength;
+}
+void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
+{
+	//displays memory contents in either ascii , raw ascii, hex
+	//t the real address for that
+	//listbox_clear(obj); 
+	obj->RowCount = 0; // clear list's array .
+	
+	uint8_t* buf = NULL;
+	uint16_t DisplayDataLength = listbox_get_charsofline(obj); // get the number of charactor in a line.
+	
+	uint8_t* WorkingAddress = memoryaddress; //get the starting pointer
+	for (int count = 0; count < LISTBOX_MAX_ROWS; count++)  //display 12 lines at a time 
+	{
+		buf = &obj->RowData[count]; 
+		switch (obj->DispMode)
+		{
+		case DISPLAYMODE_ASCII     : strncpy(buf, WorkingAddress, DisplayDataLength); break;//formatted string
+		case DISPLAYMODE_Raw_ASCII : strncpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
+		case DISPLAYMODE_HEX       : buffer2hexstring(WorkingAddress, buf, DisplayDataLength); break;//hex dump 5 bytes at a time		}
+		}
+		obj->RowCount++; //increase the row count
+		//listbox_append_row(obj, buf); //add to listbox for display
+		WorkingAddress += DisplayDataLength;
+	}
+	obj->RedrawMe = 1;
+	//Refresh = 0; //leave flag that we have changed a widget and refresh should be called
 }
