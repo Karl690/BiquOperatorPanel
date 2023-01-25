@@ -33,7 +33,7 @@ typedef struct tagListbox
 	Color16 RowOddColor;
 	Color16 RowEvenColor;
 	uint8_t RowData[LISTBOX_MAX_ROWS][WIDGET_MAX_TEXT_LENGTH];
-	uint16_t CurrentDrawYPos; //when scrolling, 
+	int16_t CurrentDrawYPos; //when scrolling, 
 	uint16_t RowCount;
 	DISPLAYMODE_TYPE	DispMode; //specify the display mdoe (Ascill or Hex) 
 }Listbox;
@@ -45,3 +45,6 @@ void listbox_clear(Listbox* obj);
 void listbox_append_row(Listbox* obj, char*);	//append the string
 void listbox_append_row_buffer(Listbox* obj, uint8_t* data, uint16_t size); // append the binary data
 void listbox_remove_row(Listbox* obj, uint16_t index);
+
+void listbox_move_up_line(Listbox* obj);
+void listbox_move_down_line(Listbox* obj);

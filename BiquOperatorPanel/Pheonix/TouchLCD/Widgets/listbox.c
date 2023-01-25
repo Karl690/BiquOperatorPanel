@@ -91,26 +91,24 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	{
 		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BorderColor);
 	}
-	
+	GUI_SetMaskArea((Rectangle){ pos.x + 1, pos.y + 1, obj->Size.width-2, obj->Size.height -2});
 	uint16_t row_height = obj->Font->Height + 4;
-	uint16_t row_bottom = obj->CurrentDrawYPos;
+	int16_t row_bottom = obj->CurrentDrawYPos;
 	uint16_t row_index = 0;
 	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
 	while (1)
 	{
 		if (row_index >= obj->RowCount) break;
-		if (row_bottom + row_height > obj->Size.height) break;
 		if (row_bottom >= 0) 
 		{
-			if (row_index % 2 == 0)
+			if (row_index % 2 == 1)
 			{
 				GUI_FillRect(pos.x,
 					pos.y +row_bottom, 
 					pos.x + obj->Size.width,
 					pos.y+row_bottom + row_height, 
-					row_index %2 == 1? obj->RowEvenColor: obj->RowOddColor);	
+					obj->RowEvenColor);	
 			}
-			
 			
 			GUI_DrawString(pos.x + 2,
 				pos.y + 2 + row_bottom,
@@ -121,6 +119,29 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 		}
 		row_bottom += row_height;
 		row_index++;
+		if (row_bottom > obj->Size.height) break;
 	}
+	GUI_ReleaseMaskArea();
 }
 
+//move a line up
+void listbox_move_up_line(Listbox* obj) 
+{
+	uint16_t row_height = obj->Font->Height + 4;
+	obj->CurrentDrawYPos -= row_height;
+	obj->RedrawMe = 1;
+}
+//move a line down
+void listbox_move_down_line(Listbox* obj) 
+{
+	uint16_t row_height = obj->Font->Height + 4;
+	if (obj->CurrentDrawYPos + row_height > 0)
+	{
+		obj->CurrentDrawYPos = 0;
+	}
+	else
+	{
+		obj->CurrentDrawYPos += row_height;	
+		obj->RedrawMe = 1;	
+	}
+}

@@ -112,7 +112,8 @@ void buffer2hexstring(uint8_t* buf, uint8_t* hexstring, uint16_t bufsize)
 	uint16_t count = 0;
 	uint16_t writ_bytes = 0;
 	uint8_t* temp = hexstring;
-	
+	sprintf(temp, "%08X  ", buf);
+	temp += 10;
 	while (count < bufsize)
 	{
 		if (writ_bytes + 3 > WIDGET_MAX_TEXT_LENGTH) break; // return if hexstring's length is more than WIDGET_MAX_LENGTH(32)

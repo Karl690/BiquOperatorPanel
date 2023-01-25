@@ -208,8 +208,8 @@ void  InitPanelMain()
 	gL_Panel4.ForeColor = RGB16(122, 225, 255);
 	gL_Panel4.BorderColor = RGB16(37, 87, 103);
 	gL_Panel4.BorderWidth = 1;
-	gL_Panel4.Location = (Point){ .x = 378, .y = 42 };
-	gL_Panel4.Size = (Size){ .width = 401, .height = 328 };
+	gL_Panel4.Location = (Point){ .x = 345, .y = 42 };
+	gL_Panel4.Size = (Size){ .width = 434, .height = 328 };
 	gL_Panel4.StackIndex = -1;
 	gL_Panel4.CornerRadius = 5;
 	gL_Panel4.Font = &Font20;
@@ -227,15 +227,15 @@ void  InitPanelMain()
 	gL_Listbox1.BackColor = RGB16(0, 22, 34);
 	gL_Listbox1.ForeColor = RGB16(122, 225, 255);
 	gL_Listbox1.BorderColor = RGB16(0, 0, 0);
-	gL_Listbox1.BorderWidth = 1;
+	gL_Listbox1.BorderWidth = 0;
 	gL_Listbox1.Font = &Font16;
 	gL_Listbox1.Padding = (PADDING) { 0, 0, 0, 0 };
 	gL_Listbox1.Visible = 1;
 	gL_Listbox1.RedrawMe = 1;
 	gL_Listbox1.RowOddColor = RGB16(0, 22, 34);
 	gL_Listbox1.RowEvenColor = RGB16(10, 32, 34);
-	gL_Listbox1.Location = (Point){ .x = 8, .y = 54 };
-	gL_Listbox1.Size = (Size){ .width = 382, .height = 269 };
+	gL_Listbox1.Location = (Point){ .x = 7, .y = 54 };
+	gL_Listbox1.Size = (Size){ .width = 423, .height = 269 };
 	edit_update(&gL_Listbox1);
 
 	panel_add_child(&gL_Panel4, &gL_Listbox1); //add to the panel
@@ -260,7 +260,7 @@ void  InitPanelMain()
 	gL_Button8.TextAlign = MiddleCenter;
 	gL_Button8.Visible = 1;
 	gL_Button8.RedrawMe = 1;
-	gL_Button8.Location = (Point){ .x = 312, .y = 16 };
+	gL_Button8.Location = (Point){ .x = 354, .y = 16 };
 	gL_Button8.Size = (Size){ .width = 75, .height = 32 };
 	strcpy(gL_Button8.Text, "DOWN");
 	strcpy(gL_Button8.CheckedText, "");
@@ -288,7 +288,7 @@ void  InitPanelMain()
 	glBtnSwitchSH.TextAlign = MiddleCenter;
 	glBtnSwitchSH.Visible = 1;
 	glBtnSwitchSH.RedrawMe = 1;
-	glBtnSwitchSH.Location = (Point){ .x = 151, .y = 16 };
+	glBtnSwitchSH.Location = (Point){ .x = 193, .y = 16 };
 	glBtnSwitchSH.Size = (Size){ .width = 75, .height = 32 };
 	strcpy(glBtnSwitchSH.Text, "ASCII");
 	strcpy(glBtnSwitchSH.CheckedText, "HEX");
@@ -316,7 +316,7 @@ void  InitPanelMain()
 	gL_Button7.TextAlign = MiddleCenter;
 	gL_Button7.Visible = 1;
 	gL_Button7.RedrawMe = 1;
-	gL_Button7.Location = (Point){ .x = 232, .y = 16 };
+	gL_Button7.Location = (Point){ .x = 274, .y = 16 };
 	gL_Button7.Size = (Size){ .width = 75, .height = 32 };
 	strcpy(gL_Button7.Text, "UP");
 	strcpy(gL_Button7.CheckedText, "");
@@ -339,8 +339,8 @@ void  InitPanelMain()
 	gL_Panel3.ForeColor = RGB16(122, 225, 255);
 	gL_Panel3.BorderColor = RGB16(37, 87, 103);
 	gL_Panel3.BorderWidth = 1;
-	gL_Panel3.Location = (Point){ .x = 378, .y = 378 };
-	gL_Panel3.Size = (Size){ .width = 401, .height = 89 };
+	gL_Panel3.Location = (Point){ .x = 345, .y = 378 };
+	gL_Panel3.Size = (Size){ .width = 434, .height = 89 };
 	gL_Panel3.StackIndex = -1;
 	gL_Panel3.CornerRadius = 5;
 	gL_Panel3.Font = &Font20;
@@ -393,7 +393,7 @@ void  InitPanelMain()
 	glTabMain.Visible = 1;
 	glTabMain.RedrawMe = 1;
 	glTabMain.Location = (Point){ .x = 11, .y = 42 };
-	glTabMain.Size = (Size){ .width = 363, .height = 425 };
+	glTabMain.Size = (Size){ .width = 330, .height = 425 };
 	glTabMain.ItemSize = (Size){ .width = 100, .height = 30 };
 	glTabMain.StackIndex = 0;
 
@@ -428,7 +428,7 @@ void  InitPanelMain()
 	gL_Panel7.BorderColor = RGB16(37, 87, 103);
 	gL_Panel7.BorderWidth = 1;
 	gL_Panel7.Location = (Point){ .x = 10, .y = 8 };
-	gL_Panel7.Size = (Size){ .width = 337, .height = 144 };
+	gL_Panel7.Size = (Size){ .width = 316, .height = 144 };
 	gL_Panel7.StackIndex = -1;
 	gL_Panel7.CornerRadius = 5;
 	gL_Panel7.Font = &Font20;
@@ -573,7 +573,7 @@ void  InitPanelMain()
 	gL_Panel5.BorderColor = RGB16(37, 87, 103);
 	gL_Panel5.BorderWidth = 1;
 	gL_Panel5.Location = (Point){ .x = 10, .y = 175 };
-	gL_Panel5.Size = (Size){ .width = 337, .height = 144 };
+	gL_Panel5.Size = (Size){ .width = 316, .height = 144 };
 	gL_Panel5.StackIndex = -1;
 	gL_Panel5.CornerRadius = 5;
 	gL_Panel5.Font = &Font20;
@@ -718,7 +718,7 @@ void  InitPanelMain()
 	glTabMainPanel_0.BorderColor = RGB16(13, 49, 61);
 	glTabMainPanel_0.BorderWidth = 1;
 	glTabMainPanel_0.Location = (Point){ .x = 0, .y = 30 };
-	glTabMainPanel_0.Size = (Size){ .width = 355, .height = 387 };
+	glTabMainPanel_0.Size = (Size){ .width = 322, .height = 387 };
 	glTabMainPanel_0.StackIndex = -1;
 	glTabMainPanel_0.CornerRadius = 0;
 	glTabMainPanel_0.Font = &Font12;
@@ -877,7 +877,7 @@ void  InitPanelMain()
 	glTabMainPanel_1.BorderColor = RGB16(13, 49, 61);
 	glTabMainPanel_1.BorderWidth = 1;
 	glTabMainPanel_1.Location = (Point){ .x = 0, .y = 30 };
-	glTabMainPanel_1.Size = (Size){ .width = 355, .height = 387 };
+	glTabMainPanel_1.Size = (Size){ .width = 322, .height = 387 };
 	glTabMainPanel_1.StackIndex = -1;
 	glTabMainPanel_1.CornerRadius = 0;
 	glTabMainPanel_1.Font = &Font12;
@@ -950,7 +950,7 @@ void  InitPanelMain()
 	gL_Edit11.TextAlign = MiddleRight;
 	gL_Edit11.Visible = 1;
 	gL_Edit11.RedrawMe = 1;
-	gL_Edit11.Location = (Point){ .x = 223, .y = 334 };
+	gL_Edit11.Location = (Point){ .x = 203, .y = 334 };
 	gL_Edit11.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit11.Text, "###");
 	edit_update(&gL_Edit11);
@@ -972,7 +972,7 @@ void  InitPanelMain()
 	gL_Edit10.TextAlign = MiddleRight;
 	gL_Edit10.Visible = 1;
 	gL_Edit10.RedrawMe = 1;
-	gL_Edit10.Location = (Point){ .x = 223, .y = 303 };
+	gL_Edit10.Location = (Point){ .x = 203, .y = 303 };
 	gL_Edit10.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit10.Text, "###");
 	edit_update(&gL_Edit10);
@@ -1044,7 +1044,7 @@ void  InitPanelMain()
 	gL_Edit9.TextAlign = MiddleRight;
 	gL_Edit9.Visible = 1;
 	gL_Edit9.RedrawMe = 1;
-	gL_Edit9.Location = (Point){ .x = 223, .y = 272 };
+	gL_Edit9.Location = (Point){ .x = 203, .y = 272 };
 	gL_Edit9.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit9.Text, "###");
 	edit_update(&gL_Edit9);
@@ -1066,7 +1066,7 @@ void  InitPanelMain()
 	gL_Edit8.TextAlign = MiddleRight;
 	gL_Edit8.Visible = 1;
 	gL_Edit8.RedrawMe = 1;
-	gL_Edit8.Location = (Point){ .x = 223, .y = 241 };
+	gL_Edit8.Location = (Point){ .x = 203, .y = 241 };
 	gL_Edit8.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit8.Text, "###");
 	edit_update(&gL_Edit8);
@@ -1088,7 +1088,7 @@ void  InitPanelMain()
 	gL_Edit7.TextAlign = MiddleRight;
 	gL_Edit7.Visible = 1;
 	gL_Edit7.RedrawMe = 1;
-	gL_Edit7.Location = (Point){ .x = 223, .y = 210 };
+	gL_Edit7.Location = (Point){ .x = 203, .y = 210 };
 	gL_Edit7.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit7.Text, "###");
 	edit_update(&gL_Edit7);
@@ -1110,7 +1110,7 @@ void  InitPanelMain()
 	gL_Edit6.TextAlign = MiddleRight;
 	gL_Edit6.Visible = 1;
 	gL_Edit6.RedrawMe = 1;
-	gL_Edit6.Location = (Point){ .x = 223, .y = 179 };
+	gL_Edit6.Location = (Point){ .x = 203, .y = 179 };
 	gL_Edit6.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit6.Text, "###");
 	edit_update(&gL_Edit6);
@@ -1132,7 +1132,7 @@ void  InitPanelMain()
 	gL_Edit5.TextAlign = MiddleRight;
 	gL_Edit5.Visible = 1;
 	gL_Edit5.RedrawMe = 1;
-	gL_Edit5.Location = (Point){ .x = 223, .y = 148 };
+	gL_Edit5.Location = (Point){ .x = 203, .y = 148 };
 	gL_Edit5.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit5.Text, "###");
 	edit_update(&gL_Edit5);
@@ -1154,7 +1154,7 @@ void  InitPanelMain()
 	gL_Edit4.TextAlign = MiddleRight;
 	gL_Edit4.Visible = 1;
 	gL_Edit4.RedrawMe = 1;
-	gL_Edit4.Location = (Point){ .x = 223, .y = 117 };
+	gL_Edit4.Location = (Point){ .x = 203, .y = 117 };
 	gL_Edit4.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit4.Text, "###");
 	edit_update(&gL_Edit4);
@@ -1176,7 +1176,7 @@ void  InitPanelMain()
 	gL_Edit3.TextAlign = MiddleRight;
 	gL_Edit3.Visible = 1;
 	gL_Edit3.RedrawMe = 1;
-	gL_Edit3.Location = (Point){ .x = 223, .y = 86 };
+	gL_Edit3.Location = (Point){ .x = 203, .y = 86 };
 	gL_Edit3.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit3.Text, "###");
 	edit_update(&gL_Edit3);
@@ -1198,7 +1198,7 @@ void  InitPanelMain()
 	gL_Edit2.TextAlign = MiddleRight;
 	gL_Edit2.Visible = 1;
 	gL_Edit2.RedrawMe = 1;
-	gL_Edit2.Location = (Point){ .x = 223, .y = 55 };
+	gL_Edit2.Location = (Point){ .x = 203, .y = 55 };
 	gL_Edit2.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit2.Text, "###");
 	edit_update(&gL_Edit2);
@@ -1220,7 +1220,7 @@ void  InitPanelMain()
 	gL_Edit1.TextAlign = MiddleRight;
 	gL_Edit1.Visible = 1;
 	gL_Edit1.RedrawMe = 1;
-	gL_Edit1.Location = (Point){ .x = 223, .y = 24 };
+	gL_Edit1.Location = (Point){ .x = 203, .y = 24 };
 	gL_Edit1.Size = (Size){ .width = 101, .height = 27 };
 	strcpy(gL_Edit1.Text, "###");
 	edit_update(&gL_Edit1);
@@ -1468,7 +1468,7 @@ void  InitPanelMain()
 	glTabMainPanel_2.BorderColor = RGB16(13, 49, 61);
 	glTabMainPanel_2.BorderWidth = 1;
 	glTabMainPanel_2.Location = (Point){ .x = 0, .y = 30 };
-	glTabMainPanel_2.Size = (Size){ .width = 355, .height = 387 };
+	glTabMainPanel_2.Size = (Size){ .width = 322, .height = 387 };
 	glTabMainPanel_2.StackIndex = -1;
 	glTabMainPanel_2.CornerRadius = 0;
 	glTabMainPanel_2.Font = &Font12;

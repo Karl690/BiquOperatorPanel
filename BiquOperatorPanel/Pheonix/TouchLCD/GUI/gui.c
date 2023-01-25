@@ -3,11 +3,23 @@
 #include "gui.h"
 
 //uint16_t GUI_ScreenBuffer[LCD_WIDTH * LCD_HEIGHT] __attribute__((section(".user_data")));
-
+Rectangle MaskArea = { 0};
+uint8_t IsSetMaskFlag = 0; //if this flag set, draw only mask area.
 void GUI_Init()
 {
 	//GUI_ScreenBuffer = (uint16_t*)malloc(LCD_WIDTH * LCD_HEIGHT * 2);
 	//GUI_Clear(COLOR_BEIGE);
+}
+
+void GUI_SetMaskArea(Rectangle mask) //if Mask set, draw only mask area.
+{
+	IsSetMaskFlag = 1;
+	memcpy((void*)&MaskArea, (const void*)&mask, sizeof(Rectangle));
+}
+void GUI_ReleaseMaskArea() //Release mask area.
+{
+	IsSetMaskFlag = 0;
+	memset((void*)&MaskArea, 0, sizeof(Rectangle));
 }
 void GUI_Clear(uint16_t color)
 {
@@ -20,10 +32,20 @@ void GUI_Clear(uint16_t color)
 	
 }
 
-void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color)
+uint8_t IsPointInMaskArea(int16_t x, int16_t y)
 {
-	LCD_SetWindow(x, y, x, y);
-	LCD_WR_16BITS_DATA(color);
+	if (x < MaskArea.x || x > MaskArea.x + MaskArea.width) return 0;
+	if (y < MaskArea.y || y > MaskArea.y + MaskArea.height) return 0;
+	return 1;
+}
+void GUI_DrawPoint(int16_t x, int16_t y, uint16_t color)
+{
+	if (!IsSetMaskFlag || (IsSetMaskFlag && IsPointInMaskArea(x, y)))
+	{
+		LCD_SetWindow(x, y, x, y);
+		LCD_WR_16BITS_DATA(color);	
+	}
+	
 	//GUI_ScreenBuffer[y*LCD_WIDTH +x] = color;
 }
 
@@ -32,13 +54,16 @@ void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color)
  * @param y - y point of line start
  * @param x2 - x point of line end
 */
-void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color)
+void GUI_HLine(int16_t x1, int16_t y, int16_t x2, uint16_t color)
 {
 	uint16_t i = 0;
 	LCD_SetWindow(x1, y, x2 - 1, y);
 	for (i = x1; i < x2; i++)
 	{
-		LCD_WR_16BITS_DATA(color);
+		if (!IsSetMaskFlag || (IsSetMaskFlag && IsPointInMaskArea(i, y)))
+		{
+			LCD_WR_16BITS_DATA(color);	
+		}
 		//GUI_ScreenBuffer[y + LCD_WIDTH + i] = color;
 	}
 }
@@ -48,13 +73,14 @@ void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color)
  * @param y1 - y point of line start
  * @param y2 - y point of line end
 */
-void GUI_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color)
+void GUI_VLine(int16_t x, int16_t y1, int16_t y2, uint16_t color)
 {
 	uint16_t i = 0;
 	LCD_SetWindow(x, y1, x, y2 - 1);
 	for (i = y1; i < y2; i++)
 	{
-		LCD_WR_16BITS_DATA(color);
+		if (!IsSetMaskFlag || (IsSetMaskFlag && IsPointInMaskArea(x, i)))
+			LCD_WR_16BITS_DATA(color);
 		//GUI_ScreenBuffer[i*LCD_WIDTH  + x] = color;
 	}
 }
@@ -65,14 +91,14 @@ void GUI_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color)
  * @param x2 - x point of bottom right corner
  * @param y2 - y point of bottom right corner
 */
-void GUI_DrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color)
+void GUI_DrawRect(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
 {
 	GUI_HLine(x1, y1, x2, color);
 	GUI_HLine(x1, y2 - 1, x2, color);
 	GUI_VLine(x1, y1, y2, color);
 	GUI_VLine(x2 - 1, y1, y2, color);
 }
-void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color)
+void GUI_FillRect(int16_t sx, int16_t sy, int16_t ex, int16_t ey, uint16_t color)
 {
 	uint16_t i = 0, j = 0;
 	LCD_SetWindow(sx, sy, ex - 1, ey - 1);
@@ -81,13 +107,14 @@ void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t c
 	{
 		for (j = sy; j < ey; j++)
 		{
+			if (!IsSetMaskFlag || (IsSetMaskFlag && IsPointInMaskArea(i, j)))
 			LCD_WR_16BITS_DATA(color);
 			//GUI_ScreenBuffer[i*LCD_WIDTH  +j] = color;
 		}
 	}
 }
 
-void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t* data)
+void GUI_WriteBuffer(int16_t sx, int16_t sy, int16_t ex, int16_t ey, uint8_t* data)
 {
 	uint16_t i = 0, j = 0;
 	LCD_SetWindow(sx, sy, sx + ex - 1, sy + ey - 1);
@@ -96,14 +123,18 @@ void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t
 	{
 		for (j = sx; j < sx + ex; j++)
 		{
-			color = data[0] + (data[1] << 8);
-			//GUI_ScreenBuffer[i*LCD_WIDTH + j] = color;
-			LCD_WR_16BITS_DATA(color);
+			if (!IsSetMaskFlag || (IsSetMaskFlag && IsPointInMaskArea(i, j)))
+			{
+				color = data[0] + (data[1] << 8);
+				//GUI_ScreenBuffer[i*LCD_WIDTH + j] = color;
+				LCD_WR_16BITS_DATA(color);
+			}
+			
 			data += 2;
 		}
 	}
 }
-void GUI_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color)
+void GUI_DrawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
 {
 	uint16_t t;
 	int xerr = 0, yerr = 0, delta_x, delta_y, distance;
@@ -169,7 +200,7 @@ void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset)
 //	return oddNodes;
 //}
 
-void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor)
+void GUI_DrawChar(int16_t X, int16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor)
 {
 	if (!font) return;
 	uint8_t width = font->Width;
@@ -206,7 +237,7 @@ void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t colo
 	}
 }
 
-void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor)
+void GUI_DrawString(int16_t X, int16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor)
 {
 	uint16_t x0 = X;
 	while ((*str <= '~')&&(*str >= ' '))

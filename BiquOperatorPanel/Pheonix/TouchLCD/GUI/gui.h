@@ -55,7 +55,10 @@ typedef struct
 {
 	uint16_t width, height;
 }Size;
-
+typedef struct 
+{
+	int16_t x, y, width, height;	
+}Rectangle;
 
 typedef struct tagFontType
 {
@@ -72,16 +75,18 @@ typedef struct tagPadding
 
 void GUI_Init();
 void GUI_Clear(uint16_t color);
-void GUI_DrawPoint(uint16_t x, uint16_t y, uint16_t color);
-void GUI_HLine(uint16_t x1, uint16_t y, uint16_t x2, uint16_t color);
-void GUI_VLine(uint16_t x, uint16_t y1, uint16_t y2, uint16_t color);
-void GUI_DrawRect(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-void GUI_FillRect(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint16_t color);
-void GUI_WriteBuffer(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey, uint8_t* data);
-void GUI_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
+void GUI_DrawPoint(int16_t x, int16_t y, uint16_t color);
+void GUI_HLine(int16_t x1, int16_t y, int16_t x2, uint16_t color);
+void GUI_VLine(int16_t x, int16_t y1, int16_t y2, uint16_t color);
+void GUI_DrawRect(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
+void GUI_FillRect(int16_t sx, int16_t sy, int16_t ex, int16_t ey, uint16_t color);
+void GUI_WriteBuffer(int16_t sx, int16_t sy, int16_t ex, int16_t ey, uint8_t* data);
+void GUI_DrawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
 void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset);
-void GUI_DrawChar(uint16_t X, uint16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor); // fontSize must be 20 or 32
-void GUI_DrawString(uint16_t X, uint16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor);
+void GUI_DrawChar(int16_t X, int16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor); // fontSize must be 20 or 32
+void GUI_DrawString(int16_t X, int16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor);
+void GUI_SetMaskArea(Rectangle MaskRect); //if Mask set, draw only mask area.
+void GUI_ReleaseMaskArea(); //Release mask area.
 
 
 //Update the screen with buffer
