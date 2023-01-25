@@ -54,40 +54,41 @@ void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
 }
 void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
-	if (!currentSoapStringAddress) currentSoapStringAddress = getSoapstringBlockAddress(); //if Sapstring's address is NULL, get the real address for that
+	MemoryDumpDisplayAddress = getSoapstringBlockAddress(); //get current soapstring address
+	displayMemoryData(DISPLAYMODE_Raw_ASCII);
+}
+
+void displayMemoryData(uint16_t displayMode)
+{//displays memory contents in either ascii , raw ascii, hex
+	//t the real address for that
 	listbox_clear(&gL_Listbox1); 
 	
 	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
-	uint16_t charsOfLine = !glBtnSwitchSH.Checked ? 32 : 8; // in case of ASCII mode, it should be 32 charactor for each row, otherwise(hex mode), it should be 8 charactor.
-	for (int idx = 0; idx < SOAPSTRING_BLOCKSIZE; idx += charsOfLine) {
-		if (!glBtnSwitchSH.Checked) //this is ASCII MODE
-			strncpy(buf, (uint8_t*)(currentSoapStringAddress + idx), charsOfLine);
-		else 
-			buffer2hexstring((uint8_t*)(currentSoapStringAddress + idx), buf, charsOfLine);
-		listbox_append_row(&gL_Listbox1, buf);
-		if (gL_Listbox1.RowCount >= LISTBOX_MAX_ROWS) break; //escape if list's buffer is over.
+	uint16_t DisplayDataLength = 50;
+	if (displayMode == DISPLAYMODE_Raw_ASCII)DisplayDataLength = 32;//raw ascii, only 32 bytes per line, plus address
+	if (displayMode == DISPLAYMODE_HEX)DisplayDataLength = 8; //hex ascii, only 8 bytes per line, plus address
+	uint8_t* WorkingAddress = MemoryDumpDisplayAddress;//get the starting pointer
+	for (int count = 0; count < 12; count++)  //display 12 lines at a time 
+	{
+		switch (displayMode)
+		{
+		case DISPLAYMODE_ASCII     :strncpy(buf, WorkingAddress, DisplayDataLength); break;//formatted string
+		case DISPLAYMODE_Raw_ASCII :strncpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
+		case DISPLAYMODE_HEX       :buffer2hexstring(WorkingAddress, buf, DisplayDataLength); break;//hex dump 5 bytes at a time		}
+		}
+		listbox_append_row(&gL_Listbox1, buf);//add to listbox for display
 	}
+	Refresh = 0;//leave flag that we have changed a widget and refresh should be called
 }
+
 void ShiftbitWritetestButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
 	
 }
 void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
-	if (!currentCalibrationAddress) currentCalibrationAddress = getCalibrationDataBlockAddress(); //if current calibration address is NULL, get the address of Calibration in storage.
-	
-	listbox_clear(&gL_Listbox1); // clear the listbox
-	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
-	uint16_t charsOfLine = !glBtnSwitchSH.Checked ? 32 : 8; // in case of ASCII mode, it should be 32 charactor for each row, otherwise(hex mode), it should be 8 charactor.
-	for (uint16_t idx = 0; idx < CALIBRATIONDATA_BLOCKSIZE; idx += charsOfLine) { //added 8 charator in listbox as one row.
-		if (!glBtnSwitchSH.Checked) //this is ASCII MODE
-			strncpy(buf, (uint8_t*)(currentCalibrationAddress + idx), charsOfLine);
-		else {
-			buffer2hexstring((uint8_t*)(currentCalibrationAddress + idx), buf, charsOfLine); //convert buffer to hex string.
-		}
-		listbox_append_row(&gL_Listbox1, buf); // append the buffer 
-		if (gL_Listbox1.RowCount >= LISTBOX_MAX_ROWS) break; //escape if list's buffer is over.
-	}
+	MemoryDumpDisplayAddress = getCalibrationDataBlockAddress(); //get current soapstring address
+	displayMemoryData(DISPLAYMODE_HEX);
 }
 
 void PageDownButtonEvent(void* sender, uint16_t x, uint16_t y)

@@ -22,6 +22,8 @@ uint32_t *PanelDisplayIndex = 0; //start by pointing to the root display panel
 
 uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE] = { 0};
 
+
+
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -68,7 +70,7 @@ int main(void)
 //	
 //	return 0;
 	
-	if (!checkForValidLCDCalibrationData()) CalibratLcdTouchPanel(); //if stored data is not good, please force calibration screen
+	if (!checkForValidLCDCalibrationData()) CalibrateScreenFlag = 1; //if stored data is not good, please force calibration screen
 		
 	ActivPanel = &Root_Panel; //set the top panel as boot screen
 //	NewScreenType = SCREEN_MAIN;

@@ -3,6 +3,9 @@
 #include "Panel.h"
 
 uint16_t* list_row_buffer = NULL;
+uint8_t DrawMemoryDumpflag = 0;//used to signal that it is time to add 12 lines formatted to this listbox
+uint8_t* MemoryDumpDisplayAddress = 0;
+
 void listbox_destory(Listbox* obj)
 {
 	free(obj);

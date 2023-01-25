@@ -28,11 +28,11 @@ typedef enum
 	BottomRight,
 }TEXT_ALIGN;
 
-typedef enum
-{
-	DISPLAYMODE_ASCII,
-	DISPLAYMODE_HEX,
-}DISPLAYMODE_TYPE;
+
+#define	DISPLAYMODE_ASCII      0
+#define	DISPLAYMODE_Raw_ASCII  1
+#define	DISPLAYMODE_HEX        2
+
 
 typedef void(*CallbackTouchEventFunction)(void*, uint32_t, uint32_t);
 
