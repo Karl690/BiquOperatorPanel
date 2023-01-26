@@ -56,6 +56,7 @@ VisualGDB/Debug/Pheonix/TouchLCD/GUI/PanelMain.event.o: \
  Pheonix/TouchLCD/GUI/../Widgets/numeric.h \
  Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h \
  Pheonix/TouchLCD/GUI/PanelMain.designer.h \
+ Pheonix/TouchLCD/GUI/PanelMain.event.h \
  Pheonix/TouchLCD/GUI/../lcd_touch.h
 Pheonix/configure.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -122,4 +123,5 @@ Pheonix/TouchLCD/GUI/../Widgets/tabcontrol.h:
 Pheonix/TouchLCD/GUI/../Widgets/numeric.h:
 Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h:
 Pheonix/TouchLCD/GUI/PanelMain.designer.h:
+Pheonix/TouchLCD/GUI/PanelMain.event.h:
 Pheonix/TouchLCD/GUI/../lcd_touch.h:

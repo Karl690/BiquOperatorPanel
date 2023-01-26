@@ -4,6 +4,7 @@
 
 
 uint8_t DrawMemoryDumpflag = 0;//used to signal that it is time to add 12 lines formatted to this listbox
+int16_t FirstLineToDisplay = 0;//set the default first line to display at 0,
 void listbox_destory(Listbox* obj)
 {
 	free(obj);
@@ -11,13 +12,14 @@ void listbox_destory(Listbox* obj)
 void listbox_update(Listbox* obj)
 {
 	//update corner points.
-	obj->CurrentDrawYPos = 0;
+	obj->FirstLineToDisplay = 0;
 }
 
 void listbox_clear(Listbox* obj)
 {
 	obj->RowCount = 0;
 	obj->RedrawMe = 1;
+	FirstLineToDisplay = 0;
 }
 
 void listbox_change_display_mode(Listbox* obj, uint8_t mode)
@@ -31,6 +33,7 @@ void listbox_remove_row(Listbox* obj, uint16_t index)
 	{
 		obj->RowCount = 0;
 		obj->RedrawMe = 1;
+		FirstLineToDisplay = 0;
 		return;
 		
 	}
@@ -83,67 +86,59 @@ void listbox_append_row_buffer(Listbox* obj, uint8_t* data, uint16_t size) //siz
 }
 void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 {	
-	obj->RedrawMe = 0;
-	Point pos = { offset.x + obj->Location.x, offset.y + obj->Location.y };
+	obj->RedrawMe = 0;//clear redraw flag
+	Point pos = { offset.x + obj->Location.x, offset.y + obj->Location.y };//pointToSCREEN()
+	//fill in background
 	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BackColor);
+	//if boarder is valid, i.e width>0, we can draw the border now
 	if (obj->BorderWidth > 0)
 	{
 		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->IsFocus?obj->FocusBorderColor: obj->BorderColor);
 	}
-	GUI_SetMaskArea((Rectangle){ pos.x + 1, pos.y + 1, obj->Size.width-2, obj->Size.height -2});
-	uint16_t row_height = obj->Font->Height + 4;
-	int16_t row_bottom = obj->CurrentDrawYPos;
+	uint16_t row_height = obj->Font->Height + 4;//font height in pixels
+	int16_t row_bottom = pos.y + obj->BorderWidth + obj->Padding.top; //first pixel in the display, however we need to offset by border and padd
 	uint16_t row_index = 0;
-	uint16_t padding = 3;
+	uint16_t NuberOfLinesToDisplay = (obj->Size.height / row_height);
+	uint16_t Padding = obj->BorderWidth;//marke the area inside the border where we can start drawing
 	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
+	uint16_t LeftSideLimit  = pos.x + obj->BorderWidth + obj->Padding.left; //drawing space
+	uint16_t RightSideLimit = pos.x + obj->Size.width - (obj->BorderWidth + obj->Padding.right); //can draw betwen these limits
+	for (int rowCount = 0; rowCount < NuberOfLinesToDisplay;rowCount++)
 	while (1)
 	{
-		if (row_index >= obj->RowCount) break;
+		if ((rowCount + obj->FirstLineToDisplay) >= obj->RowCount) break;//past the end of the list, so leave
 		if (row_bottom >= 0) 
 		{
 			if (row_index % 2 == 1)
-			{
-				GUI_FillRect(pos.x + padding,
-					pos.y +row_bottom + padding, 
-					pos.x + obj->Size.width - padding,
-					pos.y+row_bottom + row_height, 
-					obj->RowEvenColor);	
+			{//odd rows
+				GUI_FillRect(LeftSideLimit,	pos.y + row_bottom,//left start for this line rectantle
+							 RightSideLimit,pos.y + row_height + row_height,  //right 
+							 obj->RowEvenColor);	
 			}
 			
-			GUI_DrawString(pos.x + 2 + padding,
-				pos.y + 2 + row_bottom + padding,
+			GUI_DrawString(LeftSideLimit,pos.y + row_bottom,//point to start drawing from
 				obj->RowData[row_index],
 				obj->Font,
 				obj->ForeColor,
 				row_index %2 == 1? obj->RowEvenColor: obj->BackColor);
 		}
 		row_bottom += row_height;
-		row_index++;
-		if (row_bottom > obj->Size.height) break;
 	}
-	GUI_ReleaseMaskArea();
 }
 
 //move a line up
 void listbox_move_up_line(Listbox* obj) 
 {
-	uint16_t row_height = obj->Font->Height + 4;
-	obj->CurrentDrawYPos -= row_height;
+	if (obj->FirstLineToDisplay < 1)return;
+	FirstLineToDisplay--;
 	obj->RedrawMe = 1;
 }
 //move a line down
 void listbox_move_down_line(Listbox* obj) 
 {
-	uint16_t row_height = obj->Font->Height + 4;
-	if (obj->CurrentDrawYPos + row_height > 0)
-	{
-		obj->CurrentDrawYPos = 0;
-	}
-	else
-	{
-		obj->CurrentDrawYPos += row_height;	
-		obj->RedrawMe = 1;	
-	}
+	if (obj->FirstLineToDisplay == obj->RowCount )return;
+	FirstLineToDisplay++;
+	obj->RedrawMe = 1;
 }
 
 

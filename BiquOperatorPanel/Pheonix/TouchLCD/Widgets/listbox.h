@@ -11,32 +11,32 @@ typedef struct tagListbox
 	WIDGETTYPE Type;
 	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
-	uint8_t Visible;
-	Point Location;
-	Size	Size;	
-	Color16 BackColor;
-	Color16 ForeColor;
-	Color16 BorderWidth;
-	Color16 BorderColor;
-	PADDING		Padding;
+	uint8_t Visible;//visible property, set to 0 to avoid repainting
+	Point Location;//location in reference to the parent container in Pixels.
+	Size	Size;	//XY size in Pixels
+	Color16 BackColor;//default color of background
+	Color16 ForeColor;//default color of Text
+	Color16 BorderWidth;//width of border,set to 0 to inhibit boarder display
+	Color16 BorderColor;//border color
+	PADDING		Padding;//dead space required in pixel, in between bounds and graphics elements
 	
-	char Text[WIDGET_MAX_TEXT_LENGTH];
-	Font* Font;
-	TEXT_ALIGN	TextAlign;	
+	char Text[WIDGET_MAX_TEXT_LENGTH];//max line length
+	Font* Font;//default font
+	TEXT_ALIGN	TextAlign;	//sets position of text to be drawn, not sure it works in this obj.
 
-	void* Parent;
+	void* Parent;//parent container of this obj
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
 	
 	//Listbox properties	
-	uint8_t IsFocus;
-	Color16 FocusBorderColor;
-	Color16 RowOddColor;
-	Color16 RowEvenColor;
+	uint8_t IsFocus;//this object has focus
+	Color16 FocusBorderColor;//change boarder if we have focus
+	Color16 RowOddColor;//
+	Color16 RowEvenColor;//allows contrast display by alternating the back color of each row
 	uint8_t RowData[LISTBOX_MAX_ROWS][WIDGET_MAX_TEXT_LENGTH];
-	int16_t CurrentDrawYPos; //when scrolling, 
-	uint16_t RowCount;
+	int16_t FirstLineToDisplay; //when scrolling,this is the first line in the list to display
+	uint16_t RowCount;//number of Items in the list
 	uint8_t	DispMode; //specify the display mdoe (Ascill or Hex) 
 }Listbox;
 
