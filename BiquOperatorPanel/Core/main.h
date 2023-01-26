@@ -30,6 +30,7 @@ extern "C" {
 	/* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "configure.h"
+#include "RevisionHistory.h"
 #include "global.h"
 #include "GPIO/pins.h"
 #include "GPIO/GPIO_Init.h"

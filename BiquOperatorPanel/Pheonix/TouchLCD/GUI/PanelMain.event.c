@@ -65,6 +65,7 @@ void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
 }
 void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
+	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = getSoapstringBlockAddress(); //get current soapstring address
 	gL_Listbox1.DispMode = DISPLAYMODE_Raw_ASCII;
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
@@ -77,7 +78,8 @@ void ShiftbitWritetestButtonEvent(void* sender, uint16_t x, uint16_t y)
 }
 void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
-	MemoryDumpDisplayAddress = getCalibrationDataBlockAddress(); //get current soapstring address
+	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
+	MemoryDumpDisplayAddress = getCalibrationDataBlockAddress(); //get current soapstring address	
 	gL_Listbox1.DispMode = DISPLAYMODE_HEX;
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }

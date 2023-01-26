@@ -234,7 +234,7 @@ void  InitPanelMain()
 	gL_Listbox1.RowOddColor = RGB16(0, 22, 34);
 	gL_Listbox1.RowEvenColor = RGB16(10, 32, 34);
 	gL_Listbox1.Location = (Point){ .x = 7, .y = 21 };
-	gL_Listbox1.Size = (Size){ .width = 423, .height = 302 };
+	gL_Listbox1.Size = (Size){ .width = 423, .height = 261 };
 	listbox_update(&gL_Listbox1);
 
 	panel_add_child(&gL_Panel4, &gL_Listbox1); //add to the panel
@@ -254,8 +254,8 @@ void  InitPanelMain()
 	gL_Panel3.ForeColor = RGB16(122, 225, 255);
 	gL_Panel3.BorderColor = RGB16(37, 87, 103);
 	gL_Panel3.BorderWidth = 1;
-	gL_Panel3.Location = (Point){ .x = 345, .y = 378 };
-	gL_Panel3.Size = (Size){ .width = 434, .height = 89 };
+	gL_Panel3.Location = (Point){ .x = 345, .y = 331 };
+	gL_Panel3.Size = (Size){ .width = 434, .height = 136 };
 	gL_Panel3.StackIndex = -1;
 	gL_Panel3.CornerRadius = 5;
 	gL_Panel3.Font = &Font20;
@@ -1403,8 +1403,7 @@ void  InitPanelMain()
 
 	panel_add_child(&Root_Panel, &glTabMain); //add to the panel
 
-
-
+	sprintf(lblTitle.Text, " %s v%s", RevisionTitle, MajorStep);
 
 	PanelHandleList[0] = (uint32_t*)&Root_Panel; //set the root panel
 	PanelHandleList[1] = (uint32_t*)&gL_Panel4;

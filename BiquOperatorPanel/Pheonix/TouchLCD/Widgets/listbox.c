@@ -97,7 +97,6 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	}
 	uint16_t row_height = obj->Font->Height + 4;//font height in pixels
 	int16_t row_bottom = pos.y + obj->BorderWidth + obj->Padding.top; //first pixel in the display, however we need to offset by border and padd
-	uint16_t row_index = 0;
 	uint16_t NuberOfLinesToDisplay = (obj->Size.height / row_height);
 	uint16_t Padding = obj->BorderWidth;//marke the area inside the border where we can start drawing
 	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
@@ -106,21 +105,17 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	for (int rowCount = 0; rowCount < NuberOfLinesToDisplay;rowCount++)
 	{
 		if ((rowCount + obj->FirstLineToDisplay) >= obj->RowCount) break;//past the end of the list, so leave
-		if (row_bottom >= 0) 
-		{
-			if (row_index % 2 == 1)
-			{//odd rows
-				GUI_FillRect(LeftSideLimit,	pos.y + row_bottom,//left start for this line rectantle
-							 RightSideLimit,pos.y + row_height + row_height,  //right 
-							 obj->RowEvenColor);	
-			}
-			
-			GUI_DrawString(LeftSideLimit,pos.y + row_bottom,//point to start drawing from
-				obj->RowData[rowCount+obj->FirstLineToDisplay],
-				obj->Font,
-				obj->ForeColor,
-				row_index %2 == 1? obj->RowEvenColor: obj->BackColor);
-		}
+		if (rowCount % 2 == 1)
+		{//odd rows
+			GUI_FillRect(LeftSideLimit,	row_bottom,//left start for this line rectantle
+					RightSideLimit, row_bottom + row_height,  //right 
+							obj->RowEvenColor);	
+		}	
+		GUI_DrawString(LeftSideLimit, row_bottom,//point to start drawing from
+			obj->RowData[rowCount+obj->FirstLineToDisplay],
+			obj->Font,
+			obj->ForeColor,
+			rowCount %2 == 1? obj->RowEvenColor: obj->BackColor);
 		row_bottom += row_height;
 	}
 }

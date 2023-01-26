@@ -135,7 +135,7 @@ void panel_on_paint(Panel* obj, Point offset, Color16  backcolor, uint8_t forceR
 	obj->RedrawMe = 0;
 }
 
-void panel_set_focus_widget(Widget* widget)
+void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 {
 	//if widget == NULL, it meens that previous focused widget is released.
 	if (widget == NULL || (widget && (widget->Type == NUMERIC || widget->Type == DROPDOWNLIST || widget->Type == LISTBOX)))
@@ -160,7 +160,8 @@ void panel_set_focus_widget(Widget* widget)
 							
 			}
 		}		
-		if (FocusedWidget != widget && widget)
+		//if Force flag is set or the previous one is different with selected one, 
+		if ((isForce || FocusedWidget != widget) && widget)
 		{
 			FocusedWidget = NULL;
 			//the case of the different focus
@@ -205,7 +206,7 @@ void panel_touch_event_to_control(Panel* obj, Point offset)
 			else if (widget->Type == TABCONTROL) tabcontrol_touch_event_to_control((TabControl*)widget, pos);
 			else
 			{
-				if(TouchEventStatus == TOUCH_EVENT_DOWN) panel_set_focus_widget(widget);
+				if(TouchEventStatus == TOUCH_EVENT_DOWN) panel_set_focus_widget(widget, 0);
 			}
 			
 			switch (TouchEventStatus)			

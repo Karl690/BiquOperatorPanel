@@ -7,7 +7,7 @@ void EncoderButtonDownEvent()
 {
 	//CalibrateScreenFlag = 1;
 	FiredEncodeButtonEvent = 1;
-	panel_set_focus_widget(NULL);
+	panel_set_focus_widget(NULL, 0);
 }
 
 int EncoderCount = 0;
