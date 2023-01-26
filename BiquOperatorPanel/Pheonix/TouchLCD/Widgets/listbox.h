@@ -30,6 +30,8 @@ typedef struct tagListbox
 	CallbackTouchEventFunction	Event_Up;
 	
 	//Listbox properties	
+	uint8_t IsFocus;
+	Color16 FocusBorderColor;
 	Color16 RowOddColor;
 	Color16 RowEvenColor;
 	uint8_t RowData[LISTBOX_MAX_ROWS][WIDGET_MAX_TEXT_LENGTH];

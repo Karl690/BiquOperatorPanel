@@ -15,9 +15,6 @@ Button glBtnPlus;
 Button glBtnMinus;
 Panel gL_Panel4;
 Listbox gL_Listbox1;
-Button gL_Button8;
-Button glBtnSwitchSH;
-Button gL_Button7;
 Panel gL_Panel3;
 Label lblTitle;
 TabControl glTabMain;
@@ -226,103 +223,21 @@ void  InitPanelMain()
 	strcpy(gL_Listbox1.Name, "gL_Listbox1");
 	gL_Listbox1.BackColor = RGB16(0, 22, 34);
 	gL_Listbox1.ForeColor = RGB16(122, 225, 255);
-	gL_Listbox1.BorderColor = RGB16(0, 0, 0);
-	gL_Listbox1.BorderWidth = 0;
+	gL_Listbox1.BorderColor = RGB16(0, 22, 34);
+	gL_Listbox1.BorderWidth = 1;
 	gL_Listbox1.Font = &Font16;
 	gL_Listbox1.Padding = (PADDING) { 0, 0, 0, 0 };
 	gL_Listbox1.Visible = 1;
 	gL_Listbox1.RedrawMe = 1;
+	gL_Listbox1.IsFocus = 0;
+	gL_Listbox1.FocusBorderColor = RGB16(122, 225, 255);
 	gL_Listbox1.RowOddColor = RGB16(0, 22, 34);
 	gL_Listbox1.RowEvenColor = RGB16(10, 32, 34);
-	gL_Listbox1.Location = (Point){ .x = 7, .y = 54 };
-	gL_Listbox1.Size = (Size){ .width = 423, .height = 269 };
-	edit_update(&gL_Listbox1);
+	gL_Listbox1.Location = (Point){ .x = 7, .y = 21 };
+	gL_Listbox1.Size = (Size){ .width = 423, .height = 302 };
+	listbox_update(&gL_Listbox1);
 
 	panel_add_child(&gL_Panel4, &gL_Listbox1); //add to the panel
-
-
-
-
-	gL_Button8.Type = BUTTON;
-	strcpy(gL_Button8.Name, "gL_Button8");
-	gL_Button8.Event_Down = PageDownButtonEvent;
-	gL_Button8.Event_Hold = NULL;
-	gL_Button8.Event_Up   = NULL;
-	gL_Button8.BackColor = RGB16(0, 22, 34);
-	gL_Button8.ForeColor = RGB16(132, 225, 255);
-	gL_Button8.BorderColor = RGB16(1, 103, 137);
-	gL_Button8.CheckedColor = RGB16(62, 209, 255);
-	gL_Button8.CheckedForeColor = RGB16(2, 46, 61);
-	gL_Button8.BorderWidth = 1;
-	gL_Button8.CornerRadius = 0;
-	gL_Button8.Font = &Font16;
-	gL_Button8.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Button8.TextAlign = MiddleCenter;
-	gL_Button8.Visible = 1;
-	gL_Button8.RedrawMe = 1;
-	gL_Button8.Location = (Point){ .x = 354, .y = 16 };
-	gL_Button8.Size = (Size){ .width = 75, .height = 32 };
-	strcpy(gL_Button8.Text, "DOWN");
-	strcpy(gL_Button8.CheckedText, "");
-	gL_Button8.Checked = 0;
-
-	panel_add_child(&gL_Panel4, &gL_Button8); //add to the panel
-
-
-
-
-	glBtnSwitchSH.Type = BUTTON;
-	strcpy(glBtnSwitchSH.Name, "glBtnSwitchSH");
-	glBtnSwitchSH.Event_Down = SwitchSHButtonEvent;
-	glBtnSwitchSH.Event_Hold = NULL;
-	glBtnSwitchSH.Event_Up   = NULL;
-	glBtnSwitchSH.BackColor = RGB16(0, 22, 34);
-	glBtnSwitchSH.ForeColor = RGB16(132, 225, 255);
-	glBtnSwitchSH.BorderColor = RGB16(1, 103, 137);
-	glBtnSwitchSH.CheckedColor = RGB16(62, 209, 255);
-	glBtnSwitchSH.CheckedForeColor = RGB16(2, 46, 61);
-	glBtnSwitchSH.BorderWidth = 1;
-	glBtnSwitchSH.CornerRadius = 0;
-	glBtnSwitchSH.Font = &Font16;
-	glBtnSwitchSH.Padding = (PADDING) { 0, 0, 0, 0 };
-	glBtnSwitchSH.TextAlign = MiddleCenter;
-	glBtnSwitchSH.Visible = 1;
-	glBtnSwitchSH.RedrawMe = 1;
-	glBtnSwitchSH.Location = (Point){ .x = 193, .y = 16 };
-	glBtnSwitchSH.Size = (Size){ .width = 75, .height = 32 };
-	strcpy(glBtnSwitchSH.Text, "ASCII");
-	strcpy(glBtnSwitchSH.CheckedText, "HEX");
-	glBtnSwitchSH.Checked = 1;
-
-	panel_add_child(&gL_Panel4, &glBtnSwitchSH); //add to the panel
-
-
-
-
-	gL_Button7.Type = BUTTON;
-	strcpy(gL_Button7.Name, "gL_Button7");
-	gL_Button7.Event_Down = PageUpButtonEvent;
-	gL_Button7.Event_Hold = NULL;
-	gL_Button7.Event_Up   = NULL;
-	gL_Button7.BackColor = RGB16(0, 22, 34);
-	gL_Button7.ForeColor = RGB16(132, 225, 255);
-	gL_Button7.BorderColor = RGB16(1, 103, 137);
-	gL_Button7.CheckedColor = RGB16(62, 209, 255);
-	gL_Button7.CheckedForeColor = RGB16(2, 46, 61);
-	gL_Button7.BorderWidth = 1;
-	gL_Button7.CornerRadius = 0;
-	gL_Button7.Font = &Font16;
-	gL_Button7.Padding = (PADDING) { 0, 0, 0, 0 };
-	gL_Button7.TextAlign = MiddleCenter;
-	gL_Button7.Visible = 1;
-	gL_Button7.RedrawMe = 1;
-	gL_Button7.Location = (Point){ .x = 274, .y = 16 };
-	gL_Button7.Size = (Size){ .width = 75, .height = 32 };
-	strcpy(gL_Button7.Text, "UP");
-	strcpy(gL_Button7.CheckedText, "");
-	gL_Button7.Checked = 0;
-
-	panel_add_child(&gL_Panel4, &gL_Button7); //add to the panel
 
 
 
@@ -458,8 +373,8 @@ void  InitPanelMain()
 	gL_DropdownList1.Size = (Size){ .width = 120, .height = 32 };
 	gL_DropdownList1.FocusBackColor = RGB16(0, 175, 255);
 	 ;
-	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0);
+	 ;
 	gL_DropdownList1.FocusBorderColor = RGB16(2, 49, 72); 
 	;
 	gL_DropdownList1.IsFocus = 0;
@@ -544,8 +459,8 @@ void  InitPanelMain()
 	gL_Numeric2.Size = (Size){ .width = 120, .height = 32 };
 	gL_Numeric2.FocusBackColor = RGB16(0, 175, 255);
 	 ;
-	gL_Numeric2.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	gL_Numeric2.FocusForeColor = RGB16(0, 0, 0);
+	 ;
 	gL_Numeric2.FocusBorderColor = RGB16(2, 49, 72);
 	 ;
 	gL_Numeric2.IsFocus = 0;
@@ -601,8 +516,8 @@ void  InitPanelMain()
 	gL_DropdownList2.RedrawMe = 1;
 	gL_DropdownList2.Location = (Point){ .x = 172, .y = 70 };
 	gL_DropdownList2.Size = (Size){ .width = 120, .height = 32 };
-	gL_DropdownList2.FocusBackColor = RGB16(0, 175, 255);
-	 ;
+	gL_DropdownList2.FocusBackColor = RGB16(0, 175, 255); 
+	;
 	gL_DropdownList2.FocusForeColor = RGB16(0, 0, 0);
 	 ;
 	gL_DropdownList2.FocusBorderColor = RGB16(2, 49, 72);

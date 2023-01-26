@@ -1,7 +1,7 @@
 #include "main.h"
 #include "lcd.h"
 #include "GUI/gui.h"
-
+#include "GUI/PanelMain.event.h"
 uint8_t FiredEncodeButtonEvent = 0;
 void EncoderButtonDownEvent()
 {
@@ -40,6 +40,10 @@ void EncoderWheelMove()
 		{
 			if (a == 0) dropdownlist_select_nextitem((DropdownList*)FocusedWidget);	
 			if (b == 0) dropdownlist_select_previtem((DropdownList*)FocusedWidget);	
+		}else if (FocusedWidget && FocusedWidget->Type == LISTBOX)
+		{
+			if (a == 0) PageDownListbox((DropdownList*)FocusedWidget);	
+			if (b == 0) PageUpListbox((DropdownList*)FocusedWidget);	
 		}
 		//Refresh = 1;//tell them we need to redraw the screen
 		

@@ -6,7 +6,7 @@
  */
 #pragma once
 #define RevisionHeader ">Hy:BiquOperatorPanel:"
-#define MajorStep      "1.026"
+#define MajorStep      "1.027"
 #define RevisionDate   "01/26/2023"   
 #define CONNECTIONSTRING ">Hy:BiquOperatorPanel Rev " MajorStep ":" RevisionDate ":GD32F407:--:"   //"1.000:0:0:0:USB"
 

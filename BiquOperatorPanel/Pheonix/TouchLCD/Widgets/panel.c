@@ -138,7 +138,7 @@ void panel_on_paint(Panel* obj, Point offset, Color16  backcolor, uint8_t forceR
 void panel_set_focus_widget(Widget* widget)
 {
 	//if widget == NULL, it meens that previous focused widget is released.
-	if(widget == NULL || (widget && (widget->Type == NUMERIC || widget->Type == DROPDOWNLIST) ))
+	if (widget == NULL || (widget && (widget->Type == NUMERIC || widget->Type == DROPDOWNLIST || widget->Type == LISTBOX)))
 	{
 		if (FocusedWidget)
 		{	
@@ -152,6 +152,10 @@ void panel_set_focus_widget(Widget* widget)
 			case NUMERIC:
 				((Numeric*)FocusedWidget)->IsFocus = 0;
 				((Numeric*)FocusedWidget)->RedrawMe = 1;
+				break;
+			case LISTBOX:
+				((Listbox*)FocusedWidget)->IsFocus = 0;
+				((Listbox*)FocusedWidget)->RedrawMe = 1;
 				break;
 							
 			}
@@ -171,6 +175,11 @@ void panel_set_focus_widget(Widget* widget)
 				FocusedWidget = widget;
 				((Numeric*)FocusedWidget)->IsFocus = 1;
 				((Numeric*)FocusedWidget)->RedrawMe = 1;
+				break;
+			case LISTBOX:
+				FocusedWidget = widget;
+				((Listbox*)FocusedWidget)->IsFocus = 1;
+				((Listbox*)FocusedWidget)->RedrawMe = 1;
 				break;
 			}		
 		}

@@ -14,6 +14,7 @@
 #include "../Widgets/numeric.h"
 #include "../Widgets/dropdownlist.h"
 #include "PanelMain.designer.h"
+#include "PanelMain.event.h"
 #include "../lcd_touch.h"
 
 uint8_t* MemoryDumpDisplayAddress = NULL;
@@ -28,6 +29,10 @@ void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 	{
 		dropdownlist_select_nextitem((DropdownList*)FocusedWidget);
 	}
+	else if (FocusedWidget && FocusedWidget->Type == LISTBOX)
+	{
+		PageUpListbox((Listbox*)FocusedWidget);
+	}
 }
 void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 {
@@ -37,7 +42,11 @@ void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 	}
 	else if (FocusedWidget && FocusedWidget->Type == DROPDOWNLIST)
 	{
-		dropdownlist_select_previtem ((DropdownList*)FocusedWidget);
+		dropdownlist_select_previtem((DropdownList*)FocusedWidget);
+	}
+	else if (FocusedWidget && FocusedWidget->Type == LISTBOX)
+	{
+		PageDownListbox((Listbox*)FocusedWidget);
 	}
 }
 
@@ -73,22 +82,17 @@ void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y)
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
 
-void PageDownButtonEvent(void* sender, uint16_t x, uint16_t y)
+void PageDownListbox(Listbox* obj)
 {
 	if (MemoryDumpDisplayAddress == NULL) return; //do nothing
 	
-	MemoryDumpDisplayAddress += listbox_get_charsofline(&gL_Listbox1); // increase the number of characters in a line for Lisbox becasue it is different according to display mode.
-	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
+	MemoryDumpDisplayAddress += listbox_get_charsofline(obj) * LISTBOX_MAX_ROWS; // increase the addres for one page of Lisbox becasue it is different according to display mode.
+	listbox_display_memorydata(obj, MemoryDumpDisplayAddress);
 }
-void PageUpButtonEvent(void* sender, uint16_t x, uint16_t y)
+void PageUpListbox(Listbox* obj)
 {
 	if (MemoryDumpDisplayAddress == NULL) return; //do nothing
 	
-	MemoryDumpDisplayAddress -= listbox_get_charsofline(&gL_Listbox1); // decrease get the number of characters in a line for Lisbox becasue it is different according to display mode.
-	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
-}
-void SwitchSHButtonEvent(void* sender, uint16_t x, uint16_t y)
-{
-	glBtnSwitchSH.Checked = glBtnSwitchSH.Checked ==1?0:1;
-	glBtnSwitchSH.RedrawMe = 1;
+	MemoryDumpDisplayAddress -= listbox_get_charsofline(obj) * LISTBOX_MAX_ROWS; // decrease the addres for one page of Lisbox becasue it is different according to display mode.
+	listbox_display_memorydata(obj, MemoryDumpDisplayAddress);
 }

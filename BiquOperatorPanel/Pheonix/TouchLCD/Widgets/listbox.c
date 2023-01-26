@@ -2,7 +2,7 @@
 #include "listbox.h"
 #include "Panel.h"
 
-uint16_t* list_row_buffer = NULL;
+
 uint8_t DrawMemoryDumpflag = 0;//used to signal that it is time to add 12 lines formatted to this listbox
 void listbox_destory(Listbox* obj)
 {
@@ -12,8 +12,6 @@ void listbox_update(Listbox* obj)
 {
 	//update corner points.
 	obj->CurrentDrawYPos = 0;
-	uint16_t row_height = obj->Font->Height + 4;
-	list_row_buffer = (uint16_t*)malloc(row_height * obj->Size.width * 2);
 }
 
 void listbox_clear(Listbox* obj)
@@ -90,12 +88,13 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BackColor);
 	if (obj->BorderWidth > 0)
 	{
-		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->BorderColor);
+		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->IsFocus?obj->FocusBorderColor: obj->BorderColor);
 	}
 	GUI_SetMaskArea((Rectangle){ pos.x + 1, pos.y + 1, obj->Size.width-2, obj->Size.height -2});
 	uint16_t row_height = obj->Font->Height + 4;
 	int16_t row_bottom = obj->CurrentDrawYPos;
 	uint16_t row_index = 0;
+	uint16_t padding = 3;
 	char buf[WIDGET_MAX_TEXT_LENGTH] = { 0 };
 	while (1)
 	{
@@ -104,19 +103,19 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 		{
 			if (row_index % 2 == 1)
 			{
-				GUI_FillRect(pos.x,
-					pos.y +row_bottom, 
-					pos.x + obj->Size.width,
+				GUI_FillRect(pos.x + padding,
+					pos.y +row_bottom + padding, 
+					pos.x + obj->Size.width - padding,
 					pos.y+row_bottom + row_height, 
 					obj->RowEvenColor);	
 			}
 			
-			GUI_DrawString(pos.x + 2,
-				pos.y + 2 + row_bottom,
+			GUI_DrawString(pos.x + 2 + padding,
+				pos.y + 2 + row_bottom + padding,
 				obj->RowData[row_index],
 				obj->Font,
 				obj->ForeColor,
-				row_index %2 == 1? obj->RowEvenColor: obj->RowOddColor);
+				row_index %2 == 1? obj->RowEvenColor: obj->BackColor);
 		}
 		row_bottom += row_height;
 		row_index++;
