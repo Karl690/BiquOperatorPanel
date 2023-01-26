@@ -1,5 +1,6 @@
 c:\users\karl6\documents\github\biquoperatorpanel\\bin\biquoperatorpanel.link.rsp
 c:\users\karl6\documents\github\biquoperatorpanel\bin\biquoperatorpanel.bin
+c:\users\karl6\documents\github\biquoperatorpanel\\bin\biquoperatorpanel
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\biquoperatorpanel.alldeps
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\core\main.o
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\core\startup_stm32f407igtx.o
@@ -103,8 +104,11 @@ c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\de
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\flash\4xx\flash_4xx.o
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\flash\4xx\flash_4xx.dep
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\flash\4xx\flash_4xx.gcc.rsp
+c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\global.o
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\taskmanager.o
+c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\global.dep
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\taskmanager.dep
+c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\global.gcc.rsp
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\taskmanager.gcc.rsp
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\gpio\gpio_init.o
 c:\users\karl6\documents\github\biquoperatorpanel\biquoperatorpanel\visualgdb\debug\pheonix\gpio\pininit.o

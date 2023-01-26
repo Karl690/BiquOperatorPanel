@@ -104,7 +104,6 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	uint16_t LeftSideLimit  = pos.x + obj->BorderWidth + obj->Padding.left; //drawing space
 	uint16_t RightSideLimit = pos.x + obj->Size.width - (obj->BorderWidth + obj->Padding.right); //can draw betwen these limits
 	for (int rowCount = 0; rowCount < NuberOfLinesToDisplay;rowCount++)
-	while (1)
 	{
 		if ((rowCount + obj->FirstLineToDisplay) >= obj->RowCount) break;//past the end of the list, so leave
 		if (row_bottom >= 0) 
@@ -117,7 +116,7 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 			}
 			
 			GUI_DrawString(LeftSideLimit,pos.y + row_bottom,//point to start drawing from
-				obj->RowData[row_index],
+				obj->RowData[rowCount+obj->FirstLineToDisplay],
 				obj->Font,
 				obj->ForeColor,
 				row_index %2 == 1? obj->RowEvenColor: obj->BackColor);

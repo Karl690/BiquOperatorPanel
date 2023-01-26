@@ -43,5 +43,6 @@ void save_LCD_Touch_Calibration_Data(void);
 uint8_t checkForValidLCDCalibrationData(void);
 void saveSoapStringandEraseSector11(void);
 void CalibratLcdTouchPanel(void);
+void clearcalibrtionData(void);
 
 

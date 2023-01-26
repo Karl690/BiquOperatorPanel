@@ -67,7 +67,7 @@ int main(void)
 //	write_memory(FLASH_LAST_ADDRESS, data, 10); //Please put a breakpoint. and here you can check the memory map with Memory View.
 //	
 //	return 0;
-	
+	clearcalibrtionData();
 	if (!checkForValidLCDCalibrationData()) CalibrateScreenFlag = 1; //if stored data is not good, please force calibration screen
 		
 	ActivPanel = &Root_Panel; //set the top panel as boot screen

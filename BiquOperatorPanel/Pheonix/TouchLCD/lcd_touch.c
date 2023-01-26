@@ -202,6 +202,14 @@ void saveSoapStringandEraseSector11() // I think this function name is not corre
 	//writeOldsoapstringFromBuffertoflashblock[1] ;//todo
 }
 
+void clearcalibrtionData()
+{uint8_t* workPointer = CALIBRATIONDATA_STARTADDRESS;
+	for (int count = 0; count = 0x0fff; count++)
+	{
+		*workPointer = 0xff;
+		workPointer++;
+	}
+}
 uint8_t checkForValidLCDCalibrationData(void)
 {//if it finds it, it will refresh the structure from storage
 	//read_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
