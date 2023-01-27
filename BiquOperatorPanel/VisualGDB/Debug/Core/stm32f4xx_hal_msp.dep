@@ -39,11 +39,12 @@ VisualGDB/Debug/Core/stm32f4xx_hal_msp.o: Core/stm32f4xx_hal_msp.c \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- Pheonix/configure.h Pheonix/FLASH/4xx/flash_4xx.h Pheonix/global.h \
- Pheonix/GPIO/pins.h Pheonix/GPIO/GPIO_Init.h Pheonix/GPIO/pins.h \
- Pheonix/GPIO/pinout.h Pheonix/TouchLCD/lcd.h \
- Pheonix/TouchLCD/Drivers/SSD1963.h Pheonix/SPI/spi.h \
- Pheonix/SPI/w25qxx.h Pheonix/TouchLCD/GUI/PanelMain.designer.h \
+ Pheonix/configure.h Pheonix/FLASH/4xx/flash_4xx.h \
+ Pheonix/RevisionHistory.h Pheonix/global.h Pheonix/GPIO/pins.h \
+ Pheonix/GPIO/GPIO_Init.h Pheonix/GPIO/pins.h Pheonix/GPIO/pinout.h \
+ Pheonix/TouchLCD/lcd.h Pheonix/TouchLCD/Drivers/SSD1963.h \
+ Pheonix/SPI/spi.h Pheonix/SPI/w25qxx.h \
+ Pheonix/TouchLCD/GUI/PanelMain.designer.h \
  Pheonix/TouchLCD/GUI/../Widgets/Widget.h \
  Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h \
  Pheonix/TouchLCD/GUI/../Widgets/panel.h \
@@ -98,6 +99,7 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 Pheonix/configure.h:
 Pheonix/FLASH/4xx/flash_4xx.h:
+Pheonix/RevisionHistory.h:
 Pheonix/global.h:
 Pheonix/GPIO/pins.h:
 Pheonix/GPIO/GPIO_Init.h:

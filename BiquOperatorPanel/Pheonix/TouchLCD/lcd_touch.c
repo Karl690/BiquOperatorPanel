@@ -53,20 +53,45 @@ uint8_t touchCalibrationCounter = 0;
 int32_t TSC_Para[7];
 uint16_t TouchPointX = 0;
 uint16_t TouchPointY = 0;
+
+uint16_t calibrationPointX = 0;
+uint16_t CalibrationPointY = 0;
 static uint8_t touch;
 TOUCH_EVENT_TYPE TouchEventStatus;
 void LCD_ProcessTouchEvent()
 {
-	
-	if (!XPT2046_Read_Pen())
+	if (!XPT2046_Read_Pen())//0=touch event detected, 1= no touch detected
 	{
 		if (touch >= 5)  // 20ms
 		{
 			if (TouchEventStatus == TOUCH_EVENT_NONE) TouchEventStatus = TOUCH_EVENT_DOWN;		//if the previous status is NONE, it would be the down event.
 			else if (TouchEventStatus == TOUCH_EVENT_DOWN) TouchEventStatus = TOUCH_EVENT_HOLD; // if the previous status is DOWN, it would be the hold event
 			else TouchEventStatus = TOUCH_EVENT_HOLD;											//otherwise the it
-			touchScreenIsPress = 1;
+
+			touch++;
 			lcd_touch_get_coordinates(&TouchPointX, &TouchPointY);
+			if (CalibrateScreenFlag)
+			{//this means we are calibrating the screen at this time
+				//if(calibrationPointX<1)
+				if (touch >5)
+				{
+					switch (CalibrateScreenFlag)
+					{						
+					case 2: touchCalibrationInfo.TP_Points[0].x = TouchPointX;
+						    touchCalibrationInfo.TP_Points[0].y = TouchPointY;
+						    CalibrateScreenFlag++;break; //waiting for press
+					case 4: touchCalibrationInfo.TP_Points[1].x = TouchPointX;
+						    touchCalibrationInfo.TP_Points[1].y = TouchPointY;
+						    CalibrateScreenFlag++; break; //waiting for press
+					case 6: touchCalibrationInfo.TP_Points[2].x = TouchPointX;
+						    touchCalibrationInfo.TP_Points[2].y = TouchPointY;
+						    CalibrateScreenFlag++; break; //waiting for press
+					}
+					return;
+				}
+				
+			}
+			touchScreenIsPress = 1;
 		}
 		else
 		{
@@ -104,7 +129,7 @@ void LCD_ProcessTouchEvent()
 
 void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 {
-	uint16_t tp_x = XPT2046_Repeated_Compare_AD(CMD_RDX);
+	uint16_t tp_x = XPT2046_Repeated_Compare_AD(CMD_RDX);//read the data from the 2046 registers
 	uint16_t tp_y = XPT2046_Repeated_Compare_AD(CMD_RDY);
 
 	*x = (A * tp_x + B * tp_y + C) / K;
@@ -226,8 +251,8 @@ uint8_t checkForValidLCDCalibrationData(void)
 	return 0; //invalid address
 }
 
-void CalibratLcdTouchPanel()
-{//starts the screen calibration	
+void InitializeCalibrationParameters()
+{//sets the 3 points for screen touch panel calibration in pixels
 	touchCalibrationInfo.LCD_Corner[0].x = 40;
 	touchCalibrationInfo.LCD_Corner[1].x = LCD_WIDTH - 40;
 	touchCalibrationInfo.LCD_Corner[2].x = LCD_WIDTH - 40;
@@ -235,45 +260,67 @@ void CalibratLcdTouchPanel()
 	touchCalibrationInfo.LCD_Corner[0].y = 40;
 	touchCalibrationInfo.LCD_Corner[1].y = 40;
 	touchCalibrationInfo.LCD_Corner[2].y = LCD_HEIGHT - 40;
-	
-	uint16_t TP_X[3], TP_Y[3];
-	uint32_t tp_num = 0;
-	int i;
-	GUI_Clear(COLOR_WHITE);				
-	//GUI_DrawString(LCD_WIDTH / 2, 5, "Touch Screen Calibration", &Font20, COLOR_BLACK);
-	for (tp_num = 0; tp_num < 3; tp_num++)
-	{	
-		GUI_HLine(touchCalibrationInfo.LCD_Corner[tp_num].x - 10, touchCalibrationInfo.LCD_Corner[tp_num].y, touchCalibrationInfo.LCD_Corner[tp_num].x + 10, COLOR_RED);
-		GUI_VLine(touchCalibrationInfo.LCD_Corner[tp_num].x, touchCalibrationInfo.LCD_Corner[tp_num].y-10, touchCalibrationInfo.LCD_Corner[tp_num].y + 10, COLOR_RED);
-	}
-	
-	touchCalibrationCounter = 0;
-	while (touchCalibrationCounter < 3)
-	{//we loop until 3 points are pressed
-		if (TouchEventStatus != TOUCH_EVENT_DOWN) continue;
-		touchCalibrationInfo.TP_Points[touchCalibrationCounter].x = XPT2046_Repeated_Compare_AD(CMD_RDX);
-		touchCalibrationInfo.TP_Points[touchCalibrationCounter].y = XPT2046_Repeated_Compare_AD(CMD_RDY);
-		//Draw the rectangle at the selected point
-		GUI_FillRect(touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].x - 20, 
-			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].y - 20,
-			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].x + 20,
-			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].y + 20,
-			COLOR_RED);
-		touchCalibrationCounter++;		//increase the calibration point's index 
-		TouchEventStatus = TOUCH_EVENT_HOLD; //change the touch event status artificially		
-		touch = 0;
-		HAL_Delay(200);
-	}
-	touchCalibrationCounter = 100;
-	
-	K = (X1 - X3) * (Y2 - Y3) - (X2 - X3) * (Y1 - Y3);
-	A = ((XL1 - XL3) * (Y2 - Y3) - (XL2 - XL3) * (Y1 - Y3));
-	B = ((X1 - X3) * (XL2 - XL3) - (XL1 - XL3) * (X2 - X3));
-	C = (Y1 * (X3 * XL2 - X2 * XL3) + Y2 * (X1 * XL3 - X3 * XL1) + Y3 * (X2 * XL1 - X1 * XL2));
-	D = ((YL1 - YL3) * (Y2 - Y3) - (YL2 - YL3) * (Y1 - Y3));
-	E = ((X1 - X3) * (YL2 - YL3) - (YL1 - YL3) * (X2 - X3));
-	F = (Y1 * (X3 * YL2 - X2 * YL3) + Y2 * (X1 * YL3 - X3 * YL1) + Y3 * (X2 * YL1 - X1 * YL2));
-	
-	touchCalibrationInfo.IsValid = 0x80;//update in structure that it is now valid data
-	save_LCD_Touch_Calibration_Data();//save to storage
 }
+void drawCalibrationCrossHairs(int16_t Index,Color16 CrosshairColor)
+{//draws cross hair over current calibration point.
+	GUI_HLine(touchCalibrationInfo.LCD_Corner[Index].x - 10, touchCalibrationInfo.LCD_Corner[Index].y, touchCalibrationInfo.LCD_Corner[Index].x + 10, CrosshairColor);
+	GUI_VLine(touchCalibrationInfo.LCD_Corner[Index].x, touchCalibrationInfo.LCD_Corner[Index].y - 10, touchCalibrationInfo.LCD_Corner[Index].y + 10, CrosshairColor);	
+}
+void CalibratLcdTouchPanel()
+{//starts the screen calibration	
+	switch (CalibrateScreenFlag)
+	{
+	case 0: break;//not active just leave
+	case 1: if (touch)break;
+			GUI_Clear(COLOR_BLACK);
+			drawCalibrationCrossHairs(0, COLOR_RED); CalibrateScreenFlag++; break;//draw first crosshair
+	case 2: break;//just waiting for interrupt to process the press event
+	case 3: if (touch)break;
+		drawCalibrationCrossHairs(0, COLOR_BLACK); //erase previous cross hair
+		drawCalibrationCrossHairs(1, COLOR_RED); CalibrateScreenFlag++; break; //draw first crosshair
+	case 4: break;//just waiting for interrupt to process the press event
+	case 5: if (touch)break;
+		drawCalibrationCrossHairs(1, COLOR_BLACK); //erase previous cross hair
+		drawCalibrationCrossHairs(2, COLOR_RED); CalibrateScreenFlag++; break; //draw first crosshair
+	case 6: break;//do nothing, we are waiting for the last press event to fire and process}
+	case 7://set up the points for transformation		
+			K = (X1 - X3) * (Y2 - Y3) - (X2 - X3) * (Y1 - Y3);
+			A = ((XL1 - XL3) * (Y2 - Y3) - (XL2 - XL3) * (Y1 - Y3));
+			B = ((X1 - X3) * (XL2 - XL3) - (XL1 - XL3) * (X2 - X3));
+			C = (Y1 * (X3 * XL2 - X2 * XL3) + Y2 * (X1 * XL3 - X3 * XL1) + Y3 * (X2 * XL1 - X1 * XL2));
+			D = ((YL1 - YL3) * (Y2 - Y3) - (YL2 - YL3) * (Y1 - Y3));
+			E = ((X1 - X3) * (YL2 - YL3) - (YL1 - YL3) * (X2 - X3));
+			F = (Y1 * (X3 * YL2 - X2 * YL3) + Y2 * (X1 * YL3 - X3 * YL1) + Y3 * (X2 * YL1 - X1 * YL2));
+	//
+			touchCalibrationInfo.IsValid = 0x80;//update in structure that it is now valid data
+			save_LCD_Touch_Calibration_Data();//save to storage
+			CalibrateScreenFlag = 0;
+		    Refresh = 1;
+			break;
+		}
+}
+//	uint16_t TP_X[3], TP_Y[3];
+//	uint32_t tp_num = 0;
+//	int i;
+//	GUI_Clear(COLOR_BLACK);				
+//	//GUI_DrawString(LCD_WIDTH / 2, 5, "Touch Screen Calibration", &Font20, COLOR_BLACK);
+//
+//	
+//	touchCalibrationCounter = 0;
+//	while (touchCalibrationCounter < 3)
+//	{//we loop until 3 points are pressed
+//		if (TouchEventStatus != TOUCH_EVENT_DOWN) continue;
+//		touchCalibrationInfo.TP_Points[touchCalibrationCounter].x = XPT2046_Repeated_Compare_AD(CMD_RDX);
+//		touchCalibrationInfo.TP_Points[touchCalibrationCounter].y = XPT2046_Repeated_Compare_AD(CMD_RDY);
+//		//Draw the rectangle at the selected point
+//		GUI_FillRect(touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].x - 20, 
+//			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].y - 20,
+//			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].x + 20,
+//			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].y + 20,
+//			COLOR_RED);
+//		touchCalibrationCounter++;		//increase the calibration point's index 
+//		TouchEventStatus = TOUCH_EVENT_HOLD; //change the touch event status artificially		
+//		touch = 0;
+//		HAL_Delay(200);
+//	}
+//	touchCalibrationCounter = 100;
