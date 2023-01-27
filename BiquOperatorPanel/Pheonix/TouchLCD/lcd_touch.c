@@ -69,28 +69,32 @@ void LCD_ProcessTouchEvent()
 			else TouchEventStatus = TOUCH_EVENT_HOLD;											//otherwise the it
 
 			touch++;
-			lcd_touch_get_coordinates(&TouchPointX, &TouchPointY);
 			if (CalibrateScreenFlag)
-			{//this means we are calibrating the screen at this time
+			{
+				//this means we are calibrating the screen at this time
 				//if(calibrationPointX<1)
-				if (touch >5)
+				uint16_t tp_x = XPT2046_Repeated_Compare_AD(CMD_RDX);
+				uint16_t tp_y = XPT2046_Repeated_Compare_AD(CMD_RDY);
+				
+				if (touch > 5)
 				{
 					switch (CalibrateScreenFlag)
 					{						
-					case 2: touchCalibrationInfo.TP_Points[0].x = TouchPointX;
-						    touchCalibrationInfo.TP_Points[0].y = TouchPointY;
-						    CalibrateScreenFlag++;break; //waiting for press
-					case 4: touchCalibrationInfo.TP_Points[1].x = TouchPointX;
-						    touchCalibrationInfo.TP_Points[1].y = TouchPointY;
-						    CalibrateScreenFlag++; break; //waiting for press
-					case 6: touchCalibrationInfo.TP_Points[2].x = TouchPointX;
-						    touchCalibrationInfo.TP_Points[2].y = TouchPointY;
-						    CalibrateScreenFlag++; break; //waiting for press
+					case 2: touchCalibrationInfo.TP_Points[0].x = tp_x;
+						touchCalibrationInfo.TP_Points[0].y = tp_y;
+						CalibrateScreenFlag++; break; //waiting for press
+					case 4: touchCalibrationInfo.TP_Points[1].x = tp_x;
+						touchCalibrationInfo.TP_Points[1].y = tp_y;
+						CalibrateScreenFlag++; break; //waiting for press
+					case 6: touchCalibrationInfo.TP_Points[2].x = tp_x;
+						touchCalibrationInfo.TP_Points[2].y = tp_y;
+						CalibrateScreenFlag++; break; //waiting for press
 					}
 					return;
 				}
-				
 			}
+			else 
+				lcd_touch_get_coordinates(&TouchPointX, &TouchPointY);
 			touchScreenIsPress = 1;
 		}
 		else
@@ -284,20 +288,21 @@ void CalibratLcdTouchPanel()
 		drawCalibrationCrossHairs(2, COLOR_RED); CalibrateScreenFlag++; break; //draw first crosshair
 	case 6: break;//do nothing, we are waiting for the last press event to fire and process}
 	case 7://set up the points for transformation		
-			K = (X1 - X3) * (Y2 - Y3) - (X2 - X3) * (Y1 - Y3);
-			A = ((XL1 - XL3) * (Y2 - Y3) - (XL2 - XL3) * (Y1 - Y3));
-			B = ((X1 - X3) * (XL2 - XL3) - (XL1 - XL3) * (X2 - X3));
-			C = (Y1 * (X3 * XL2 - X2 * XL3) + Y2 * (X1 * XL3 - X3 * XL1) + Y3 * (X2 * XL1 - X1 * XL2));
-			D = ((YL1 - YL3) * (Y2 - Y3) - (YL2 - YL3) * (Y1 - Y3));
-			E = ((X1 - X3) * (YL2 - YL3) - (YL1 - YL3) * (X2 - X3));
-			F = (Y1 * (X3 * YL2 - X2 * YL3) + Y2 * (X1 * YL3 - X3 * YL1) + Y3 * (X2 * YL1 - X1 * YL2));
-	//
-			touchCalibrationInfo.IsValid = 0x80;//update in structure that it is now valid data
-			save_LCD_Touch_Calibration_Data();//save to storage
-			CalibrateScreenFlag = 0;
-		    Refresh = 1;
-			break;
-		}
+		K = (X1 - X3) * (Y2 - Y3) - (X2 - X3) * (Y1 - Y3);
+		A = ((XL1 - XL3) * (Y2 - Y3) - (XL2 - XL3) * (Y1 - Y3));
+		B = ((X1 - X3) * (XL2 - XL3) - (XL1 - XL3) * (X2 - X3));
+		C = (Y1 * (X3 * XL2 - X2 * XL3) + Y2 * (X1 * XL3 - X3 * XL1) + Y3 * (X2 * XL1 - X1 * XL2));
+		D = ((YL1 - YL3) * (Y2 - Y3) - (YL2 - YL3) * (Y1 - Y3));
+		E = ((X1 - X3) * (YL2 - YL3) - (YL1 - YL3) * (X2 - X3));
+		F = (Y1 * (X3 * YL2 - X2 * YL3) + Y2 * (X1 * YL3 - X3 * YL1) + Y3 * (X2 * YL1 - X1 * YL2));
+//
+		touchCalibrationInfo.IsValid = 0x80;//update in structure that it is now valid data
+		save_LCD_Touch_Calibration_Data();//save to storage
+		CalibrateScreenFlag = 0;
+		Root_Panel.RedrawMe = 1;
+		Refresh = 1;
+		break;
+	}
 }
 //	uint16_t TP_X[3], TP_Y[3];
 //	uint32_t tp_num = 0;
