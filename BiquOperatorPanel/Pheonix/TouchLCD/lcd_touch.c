@@ -62,9 +62,9 @@ void LCD_ProcessTouchEvent()
 	{
 		if (touch >= 5)  // 20ms
 		{
-			if (TouchEventStatus == TOUCH_EVENT_NONE) TouchEventStatus = TOUCH_EVENT_DOWN;
-			else if (TouchEventStatus == TOUCH_EVENT_DOWN) TouchEventStatus = TOUCH_EVENT_HOLD;
-			else TouchEventStatus = TOUCH_EVENT_HOLD;
+			if (TouchEventStatus == TOUCH_EVENT_NONE) TouchEventStatus = TOUCH_EVENT_DOWN;		//if the previous status is NONE, it would be the down event.
+			else if (TouchEventStatus == TOUCH_EVENT_DOWN) TouchEventStatus = TOUCH_EVENT_HOLD; // if the previous status is DOWN, it would be the hold event
+			else TouchEventStatus = TOUCH_EVENT_HOLD;											//otherwise the it
 			touchScreenIsPress = 1;
 			lcd_touch_get_coordinates(&TouchPointX, &TouchPointY);
 		}
@@ -73,7 +73,7 @@ void LCD_ProcessTouchEvent()
 			touch++;
 		}
 	}
-	else
+	else //
 	{
 		if (TouchEventStatus == TOUCH_EVENT_DOWN || TouchEventStatus == TOUCH_EVENT_HOLD) 
 		{
@@ -250,16 +250,17 @@ void CalibratLcdTouchPanel()
 	touchCalibrationCounter = 0;
 	while (touchCalibrationCounter < 3)
 	{//we loop until 3 points are pressed
-		if (!touchScreenIsPress) continue;
+		if (TouchEventStatus != TOUCH_EVENT_DOWN) continue;
 		touchCalibrationInfo.TP_Points[touchCalibrationCounter].x = XPT2046_Repeated_Compare_AD(CMD_RDX);
 		touchCalibrationInfo.TP_Points[touchCalibrationCounter].y = XPT2046_Repeated_Compare_AD(CMD_RDY);
+		//Draw the rectangle at the selected point
 		GUI_FillRect(touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].x - 20, 
 			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].y - 20,
 			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].x + 20,
 			touchCalibrationInfo.LCD_Corner[touchCalibrationCounter].y + 20,
 			COLOR_RED);
-		touchCalibrationCounter++;
-		touchScreenIsPress = FALSE;		
+		touchCalibrationCounter++;		//increase the calibration point's index 
+		TouchEventStatus = TOUCH_EVENT_HOLD; //change the touch event status artificially		
 		touch = 0;
 		HAL_Delay(200);
 	}
