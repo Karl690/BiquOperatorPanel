@@ -72,66 +72,25 @@ int main(void)
 	if (!checkForValidLCDCalibrationData()) CalibrateScreenFlag = 1; //if stored data is not good, please force calibration screen
 		
 	ActivPanel = &Root_Panel; //set the top panel as boot screen
-//	NewScreenType = SCREEN_MAIN;
-//	CurretScreenType = SCREEN_MAIN;
-//	ActivPanel = InitPanelMain();
-//	panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
-	//panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); //draw whole panel this time
-	
-	
 	
 	while (1)
 	{
-		
 		if (CalibrateScreenFlag)
 		{
 			CalibratLcdTouchPanel(); //start the touch panel calibration
 			continue;
 		}
-//		{
-//			CalibratLcdTouchPanel();//start the touch panel calibration
-//			CalibrateScreenFlag = 0;//done calibrating so turn off the flag,
-//			panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 1); //refresh
-//		}
+
 		panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 0); //redraw as required..
 		
 		if(touchScreenIsPress)
 			panel_touch_event_to_control(ActivPanel, (Point){0, 0});
 		
 		Refresh = 0;
-//		switch (PanelDisplayIndex)
-//		if(CurretScreenType != NewScreenType) // it need to transform screen
-//		{
-//			switch (NewScreenType)
-//			{
-//			case SCREEN_TOUCH_CALIBRATION:
-//				lcd_touch_calibration_screen(1);
-//				NewScreenType = SCREEN_MAIN;			
-//			default:
-//				break;
-//			}	
-//			CurretScreenType = NewScreenType;
-//			GUI_Clear(COLOR_BLACK);
-//			switch (CurretScreenType)
-//			{
-//			case SCREEN_MAIN:
-//				panel_on_paint(ActivPanel, (Point){ 0, 0 }, 1);
-//				CurretScreenType = NewScreenType;
-//				panel_touch_event_to_control(ActivPanel);
-//			default:
-//				break;
-//			}
-//		}else
-//		{
-//			panel_on_paint(ActivPanel, (Point){ 0, 0 }, 0);
-//			panel_touch_event_to_control(ActivPanel);
-//			
-//		}
-	
 		HeartBeat++;
 		if (BarValue > 3.3) BarValue = 0;
 		BarValue += 0.1;
-		HAL_Delay(100);
+		HAL_Delay(50);
 	}
 }
 

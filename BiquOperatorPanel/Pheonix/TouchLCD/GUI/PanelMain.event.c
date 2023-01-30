@@ -17,7 +17,45 @@
 #include "PanelMain.event.h"
 #include "../lcd_touch.h"
 
+Numeric* SoapNudsList[30] = { 0 };
 uint8_t* MemoryDumpDisplayAddress = NULL;
+
+void initialize_SoapNudList()
+{
+	//assign the address of Nuds in Vars tab into list
+	SoapNudsList[0] = &glNudVars00;
+	SoapNudsList[1] = &glNudVars01;
+	SoapNudsList[2] = &glNudVars02;
+	SoapNudsList[3] = &glNudVars03;
+	SoapNudsList[4] = &glNudVars04;
+	SoapNudsList[5] = &glNudVars05;
+	SoapNudsList[6] = &glNudVars06;
+	SoapNudsList[7] = &glNudVars07;
+	SoapNudsList[8] = &glNudVars08;
+	SoapNudsList[9] = &glNudVars09;
+	SoapNudsList[10] = NULL; //the end
+}
+	
+void FindNextFlashSaveAddress()
+{
+	
+}
+//write the Nude name and value into Soap string
+void WriteSoapValuePair(uint16_t pairIndex,  uint32_t address) 
+{
+	if (!SoapNudsList[pairIndex])  return;
+	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
+	
+	sprintf(stringValuePair, "%s,%.3f;", SoapNudsList[pairIndex]->Name, SoapNudsList[pairIndex]->Value); // format: name,value;
+	strcpy(address, stringValuePair); // connect the current nud name and value to soapstring.
+}
+
+void LoadSoapValuePare(uint16_t pairIndex, uint16_t address) 
+{
+	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
+	
+}
+
 
 void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 {
