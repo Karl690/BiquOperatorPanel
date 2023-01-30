@@ -228,21 +228,49 @@ uint8_t* getCalibrationDataBlockAddress()
  *writeValuePair()
  *Next
  **/
-uint8_t* getSoapstring4kBlockAddress()  //get the current soap string's address
+uint8_t* FindNexSaveAddress()  //get the current soap string's address
 {	
-	uint8_t* i = NULL;
+	uint8_t* count = NULL;
 	uint8_t* currentSoapstringBlockPointer = NULL;
-	for (i = 0; i < SOAPSTRING_USABLE_RANGE; i += SOAPSTRING_BLOCKSIZE)
+	for (count = 0; count < SOAPSTRING_MAXBLOCKS; count += SOAPSTRING_BLOCKSIZE)
 	{
-		currentSoapstringBlockPointer = (uint8_t*)(SOAPSTRING_STARTADDRESS + i);
+		currentSoapstringBlockPointer = (uint8_t*)(SOAPSTRING_STARTADDRESS + (count * SOAPSTRING_BLOCKSIZE));
 		if (*currentSoapstringBlockPointer == 0xff) //check if the first byte of the block is ascii charactor. 
 		{
-			return currentSoapstringBlockPointer; 
+			//at this point, we found a 4k block that starts with 0xff, so it is empty
+			//now we go back one block to find the end of valid data, and that is our starting point
+			//for new valuepairs.
+			if (count == 0)return currentSoapstringBlockPointer; //first byte i 128k page is empty. so leave
+			for (count = 0; count < 4096; count++)
+			{
+				if (*currentSoapstringBlockPointer == 0xff)
+				{
+					return currentSoapstringBlockPointer;
+				}
+				currentSoapStringAddress++; //walk forward and check next byte
+			}
+			//if you get here, we are on 4096 byte boundry
+			currentSoapStringAddress++; //walk forward and check next byte
+			if (currentSoapStringAddress < SOAPSTRING_ENDADDRESS) 
+			{
+				return currentSoapstringBlockPointer;
+			}
+			{//get here and we have gotten to end of the page
+				//copy last 4k block to Ram
+				//erase entire 128k page
+				//write 4kblock to first block of soap string ram.
+				
+			}
+		
 		}
 	}
 	return NULL; // it need to erase flash.
 }
 
+string readNextValuePair(uint32_t nextValuePairAddress)
+{//returns the next valuepair string
+	
+}
 //move the data from the source address to the target address.
 void MoveData(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
@@ -289,7 +317,7 @@ void save_LCD_Touch_Calibration_Data(void)
 
 void saveSoapStringTobuffer() //backup Soapstring from storage to FLASH.
 {
-	currentSoapStringAddress = getSoapstring4kBlockAddress(); //get the current soapstring in storage.
+	currentSoapStringAddress = FindNexSaveAddress(); //get the current soapstring in storage.
 	if (!currentSoapStringAddress) {
 		//Soapstring is not exsit in storage.		
 		return; 
@@ -299,7 +327,7 @@ void saveSoapStringTobuffer() //backup Soapstring from storage to FLASH.
 
 void writeOldsoapstringFromBuffertoflashblock() //save the soapstring in storage
 {
-	uint8_t* currentSoapstringAddress = getSoapstring4kBlockAddress(); //get the current soapstring in storage.
+	uint8_t* currentSoapstringAddress = FindNexSaveAddress(); //get the current soapstring in storage.
 	if (!currentSoapstringAddress)
 	{	
 		currentSoapstringAddress = SOAPSTRING_STARTADDRESS; 
@@ -327,7 +355,7 @@ void FindNextFlashSaveAddress()
 
 void WriteSoapString()
 {
-	uint32_t SoapstringAddress = getSoapstring4kBlockAddress();
+	uint32_t SoapstringAddress = FindNexSaveAddress();
 	for (uint16_t i = 0; SoapNudsList[i] != NULL; i++)
 	{
 		

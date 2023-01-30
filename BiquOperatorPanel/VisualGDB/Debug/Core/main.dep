@@ -43,10 +43,10 @@ VisualGDB/Debug/Core/main.o: Core/main.c Core/main.h \
  Pheonix/RevisionHistory.h Pheonix/global.h Pheonix/GPIO/pins.h \
  Pheonix/GPIO/GPIO_Init.h Pheonix/GPIO/pins.h Pheonix/GPIO/pinout.h \
  Pheonix/TouchLCD/lcd.h Pheonix/TouchLCD/Drivers/SSD1963.h \
+ Pheonix/TouchLCD/lcd_touch.h Pheonix/TouchLCD/GUI/gui.h \
  Pheonix/SPI/spi.h Pheonix/SPI/w25qxx.h \
  Pheonix/TouchLCD/GUI/PanelMain.designer.h \
  Pheonix/TouchLCD/GUI/../Widgets/Widget.h \
- Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h \
  Pheonix/TouchLCD/GUI/../Widgets/panel.h \
  Pheonix/TouchLCD/GUI/../Widgets/label.h \
  Pheonix/TouchLCD/GUI/../Widgets/edit.h \
@@ -56,7 +56,7 @@ VisualGDB/Debug/Core/main.o: Core/main.c Core/main.h \
  Pheonix/TouchLCD/GUI/../Widgets/numeric.h \
  Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h Pheonix/GPIO/pininit.h \
  Pheonix/TouchLCD/GUI/display.h Pheonix/TouchLCD/GUI/displaylist.h \
- Pheonix/TouchLCD/lcd_touch.h Pheonix/taskmanager.h
+ Pheonix/TouchLCD/GUI/PanelMain.event.h Pheonix/taskmanager.h
 Core/main.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/stm32f4xx_hal_conf.h:
@@ -109,11 +109,12 @@ Pheonix/GPIO/pins.h:
 Pheonix/GPIO/pinout.h:
 Pheonix/TouchLCD/lcd.h:
 Pheonix/TouchLCD/Drivers/SSD1963.h:
+Pheonix/TouchLCD/lcd_touch.h:
+Pheonix/TouchLCD/GUI/gui.h:
 Pheonix/SPI/spi.h:
 Pheonix/SPI/w25qxx.h:
 Pheonix/TouchLCD/GUI/PanelMain.designer.h:
 Pheonix/TouchLCD/GUI/../Widgets/Widget.h:
-Pheonix/TouchLCD/GUI/../Widgets/../GUI/gui.h:
 Pheonix/TouchLCD/GUI/../Widgets/panel.h:
 Pheonix/TouchLCD/GUI/../Widgets/label.h:
 Pheonix/TouchLCD/GUI/../Widgets/edit.h:
@@ -125,5 +126,5 @@ Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h:
 Pheonix/GPIO/pininit.h:
 Pheonix/TouchLCD/GUI/display.h:
 Pheonix/TouchLCD/GUI/displaylist.h:
-Pheonix/TouchLCD/lcd_touch.h:
+Pheonix/TouchLCD/GUI/PanelMain.event.h:
 Pheonix/taskmanager.h:

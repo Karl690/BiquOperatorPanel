@@ -87,10 +87,12 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 /* Macro and function for operating(save/load) Calibration data */
 #define SOAPSTRING_STARTADDRESS 0x20000000 + 0x11000   //Soapstring address would be started from 68K(0x11000) range of RAM.
 #define SOAPSTRING_BLOCKSIZE	4096					//4k
-#define SOAPSTRING_ENDADDRESS	0x20000000 + 0x20000	// for 407, RAM size is 128K. 
-#define SOAPSTRING_USABLE_RANGE				60 * 1024	//128-68 = 60K
+#define SOAPSTRING_MAXBLOCKS     2                      //2 blocks for ram, 120 or flash
+#define SOAPSTRING_ENDADDRESS	SOAPSTRING_STARTADDRESS + 0x2000	// for 407, RAM size is 128K. 
+#define SOAPSTRING_USABLE_RANGE				8 * 1024	//8k for ram test  128-8k(forcalibration) = 120K
 
-uint8_t* getSoapstring4kBlockAddress(); //get the current soap string's address
+//#define SOAPSTRING_USABLE_RANGE				12 * 1024 //for flash
+uint8_t* FindNexSaveAddress(); //get the current soap string's address
 void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
 
 void save_LCD_Touch_Calibration_Data(void);
