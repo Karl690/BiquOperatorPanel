@@ -6,6 +6,7 @@
 #include "TouchLCD/GUI/display.h"
 #include "TouchLCD/lcd_touch.h"
 #include "TouchLCD/GUI/PanelMain.designer.h"
+#include "TouchLCD/GUI/PanelMain.event.h"
 #include "TouchLCD/Widgets/panel.h"
 #include "taskmanager.h"
 /* Private variables ---------------------------------------------------------*/
@@ -21,7 +22,9 @@ uint16_t CalibrateScreenFlag = 0;//calibration flag 0= none, 1=first corner,2=se
 uint32_t *PanelDisplayIndex = 0; //start by pointing to the root display panel
 
 uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE] = { 0};
+TouchCalibrationInfo touchCalibrationInfo;
 
+Numeric* SoapNudsList[30] = { 0 };
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -69,6 +72,7 @@ int main(void)
 //	return 0;
 	//clearcalibrtionData();
 	InitializeCalibrationParameters();
+	initializeSoapNudList();
 	if (!checkForValidLCDCalibrationData()) CalibrateScreenFlag = 1; //if stored data is not good, please force calibration screen
 		
 	ActivPanel = &Root_Panel; //set the top panel as boot screen

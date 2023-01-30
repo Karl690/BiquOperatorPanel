@@ -2,6 +2,8 @@
 #include "global.h"
 
 extern uint8_t* MemoryDumpDisplayAddress;
+void initializeSoapNudList();
+
 void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y);
 void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y);
 void glBtnSave_TouchEvent(void* sender, uint16_t x, uint16_t y);
@@ -14,3 +16,5 @@ void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y);
 
 void PageUpListbox();
 void PageDownListbox();
+
+

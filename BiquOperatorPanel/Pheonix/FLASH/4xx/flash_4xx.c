@@ -1,5 +1,6 @@
 
 #include "configure.h"
+#include "main.h"
 #include <ctype.h>
 //#if defined(FK_407) || defined(CORE_407I)
 #ifdef USE_FLASH
@@ -219,15 +220,22 @@ uint8_t* getCalibrationDataBlockAddress()
 	return NULL; // it need to erase flash.
 }
 
-
-uint8_t* getSoapstringBlockAddress()  //get the current soap string's address
+/*to store a entire soapstring sequence of multiple objects 
+ *first get the starting point in memory for the next storage location
+ *getSoapstring4kBlockAddress() // now we have the 4k block
+ *FindNextSaveAddress() // find the first empty byte
+ *for
+ *writeValuePair()
+ *Next
+ **/
+uint8_t* getSoapstring4kBlockAddress()  //get the current soap string's address
 {	
 	uint8_t* i = NULL;
 	uint8_t* currentSoapstringBlockPointer = NULL;
 	for (i = 0; i < SOAPSTRING_USABLE_RANGE; i += SOAPSTRING_BLOCKSIZE)
 	{
 		currentSoapstringBlockPointer = (uint8_t*)(SOAPSTRING_STARTADDRESS + i);
-		if (isascii(*currentSoapstringBlockPointer)) //check if the first byte of the block is ascii charactor. 
+		if (*currentSoapstringBlockPointer == 0xff) //check if the first byte of the block is ascii charactor. 
 		{
 			return currentSoapstringBlockPointer; 
 		}
@@ -243,6 +251,144 @@ void MoveData(uint8_t* target, uint8_t* source, uint16_t datasize)
 		*target = source[i]; 
 		target++;
 	}
+}
+
+
+
+uint8_t* currentCalibrationAddress = NULL;
+uint8_t* currentSoapStringAddress = NULL;
+void save_LCD_Touch_Calibration_Data(void)
+{
+	currentCalibrationAddress = getCalibrationDataBlockAddress(); //get current pointer in storage
+	if (currentCalibrationAddress == NULL)
+	{
+		//no valid data was found;
+		currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
+		if (*currentCalibrationAddress != 0xff)
+		{
+			saveSoapStringandEraseSector11(); //erase and copy old soap to new starting block	
+			return;
+		}
+	}
+	else
+	{
+		//we have found valid block,now disable it and then incrment to next block
+		*currentCalibrationAddress = 0; //zero out old pointer, data no longer valid
+		currentCalibrationAddress += CALIBRATIONDATA_BLOCKSIZE; //point to next place in storage
+		if (currentCalibrationAddress > CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE)
+		{
+			//now we have reached past the 4k boundry and need to point back to the beginning
+			saveSoapStringandEraseSector11();	
+			return;
+		}
+	}
+	//ok, when you get here, we should be pointing to 0xff values in the target storage memory
+	MoveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+}
+
+
+void saveSoapStringTobuffer() //backup Soapstring from storage to FLASH.
+{
+	currentSoapStringAddress = getSoapstring4kBlockAddress(); //get the current soapstring in storage.
+	if (!currentSoapStringAddress) {
+		//Soapstring is not exsit in storage.		
+		return; 
+	}
+	MoveData(SoapStringBuffer, currentSoapStringAddress, SOAPSTRING_BLOCKSIZE); // SoapString copy from storage's currentSoapStringAddress.
+}
+
+void writeOldsoapstringFromBuffertoflashblock() //save the soapstring in storage
+{
+	uint8_t* currentSoapstringAddress = getSoapstring4kBlockAddress(); //get the current soapstring in storage.
+	if (!currentSoapstringAddress)
+	{	
+		currentSoapstringAddress = SOAPSTRING_STARTADDRESS; 
+	}
+	else
+	{
+		*currentSoapstringAddress = 0x0; //set flag as that is old block
+		currentSoapstringAddress += SOAPSTRING_BLOCKSIZE; // move to next block
+		if (currentSoapstringAddress + SOAPSTRING_BLOCKSIZE > SOAPSTRING_ENDADDRESS)
+		{
+			currentSoapstringAddress = SOAPSTRING_STARTADDRESS;
+			saveSoapStringandEraseSector11(); // it need to erase storage.
+			return;
+		}
+	}	
+	//copy the SoapstringBuffer to storage.
+	MoveData(currentSoapstringAddress, (uint8_t*)&SoapStringBuffer, SOAPSTRING_BLOCKSIZE); 
+}
+
+	
+void FindNextFlashSaveAddress()
+{
+	
+}
+
+void WriteSoapString()
+{
+	uint32_t SoapstringAddress = getSoapstring4kBlockAddress();
+	for (uint16_t i = 0; SoapNudsList[i] != NULL; i++)
+	{
+		
+	}
+}
+//write the Nude name and value into Soap string
+void WriteSoapValuePair(uint16_t pairIndex, uint32_t address) 
+{
+	if (!SoapNudsList[pairIndex])  return;
+	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
+	
+	sprintf(stringValuePair, "%s,%.3f;", SoapNudsList[pairIndex]->Name, SoapNudsList[pairIndex]->Value); // format: name,value;
+	strcpy(address, stringValuePair); // connect the current nud name and value to soapstring.
+}
+
+void LoadSoapValuePare(uint16_t pairIndex, uint16_t address) 
+{
+	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
+	
+}
+
+
+void eraseStorage()
+{
+	/// Erase storaage .. to do
+	currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
+	currentSoapStringAddress = SOAPSTRING_STARTADDRESS;
+}
+void saveSoapStringandEraseSector11() // I think this function name is not correct.
+{
+	saveSoapStringTobuffer(); //backup soapstring in storage to buffer
+	eraseStorage(); //erase the storage and set the address as start.
+	MoveData(currentCalibrationAddress, &touchCalibrationInfo, CALIBRATIONDATA_BLOCKSIZE); //copy calibration buffer  to storage
+	MoveData(currentSoapStringAddress, &SoapStringBuffer, SOAPSTRING_BLOCKSIZE); //copy soapstring buffer to storage
+	//writeOldsoapstringFromBuffertoflashblock[1] ;//todo
+}
+
+void clearcalibrtionData()
+{
+	uint8_t* workPointer = CALIBRATIONDATA_STARTADDRESS;
+	for (int count = 0; count = 0x0fff; count++)
+	{
+		*workPointer = 0xff;
+		workPointer++;
+	}
+}
+uint8_t checkForValidLCDCalibrationData(void)
+{
+	//if it finds it, it will refresh the structure from storage
+	//read_memory(0, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+	//if (touchCalibrationInfo.IsValid != 0x80) return 0;
+	//uint32_t* currentCalibrationAddress = NULL;
+	currentCalibrationAddress  = getCalibrationDataBlockAddress();
+	if (currentCalibrationAddress == 0) return 0;//was a disaster and we did not find valid data
+	if (*currentCalibrationAddress == 0x80)
+	{
+		//it is valid data, so lets update
+		MoveData((uint8_t*)&touchCalibrationInfo, currentCalibrationAddress, sizeof(TouchCalibrationInfo)); //update working variables from storage
+		return 1;//updated so report successfully found and updated
+	}
+	return 0; //invalid address
 }
 
 #endif

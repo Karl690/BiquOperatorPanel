@@ -37,6 +37,7 @@ extern "C" {
 #include "GPIO/pinout.h"
 	
 #include "TouchLCD/lcd.h"
+#include "TouchLCD/lcd_touch.h"
 #include "SPI/spi.h"
 #include "SPI/w25qxx.h"
 
@@ -57,7 +58,8 @@ extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.
 
 	
 extern uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE];
-	
+extern TouchCalibrationInfo touchCalibrationInfo;
+extern Numeric* SoapNudsList[30];
 void Error_Handler(void);
 	extern uint16_t	Refresh;
 	extern uint16_t CalibrateScreenFlag;

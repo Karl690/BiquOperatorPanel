@@ -90,6 +90,10 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 #define SOAPSTRING_ENDADDRESS	0x20000000 + 0x20000	// for 407, RAM size is 128K. 
 #define SOAPSTRING_USABLE_RANGE				60 * 1024	//128-68 = 60K
 
-uint8_t* getSoapstringBlockAddress(); //get the current soap string's address
+uint8_t* getSoapstring4kBlockAddress(); //get the current soap string's address
 void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
+
+void save_LCD_Touch_Calibration_Data(void);
+uint8_t checkForValidLCDCalibrationData(void);
+void saveSoapStringandEraseSector11(void);
 //#endif

@@ -17,10 +17,10 @@
 #include "PanelMain.event.h"
 #include "../lcd_touch.h"
 
-Numeric* SoapNudsList[30] = { 0 };
+
 uint8_t* MemoryDumpDisplayAddress = NULL;
 
-void initialize_SoapNudList()
+void initializeSoapNudList()
 {
 	//assign the address of Nuds in Vars tab into list
 	SoapNudsList[0] = &glNudVars00;
@@ -34,26 +34,6 @@ void initialize_SoapNudList()
 	SoapNudsList[8] = &glNudVars08;
 	SoapNudsList[9] = &glNudVars09;
 	SoapNudsList[10] = NULL; //the end
-}
-	
-void FindNextFlashSaveAddress()
-{
-	
-}
-//write the Nude name and value into Soap string
-void WriteSoapValuePair(uint16_t pairIndex,  uint32_t address) 
-{
-	if (!SoapNudsList[pairIndex])  return;
-	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
-	
-	sprintf(stringValuePair, "%s,%.3f;", SoapNudsList[pairIndex]->Name, SoapNudsList[pairIndex]->Value); // format: name,value;
-	strcpy(address, stringValuePair); // connect the current nud name and value to soapstring.
-}
-
-void LoadSoapValuePare(uint16_t pairIndex, uint16_t address) 
-{
-	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
-	
 }
 
 
@@ -104,7 +84,7 @@ void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
 void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
 	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
-	MemoryDumpDisplayAddress = getSoapstringBlockAddress(); //get current soapstring address
+	MemoryDumpDisplayAddress = getSoapstring4kBlockAddress(); //get current soapstring address
 	gL_Listbox1.DispMode = DISPLAYMODE_Raw_ASCII;
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
