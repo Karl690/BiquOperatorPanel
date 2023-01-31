@@ -91,6 +91,12 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 #define SOAPSTRING_ENDADDRESS	SOAPSTRING_STARTADDRESS + 0x2000	// for 407, RAM size is 128K. 
 #define SOAPSTRING_USABLE_RANGE				8 * 1024	//8k for ram test  128-8k(forcalibration) = 120K
 
+#define EOT			0x04	//End of Transmission. we use this as the first byte of var pairs 's block
+#define FOV			0x0A	//First byte of Var	pair
+#define EOV			0x0D	//End byte of var pair
+#define FOC			0xFF	//Formatted byte of Charactor
+
+
 //#define SOAPSTRING_USABLE_RANGE				12 * 1024 //for flash
 uint8_t* FindNexSaveAddress(); //get the current soap string's address
 void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
@@ -98,4 +104,7 @@ void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
 void save_LCD_Touch_Calibration_Data(void);
 uint8_t checkForValidLCDCalibrationData(void);
 void saveSoapStringandEraseSector11(void);
+void eraseStorage();
+void WriteSoapStringToStorage();
+void LoadSoapStringFromStorage();
 //#endif

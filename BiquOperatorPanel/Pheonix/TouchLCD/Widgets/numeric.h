@@ -45,3 +45,5 @@ void numeric_destory(Numeric* label);
 void numeric_on_paint(Numeric* label, Point offset, Color16  backcolor);
 void numeric_increment(Numeric* numeric);
 void numeric_decrement(Numeric* numeric);
+
+void numeric_set_value(Numeric* obj, float value);

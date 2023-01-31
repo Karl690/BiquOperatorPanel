@@ -33,7 +33,8 @@ void initializeSoapNudList()
 	SoapNudsList[7] = &glNudVars07;
 	SoapNudsList[8] = &glNudVars08;
 	SoapNudsList[9] = &glNudVars09;
-	SoapNudsList[10] = NULL; //the end
+	SoapNudsList[10] = &glNudVars10;
+	SoapNudsList[11] = NULL; //the end
 }
 
 
@@ -80,6 +81,15 @@ void glBtnApply_TouchEvent(void* sender, uint16_t x, uint16_t y)
 
 void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
 {
+	eraseStorage();
+}
+void LoadSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
+{
+	LoadSoapStringFromStorage();
+}
+void SaveSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
+{
+	WriteSoapStringToStorage();
 }
 void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {

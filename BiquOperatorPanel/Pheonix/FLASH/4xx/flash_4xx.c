@@ -2,6 +2,7 @@
 #include "configure.h"
 #include "main.h"
 #include <ctype.h>
+#include <stdlib.h>
 //#if defined(FK_407) || defined(CORE_407I)
 #ifdef USE_FLASH
 //#include "taskmanager.h"
@@ -230,9 +231,9 @@ uint8_t* getCalibrationDataBlockAddress()
  **/
 uint8_t* FindNexSaveAddress()  //get the current soap string's address
 {	
-	uint8_t* count = NULL;
+	uint32_t count = 0;
 	uint8_t* currentSoapstringBlockPointer = NULL;
-	for (count = 0; count < SOAPSTRING_MAXBLOCKS; count += SOAPSTRING_BLOCKSIZE)
+	for (count = 0; count < SOAPSTRING_MAXBLOCKS; count ++)
 	{
 		currentSoapstringBlockPointer = (uint8_t*)(SOAPSTRING_STARTADDRESS + (count * SOAPSTRING_BLOCKSIZE));
 		if (*currentSoapstringBlockPointer == 0xff) //check if the first byte of the block is ascii charactor. 
@@ -241,13 +242,17 @@ uint8_t* FindNexSaveAddress()  //get the current soap string's address
 			//now we go back one block to find the end of valid data, and that is our starting point
 			//for new valuepairs.
 			if (count == 0)return currentSoapstringBlockPointer; //first byte i 128k page is empty. so leave
+
+			currentSoapstringBlockPointer -= SOAPSTRING_BLOCKSIZE; //point to the beginning of the block before
+			//now starting with the first byte, we look for the first 0xff , 
+			//that is where we will start writing new data
 			for (count = 0; count < 4096; count++)
 			{
 				if (*currentSoapstringBlockPointer == 0xff)
 				{
 					return currentSoapstringBlockPointer;
 				}
-				currentSoapStringAddress++; //walk forward and check next byte
+				currentSoapstringBlockPointer++; //walk forward and check next byte
 			}
 			//if you get here, we are on 4096 byte boundry
 			currentSoapStringAddress++; //walk forward and check next byte
@@ -255,11 +260,11 @@ uint8_t* FindNexSaveAddress()  //get the current soap string's address
 			{
 				return currentSoapstringBlockPointer;
 			}
-			{//get here and we have gotten to end of the page
+			{
+				//get here and we have gotten to end of the page
 				//copy last 4k block to Ram
 				//erase entire 128k page
 				//write 4kblock to first block of soap string ram.
-				
 			}
 		
 		}
@@ -267,7 +272,7 @@ uint8_t* FindNexSaveAddress()  //get the current soap string's address
 	return NULL; // it need to erase flash.
 }
 
-string readNextValuePair(uint32_t nextValuePairAddress)
+char* readNextValuePair(uint32_t nextValuePairAddress)
 {//returns the next valuepair string
 	
 }
@@ -318,10 +323,9 @@ void save_LCD_Touch_Calibration_Data(void)
 void saveSoapStringTobuffer() //backup Soapstring from storage to FLASH.
 {
 	currentSoapStringAddress = FindNexSaveAddress(); //get the current soapstring in storage.
-	if (!currentSoapStringAddress) {
-		//Soapstring is not exsit in storage.		
+	if (!currentSoapStringAddress) //Soapstring is not exsit in storage.		
 		return; 
-	}
+	
 	MoveData(SoapStringBuffer, currentSoapStringAddress, SOAPSTRING_BLOCKSIZE); // SoapString copy from storage's currentSoapStringAddress.
 }
 
@@ -348,33 +352,127 @@ void writeOldsoapstringFromBuffertoflashblock() //save the soapstring in storage
 }
 
 	
-void FindNextFlashSaveAddress()
-{
-	
-}
 
-void WriteSoapString()
-{
-	uint32_t SoapstringAddress = FindNexSaveAddress();
-	for (uint16_t i = 0; SoapNudsList[i] != NULL; i++)
-	{
-		
-	}
-}
+
+
 //write the Nude name and value into Soap string
-void WriteSoapValuePair(uint16_t pairIndex, uint32_t address) 
+uint16_t WriteSoapValuePair(uint16_t pairIndex, uint8_t* address) 
 {
-	if (!SoapNudsList[pairIndex])  return;
+	if (!SoapNudsList[pairIndex])  return 0;
+	uint16_t writtenBytes = 0;
 	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
 	
 	sprintf(stringValuePair, "%s,%.3f;", SoapNudsList[pairIndex]->Name, SoapNudsList[pairIndex]->Value); // format: name,value;
-	strcpy(address, stringValuePair); // connect the current nud name and value to soapstring.
+	uint16_t len = strlen(stringValuePair);
+	if (address + len + 2 >= SOAPSTRING_ENDADDRESS) return 0; //out of memory
+	
+	*address = 0x0A; //write the First Byte of VarPars
+	address++;
+	writtenBytes++;
+	
+	memcpy(address, stringValuePair, len); // copy the var pair's string to the address
+	writtenBytes += len;
+	address += len; //increase the address as len
+	*address = 0x0D; //put the EOS code 
+	writtenBytes++;
+	return writtenBytes;
+	
+}
+void WriteSoapStringToStorage()
+{
+	uint8_t* SoapstringAddress = FindNexSaveAddress();
+	if (!SoapstringAddress) return; // do nothing if it did not found out the address to write soapstring
+	
+	uint16_t writtenBytes = 0;
+	*SoapstringAddress = 0x4; //put EOT charactor
+	SoapstringAddress++; //increase the address 
+	for (uint16_t i = 0; SoapNudsList[i] != NULL; i++)
+	{
+		writtenBytes = WriteSoapValuePair(i, SoapstringAddress); //write the varpairs at the address of storage
+		if (writtenBytes == 0) break;							//stop the write soapstring
+		
+		//I didn't know if I should call the function to get the next address here, so I just increased the address.
+		SoapstringAddress += writtenBytes;							//increase the address as written length.
+	}
 }
 
-void LoadSoapValuePare(uint16_t pairIndex, uint16_t address) 
+//find the start address of VarpairList with the end address
+//address is the end address
+uint8_t* FindVarPairListAddress(uint8_t* address) 
 {
-	char stringValuePair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
+	uint8_t* StartAddress = address - 1; // this address would go down 
+	for (StartAddress = address; StartAddress >= SOAPSTRING_STARTADDRESS; StartAddress--)
+	{
+		if (*StartAddress == 0x04) return StartAddress;		
+	}
+	return NULL;
+}
+
+uint8_t ParseVarPairstring(uint16_t  VarpairIndex, char* varpairstring) 
+{
+	uint8_t result = 0, index =0;
+	uint16_t len = strlen(varpairstring);
+	uint8_t name[WIDGET_MAX_TEXT_LENGTH / 2] = { 0 };
+	uint8_t value[WIDGET_MAX_TEXT_LENGTH / 2] = { 0 };
+	for (index = 0; index < len; index++)
+	{
+		if (varpairstring[index] == ',')
+		{
+			strncpy(name, varpairstring, index);
+			strncpy(value, varpairstring + index + 1, len - index - 2); //minus 2 becasue it include ',' and ';'
+			if (strcmp(name, (char*)&SoapNudsList[VarpairIndex]->Name[0]) != 0) break; // it means that is not for the control
+			float fvalue = atof(value);
+			numeric_set_value(SoapNudsList[VarpairIndex], fvalue); //set the value to control
+			result = 1;
+			break;
+		}
+	}
+	return 1;
+}
+void LoadSoapStringFromStorage() 
+{
+	uint8_t* EndSoapstringAddress = FindNexSaveAddress();
+	if (!EndSoapstringAddress) return; //do nothing
+	uint8_t* StartSoapstringAddress = FindVarPairListAddress(EndSoapstringAddress); //with the end of Soapstring, find out the start address of soapstring
+	if (!StartSoapstringAddress) return; //do nothing because it means that it does not find out the address.
+	char VarPair[WIDGET_MAX_TEXT_LENGTH] = { 0 };
 	
+	uint8_t flag  = 0;
+	char* VarPairAddress = NULL;
+	uint16_t VarpairIndex = 0;
+	for (uint8_t* address = StartSoapstringAddress; address < EndSoapstringAddress; address ++)
+	{
+		if (*address == FOV)
+		{
+			flag = 1; //set the flag to add the Varpair string
+			memset(VarPair, 0, WIDGET_MAX_TEXT_LENGTH); //reset the buffer.
+			VarPairAddress = VarPair;  //set the first address of Buffer at VarPairAddress
+			continue;
+		}
+		else if (*address == EOV)
+		{
+			//
+			flag = 0; //release the flag
+			//at this point we parse the Varpair string and put the value at the corresponding control
+			ParseVarPairstring(VarpairIndex, VarPair);
+			VarpairIndex++; 
+			if (VarpairIndex >= 30 || SoapNudsList[VarpairIndex] == NULL) break; //escape, in this case
+			continue;
+		}
+		if (flag) //if this is VarPair string
+		{
+			*VarPairAddress = *address;
+			if (VarPairAddress - VarPair > WIDGET_MAX_TEXT_LENGTH ) // 
+			{
+				break; // it means that is not normal.
+			}
+			else
+			{
+				VarPairAddress++;	
+			}
+		}
+		
+	}
 }
 
 
@@ -383,6 +481,12 @@ void eraseStorage()
 	/// Erase storaage .. to do
 	currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
 	currentSoapStringAddress = SOAPSTRING_STARTADDRESS;
+	
+	for (uint32_t i = CALIBRATIONDATA_STARTADDRESS; i < CALIBRATIONDATA_STARTADDRESS + CALIBRATIONDATA_SIZE; i++) 
+		*(uint8_t*)i = 0xFF;
+	
+	for (uint32_t i = SOAPSTRING_STARTADDRESS; i < SOAPSTRING_ENDADDRESS; i++) 
+		*(uint8_t*)i = 0xFF;
 }
 void saveSoapStringandEraseSector11() // I think this function name is not correct.
 {

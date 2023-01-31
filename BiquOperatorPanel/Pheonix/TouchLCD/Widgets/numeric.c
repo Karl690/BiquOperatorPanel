@@ -74,3 +74,12 @@ void numeric_decrement(Numeric* obj)
 	sprintf(obj->Text, "%.02f", obj->Value);
 	obj->RedrawMe = 1;
 }
+
+
+void numeric_set_value(Numeric* obj, float value)
+{
+	if (value < obj->MinValue && value >= obj->MaxValue) return;
+	obj->Value = value;
+	sprintf(obj->Text, "%.02f", obj->Value);
+	obj->RedrawMe = 1;
+}
