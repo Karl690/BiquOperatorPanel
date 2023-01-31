@@ -61,7 +61,15 @@ VisualGDB/Debug/Pheonix/FLASH/4xx/flash_4xx.o: \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h \
- c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h
 Pheonix/configure.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/stm32f4xx_hal_conf.h:
@@ -135,3 +143,11 @@ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h:

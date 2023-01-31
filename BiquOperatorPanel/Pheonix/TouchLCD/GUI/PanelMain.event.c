@@ -90,11 +90,16 @@ void LoadSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 void SaveSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
 	WriteSoapStringToStorage();
+	//lvana 
+	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
 }
 void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
 	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = FindNexSaveAddress(); //get current soapstring address
+	//Lvana, please index back to START of Last Soapstring Beginning
+	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
+	
 	gL_Listbox1.DispMode = DISPLAYMODE_Raw_ASCII;
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }

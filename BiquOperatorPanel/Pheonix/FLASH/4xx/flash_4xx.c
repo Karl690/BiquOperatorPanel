@@ -366,34 +366,84 @@ uint16_t WriteSoapValuePair(uint16_t pairIndex, uint8_t* address)
 	uint16_t len = strlen(stringValuePair);
 	if (address + len + 2 >= SOAPSTRING_ENDADDRESS) return 0; //out of memory
 	
-	*address = 0x0A; //write the First Byte of VarPars
-	address++;
+	//*address = 0x0A; //write the First Byte of VarPars
+	//address++;
 	writtenBytes++;
 	
 	memcpy(address, stringValuePair, len); // copy the var pair's string to the address
 	writtenBytes += len;
-	address += len; //increase the address as len
-	*address = 0x0D; //put the EOS code 
+	//address += len; //increase the address as len
+	//*address = 0x0D; //put the EOS code 
 	writtenBytes++;
 	return writtenBytes;
 	
 }
+
+/*lvana , the expected memory storage format is
+ *0x04 start of soapstring char
+ *firstObjectName,firstObjectvalue.tostring();
+ *secondObjectName,secondObjectValue.tostring90;      note the , and the ; are atual chars in this
+ *0xff                                                end of the soap string
+ **/
+uint32_t calculateSoapStringSize()
+{
+	uint32_t SizeOfMySoapString = 0;
+	char CalcString[60];
+	
+	for (uint16_t pairIndex = 0; SoapNudsList[pairIndex] != NULL; pairIndex++)
+	{
+		if (!SoapNudsList[pairIndex])  continue;
+		uint16_t writtenBytes = 0;
+		sprintf(CalcString, "%s,%.3f;", SoapNudsList[pairIndex]->Name, SoapNudsList[pairIndex]->Value); // format: name,value;
+		uint16_t len = strlen(CalcString);
+		SizeOfMySoapString += len;//add up the total string length	
+	}
+	return SizeOfMySoapString;
+}
 void WriteSoapStringToStorage()
 {
-	uint8_t* SoapstringAddress = FindNexSaveAddress();
+	uint8_t* SoapstringAddress = FindNexSaveAddress();//find where the empty flash starts
 	if (!SoapstringAddress) return; // do nothing if it did not found out the address to write soapstring
-	
+	//lvana please check to see if there is enough room for the soapstring to write
+
 	uint16_t writtenBytes = 0;
 	*SoapstringAddress = 0x4; //put EOT charactor
 	SoapstringAddress++; //increase the address 
 	for (uint16_t i = 0; SoapNudsList[i] != NULL; i++)
 	{
 		writtenBytes = WriteSoapValuePair(i, SoapstringAddress); //write the varpairs at the address of storage
-		if (writtenBytes == 0) break;							//stop the write soapstring
+		if (writtenBytes == 0)
+		{//if we get here, we just blew past the end of the flashstorage space
+			//so we need to erase and point again
+			eraseSoapStringData_copyCalibrationDataTobeginning();
+			SoapstringAddress = SOAPSTRING_ENDADDRESS;
+			i = 0xffff;
+			continue;
+			//break;							//stop the write soapstring
+		}
 		
 		//I didn't know if I should call the function to get the next address here, so I just increased the address.
 		SoapstringAddress += writtenBytes;							//increase the address as written length.
+	
 	}
+}
+
+void eraseSoapStringData_copyCalibrationDataTobeginning()
+{
+	//so we need to 
+//1. take a deep breath  :-)
+//2. copyLastCalibrationDataToRamBuffer
+//3. erase flash
+//4. writeTempCalibrationDataToFlash(START_OF_CALIBRATION_DATA);
+}
+void eraseSoapStringData_CopySoapstringbeginning()
+{
+	//so we need to 
+	//1. take a deep breath  :-)
+	//2. copyLastSoapStringToRamBuffer
+	//3. erase flash
+	//4. writeTempSoapStringToFlash(SOAPSTRING_STARTADDRESS);
+	
 }
 
 //find the start address of VarpairList with the end address
