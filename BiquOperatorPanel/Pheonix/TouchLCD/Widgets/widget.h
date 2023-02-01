@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include "../GUI/gui.h"
+
 #define NULL 0
 #define WIDGET_MAX_TEXT_LENGTH 50
 #define LIST_MAX_LENGH		30

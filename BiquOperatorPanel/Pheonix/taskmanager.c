@@ -153,21 +153,47 @@ void BlinkButtonsTask(void) // it is called every 100ms
 {
 	for (uint16_t i = 0; i < LIST_MAX_LENGH; i++)
 	{
-		if (BlinkWidgetsList[i].widget == NULL) return;
-		if (BlinkWidgetsList[i].blinkCount % BlinkWidgetsList[i].blinkRate== 0) { 
-			BlinkWidgetsList[i].widget->HasFocus = !BlinkWidgetsList[i].widget->HasFocus; //invert the state
-			BlinkWidgetsList[i].widget->RedrawMe = 1;
-		}
-		uint16_t numberOfblinked = BlinkWidgetsList[i].blinkCount / (BlinkWidgetsList[i].blinkRate); //number of blinks, so far 
-		if (BlinkWidgetsList[i].numberOfTimesToblink != 0xFF && BlinkWidgetsList[i].numberOfTimesToblink <= numberOfblinked)
+		if (BlinkWidgetsList[i].widget == NULL) return;//no valid object in list, leave
+		if (BlinkWidgetsList[i].widget->Type != BUTTON) continue;
+		if (BlinkWidgetsList[i].numberOfTimesToblink)
 		{
-			BlinkWidgetsList[i].widget->HasFocus = 0;
-			BlinkWidgetsList[i].widget->RedrawMe = 1;
-			widget_delete_blink_widget(BlinkWidgetsList[i].widget);
+			//this object is supposed to be blinking
+			if (BlinkWidgetsList[i].blinkCount != 0xff)//iff count is 0xff, blink forever
+			{	BlinkWidgetsList[i].blinkCount--; }//count down the blinks
+			
+			if (BlinkWidgetsList[i].blinkCount == 0 )
+			{
+				//we reached full count, so lets change the backcolor
+				if (BlinkWidgetsList[i].numberOfTimesToblink & 1)
+				{
+					((Button*)BlinkWidgetsList[i].widget)->Checked = 1; 
+				}
+				else
+				{
+					((Button*)BlinkWidgetsList[i].widget)->Checked = 0; 
+				}
+				BlinkWidgetsList[i].widget->RedrawMe = 1;
+			}
 		}
-		else
-			BlinkWidgetsList[i].blinkCount++;
-		
 	}
 }
+//	for (uint16_t i = 0; i < LIST_MAX_LENGH; i++)
+//	{
+//		if (BlinkWidgetsList[i].widget == NULL) return;
+//		if (BlinkWidgetsList[i].blinkCount % BlinkWidgetsList[i].blinkRate== 0) { 
+//			BlinkWidgetsList[i].widget->HasFocus = !BlinkWidgetsList[i].widget->HasFocus; //invert the state
+//			BlinkWidgetsList[i].widget->RedrawMe = 1;
+//		}
+//		uint16_t numberOfblinked = BlinkWidgetsList[i].blinkCount / (BlinkWidgetsList[i].blinkRate); //number of blinks, so far 
+//		if (BlinkWidgetsList[i].numberOfTimesToblink != 0xFF && BlinkWidgetsList[i].numberOfTimesToblink <= numberOfblinked)
+//		{
+//			BlinkWidgetsList[i].widget->HasFocus = 0;
+//			BlinkWidgetsList[i].widget->RedrawMe = 1;
+//			widget_delete_blink_widget(BlinkWidgetsList[i].widget);
+//		}
+//		else
+//			BlinkWidgetsList[i].blinkCount++;
+//		
+//	}
+
 
