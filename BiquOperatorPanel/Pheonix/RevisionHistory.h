@@ -7,7 +7,7 @@
 #pragma once
 #define RevisionTitle			"MEGASONIC HYPERCLEAN"
 #define RevisionHeader ">Hy:BiquOperatorPanel:"
-#define MajorStep      "1.034"
+#define MajorStep      "1.035"
 #define RevisionDate   "02/01/2023"   
 #define CONNECTIONSTRING ">Hy:BiquOperatorPanel Rev " MajorStep ":" RevisionDate ":GD32F407:--:"   //"1.000:0:0:0:USB"
 

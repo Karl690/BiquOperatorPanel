@@ -153,14 +153,16 @@ void widget_add_blink_widget(Widget* widget, uint8_t rate, uint8_t numberOfTime)
 		{
 			//if widget is exit, update the blink information for this widget
 			BlinkWidgetsList[i].blinkRate = rate;
+			BlinkWidgetsList[i].blinkCount = rate;//start with full count please
 			BlinkWidgetsList[i].numberOfTimesToblink = numberOfTime;
+			return;
 		}
 	}
 	if (i >= LIST_MAX_LENGH) return; //out of list range
 	//add the widget and blink params in list
 	BlinkWidgetsList[i].widget = widget;
 	BlinkWidgetsList[i].blinkRate = rate;
-	BlinkWidgetsList[i].blinkCount = 0;
+	BlinkWidgetsList[i].blinkCount = rate;
 	BlinkWidgetsList[i].numberOfTimesToblink = numberOfTime;
 }
 //remove the widget from list.

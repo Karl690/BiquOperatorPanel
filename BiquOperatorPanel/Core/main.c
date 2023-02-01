@@ -89,11 +89,10 @@ int main(void)
 		}
 
 		panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 0); //redraw as required..
-		
+		Refresh = 0;		
 		if(touchScreenIsPress)
 			panel_touch_event_to_control(ActivPanel, (Point){0, 0});
 		
-		Refresh = 0;
 		HeartBeat++;
 		if (BarValue > 3.3) BarValue = 0;
 		BarValue += 0.1;

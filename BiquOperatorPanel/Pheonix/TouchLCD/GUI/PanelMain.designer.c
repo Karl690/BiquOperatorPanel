@@ -713,7 +713,7 @@ void  InitPanelMain()
 	glBtnLoadString.BackColor = RGB16(0, 0, 0);
 	glBtnLoadString.ForeColor = RGB16(132, 225, 255);
 	glBtnLoadString.BorderColor = RGB16(255, 255, 0);
-	glBtnLoadString.CheckedBackColor = RGB16(0, 0, 0);
+	glBtnLoadString.CheckedBackColor = RGB16(88, 88, 88);
 	glBtnLoadString.CheckedForeColor = RGB16(0, 0, 0);
 	glBtnLoadString.CheckedBorderColor = RGB16(0, 0, 0);
 	glBtnLoadString.FocusBackColor = RGB16(0, 0, 0);

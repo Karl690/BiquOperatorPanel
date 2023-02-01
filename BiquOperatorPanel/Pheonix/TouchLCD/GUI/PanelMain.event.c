@@ -86,7 +86,7 @@ void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
 }
 void LoadSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
-	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
+	BlinkStartWidget(sender, 5, 10); //blink 5 times every 0.5s
 	
 	LoadSoapStringFromStorage();
 }
