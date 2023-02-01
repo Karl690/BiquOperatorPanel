@@ -20,11 +20,10 @@ typedef enum
 
 typedef struct tagTouchCalibrationInfo
 {
-	uint8_t IsValid;
-	Point LCD_Corner[3];
-	Point TP_Points[3];
-	uint32_t A, B, C, D, E, F, K;
-}TouchCalibrationInfo;
+	uint8_t IsValid;			//1 
+	Point TP_Points[3];			//2*2 *3 = 12
+	uint32_t A, B, C, D, E, F, K;  //4*7 = 28
+}TouchCalibrationInfo;				//total size is 41bytes
 
 
 

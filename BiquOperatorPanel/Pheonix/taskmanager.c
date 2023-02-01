@@ -12,6 +12,7 @@
 #include "main.h"
 #include "taskmanager.h"
 #include "TouchLCD/lcd_encoder.h"
+#include "TouchLCD/Widgets/widget.h"
 #include "TouchLCD/Widgets/button.h"
 
 uint32_t Seconds = 0;               // needed for heartbeat (number of seconds since boot)
@@ -54,7 +55,7 @@ const PFUNC F10HZ[NUM_10HZ] =
 	Spare,
 	Spare,
 	Spare,
-	Spare,
+	BlinkButtonsTask,
 };
 
 const PFUNC F1HZ[NUM_1HZ] =
@@ -148,4 +149,25 @@ void CheckEncoderButton()
 	
 }
 
+void BlinkButtonsTask(void) // it is called every 100ms
+{
+	for (uint16_t i = 0; i < LIST_MAX_LENGH; i++)
+	{
+		if (BlinkWidgetsList[i].widget == NULL) return;
+		if (BlinkWidgetsList[i].blinkCount % BlinkWidgetsList[i].blinkRate== 0) { 
+			BlinkWidgetsList[i].widget->HasFocus = !BlinkWidgetsList[i].widget->HasFocus; //invert the state
+			BlinkWidgetsList[i].widget->RedrawMe = 1;
+		}
+		uint16_t numberOfblinked = BlinkWidgetsList[i].blinkCount / (BlinkWidgetsList[i].blinkRate); //number of blinks, so far 
+		if (BlinkWidgetsList[i].numberOfTimesToblink != 0xFF && BlinkWidgetsList[i].numberOfTimesToblink <= numberOfblinked)
+		{
+			BlinkWidgetsList[i].widget->HasFocus = 0;
+			BlinkWidgetsList[i].widget->RedrawMe = 1;
+			widget_delete_blink_widget(BlinkWidgetsList[i].widget);
+		}
+		else
+			BlinkWidgetsList[i].blinkCount++;
+		
+	}
+}
 

@@ -93,7 +93,7 @@ void listbox_on_paint(Listbox* obj, Point offset, Color16  backcolor)
 	//if boarder is valid, i.e width>0, we can draw the border now
 	if (obj->BorderWidth > 0)
 	{
-		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->IsFocus?obj->FocusBorderColor: obj->BorderColor);
+		GUI_DrawRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->HasFocus?obj->FocusBorderColor: obj->BorderColor);
 	}
 	uint16_t row_height = obj->Font->Height + 4;//font height in pixels
 	int16_t row_bottom = pos.y + obj->BorderWidth + obj->Padding.top; //first pixel in the display, however we need to offset by border and padd

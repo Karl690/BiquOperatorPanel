@@ -20,11 +20,11 @@ void numeric_on_paint(Numeric* obj, Point offset, Color16  backcolor)
 {	
 	obj->RedrawMe = 0;
 	Point pos = { offset.x + obj->Location.x, offset.y + obj->Location.y };
-	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->IsFocus?obj->FocusBackColor: obj->BackColor);
+	GUI_FillRect(pos.x, pos.y, pos.x + obj->Size.width, pos.y + obj->Size.height, obj->HasFocus ? obj->FocusBackColor : obj->BackColor);
 	if (obj->BorderWidth > 0)
 	{
 		//GUI_DrawRect(pos.x, pos.y, pos.x + edit->Size.width, pos.y + edit->Size.height, edit->BorderColor);
-		GUI_DrawPolygon(obj->CornerPoints, sizeof(obj->CornerPoints) / sizeof(Point), obj->IsFocus?obj->FocusBorderColor: obj->BorderColor, pos);
+		GUI_DrawPolygon(obj->CornerPoints, sizeof(obj->CornerPoints) / sizeof(Point), obj->HasFocus?obj->FocusBorderColor: obj->BorderColor, pos);
 	}
 	
 	widget_draw_string(obj->Text,
@@ -35,8 +35,8 @@ void numeric_on_paint(Numeric* obj, Point offset, Color16  backcolor)
 		&obj->Padding,
 		obj->Font,
 		obj->TextAlign, 
-		obj->IsFocus?obj->FocusForeColor: obj->ForeColor,
-		obj->IsFocus?obj->FocusBackColor: obj->BackColor);
+		obj->HasFocus?obj->FocusForeColor: obj->ForeColor,
+		obj->HasFocus?obj->FocusBackColor: obj->BackColor);
 }
 
 void numeric_set_min_max(Numeric* obj, int min, int max)

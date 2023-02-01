@@ -81,22 +81,29 @@ void glBtnApply_TouchEvent(void* sender, uint16_t x, uint16_t y)
 
 void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
 {
+	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
 	eraseStorage();
 }
 void LoadSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
+	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
+	
 	LoadSoapStringFromStorage();
 }
 void SaveSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
+	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
+	
 	WriteSoapStringToStorage();
 	//lvana 
 	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
 }
 void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
+	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
+	
 	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
-	MemoryDumpDisplayAddress = FindNexSaveAddress(); //get current soapstring address
+	MemoryDumpDisplayAddress = FindCurrentSoapstringAddress() + 1; //get current soapstring address , because the first byte is 0x04, it add 1.
 	//Lvana, please index back to START of Last Soapstring Beginning
 	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
 	

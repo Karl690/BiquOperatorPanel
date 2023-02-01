@@ -72,3 +72,4 @@ void BlinkHeartBeat(void);
 
 void CheckEncoderButton(void);
 void blink(void);
+void BlinkButtonsTask(void);
