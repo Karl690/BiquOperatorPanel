@@ -80,7 +80,7 @@ uint8_t EraseFlash(uint32_t sector);
 
 /* Macro and function for operating(save/load) Calibration data */
 #define CALIBRATIONDATA_STARTADDRESS 0x20000000 + 0x10000   //we use RAM after 64kbye because the ram before 64k could be already use.
-#define CALIBRATIONDATA_BLOCKSIZE	128
+#define CALIBRATIONDATA_BLOCKSIZE	64
 #define CALIBRATIONDATA_SIZE		4096	//4k
 uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 
@@ -98,7 +98,8 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 
 
 //#define SOAPSTRING_USABLE_RANGE				12 * 1024 //for flash
-uint8_t* FindNexSaveAddress(); //get the current soap string's address
+uint8_t* FindNexSaveSoapstringAddress(); //get the availabe address of soapstring
+uint8_t* FindCurrentSoapstringAddress(); //get the current soap string's address
 void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
 
 void save_LCD_Touch_Calibration_Data(void);

@@ -25,12 +25,8 @@ uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE] = { 0};
 TouchCalibrationInfo touchCalibrationInfo;
 
 Numeric* SoapNudsList[30] = { 0 };
-// lvana create struct for Widget_blinkControl 
-// *widget, byte blinkRate, byte numberOfTimesToblink
-//make new method for 10hz loop, call it   BlinkTroll();
-//blinkRate is how blink interval in .1 sec, so 5 would blink 1 x per second, .5 on, and .5 off
-//numberOfTimesToblink is how many times it will turn on and off
-//if set to -1,it is continous
+//the blink functions and structure are in widget.c 
+
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);

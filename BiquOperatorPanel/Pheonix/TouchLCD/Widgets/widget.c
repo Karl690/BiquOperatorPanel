@@ -3,7 +3,7 @@
 #include "panel.h"
 #include "button.h"
 #include "label.h"
-
+BlinkWidgetInfo BlinkWidgetsList[LIST_MAX_LENGH] = { 0 };
 
 //get the absolute condination of Control
 void widget_get_control_coodination(Widget* widget, Point* pos) 
@@ -139,4 +139,54 @@ void buffer2hexstring(uint8_t* buf, uint8_t* hexstring, uint16_t bufsize)
 			*temp = '.';
 		temp ++;
 	}
+}
+
+
+
+void widget_add_blink_widget(Widget* widget, uint8_t rate, uint8_t numberOfTime)//if widget is exit, it would update 
+{
+	uint16_t i = 0;
+	for (i = 0; i < LIST_MAX_LENGH; i++)
+	{
+		if (BlinkWidgetsList[i].widget == NULL) break;
+		if (BlinkWidgetsList[i].widget == widget)
+		{
+			//if widget is exit, update the blink information for this widget
+			BlinkWidgetsList[i].blinkRate = rate;
+			BlinkWidgetsList[i].numberOfTimesToblink = numberOfTime;
+		}
+	}
+	if (i >= LIST_MAX_LENGH) return; //out of list range
+	//add the widget and blink params in list
+	BlinkWidgetsList[i].widget = widget;
+	BlinkWidgetsList[i].blinkRate = rate;
+	BlinkWidgetsList[i].blinkCount = 0;
+	BlinkWidgetsList[i].numberOfTimesToblink = numberOfTime;
+}
+//remove the widget from list.
+void widget_delete_blink_widget(Widget* widget) 
+{
+	uint16_t i = 0;
+	for (i = 0; i < LIST_MAX_LENGH; i++)
+	{
+		if (BlinkWidgetsList[i].widget == NULL) break; //not find the widget
+		if (BlinkWidgetsList[i].widget == widget)
+		{
+			for (uint16_t j = i; j < LIST_MAX_LENGH; j++)
+			{
+				memcpy(&BlinkWidgetsList[j], &BlinkWidgetsList[j+1], sizeof(BlinkWidgetInfo)); //copy the next item to previous one
+				memset(&BlinkWidgetsList[j + 1], 0, sizeof(BlinkWidgetInfo)); // reset the memory of next item
+			}
+		}
+	}
+	
+}
+
+void BlinkStartWidget(Widget* widget, uint8_t rate, uint8_t numberOfTime)
+{
+	widget_add_blink_widget(widget, rate, numberOfTime);
+}
+void BlinkStopWidget(Widget* widget)
+{
+	widget_delete_blink_widget(widget);
 }

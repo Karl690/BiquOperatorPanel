@@ -20,14 +20,15 @@
 //};
 //	
 
+Point LCD_Corner[3] = { 0 };
 
-#define XL1 touchCalibrationInfo.LCD_Corner[0].x
-#define XL2 touchCalibrationInfo.LCD_Corner[1].x
-#define XL3 touchCalibrationInfo.LCD_Corner[2].x
+#define XL1 LCD_Corner[0].x
+#define XL2 LCD_Corner[1].x
+#define XL3 LCD_Corner[2].x
 
-#define YL1 touchCalibrationInfo.LCD_Corner[0].y
-#define YL2 touchCalibrationInfo.LCD_Corner[1].y
-#define YL3 touchCalibrationInfo.LCD_Corner[2].y
+#define YL1 LCD_Corner[0].y
+#define YL2 LCD_Corner[1].y
+#define YL3 LCD_Corner[2].y
 
 #define X1 touchCalibrationInfo.TP_Points[0].x
 #define X2 touchCalibrationInfo.TP_Points[1].x
@@ -156,18 +157,18 @@ void lcd_touch_get_coordinates(uint16_t *x, uint16_t *y)
 
 void InitializeCalibrationParameters()
 {//sets the 3 points for screen touch panel calibration in pixels
-	touchCalibrationInfo.LCD_Corner[0].x = 40;
-	touchCalibrationInfo.LCD_Corner[1].x = LCD_WIDTH - 40;
-	touchCalibrationInfo.LCD_Corner[2].x = LCD_WIDTH - 40;
+	LCD_Corner[0].x = 40;
+	LCD_Corner[1].x = LCD_WIDTH - 40;
+	LCD_Corner[2].x = LCD_WIDTH - 40;
 	
-	touchCalibrationInfo.LCD_Corner[0].y = 40;
-	touchCalibrationInfo.LCD_Corner[1].y = 40;
-	touchCalibrationInfo.LCD_Corner[2].y = LCD_HEIGHT - 40;
+	LCD_Corner[0].y = 40;
+	LCD_Corner[1].y = 40;
+	LCD_Corner[2].y = LCD_HEIGHT - 40;
 }
 void drawCalibrationCrossHairs(int16_t Index,Color16 CrosshairColor)
 {//draws cross hair over current calibration point.
-	GUI_HLine(touchCalibrationInfo.LCD_Corner[Index].x - 10, touchCalibrationInfo.LCD_Corner[Index].y, touchCalibrationInfo.LCD_Corner[Index].x + 10, CrosshairColor);
-	GUI_VLine(touchCalibrationInfo.LCD_Corner[Index].x, touchCalibrationInfo.LCD_Corner[Index].y - 10, touchCalibrationInfo.LCD_Corner[Index].y + 10, CrosshairColor);	
+	GUI_HLine(LCD_Corner[Index].x - 10, LCD_Corner[Index].y, LCD_Corner[Index].x + 10, CrosshairColor);
+	GUI_VLine(LCD_Corner[Index].x, LCD_Corner[Index].y - 10, LCD_Corner[Index].y + 10, CrosshairColor);	
 }
 void CalibratLcdTouchPanel()
 {//starts the screen calibration	

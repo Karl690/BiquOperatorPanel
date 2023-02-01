@@ -146,15 +146,15 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 			switch (FocusedWidget->Type)
 			{
 			case DROPDOWNLIST:
-				((DropdownList*)FocusedWidget)->IsFocus = 0;
+				((DropdownList*)FocusedWidget)->HasFocus = 0;
 				((DropdownList*)FocusedWidget)->RedrawMe = 1;
 				break;
 			case NUMERIC:
-				((Numeric*)FocusedWidget)->IsFocus = 0;
+				((Numeric*)FocusedWidget)->HasFocus = 0;
 				((Numeric*)FocusedWidget)->RedrawMe = 1;
 				break;
 			case LISTBOX:
-				((Listbox*)FocusedWidget)->IsFocus = 0;
+				((Listbox*)FocusedWidget)->HasFocus = 0;
 				((Listbox*)FocusedWidget)->RedrawMe = 1;
 				break;
 							
@@ -169,17 +169,17 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 			{
 			case DROPDOWNLIST:
 				FocusedWidget = widget;
-				((DropdownList*)FocusedWidget)->IsFocus = 1;
+				((DropdownList*)FocusedWidget)->HasFocus = 1;
 				((DropdownList*)FocusedWidget)->RedrawMe = 1;
 				break;
 			case NUMERIC:
 				FocusedWidget = widget;
-				((Numeric*)FocusedWidget)->IsFocus = 1;
+				((Numeric*)FocusedWidget)->HasFocus = 1;
 				((Numeric*)FocusedWidget)->RedrawMe = 1;
 				break;
 			case LISTBOX:
 				FocusedWidget = widget;
-				((Listbox*)FocusedWidget)->IsFocus = 1;
+				((Listbox*)FocusedWidget)->HasFocus = 1;
 				((Listbox*)FocusedWidget)->RedrawMe = 1;
 				break;
 			}		

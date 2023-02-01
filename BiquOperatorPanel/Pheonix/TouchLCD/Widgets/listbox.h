@@ -12,12 +12,16 @@ typedef struct tagListbox
 	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;//visible property, set to 0 to avoid repainting
+	uint16_t HasFocus;
 	Point Location;//location in reference to the parent container in Pixels.
 	Size	Size;	//XY size in Pixels
-	Color16 BackColor;//default color of background
-	Color16 ForeColor;//default color of Text
-	Color16 BorderWidth;//width of border,set to 0 to inhibit boarder display
-	Color16 BorderColor;//border color
+	Color16 BackColor;
+	Color16 ForeColor;
+	Color16 FocusBackColor;
+	Color16 FocusForeColor;
+	uint16_t BorderWidth;
+	Color16 BorderColor;
+	Color16 FocusBorderColor;
 	PADDING		Padding;//dead space required in pixel, in between bounds and graphics elements
 	
 	char Text[WIDGET_MAX_TEXT_LENGTH];//max line length
@@ -29,9 +33,7 @@ typedef struct tagListbox
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
 	
-	//Listbox properties	
-	uint8_t IsFocus;//this object has focus
-	Color16 FocusBorderColor;//change boarder if we have focus
+	//Listbox properties		
 	Color16 RowOddColor;//
 	Color16 RowEvenColor;//allows contrast display by alternating the back color of each row
 	uint8_t RowData[LISTBOX_MAX_ROWS][WIDGET_MAX_TEXT_LENGTH];
