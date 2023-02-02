@@ -16,6 +16,7 @@ extern Button gL_Button1;
 extern Button glBtnPlus;
 extern Button glBtnMinus;
 extern Panel gL_Panel4;
+extern DropdownList glDropdownDisplayMode;
 extern Listbox gL_Listbox1;
 extern Panel gL_Panel3;
 extern Label lblTitle;
