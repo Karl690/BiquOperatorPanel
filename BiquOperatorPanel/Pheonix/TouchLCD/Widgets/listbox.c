@@ -139,7 +139,7 @@ void listbox_move_down_line(Listbox* obj)
 //get the number of characters for a line
 uint16_t listbox_get_charsofline(Listbox* obj) 
 {
-	uint16_t DisplayDataLength = WIDGET_MAX_TEXT_LENGTH;
+	uint16_t DisplayDataLength = 40;//WIDGET_MAX_TEXT_LENGTH;
 	if (obj->DispMode == DISPLAYMODE_Raw_ASCII) DisplayDataLength = 32; //raw ascii, only 32 bytes per line, plus address
 	else if(obj->DispMode ==  DISPLAYMODE_HEX)		DisplayDataLength = 8; //hex ascii, only 8 bytes per line, plus address
 	return DisplayDataLength;
@@ -167,13 +167,16 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 		case DISPLAYMODE_VARPAIR	: 
 			{
 				DisplayDataLength = 0;
-				for (uint16_t i = 0; i < WIDGET_MAX_TEXT_LENGTH; i++)
+				sprintf(buf, "%08X  ", (uint32_t)WorkingAddress); //set the address of Memory
+				buf += 10; //added 8 charactor of address string and two space  [000000  ]
+				for (uint16_t i = 0; i < WIDGET_MAX_TEXT_LENGTH -10; i++)
 				{	
 					if (*(WorkingAddress + i) == ';')  //find out the ';'
 					{
 						DisplayDataLength++;
 						break;
 					}
+					
 					buf[i] = *(WorkingAddress + i);
 					DisplayDataLength++;
 				}
