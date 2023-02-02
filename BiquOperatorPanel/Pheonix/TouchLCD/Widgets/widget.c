@@ -155,6 +155,11 @@ void widget_add_blink_widget(Widget* widget, uint8_t rate, uint8_t numberOfTime)
 			BlinkWidgetsList[i].blinkRate = rate;
 			BlinkWidgetsList[i].blinkCount = rate;//start with full count please
 			BlinkWidgetsList[i].numberOfTimesToblink = numberOfTime;
+			BlinkWidgetsList[i].widget->RedrawMe = 1;
+			BlinkWidgetsList[i].originalChecked = BlinkWidgetsList[i].widget->Checked; //save the original check status before blinking
+			BlinkWidgetsList[i].originalFocused = BlinkWidgetsList[i].widget->HasFocus; //save the original focus tatus before blinking
+			BlinkWidgetsList[i].widget->Checked = !BlinkWidgetsList[i].widget->Checked; //invert the status
+			BlinkWidgetsList[i].widget->HasFocus = 0; //during blinking, focus is false because if checked =0, it could have focus color
 			return;
 		}
 	}
@@ -164,6 +169,12 @@ void widget_add_blink_widget(Widget* widget, uint8_t rate, uint8_t numberOfTime)
 	BlinkWidgetsList[i].blinkRate = rate;
 	BlinkWidgetsList[i].blinkCount = rate;
 	BlinkWidgetsList[i].numberOfTimesToblink = numberOfTime;
+	BlinkWidgetsList[i].widget->RedrawMe = 1;
+	BlinkWidgetsList[i].originalChecked = BlinkWidgetsList[i].widget->Checked; //save the original status before blinking
+	BlinkWidgetsList[i].originalFocused = BlinkWidgetsList[i].widget->HasFocus; //save the original focus tatus before blinking
+	BlinkWidgetsList[i].widget->Checked = !BlinkWidgetsList[i].widget->Checked;//invert the status
+	BlinkWidgetsList[i].widget->HasFocus = 0; //during blinking, focus is false because if checked =0, it could have focus color
+	
 }
 //remove the widget from list.
 void widget_delete_blink_widget(Widget* widget) 
@@ -174,8 +185,21 @@ void widget_delete_blink_widget(Widget* widget)
 		if (BlinkWidgetsList[i].widget == NULL) break; //not find the widget
 		if (BlinkWidgetsList[i].widget == widget)
 		{
+			//Backup the original status(checked, focus)
+			if (BlinkWidgetsList[i].widget->Checked != BlinkWidgetsList[i].originalChecked)
+			{
+				BlinkWidgetsList[i].widget->Checked = BlinkWidgetsList[i].originalChecked;
+				BlinkWidgetsList[i].widget->RedrawMe = 1;
+			}
+			if (BlinkWidgetsList[i].widget->HasFocus != BlinkWidgetsList[i].originalFocused)
+			{
+				BlinkWidgetsList[i].widget->HasFocus = BlinkWidgetsList[i].originalFocused;
+				BlinkWidgetsList[i].widget->RedrawMe = 1;
+			}
+			
 			for (uint16_t j = i; j < LIST_MAX_LENGH; j++)
 			{
+				
 				memcpy(&BlinkWidgetsList[j], &BlinkWidgetsList[j+1], sizeof(BlinkWidgetInfo)); //copy the next item to previous one
 				memset(&BlinkWidgetsList[j + 1], 0, sizeof(BlinkWidgetInfo)); // reset the memory of next item
 			}
@@ -190,5 +214,6 @@ void BlinkStartWidget(Widget* widget, uint8_t rate, uint8_t numberOfTime)
 }
 void BlinkStopWidget(Widget* widget)
 {
+	
 	widget_delete_blink_widget(widget);
 }

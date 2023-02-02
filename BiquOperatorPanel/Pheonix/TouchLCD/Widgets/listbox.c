@@ -158,11 +158,27 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 	for (int count = 0; count < LISTBOX_MAX_ROWS; count++)  //display 12 lines at a time 
 	{
 		buf = &obj->RowData[count]; 
+		memset(buf, 0, WIDGET_MAX_TEXT_LENGTH); //reset the buffer.
 		switch (obj->DispMode)
 		{
 		case DISPLAYMODE_ASCII     : strncpy(buf, WorkingAddress, DisplayDataLength); break;//formatted string
 		case DISPLAYMODE_Raw_ASCII : strncpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
 		case DISPLAYMODE_HEX       : buffer2hexstring(WorkingAddress, buf, DisplayDataLength); break;//hex dump 5 bytes at a time		}
+		case DISPLAYMODE_VARPAIR	: 
+			{
+				DisplayDataLength = 0;
+				for (uint16_t i = 0; i < WIDGET_MAX_TEXT_LENGTH; i++)
+				{	
+					if (*(WorkingAddress + i) == ';')  //find out the ';'
+					{
+						DisplayDataLength++;
+						break;
+					}
+					buf[i] = *(WorkingAddress + i);
+					DisplayDataLength++;
+				}
+			break;
+			}
 		}
 		obj->RowCount++; //increase the row count
 		//listbox_append_row(obj, buf); //add to listbox for display

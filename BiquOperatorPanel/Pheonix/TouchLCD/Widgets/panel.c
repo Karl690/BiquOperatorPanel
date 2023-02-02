@@ -148,6 +148,7 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 			case DROPDOWNLIST:
 				((DropdownList*)FocusedWidget)->HasFocus = 0;
 				((DropdownList*)FocusedWidget)->RedrawMe = 1;
+				BlinkStopWidget(FocusedWidget);
 				break;
 			case NUMERIC:
 				((Numeric*)FocusedWidget)->HasFocus = 0;
@@ -171,6 +172,7 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 				FocusedWidget = widget;
 				((DropdownList*)FocusedWidget)->HasFocus = 1;
 				((DropdownList*)FocusedWidget)->RedrawMe = 1;
+				BlinkStartWidget(FocusedWidget, 5, 0xff);
 				break;
 			case NUMERIC:
 				FocusedWidget = widget;

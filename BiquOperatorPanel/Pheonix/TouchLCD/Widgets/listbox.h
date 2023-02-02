@@ -12,7 +12,8 @@ typedef struct tagListbox
 	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;//visible property, set to 0 to avoid repainting
-	uint16_t HasFocus;
+	uint8_t HasFocus;
+	uint8_t Checked;
 	Point Location;//location in reference to the parent container in Pixels.
 	Size	Size;	//XY size in Pixels
 	Color16 BackColor;

@@ -154,7 +154,6 @@ void BlinkButtonsTask(void) // it is called every 100ms
 	for (uint16_t i = 0; i < LIST_MAX_LENGH; i++)
 	{
 		if (BlinkWidgetsList[i].widget == NULL) return;//no valid object in list, leave
-		if (BlinkWidgetsList[i].widget->Type != BUTTON) continue;
 		if (BlinkWidgetsList[i].numberOfTimesToblink)  //this object is supposed to be blinking
 		{	
 			
@@ -162,20 +161,28 @@ void BlinkButtonsTask(void) // it is called every 100ms
 			if (BlinkWidgetsList[i].blinkCount == 0 )
 			{
 				if (BlinkWidgetsList[i].numberOfTimesToblink != 0xff)//iff numberOfTimesToblink is 0xff, blink forever
-				{BlinkWidgetsList[i].numberOfTimesToblink--; }
-				//we reached full count, so lets change the backcolor
-				if (BlinkWidgetsList[i].numberOfTimesToblink & 1)
-				{
-					((Button*)BlinkWidgetsList[i].widget)->Checked = 1; //set state every other count cycle
-				}
-				else
-				{
-					((Button*)BlinkWidgetsList[i].widget)->Checked = 0; 
-				}
+				{ BlinkWidgetsList[i].numberOfTimesToblink--; }
+				
+				BlinkWidgetsList[i].widget->Checked = !BlinkWidgetsList[i].widget->Checked; // invert the checked status
+				
+//				//we reached full count, so lets change the backcolor
+//				if (BlinkWidgetsList[i].numberOfTimesToblink & 1)
+//				{
+//					((Button*)BlinkWidgetsList[i].widget)->Checked = 1; //set state every other count cycle
+//				}
+//				else
+//				{
+//					((Button*)BlinkWidgetsList[i].widget)->Checked = 0; 
+//				}
 				BlinkWidgetsList[i].blinkCount = BlinkWidgetsList[i].blinkRate;
 				BlinkWidgetsList[i].widget->RedrawMe = 1;
 				Refresh = 1;
 			}
+		}else
+		{
+			//remove the widget in blink widget list.
+			
+			BlinkStopWidget(BlinkWidgetsList[i].widget);
 		}
 	}
 }

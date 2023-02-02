@@ -34,6 +34,7 @@ typedef enum
 #define	DISPLAYMODE_ASCII      0
 #define	DISPLAYMODE_Raw_ASCII  1
 #define	DISPLAYMODE_HEX        2
+#define DISPLAYMODE_VARPAIR		3
 
 
 typedef void(*CallbackTouchEventFunction)(void*, uint32_t, uint32_t);
@@ -45,7 +46,8 @@ typedef struct tagWidget
 	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;
-	uint16_t HasFocus;
+	uint8_t HasFocus;
+	uint8_t Checked;
 	Point Location;
 	Size	Size;	
 	Color16 BackColor;
@@ -72,6 +74,8 @@ typedef struct tagBlinkWidgetInfo
 	uint8_t blinkRate; //blinkRate is how blink interval in .1 sec, so 5 would blink 1 x per second, .5 on, and .5 off
 	uint32_t blinkCount; //blinkCount is a number that count down.
 	uint8_t numberOfTimesToblink; //numberOfTimesToblink is how many times it will turn on and off if set to -1 or 0xff,it is continous
+	uint8_t originalChecked; // before blinking, it save the widget's check status. after finished blink, it would keep with original status.
+	uint16_t originalFocused; //during blinking, HasFocus is false, after it need to keep original statue
 }BlinkWidgetInfo;
 
 

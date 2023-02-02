@@ -10,7 +10,8 @@ typedef struct tagButton
 	char Name[WIDGET_MAX_TEXT_LENGTH];
 	uint8_t RedrawMe; //0: Not redraw, 1: need to Redraw
 	uint8_t Visible;
-	uint16_t HasFocus;
+	uint8_t HasFocus;
+	uint8_t Checked;
 	Point Location;
 	Size	Size;	
 	Color16 BackColor;
@@ -37,8 +38,7 @@ typedef struct tagButton
 	
 	Color16	CheckedBackColor;
 	Color16	CheckedForeColor;
-	Color16	CheckedBorderColor;
-	uint8_t		Checked;
+	Color16	CheckedBorderColor;	
 	char		CheckedText[WIDGET_MAX_TEXT_LENGTH];
 	
 	

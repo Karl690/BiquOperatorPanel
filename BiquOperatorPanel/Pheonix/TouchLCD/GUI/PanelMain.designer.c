@@ -261,8 +261,10 @@ void  InitPanelMain()
 	 ;
 	glDropdownDisplayMode.HasFocus = 0;
 	glDropdownDisplayMode.ValueType = DROPDOWNLIST_STRING;
-	dropdownlist_add_item(&glDropdownDisplayMode, "HEX");
+	dropdownlist_add_item(&glDropdownDisplayMode, "ASCII");	
 	dropdownlist_add_item(&glDropdownDisplayMode, "RAW");
+	dropdownlist_add_item(&glDropdownDisplayMode, "HEX");
+	dropdownlist_add_item(&glDropdownDisplayMode, "VARPAIR");
 	glDropdownDisplayMode.SelectedIndex = 1;
 	dropdownlist_update(&glDropdownDisplayMode);
 

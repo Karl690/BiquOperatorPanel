@@ -107,7 +107,7 @@ void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 	//Lvana, please index back to START of Last Soapstring Beginning
 	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
 	
-	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex == 0?DISPLAYMODE_HEX : DISPLAYMODE_Raw_ASCII;
+	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex;// 0:DISPLAYMODE_HEX, 1: DISPLAYMODE_Raw_ASCII 2: VARPAIR;
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
 
@@ -120,7 +120,7 @@ void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
 	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = getCalibrationDataBlockAddress(); //get current soapstring address	
-	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex == 0 ? DISPLAYMODE_HEX : DISPLAYMODE_Raw_ASCII;
+	gL_Listbox1.DispMode = DISPLAYMODE_HEX; // 0:DISPLAYMODE_HEX, 1: DISPLAYMODE_Raw_ASCII 2: VARPAIR;
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
 
