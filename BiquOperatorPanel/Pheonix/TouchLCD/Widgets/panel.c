@@ -147,8 +147,7 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 			{
 			case DROPDOWNLIST:
 				((DropdownList*)FocusedWidget)->HasFocus = 0;
-				((DropdownList*)FocusedWidget)->RedrawMe = 1;
-				BlinkStopWidget(FocusedWidget);
+				((DropdownList*)FocusedWidget)->RedrawMe = 1;				
 				break;
 			case NUMERIC:
 				((Numeric*)FocusedWidget)->HasFocus = 0;
@@ -157,8 +156,7 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 			case LISTBOX:
 				((Listbox*)FocusedWidget)->HasFocus = 0;
 				((Listbox*)FocusedWidget)->RedrawMe = 1;
-				break;
-							
+				break;	
 			}
 		}		
 		//if Force flag is set or the previous one is different with selected one, 
@@ -172,7 +170,7 @@ void panel_set_focus_widget(Widget* widget, uint8_t isForce)
 				FocusedWidget = widget;
 				((DropdownList*)FocusedWidget)->HasFocus = 1;
 				((DropdownList*)FocusedWidget)->RedrawMe = 1;
-				BlinkStartWidget(FocusedWidget, 5, 0xff);
+				dropdownlist_change_item((DropdownList*)FocusedWidget);
 				break;
 			case NUMERIC:
 				FocusedWidget = widget;
@@ -208,7 +206,7 @@ void panel_touch_event_to_control(Panel* obj, Point offset)
 			else if (widget->Type == TABCONTROL) tabcontrol_touch_event_to_control((TabControl*)widget, pos);
 			else
 			{
-				if(TouchEventStatus == TOUCH_EVENT_DOWN) panel_set_focus_widget(widget, 0);
+				if (TouchEventStatus == TOUCH_EVENT_DOWN) panel_set_focus_widget(widget, widget->Type  == DROPDOWNLIST?1:0);
 			}
 			
 			switch (TouchEventStatus)			

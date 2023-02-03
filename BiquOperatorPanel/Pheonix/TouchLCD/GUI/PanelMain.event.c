@@ -104,17 +104,20 @@ void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 	
 	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = FindCurrentSoapstringAddress() + 1; //get current soapstring address , because the first byte is 0x04, it add 1.
-	//Lvana, please index back to START of Last Soapstring Beginning
-	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
+	if (MemoryDumpDisplayAddress < SOAPSTRING_STARTADDRESS) return; //do not exist soapstring in storage
 	
 	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex;// 0:DISPLAYMODE_HEX, 1: DISPLAYMODE_Raw_ASCII 2: VARPAIR;
-	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
+	
+	listbox_set_memoryaddress(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
 
 void ChangeDisplayModeListEvent(void* sender)
 {
+	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
+	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
 	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex; // 0:DISPLAYMODE_ASCII, 1: DISPLAYMODE_Raw_ASCII 2: DISPLAYMODE_HEX, 3: DISPLAYMODE_VARPAIR;
-	listbox_display_memorydata(&gL_Listbox1, gL_Listbox1.MemoryAddressToDisplay); //display with list's memory address
+	
+	listbox_display_memorydata(&gL_Listbox1, gL_Listbox1.CurrentMemoryAddressToDisplay); //display with list's memory address
 }
 
 void ShiftbitWritetestButtonEvent(void* sender, uint16_t x, uint16_t y)
@@ -125,21 +128,16 @@ void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y)
 {
 	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = getCalibrationDataBlockAddress(); //get current soapstring address	
+	if (MemoryDumpDisplayAddress == NULL) return; //do not exist calibration data in storage
 	gL_Listbox1.DispMode = DISPLAYMODE_HEX; // 0:DISPLAYMODE_HEX, 1: DISPLAYMODE_Raw_ASCII 2: VARPAIR;
-	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
+	listbox_set_memoryaddress(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
 
 void PageDownListbox(Listbox* obj)
 {
-	if (MemoryDumpDisplayAddress == NULL) return; //do nothing
-	
-	MemoryDumpDisplayAddress += listbox_get_charsofline(obj) * LISTBOX_MAX_ROWS; // increase the addres for one page of Lisbox becasue it is different according to display mode.
-	listbox_display_memorydata(obj, MemoryDumpDisplayAddress);
+	listbox_memorydata_go_foreward(obj);
 }
 void PageUpListbox(Listbox* obj)
 {
-	if (MemoryDumpDisplayAddress == NULL) return; //do nothing
-	
-	MemoryDumpDisplayAddress -= listbox_get_charsofline(obj) * LISTBOX_MAX_ROWS; // decrease the addres for one page of Lisbox becasue it is different according to display mode.
-	listbox_display_memorydata(obj, MemoryDumpDisplayAddress);
+	listbox_memorydata_go_backward(obj);
 }

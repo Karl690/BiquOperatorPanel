@@ -42,7 +42,9 @@ typedef struct tagListbox
 	int16_t FirstLineToDisplay; //when scrolling,this is the first line in the list to display
 	uint16_t RowCount;//number of Items in the list
 	uint8_t	DispMode; //specify the display mdoe (Ascill or Hex) 
-	uint8_t*	MemoryAddressToDisplay;// Memory address to display
+	uint8_t*	CurrentMemoryAddressToDisplay;// Memory address to display, it changed when scroll
+	uint16_t*	FirstMemoryAddressToDispay;//by display function it set.
+	
 }Listbox;
 
 void listbox_destory(Listbox* obj);
@@ -57,4 +59,8 @@ void listbox_move_up_line(Listbox* obj);
 void listbox_move_down_line(Listbox* obj);
 
 uint16_t listbox_get_charsofline(Listbox* obj);
+void listbox_set_memoryaddress(Listbox* obj, uint8_t* address);
 void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress);
+
+void listbox_memorydata_go_backward(Listbox* obj);
+void listbox_memorydata_go_foreward(Listbox* obj);

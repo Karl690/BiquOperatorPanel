@@ -35,12 +35,8 @@ void EncoderWheelMove()
 		{
 			if (a == 0) numeric_increment((Numeric*)FocusedWidget);	
 			if (b == 0) numeric_decrement((Numeric*)FocusedWidget);	
-		}else if (FocusedWidget && FocusedWidget->Type == DROPDOWNLIST)
-		{
-			
-			if (a == 0) dropdownlist_select_nextitem((DropdownList*)FocusedWidget);	
-			if (b == 0) dropdownlist_select_previtem((DropdownList*)FocusedWidget);	
-		}else if (FocusedWidget && FocusedWidget->Type == LISTBOX)
+		}
+		else if (FocusedWidget && FocusedWidget->Type == LISTBOX)
 		{
 			if (a == 0) PageDownListbox((DropdownList*)FocusedWidget);	
 			if (b == 0) PageUpListbox((DropdownList*)FocusedWidget);	

@@ -86,6 +86,15 @@ uint16_t dropdownlist_get_seletected_index(DropdownList* obj)
 {
 	return obj->SelectedIndex;
 }
+
+void dropdownlist_change_item(DropdownList* obj)
+{
+	if (obj->SelectedIndex + 1 < obj->ValuesNum) obj->SelectedIndex++;
+	else obj->SelectedIndex = 0;
+	strcpy(obj->Text, obj->Values[obj->SelectedIndex]);
+	obj->RedrawMe = 1;
+	if (obj->Event_ChangedValue)  obj->Event_ChangedValue(obj);
+}
 void dropdownlist_select_nextitem(DropdownList* obj)
 {
 	if (obj->SelectedIndex + 1 < obj->ValuesNum)

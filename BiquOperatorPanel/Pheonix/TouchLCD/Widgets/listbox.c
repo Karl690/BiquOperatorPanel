@@ -145,9 +145,16 @@ uint16_t listbox_get_charsofline(Listbox* obj)
 	else if(obj->DispMode ==  DISPLAYMODE_HEX)		DisplayDataLength = 8; //hex ascii, only 8 bytes per line, plus address
 	return DisplayDataLength;
 }
+void listbox_set_memoryaddress(Listbox* obj, uint8_t* address)
+{
+	//set the memory address to Listbox
+	obj->FirstMemoryAddressToDispay = address;
+	obj->CurrentMemoryAddressToDisplay = address;
+	listbox_display_memorydata(obj, address);
+}
 void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 {
-	obj->MemoryAddressToDisplay = memoryaddress; //set the current memory address to this object
+	obj->CurrentMemoryAddressToDisplay = memoryaddress; //set the current memory address to this object
 	//displays memory contents in either ascii , raw ascii, hex
 	//t the real address for that
 	obj->RowCount = 0; // clear list's array .
@@ -198,4 +205,25 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 	}
 	obj->RedrawMe = 1;
 	//Refresh = 0; //leave flag that we have changed a widget and refresh should be called
+}
+
+//go foreward as one line
+void listbox_memorydata_go_foreward(Listbox* obj)
+{
+	uint16_t DisplayDataLength = listbox_get_charsofline(obj); // get the number of charactor in a line.
+	uint8_t* nextAddress = obj->CurrentMemoryAddressToDisplay + DisplayDataLength;
+	if (*nextAddress == 0xff) {
+		//go to the first address
+		nextAddress = obj->FirstMemoryAddressToDispay;
+	}
+	listbox_display_memorydata(obj, nextAddress);
+}
+//go backward as one line
+void listbox_memorydata_go_backward(Listbox* obj)
+{
+	uint16_t DisplayDataLength = listbox_get_charsofline(obj); // get the number of charactor in a line.
+	uint8_t* nextAddress = obj->CurrentMemoryAddressToDisplay - DisplayDataLength;
+	if (*nextAddress == 0xff) return; // nothing because it is not data range
+	listbox_display_memorydata(obj, nextAddress);
+	
 }

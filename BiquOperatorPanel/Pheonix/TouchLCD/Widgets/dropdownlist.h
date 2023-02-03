@@ -60,3 +60,5 @@ void dropdownlist_select_item(DropdownList* obj, uint16_t index);
 uint16_t dropdownlist_get_seletected_index(DropdownList* obj);
 void dropdownlist_select_nextitem(DropdownList* obj);
 void dropdownlist_select_previtem(DropdownList* obj);
+
+void dropdownlist_change_item(DropdownList* obj);
