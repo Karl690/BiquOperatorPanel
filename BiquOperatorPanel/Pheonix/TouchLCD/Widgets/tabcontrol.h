@@ -32,7 +32,7 @@ typedef struct tagTabControl
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
-	
+	CallbackEncoderEventFunction Event_Encoder;
 	//Panel properties
 	uint16_t CornerRadius;
 	Point	CornerPoints[10];

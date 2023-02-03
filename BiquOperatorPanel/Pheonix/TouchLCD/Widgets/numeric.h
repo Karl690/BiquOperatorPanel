@@ -31,6 +31,7 @@ typedef struct tagNumeric
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
+	CallbackEncoderEventFunction Event_Encoder;
 	
 	
 	//Label properties

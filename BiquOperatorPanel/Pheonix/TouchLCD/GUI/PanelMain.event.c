@@ -111,6 +111,11 @@ void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 	listbox_display_memorydata(&gL_Listbox1, MemoryDumpDisplayAddress);
 }
 
+void ChangeDisplayModeListEvent(void* sender)
+{
+	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex; // 0:DISPLAYMODE_ASCII, 1: DISPLAYMODE_Raw_ASCII 2: DISPLAYMODE_HEX, 3: DISPLAYMODE_VARPAIR;
+	listbox_display_memorydata(&gL_Listbox1, gL_Listbox1.MemoryAddressToDisplay); //display with list's memory address
+}
 
 void ShiftbitWritetestButtonEvent(void* sender, uint16_t x, uint16_t y)
 {

@@ -31,13 +31,13 @@ void EncoderWheelMove()
 		if (b == 0)EncoderCount--;
 		encoderlastRead = st;
 		
-		
 		if (FocusedWidget && FocusedWidget->Type == NUMERIC)
 		{
 			if (a == 0) numeric_increment((Numeric*)FocusedWidget);	
 			if (b == 0) numeric_decrement((Numeric*)FocusedWidget);	
 		}else if (FocusedWidget && FocusedWidget->Type == DROPDOWNLIST)
 		{
+			
 			if (a == 0) dropdownlist_select_nextitem((DropdownList*)FocusedWidget);	
 			if (b == 0) dropdownlist_select_previtem((DropdownList*)FocusedWidget);	
 		}else if (FocusedWidget && FocusedWidget->Type == LISTBOX)

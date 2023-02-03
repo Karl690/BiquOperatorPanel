@@ -254,13 +254,11 @@ void  InitPanelMain()
 	glDropdownDisplayMode.Location = (Point){ .x = 354, .y = 14 };
 	glDropdownDisplayMode.Size = (Size){ .width = 76, .height = 25 };
 	glDropdownDisplayMode.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	glDropdownDisplayMode.FocusForeColor = RGB16(0, 0, 0); 
-	;
 	glDropdownDisplayMode.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glDropdownDisplayMode.HasFocus = 0;
 	glDropdownDisplayMode.ValueType = DROPDOWNLIST_STRING;
+	glDropdownDisplayMode.Event_ChangedValue = ChangeDisplayModeListEvent;
 	dropdownlist_add_item(&glDropdownDisplayMode, "ASCII");	
 	dropdownlist_add_item(&glDropdownDisplayMode, "RAW");
 	dropdownlist_add_item(&glDropdownDisplayMode, "HEX");

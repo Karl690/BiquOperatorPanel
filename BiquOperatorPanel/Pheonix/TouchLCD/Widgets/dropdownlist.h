@@ -38,6 +38,7 @@ typedef struct tagDropdownList
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
+	CallbackEncoderEventFunction Event_Encoder;
 	
 	
 	//Label properties
@@ -47,6 +48,7 @@ typedef struct tagDropdownList
 	char	Values[COMBO_MAX_ITEMS][WIDGET_MAX_TEXT_LENGTH];
 	uint16_t	SelectedIndex;
 	uint16_t	ValuesNum;
+	CallbackChangedValueEventFunction Event_ChangedValue;
 }DropdownList;
 DropdownList* combo_init();
 void dropdownlist_destory(DropdownList* obj);

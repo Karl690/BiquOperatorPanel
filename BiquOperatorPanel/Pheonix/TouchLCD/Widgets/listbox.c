@@ -1,4 +1,5 @@
 #include "../GUI/gui.h"
+#include <ctype.h>
 #include "listbox.h"
 #include "Panel.h"
 
@@ -146,9 +147,9 @@ uint16_t listbox_get_charsofline(Listbox* obj)
 }
 void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 {
+	obj->MemoryAddressToDisplay = memoryaddress; //set the current memory address to this object
 	//displays memory contents in either ascii , raw ascii, hex
 	//t the real address for that
-	//listbox_clear(obj); 
 	obj->RowCount = 0; // clear list's array .
 	
 	uint8_t* buf = NULL;
@@ -161,8 +162,16 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 		memset(buf, 0, WIDGET_MAX_TEXT_LENGTH); //reset the buffer.
 		switch (obj->DispMode)
 		{
-		case DISPLAYMODE_ASCII     : strncpy(buf, WorkingAddress, DisplayDataLength); break;//formatted string
-		case DISPLAYMODE_Raw_ASCII : strncpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
+		case DISPLAYMODE_ASCII     : 
+		case DISPLAYMODE_Raw_ASCII : {
+				//strncpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
+				for (uint16_t i = 0; i < DisplayDataLength; i++) {
+					if (WorkingAddress[i] == 0 || WorkingAddress[i] == 0xff) break; // this means the end of string
+					if(isascii(WorkingAddress[i])) buf[i] = WorkingAddress[i]; //if it is asscii charactor, put the letter
+					else buf[i] = '?'; //otherwise , '?'
+				}
+			}
+			break;
 		case DISPLAYMODE_HEX       : buffer2hexstring(WorkingAddress, buf, DisplayDataLength); break;//hex dump 5 bytes at a time		}
 		case DISPLAYMODE_VARPAIR	: 
 			{

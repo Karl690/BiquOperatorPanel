@@ -93,6 +93,7 @@ void dropdownlist_select_nextitem(DropdownList* obj)
 		obj->SelectedIndex++;
 		strcpy(obj->Text, obj->Values[obj->SelectedIndex]);
 		obj->RedrawMe = 1;
+		if (obj->Event_ChangedValue)  obj->Event_ChangedValue(obj);
 	}
 }
 
@@ -103,5 +104,6 @@ void dropdownlist_select_previtem(DropdownList* obj)
 		obj->SelectedIndex--;
 		strcpy(obj->Text, obj->Values[obj->SelectedIndex]);
 		obj->RedrawMe = 1;
+		if (obj->Event_ChangedValue)  obj->Event_ChangedValue(obj);
 	}
 }

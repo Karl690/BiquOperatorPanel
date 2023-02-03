@@ -15,6 +15,9 @@ void ShiftbitWritetestButtonEvent(void* sender, uint16_t x, uint16_t y);
 void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y);
 void LoadSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y);
 void SaveSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y);
+
+void ChangeDisplayModeListEvent(void* sender);
+
 void PageUpListbox();
 void PageDownListbox();
 

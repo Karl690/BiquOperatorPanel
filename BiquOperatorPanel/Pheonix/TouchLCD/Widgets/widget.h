@@ -38,6 +38,9 @@ typedef enum
 
 
 typedef void(*CallbackTouchEventFunction)(void*, uint32_t, uint32_t);
+typedef void(*CallbackEncoderEventFunction)(void*, uint8_t); //direction -1 or 1;
+
+typedef void(*CallbackChangedValueEventFunction)(void*);
 
 typedef struct tagWidget
 {
@@ -65,6 +68,7 @@ typedef struct tagWidget
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
+	CallbackEncoderEventFunction Event_Encoder;
 }Widget;
 
 

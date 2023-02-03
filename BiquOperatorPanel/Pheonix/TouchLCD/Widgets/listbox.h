@@ -33,6 +33,7 @@ typedef struct tagListbox
 	CallbackTouchEventFunction	Event_Down;
 	CallbackTouchEventFunction	Event_Hold;
 	CallbackTouchEventFunction	Event_Up;
+	CallbackEncoderEventFunction Event_Encoder;
 	
 	//Listbox properties		
 	Color16 RowOddColor;//
@@ -41,6 +42,7 @@ typedef struct tagListbox
 	int16_t FirstLineToDisplay; //when scrolling,this is the first line in the list to display
 	uint16_t RowCount;//number of Items in the list
 	uint8_t	DispMode; //specify the display mdoe (Ascill or Hex) 
+	uint8_t*	MemoryAddressToDisplay;// Memory address to display
 }Listbox;
 
 void listbox_destory(Listbox* obj);
