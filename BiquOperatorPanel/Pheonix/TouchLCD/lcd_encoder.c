@@ -38,8 +38,8 @@ void EncoderWheelMove()
 		}
 		else if (FocusedWidget && FocusedWidget->Type == LISTBOX)
 		{
-			if (a == 0) PageDownListbox((DropdownList*)FocusedWidget);	
-			if (b == 0) PageUpListbox((DropdownList*)FocusedWidget);	
+			if (a == 0) PageDownListbox((Listbox*)FocusedWidget);	
+			if (b == 0) PageUpListbox((Listbox*)FocusedWidget);	
 		}
 		//Refresh = 1;//tell them we need to redraw the screen
 		

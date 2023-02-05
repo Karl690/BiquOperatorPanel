@@ -140,7 +140,7 @@ void listbox_move_down_line(Listbox* obj)
 //get the number of characters for a line
 uint16_t listbox_get_charsofline(Listbox* obj) 
 {
-	uint16_t DisplayDataLength = 40;//WIDGET_MAX_TEXT_LENGTH;
+	uint16_t DisplayDataLength = 40;
 	if (obj->DispMode == DISPLAYMODE_Raw_ASCII) DisplayDataLength = 32; //raw ascii, only 32 bytes per line, plus address
 	else if(obj->DispMode ==  DISPLAYMODE_HEX)		DisplayDataLength = 8; //hex ascii, only 8 bytes per line, plus address
 	return DisplayDataLength;
@@ -160,8 +160,8 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 	obj->RowCount = 0; // clear list's array .
 	
 	uint8_t* buf = NULL;
-	uint16_t DisplayDataLength = listbox_get_charsofline(obj); // get the number of charactor in a line.
-	
+	uint16_t DisplayDataLength ,OrignalDislpayDataLength =  listbox_get_charsofline(obj); // get the number of charactor in a line.
+	DisplayDataLength  = OrignalDislpayDataLength;
 	uint8_t* WorkingAddress = memoryaddress; //get the starting pointer
 	for (int count = 0; count < LISTBOX_MAX_ROWS; count++)  //display 12 lines at a time 
 	{
@@ -170,15 +170,25 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 		switch (obj->DispMode)
 		{
 		case DISPLAYMODE_ASCII     : 
-		case DISPLAYMODE_Raw_ASCII : {
+			{
+				DisplayDataLength  = OrignalDislpayDataLength;
 				//strncpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
 				for (uint16_t i = 0; i < DisplayDataLength; i++) {
 					if (WorkingAddress[i] == 0 || WorkingAddress[i] == 0xff) break; // this means the end of string
+					if (WorkingAddress[i] == 0x0D && WorkingAddress[i+1] == 0x0A)
+					{
+						//if it is the end of line
+						DisplayDataLength = i + 2; // it constains the 0xa and 0xd
+						break;
+					}
 					if(isascii(WorkingAddress[i])) buf[i] = WorkingAddress[i]; //if it is asscii charactor, put the letter
 					else buf[i] = '?'; //otherwise , '?'
 				}
 			}
 			break;
+		case DISPLAYMODE_Raw_ASCII : 
+			memcpy(buf, WorkingAddress, DisplayDataLength); break;//just 32 char of ascii
+			break;			
 		case DISPLAYMODE_HEX       : buffer2hexstring(WorkingAddress, buf, DisplayDataLength); break;//hex dump 5 bytes at a time		}
 		case DISPLAYMODE_VARPAIR	: 
 			{
@@ -206,11 +216,79 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 	obj->RedrawMe = 1;
 	//Refresh = 0; //leave flag that we have changed a widget and refresh should be called
 }
-
+uint16_t listbox_get_scrollline_address(Listbox* obj, int8_t direction)
+{
+	//if direction is 1, go down, otherwise go up.
+	uint8_t length = 8;
+	uint16_t count = 0;
+	uint8_t byte = 0;
+	uint8_t *byteAddress = 0;
+	uint8_t* address = obj->CurrentMemoryAddressToDisplay;
+	if (direction != 1) // invert direction
+	{
+		//start the previos address of current address
+		address--;
+		if (*(address) == 0X4) return 0;	//if the first byte of Soapstring retrun
+	}
+	switch (obj->DispMode)
+	{
+	case DISPLAYMODE_ASCII://ascii mode , find next EOL, 0xa or 0xd
+			//find start of next line()
+		//nextAddress = obj->CurrentMemoryAddressToDisplay += find start of next line(); break;		
+		if (direction == -1 && *address == 0xA && *(address - 1) == 0xD) //if the end of line (xx xxx 0D 0A)
+		{
+			count += 2;
+		}
+		for (uint16_t i = count; i < 40; i++)
+		{
+			byteAddress = (address + (i * direction));
+			if (direction ==1 && *byteAddress == 0xD && *(byteAddress + 1) == 0xA) //if the end of line (xx xxx 0D 0A)
+			{
+				count += 2;//direction ==1 ? 2: 1;
+				break;
+			}
+			else if (direction == -1 && (*byteAddress == 0xA && *(byteAddress - 1) == 0xD) || *byteAddress == 0x4) //if it is EOL or First  byte of Soapstring
+			{
+				break;
+			}
+			count++;
+		}
+		length = count;		
+		break;
+	case DISPLAYMODE_Raw_ASCII://raw ascii mode , jump forward 128 chars and display again
+		length = 32; break;
+	case DISPLAYMODE_HEX: 
+		length = 32; break;
+	case DISPLAYMODE_VARPAIR:
+		//find next value pair, 
+		//nextAddress = obj->CurrentMemoryAddressToDisplay += find start of next ValuePair(); break;
+		if (direction != 1) 
+		{
+			if (*(address) == ';')
+			{
+				address --;	
+				count +=2;
+			}
+		}
+		for (uint16_t i = 0; i < 40; i++) //that is because it contain address
+		{
+			byte = *(address + (i * direction));
+			if (byte == ';' || byte == 0x04) break;	 
+			count++;
+		}
+		length = count + direction;	
+		break;
+		
+	}
+	return length;
+}
 //go foreward as one line
 void listbox_memorydata_go_foreward(Listbox* obj)
 {
-	uint16_t DisplayDataLength = listbox_get_charsofline(obj); // get the number of charactor in a line.
+	
+	
+	uint16_t DisplayDataLength = listbox_get_scrollline_address(obj, 1); // get the number of charactor in a line.
+	if (DisplayDataLength == 0) return; //if the number of bytes to move is zero, do nothing
 	uint8_t* nextAddress = obj->CurrentMemoryAddressToDisplay + DisplayDataLength;
 	if (*nextAddress == 0xff) {
 		//go to the first address
@@ -221,7 +299,8 @@ void listbox_memorydata_go_foreward(Listbox* obj)
 //go backward as one line
 void listbox_memorydata_go_backward(Listbox* obj)
 {
-	uint16_t DisplayDataLength = listbox_get_charsofline(obj); // get the number of charactor in a line.
+	uint16_t DisplayDataLength = listbox_get_scrollline_address(obj, -1); // get the number of charactor in a line.
+	if (DisplayDataLength == 0) return; //if the number of bytes to move is zero, do nothing
 	uint8_t* nextAddress = obj->CurrentMemoryAddressToDisplay - DisplayDataLength;
 	if (*nextAddress == 0xff) return; // nothing because it is not data range
 	listbox_display_memorydata(obj, nextAddress);

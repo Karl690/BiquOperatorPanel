@@ -84,7 +84,7 @@ void GUI_WriteBuffer(int16_t sx, int16_t sy, int16_t ex, int16_t ey, uint8_t* da
 void GUI_DrawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color);
 void GUI_DrawPolygon(Point* points, uint16_t num, uint16_t color, Point offset);
 void GUI_DrawChar(int16_t X, int16_t Y, uint8_t chr, Font* font, uint16_t color, uint16_t bgcolor); // fontSize must be 20 or 32
-void GUI_DrawString(int16_t X, int16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor);
+void GUI_DrawString(int16_t X, int16_t Y, uint8_t *str, Font* font, uint16_t color, uint16_t bgcolor);
 void GUI_SetMaskArea(Rectangle MaskRect); //if Mask set, draw only mask area.
 void GUI_ReleaseMaskArea(); //Release mask area.
 

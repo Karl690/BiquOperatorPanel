@@ -237,16 +237,27 @@ void GUI_DrawChar(int16_t X, int16_t Y, uint8_t chr, Font* font, uint16_t color,
 	}
 }
 
-void GUI_DrawString(int16_t X, int16_t Y, char *str, Font* font, uint16_t color, uint16_t bgcolor)
+void GUI_DrawString(int16_t X, int16_t Y, uint8_t *str, Font* font, uint16_t color, uint16_t bgcolor)
 {
 	uint16_t x0 = X;
-	while ((*str <= '~')&&(*str >= ' '))
+	while ((*str <= '~')&&(*str >= ' ') || (*str == 0xD && *(str+1) == 0xA))
 	{
 		if (X >= LCD_WIDTH){X = x0; Y += font->Height; }
 		if (Y >= LCD_HEIGHT) break;//�˳�
-		GUI_DrawChar(X, Y, *str, font, color, bgcolor);
-		X += font->Width-2;//fontSize / 2;
-		str++;
+		if (*str == 0xD && *(str + 1) == 0xA) {			
+			GUI_DrawChar(X, Y, '\\', font, COLOR_YELLOW, bgcolor);
+			X += font->Width - 2; //fontSize / 2;
+			GUI_DrawChar(X, Y, 'n', font, COLOR_YELLOW, bgcolor);
+			X += font->Width - 2; //fontSize / 2;
+			str+=2;
+		}
+		else 
+		{
+			GUI_DrawChar(X, Y, *str, font, color, bgcolor);
+			X += font->Width - 2; //fontSize / 2;
+			str++;
+		}
+		
 	}
 }
 
