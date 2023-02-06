@@ -47,41 +47,44 @@
     <Filter Include="Drivers\CMSIS\Device\ST\STM32F4xx\Source">
       <UniqueIdentifier>{db39fdec-647e-40d5-a0d9-6bdb8b873e33}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix">
+    <Filter Include="Megasonic">
       <UniqueIdentifier>{e29c13a0-5e45-4222-931d-dec92d5b4408}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\TouchLCD">
+    <Filter Include="Megasonic\TouchLCD">
       <UniqueIdentifier>{05acaf17-1879-460a-873d-5902144de865}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\TouchLCD\4xx">
+    <Filter Include="Megasonic\TouchLCD\4xx">
       <UniqueIdentifier>{808813a6-b415-4947-93d5-5ec320c7379d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\TouchLCD\GUI">
+    <Filter Include="Megasonic\TouchLCD\GUI">
       <UniqueIdentifier>{c52bef55-9978-4ed4-8410-a40c165e63ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\TouchLCD\Drivers">
+    <Filter Include="Megasonic\TouchLCD\Drivers">
       <UniqueIdentifier>{d3abf9a5-2e1b-48e5-a591-ec82abbfd784}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\GPIO">
+    <Filter Include="Megasonic\GPIO">
       <UniqueIdentifier>{caafe3af-304a-4ee5-8bae-e9025f683fd6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\SPI">
+    <Filter Include="Megasonic\SPI">
       <UniqueIdentifier>{ed7f3e59-3c3b-4b34-a898-b09c30019b22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\Timer">
+    <Filter Include="Megasonic\Timer">
       <UniqueIdentifier>{5371ed61-950e-4459-bfb8-6228b5709351}</UniqueIdentifier>
     </Filter>
     <Filter Include="Icons">
       <UniqueIdentifier>{bac1af02-ccb6-4db1-958f-5c4edb7f4f00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\TouchLCD\Widgets">
+    <Filter Include="Megasonic\TouchLCD\Widgets">
       <UniqueIdentifier>{053ea268-dcc7-4384-9ade-07d8295c696c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\FLASH">
+    <Filter Include="Megasonic\FLASH">
       <UniqueIdentifier>{c1b9d653-8d4b-4f14-bed3-66d0056914d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pheonix\FLASH\4xx">
+    <Filter Include="Megasonic\FLASH\4xx">
       <UniqueIdentifier>{218811fc-a7b4-4cd8-a602-dadcb8158e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Megasonic\SECS1">
+      <UniqueIdentifier>{b68a327a-26bd-468e-b562-b596b8871273}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,8 +178,8 @@
     <ClInclude Include="Drivers\CMSIS\Include\tz_context.h">
       <Filter>Drivers\CMSIS\Include</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\4xx\TouchLCD_4xx.h">
-      <Filter>Pheonix\TouchLCD\4xx</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.h">
+      <Filter>Megasonic\TouchLCD\4xx</Filter>
     </ClInclude>
     <ClInclude Include="Core\stm32f4xx_hal_conf.h">
       <Filter>Core</Filter>
@@ -310,120 +313,123 @@
     <ClInclude Include="Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h">
       <Filter>Drivers\STM32F4xx_HAL_Driver\Inc\Legacy</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\gui.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\gui.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\lcd.h">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\lcd.h">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Drivers\SSD1963.h">
-      <Filter>Pheonix\TouchLCD\Drivers</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Drivers\SSD1963.h">
+      <Filter>Megasonic\TouchLCD\Drivers</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\configure.h">
-      <Filter>Pheonix</Filter>
+    <ClInclude Include="Megasonic\configure.h">
+      <Filter>Megasonic</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\global.h">
-      <Filter>Pheonix</Filter>
+    <ClInclude Include="Megasonic\global.h">
+      <Filter>Megasonic</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\lcd_dma.h">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\lcd_dma.h">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\SPI\spi.h">
-      <Filter>Pheonix\SPI</Filter>
+    <ClInclude Include="Megasonic\SPI\spi.h">
+      <Filter>Megasonic\SPI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\SPI\w25qxx.h">
-      <Filter>Pheonix\SPI</Filter>
+    <ClInclude Include="Megasonic\SPI\w25qxx.h">
+      <Filter>Megasonic\SPI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\GPIO\GPIO_Init.h">
-      <Filter>Pheonix\GPIO</Filter>
+    <ClInclude Include="Megasonic\GPIO\GPIO_Init.h">
+      <Filter>Megasonic\GPIO</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\GPIO\pins.h">
-      <Filter>Pheonix\GPIO</Filter>
+    <ClInclude Include="Megasonic\GPIO\pins.h">
+      <Filter>Megasonic\GPIO</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\GPIO\pinout.h">
-      <Filter>Pheonix\GPIO</Filter>
+    <ClInclude Include="Megasonic\GPIO\pinout.h">
+      <Filter>Megasonic\GPIO</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\SPI\xpt2046.h">
-      <Filter>Pheonix\SPI</Filter>
+    <ClInclude Include="Megasonic\SPI\xpt2046.h">
+      <Filter>Megasonic\SPI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\SPI\sw_spi.h">
-      <Filter>Pheonix\SPI</Filter>
+    <ClInclude Include="Megasonic\SPI\sw_spi.h">
+      <Filter>Megasonic\SPI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\Timer\timer_pwm.h">
-      <Filter>Pheonix\Timer</Filter>
+    <ClInclude Include="Megasonic\Timer\timer_pwm.h">
+      <Filter>Megasonic\Timer</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\font.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\font.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\display.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\display.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\DisplayList.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\DisplayList.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="ICONS\icons.h">
       <Filter>Icons</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\PanelMain.designer.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\PanelMain.designer.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\label.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\label.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\button.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\button.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\widget.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\widget.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\panel.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\panel.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\FontArial.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\FontArial.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\taskmanager.h">
-      <Filter>Pheonix</Filter>
+    <ClInclude Include="Megasonic\taskmanager.h">
+      <Filter>Megasonic</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\RevisionHistory.h">
-      <Filter>Pheonix</Filter>
+    <ClInclude Include="Megasonic\RevisionHistory.h">
+      <Filter>Megasonic</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\lcd_touch.h">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\lcd_touch.h">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\FLASH\4xx\flash_4xx.h">
-      <Filter>Pheonix\FLASH\4xx</Filter>
+    <ClInclude Include="Megasonic\FLASH\4xx\flash_4xx.h">
+      <Filter>Megasonic\FLASH\4xx</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\GPIO\pininit.h">
-      <Filter>Pheonix\GPIO</Filter>
+    <ClInclude Include="Megasonic\GPIO\pininit.h">
+      <Filter>Megasonic\GPIO</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\lcd_encoder.h">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\lcd_encoder.h">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\edit.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\edit.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\listbox.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\listbox.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\tabcontrol.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\tabcontrol.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\numeric.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\numeric.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\GUI\PanelMain.event.h">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\GUI\PanelMain.event.h">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Pheonix\TouchLCD\Widgets\dropdownlist.h">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClInclude Include="Megasonic\TouchLCD\Widgets\dropdownlist.h">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\SECS1\secs1.h">
+      <Filter>Megasonic\SECS1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Pheonix\TouchLCD\4xx\TouchLCD_4xx.c">
-      <Filter>Pheonix\TouchLCD\4xx</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.c">
+      <Filter>Megasonic\TouchLCD\4xx</Filter>
     </ClCompile>
     <ClCompile Include="Core\startup_stm32f407igtx.s">
       <Filter>Core</Filter>
@@ -518,95 +524,98 @@
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver\Src</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\GUI\gui.c">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\GUI\gui.c">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\lcd.c">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\lcd.c">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Drivers\SSD1963.c">
-      <Filter>Pheonix\TouchLCD\Drivers</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Drivers\SSD1963.c">
+      <Filter>Megasonic\TouchLCD\Drivers</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\lcd_dma.c">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\lcd_dma.c">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\SPI\spi.c">
-      <Filter>Pheonix\SPI</Filter>
+    <ClCompile Include="Megasonic\SPI\spi.c">
+      <Filter>Megasonic\SPI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\SPI\w25qxx.c">
-      <Filter>Pheonix\SPI</Filter>
+    <ClCompile Include="Megasonic\SPI\w25qxx.c">
+      <Filter>Megasonic\SPI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\GPIO\GPIO_Init.c">
-      <Filter>Pheonix\GPIO</Filter>
+    <ClCompile Include="Megasonic\GPIO\GPIO_Init.c">
+      <Filter>Megasonic\GPIO</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\SPI\xpt2046.c">
-      <Filter>Pheonix\SPI</Filter>
+    <ClCompile Include="Megasonic\SPI\xpt2046.c">
+      <Filter>Megasonic\SPI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\SPI\sw_spi.c">
-      <Filter>Pheonix\SPI</Filter>
+    <ClCompile Include="Megasonic\SPI\sw_spi.c">
+      <Filter>Megasonic\SPI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\Timer\timer_pwm.c">
-      <Filter>Pheonix\Timer</Filter>
+    <ClCompile Include="Megasonic\Timer\timer_pwm.c">
+      <Filter>Megasonic\Timer</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\GUI\display.c">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\GUI\display.c">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\GUI\DisplayList.c">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\GUI\DisplayList.c">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClCompile>
     <ClCompile Include="ICONS\icon_start.c">
       <Filter>Icons</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\GUI\PanelMain.designer.c">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\GUI\PanelMain.designer.c">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\label.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\label.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\button.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\button.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\widget.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\widget.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\panel.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\panel.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\taskmanager.c">
-      <Filter>Pheonix</Filter>
+    <ClCompile Include="Megasonic\taskmanager.c">
+      <Filter>Megasonic</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\lcd_touch.c">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\lcd_touch.c">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\FLASH\4xx\flash_4xx.c">
-      <Filter>Pheonix\FLASH\4xx</Filter>
+    <ClCompile Include="Megasonic\FLASH\4xx\flash_4xx.c">
+      <Filter>Megasonic\FLASH\4xx</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\GPIO\pininit.c">
-      <Filter>Pheonix\GPIO</Filter>
+    <ClCompile Include="Megasonic\GPIO\pininit.c">
+      <Filter>Megasonic\GPIO</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\lcd_encoder.c">
-      <Filter>Pheonix\TouchLCD</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\lcd_encoder.c">
+      <Filter>Megasonic\TouchLCD</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\edit.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\edit.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\listbox.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\listbox.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\tabcontrol.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\tabcontrol.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\numeric.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\numeric.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\GUI\PanelMain.event.c">
-      <Filter>Pheonix\TouchLCD\GUI</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\GUI\PanelMain.event.c">
+      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\TouchLCD\Widgets\dropdownlist.c">
-      <Filter>Pheonix\TouchLCD\Widgets</Filter>
+    <ClCompile Include="Megasonic\TouchLCD\Widgets\dropdownlist.c">
+      <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="Pheonix\global.c">
-      <Filter>Pheonix</Filter>
+    <ClCompile Include="Megasonic\global.c">
+      <Filter>Megasonic</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\SECS1\secs1.c">
+      <Filter>Megasonic\SECS1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
