@@ -1,8 +1,6 @@
 #pragma once
 #include <stdint.h>
 
-#define LCD_WIDTH 800
-#define LCD_HEIGHT 600
 typedef struct
 {
 	volatile uint16_t LCD_REG;

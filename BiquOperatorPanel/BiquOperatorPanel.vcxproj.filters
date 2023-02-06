@@ -41,12 +41,6 @@
     <Filter Include="Megasonic\TouchLCD\Widgets">
       <UniqueIdentifier>{053ea268-dcc7-4384-9ade-07d8295c696c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Megasonic\FLASH">
-      <UniqueIdentifier>{c1b9d653-8d4b-4f14-bed3-66d0056914d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Megasonic\FLASH\4xx">
-      <UniqueIdentifier>{218811fc-a7b4-4cd8-a602-dadcb8158e84}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Megasonic\SECS1">
       <UniqueIdentifier>{b68a327a-26bd-468e-b562-b596b8871273}</UniqueIdentifier>
     </Filter>
@@ -85,6 +79,12 @@
     </Filter>
     <Filter Include="Icons\Drivers\STM32F4xx_HAL_Driver\Src">
       <UniqueIdentifier>{39cadd77-bada-4c66-acd8-37c94126bffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Megasonic\STORAGE">
+      <UniqueIdentifier>{f9c8ecd8-ef84-46c1-8ffb-c04a0dd4508e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Megasonic\STORAGE\FLASH">
+      <UniqueIdentifier>{c1b9d653-8d4b-4f14-bed3-66d0056914d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -328,9 +328,6 @@
     <ClInclude Include="Megasonic\SPI\spi.h">
       <Filter>Megasonic\SPI</Filter>
     </ClInclude>
-    <ClInclude Include="Megasonic\SPI\w25qxx.h">
-      <Filter>Megasonic\SPI</Filter>
-    </ClInclude>
     <ClInclude Include="Megasonic\GPIO\GPIO_Init.h">
       <Filter>Megasonic\GPIO</Filter>
     </ClInclude>
@@ -350,12 +347,6 @@
       <Filter>Megasonic\Timer</Filter>
     </ClInclude>
     <ClInclude Include="Megasonic\TouchLCD\GUI\font.h">
-      <Filter>Megasonic\TouchLCD\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Megasonic\TouchLCD\GUI\display.h">
-      <Filter>Megasonic\TouchLCD\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Megasonic\TouchLCD\GUI\DisplayList.h">
       <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClInclude>
     <ClInclude Include="ICONS\icons.h">
@@ -381,9 +372,6 @@
     </ClInclude>
     <ClInclude Include="Megasonic\TouchLCD\lcd_touch.h">
       <Filter>Megasonic\TouchLCD</Filter>
-    </ClInclude>
-    <ClInclude Include="Megasonic\FLASH\4xx\flash_4xx.h">
-      <Filter>Megasonic\FLASH\4xx</Filter>
     </ClInclude>
     <ClInclude Include="Megasonic\GPIO\pininit.h">
       <Filter>Megasonic\GPIO</Filter>
@@ -415,6 +403,18 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="RevisionHistory.h" />
     <ClInclude Include="taskmanager.h" />
+    <ClInclude Include="Megasonic\STORAGE\storage.h">
+      <Filter>Megasonic\STORAGE</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\STORAGE\FLASH\sdcard.h">
+      <Filter>Megasonic\STORAGE\FLASH</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\STORAGE\FLASH\flash_4xx.h">
+      <Filter>Megasonic\STORAGE\FLASH</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\STORAGE\FLASH\w25qxx.h">
+      <Filter>Megasonic\STORAGE\FLASH</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.c">
@@ -528,9 +528,6 @@
     <ClCompile Include="Megasonic\SPI\spi.c">
       <Filter>Megasonic\SPI</Filter>
     </ClCompile>
-    <ClCompile Include="Megasonic\SPI\w25qxx.c">
-      <Filter>Megasonic\SPI</Filter>
-    </ClCompile>
     <ClCompile Include="Megasonic\GPIO\GPIO_Init.c">
       <Filter>Megasonic\GPIO</Filter>
     </ClCompile>
@@ -542,12 +539,6 @@
     </ClCompile>
     <ClCompile Include="Megasonic\Timer\timer_pwm.c">
       <Filter>Megasonic\Timer</Filter>
-    </ClCompile>
-    <ClCompile Include="Megasonic\TouchLCD\GUI\display.c">
-      <Filter>Megasonic\TouchLCD\GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Megasonic\TouchLCD\GUI\DisplayList.c">
-      <Filter>Megasonic\TouchLCD\GUI</Filter>
     </ClCompile>
     <ClCompile Include="ICONS\icon_start.c">
       <Filter>Icons</Filter>
@@ -569,9 +560,6 @@
     </ClCompile>
     <ClCompile Include="Megasonic\TouchLCD\lcd_touch.c">
       <Filter>Megasonic\TouchLCD</Filter>
-    </ClCompile>
-    <ClCompile Include="Megasonic\FLASH\4xx\flash_4xx.c">
-      <Filter>Megasonic\FLASH\4xx</Filter>
     </ClCompile>
     <ClCompile Include="Megasonic\GPIO\pininit.c">
       <Filter>Megasonic\GPIO</Filter>
@@ -605,6 +593,18 @@
     </ClCompile>
     <ClCompile Include="main.c" />
     <ClCompile Include="taskmanager.c" />
+    <ClCompile Include="Megasonic\STORAGE\storage.c">
+      <Filter>Megasonic\STORAGE</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\STORAGE\FLASH\sdcard.c">
+      <Filter>Megasonic\STORAGE\FLASH</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\STORAGE\FLASH\flash_4xx.c">
+      <Filter>Megasonic\STORAGE\FLASH</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\STORAGE\FLASH\w25qxx.c">
+      <Filter>Megasonic\STORAGE\FLASH</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <LinkerScript Include="STM32F407VE_flash.lds">

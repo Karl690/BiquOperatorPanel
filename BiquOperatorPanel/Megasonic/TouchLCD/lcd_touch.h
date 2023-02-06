@@ -43,4 +43,6 @@ void lcd_touch_loop_calibration_data();
 void CalibratLcdTouchPanel(void);
 void clearcalibrtionData(void);
 
+void InitializeCalibrationParameters();
+
 

@@ -1,10 +1,11 @@
-
+#pragma once
 #include "stm32f4xx_hal.h"
-#include "FLASH/4xx/flash_4xx.h"
+#include "STORAGE/FLASH/flash_4xx.h"
 #define USE_FLASH
 
 // LCD interface
 // Supported LCD drivers: [ST7789, SSD1963, RM68042, NT35310, ILI9488, ILI9341, ILI9325, HX8558]
+#define SSD1963
 #ifndef TFTLCD_DRIVER
 	#define TFTLCD_DRIVER       SSD1963
 	#define TFTLCD_DRIVER_SPEED 0x10     // SSD1963 needs slower speed

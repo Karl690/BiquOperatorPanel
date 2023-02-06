@@ -1,8 +1,6 @@
+#include "main.h"
 #include "../GUI/gui.h"
-#include <ctype.h>
 #include "listbox.h"
-#include "Panel.h"
-
 
 uint8_t DrawMemoryDumpflag = 0;//used to signal that it is time to add 12 lines formatted to this listbox
 int16_t FirstLineToDisplay = 0;//set the default first line to display at 0,
@@ -165,7 +163,7 @@ void listbox_display_memorydata(Listbox* obj, uint8_t* memoryaddress)
 	uint8_t* WorkingAddress = memoryaddress; //get the starting pointer
 	for (int count = 0; count < LISTBOX_MAX_ROWS; count++)  //display 12 lines at a time 
 	{
-		buf = &obj->RowData[count]; 
+		buf = &obj->RowData[count][0]; 
 		memset(buf, 0, WIDGET_MAX_TEXT_LENGTH); //reset the buffer.
 		switch (obj->DispMode)
 		{

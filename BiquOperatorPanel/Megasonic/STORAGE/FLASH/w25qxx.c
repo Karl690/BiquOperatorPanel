@@ -1,6 +1,6 @@
 #include "main.h"
 #include "w25qxx.h"
-#include "spi.h"
+#include "SPI/spi.h"
 
 /*************************** W25Qxx SPI Interface ported by the underlying pattern ***************************/
 //#define W25Qxx_SPI     _SPI3

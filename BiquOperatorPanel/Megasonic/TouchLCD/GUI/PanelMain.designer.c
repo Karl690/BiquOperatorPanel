@@ -836,7 +836,7 @@ void  InitPanelMain()
 
 	gL_Button5.Type = BUTTON;
 	strcpy(gL_Button5.Name, "gL_Button5");
-	gL_Button5.Event_Down = displayCalibrationButtonEvent;
+	gL_Button5.Event_Down = (void (*)(void *, long unsigned int,  long unsigned int))displayCalibrationButtonEvent;
 	gL_Button5.Event_Hold = NULL;
 	gL_Button5.Event_Up   = NULL;
 	gL_Button5.BackColor = RGB16(0, 0, 0);

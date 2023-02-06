@@ -44,9 +44,10 @@ typedef struct tagNumeric
 	float 	MaxValue;
 }Numeric;
 Numeric* numeric_init();
-void numeric_destory(Numeric* label);
-void numeric_on_paint(Numeric* label, Point offset, Color16  backcolor);
-void numeric_increment(Numeric* numeric);
-void numeric_decrement(Numeric* numeric);
+void numeric_update(Numeric* );
+void numeric_destory(Numeric* );
+void numeric_on_paint(Numeric* , Point , Color16 );
+void numeric_increment(Numeric* );
+void numeric_decrement(Numeric* );
 
-void numeric_set_value(Numeric* obj, float value);
+void numeric_set_value(Numeric* , float );

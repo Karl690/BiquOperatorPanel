@@ -208,7 +208,7 @@ void GUI_DrawChar(int16_t X, int16_t Y, uint8_t chr, Font* font, uint16_t color,
 	uint8_t offset =  8 *((width + 7)/8) -  width ;
 	uint32_t counterh = 0, counterw = 0, index = 0;
 	
-	uint8_t* pChar = &font->pFontData[(chr - ' ') * height * ((width + 7) / 8)];
+	uint8_t* pChar = (uint8_t*)&font->pFontData[(chr - ' ') * height * ((width + 7) / 8)];
 	uint8_t *pchar = NULL;
 	uint32_t line = 0;
 	for (counterh = 0; counterh < height; counterh++)

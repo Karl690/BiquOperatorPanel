@@ -1,6 +1,5 @@
-#include "../GUI/gui.h"
+#include "main.h"
 #include "numeric.h"
-#include "Panel.h"
 
 void numeric_update(Numeric* obj)
 {

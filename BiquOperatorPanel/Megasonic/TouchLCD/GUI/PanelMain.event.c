@@ -38,7 +38,7 @@ void initializeSoapNudList()
 }
 
 
-void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y)
+void glBtnPlus_TouchEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	if (FocusedWidget && FocusedWidget->Type == NUMERIC)
 	{
@@ -53,7 +53,7 @@ void glBtnPlus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 		PageUpListbox((Listbox*)FocusedWidget);
 	}
 }
-void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y)
+void glBtnMinus_TouchEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	if (FocusedWidget && FocusedWidget->Type == NUMERIC)
 	{
@@ -69,28 +69,28 @@ void glBtnMinus_TouchEvent(void* sender, uint16_t x, uint16_t y)
 	}
 }
 
-void glBtnSave_TouchEvent(void* sender, uint16_t x, uint16_t y)
+void glBtnSave_TouchEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	
 }
 
-void glBtnApply_TouchEvent(void* sender, uint16_t x, uint16_t y)
+void glBtnApply_TouchEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	
 }
 
-void eraseFlashButonEvent(void* sender, uint16_t x, uint16_t y)
+void eraseFlashButonEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
 	eraseStorage();
 }
-void LoadSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
+void LoadSoapstringButtonEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	BlinkStartWidget(sender, 5, 10); //blink 5 times every 0.5s
 	
 	LoadSoapStringFromStorage();
 }
-void SaveSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
+void SaveSoapstringButtonEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
 	
@@ -98,13 +98,13 @@ void SaveSoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 	//lvana 
 	//blinkThisButton(*sender,5,5);//blink the button to acknowledge it was pressed.
 }
-void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
+void displaySoapstringButtonEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
 	
-	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
+	panel_set_focus_widget((Widget*)&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = FindCurrentSoapstringAddress() + 1; //get current soapstring address , because the first byte is 0x04, it add 1.
-	if (MemoryDumpDisplayAddress < SOAPSTRING_STARTADDRESS) return; //do not exist soapstring in storage
+	if (MemoryDumpDisplayAddress < (uint8_t*)SOAPSTRING_STARTADDRESS) return; //do not exist soapstring in storage
 	
 	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex;// 0:DISPLAYMODE_HEX, 1: DISPLAYMODE_Raw_ASCII 2: VARPAIR;
 	
@@ -113,20 +113,20 @@ void displaySoapstringButtonEvent(void* sender, uint16_t x, uint16_t y)
 
 void ChangeDisplayModeListEvent(void* sender)
 {
-	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
+	panel_set_focus_widget((Widget*)&gL_Listbox1, 1); // focus the Listbox
 	BlinkStartWidget(sender, 5, 5); //blink 5 times every 0.5s
 	gL_Listbox1.DispMode = glDropdownDisplayMode.SelectedIndex; // 0:DISPLAYMODE_ASCII, 1: DISPLAYMODE_Raw_ASCII 2: DISPLAYMODE_HEX, 3: DISPLAYMODE_VARPAIR;
 	
 	listbox_display_memorydata(&gL_Listbox1, gL_Listbox1.CurrentMemoryAddressToDisplay); //display with list's memory address
 }
 
-void ShiftbitWritetestButtonEvent(void* sender, uint16_t x, uint16_t y)
+void ShiftbitWritetestButtonEvent(void* sender, long unsigned int x, long unsigned int y)
 {
 	
 }
-void displayCalibrationButtonEvent(void* sender, uint16_t x, uint16_t y)
+void displayCalibrationButtonEvent(void* sender, long unsigned int x, long unsigned int y)
 {
-	panel_set_focus_widget(&gL_Listbox1, 1); // focus the Listbox
+	panel_set_focus_widget((Widget*)&gL_Listbox1, 1); // focus the Listbox
 	MemoryDumpDisplayAddress = getCalibrationDataBlockAddress(); //get current soapstring address	
 	if (MemoryDumpDisplayAddress == NULL) return; //do not exist calibration data in storage
 	gL_Listbox1.DispMode = DISPLAYMODE_HEX; // 0:DISPLAYMODE_HEX, 1: DISPLAYMODE_Raw_ASCII 2: VARPAIR;

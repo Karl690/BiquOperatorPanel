@@ -17,5 +17,5 @@ extern uint8_t LCD_DriveIsSSD1963(void);
 extern void Init_Commands(void);
 extern void SetDirection(uint8_t rotate);
 extern void SetWindow(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey);
-extern uint32_t ReadPixel_24Bit(int16_t x, int16_t y);
+//extern uint32_t ReadPixel_24Bit(int16_t x, int16_t y);
 

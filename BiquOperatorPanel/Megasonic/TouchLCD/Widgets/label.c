@@ -1,6 +1,5 @@
-#include "../GUI/gui.h"
+#include "main.h"
 #include "label.h"
-#include "Panel.h"
 
 void label_destory(Label* obj)
 {

@@ -3,7 +3,6 @@
 #include "GPIO/pininit.h"
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/GUI/gui.h"
-#include "TouchLCD/GUI/display.h"
 #include "TouchLCD/lcd_touch.h"
 #include "TouchLCD/GUI/PanelMain.designer.h"
 #include "TouchLCD/GUI/PanelMain.event.h"
@@ -97,8 +96,7 @@ int main(void)
 		}
 		
 		HeartBeat++;
-		if (BarValue > 3.3) BarValue = 0;
-		BarValue += 0.1;
+		
 		HAL_Delay(50);
 	}
 }

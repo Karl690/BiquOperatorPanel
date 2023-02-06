@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <string.h>
 #include "widget.h"
 #include "panel.h"
 #include "label.h"
@@ -240,7 +242,7 @@ void panel_update_control_value(Panel* obj, char* name, char* value)
 	for (ChildIndex = 0; ChildIndex < obj->ChildrenNum; ChildIndex++)
 	{
 		Widget* child = obj->Children[ChildIndex];
-		if(strcmp(name, child->Name) == 0)
-			widget_update_value(child, value);
+		if(strcmp((char*)name, (const char*)child->Name) == 0)
+			widget_update_value_string(child, value);
 	}
 }

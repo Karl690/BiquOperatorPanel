@@ -1,4 +1,4 @@
-#include <ctype.h>
+#include "main.h"
 #include "widget.h"
 #include "panel.h"
 #include "button.h"
@@ -16,14 +16,15 @@ void widget_get_control_coodination(Widget* widget, Point* pos)
 	}
 }
 
-void widget_update_value_string(Widget* widget, uint32_t value)
+void widget_update_value_string(Widget* widget, char* value)
 {
 	strcpy(widget->Text, value);
 	widget->RedrawMe = 1;
 }
-void widget_update_value_int(Widget* widget, uint32_t value)
+void widget_update_value_int(Widget* widget, char* value)
 {
 	sprintf(widget->Text, "%d", value);
+	#pragma GCC diagnostic pop
 	widget->RedrawMe = 1;
 }
 void widget_ToggleVisible(Widget* widget)

@@ -52,6 +52,7 @@ typedef struct tagDropdownList
 }DropdownList;
 DropdownList* combo_init();
 void dropdownlist_destory(DropdownList* obj);
+void dropdownlist_update(DropdownList* obj);
 void dropdownlist_on_paint(DropdownList* obj, Point offset, Color16  backcolor);
 
 void dropdownlist_add_item(DropdownList* obj, char* item);

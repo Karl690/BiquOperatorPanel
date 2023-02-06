@@ -43,7 +43,7 @@ typedef struct tagListbox
 	uint16_t RowCount;//number of Items in the list
 	uint8_t	DispMode; //specify the display mdoe (Ascill or Hex) 
 	uint8_t*	CurrentMemoryAddressToDisplay;// Memory address to display, it changed when scroll
-	uint16_t*	FirstMemoryAddressToDispay;//by display function it set.
+	uint8_t*	FirstMemoryAddressToDispay;//by display function it set.
 	
 }Listbox;
 

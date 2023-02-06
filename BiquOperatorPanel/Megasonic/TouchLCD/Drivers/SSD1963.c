@@ -1,7 +1,9 @@
 #include "SSD1963.h"
-#if LCD_DRIVER_HAS(SSD1963)
+//#if LCD_DRIVER_HAS(SSD1963)
+#ifdef SSD1963
 
 #include "SSD1963.h"
+#include "TouchLCD/4xx/TouchLCD_4xx.h"
 // SSD1963  resolution max:864*480
 #define SSD_HOR_RESOLUTION LCD_HARDWARE_WIDTH   // LCD width pixel
 #define SSD_VER_RESOLUTION LCD_HARDWARE_HEIGHT  // LCD height pixel
@@ -91,15 +93,15 @@ void SetWindow(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey)
 	LCD_WR_REG(0x2C); // Ready to write memory
 }
 
-uint32_t ReadPixel_24Bit(int16_t x, int16_t y)
-{
-	LCD_SetWindow(x, y, x, y);
-	LCD_WR_REG(0X2E);
-	Delay_us(1);
-
-	GUI_COLOR pix;
-	pix.color = LCD_RD_DATA();
-	return (pix.RGB.r << 19) | (pix.RGB.g << 10) | (pix.RGB.b << 3);
-}
+//uint32_t ReadPixel_24Bit(int16_t x, int16_t y)
+//{
+//	LCD_SetWindow(x, y, x, y);
+//	LCD_WR_REG(0X2E);
+//	Delay_us(1);
+//
+//	GUI_COLOR pix;
+//	pix.color = LCD_RD_DATA();
+//	return (pix.RGB.r << 19) | (pix.RGB.g << 10) | (pix.RGB.b << 3);
+//}
 
 #endif  // LCD_DRIVER_HAS(SSD1963)

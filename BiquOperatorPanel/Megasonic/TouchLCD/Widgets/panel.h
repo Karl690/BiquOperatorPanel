@@ -46,6 +46,7 @@ typedef struct tagPanel
 
 extern Widget* FocusedWidget;
 Panel* panel_init();
+void panel_update(Panel* obj);
 void panel_destory(Panel* obj);
 void panel_add_child(Panel* obj, void* child);
 void panel_on_paint(Panel* obj, Point offset, Color16  backcolor, uint8_t forceRedraw);

@@ -28,9 +28,17 @@ extern "C" {
 #endif
 
 	/* Includes ------------------------------------------------------------------*/
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 #include "stm32f4xx_hal.h"
 #include "configure.h"
+#include "global.h"
+
 #include "RevisionHistory.h"
+#include "taskmanager.h"
 #include "global.h"
 #include "GPIO/pins.h"
 #include "GPIO/GPIO_Init.h"
@@ -39,8 +47,9 @@ extern "C" {
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/lcd_touch.h"
 #include "SPI/spi.h"
-#include "SPI/w25qxx.h"
-
+#include "STORAGE/FLASH/w25qxx.h"
+#include "SPI/xpt2046.h"
+#include "STORAGE/storage.h"
 #include "TouchLCD/GUI/PanelMain.designer.h"	
 	
 #define VECT_TAB_FLASH 0x08008000UL

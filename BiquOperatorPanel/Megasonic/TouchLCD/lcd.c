@@ -1,6 +1,8 @@
 #include "main.h"
 #include "lcd.h"
+#include "lcd_dma.h"
 #include "GUI/gui.h"
+//#include "TouchLCD/4xx/TouchLCD_4xx.h"
 void(*pLCD_SetDirection)(uint8_t rotate);
 void(*pLCD_SetWindow)(uint16_t sx, uint16_t sy, uint16_t ex, uint16_t ey);
 

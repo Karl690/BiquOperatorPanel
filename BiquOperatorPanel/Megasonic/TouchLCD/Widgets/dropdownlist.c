@@ -1,6 +1,5 @@
-#include "../GUI/gui.h"
+#include "main.h"
 #include "dropdownlist.h"
-#include "Panel.h"
 
 void dropdownlist_update(DropdownList* obj)
 {

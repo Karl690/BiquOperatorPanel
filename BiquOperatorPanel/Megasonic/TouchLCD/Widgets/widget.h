@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include "../GUI/gui.h"
 
-#define NULL 0
 #define WIDGET_MAX_TEXT_LENGTH 50
 #define LIST_MAX_LENGH		30
 typedef enum
@@ -85,8 +84,8 @@ typedef struct tagBlinkWidgetInfo
 
 extern BlinkWidgetInfo BlinkWidgetsList[LIST_MAX_LENGH];
 uint8_t Refresh_Widget(Widget* widget, uint8_t forceRedraw);
-void widget_update_value_int(Widget* widget, uint32_t value);
-void widget_update_value_string(Widget* widget, uint32_t value);
+void widget_update_value_int(Widget* widget, char* value);
+void widget_update_value_string(Widget* widget, char* value);
 void widget_ToggleVisible(Widget* widget);
 void widget_draw_string(char* string, uint16_t x, uint16_t y, uint16_t w, uint16_t h, 
 	PADDING* padding,Font* font,TEXT_ALIGN align, Color16 foreColor,Color16 backColor);

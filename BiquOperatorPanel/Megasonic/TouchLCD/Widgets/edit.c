@@ -1,6 +1,5 @@
-#include "../GUI/gui.h"
+#include "main.h"
 #include "edit.h"
-#include "Panel.h"
 
 void edit_destory(Edit* obj)
 {
