@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>./Core;./Drivers/CMSIS/Device/ST.STM32F4xx/Include;./Drivers/CMSIS/Include;./Drivers/STM32F4xx_HAL_Driver/Inc;./Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;./HAL;./Megasonic;./lvgl;./Icons;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;./Core;./Drivers/CMSIS/Device/ST.STM32F4xx/Include;./Drivers/CMSIS/Include;./Drivers/STM32F4xx_HAL_Driver/Inc;./Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;./HAL;./Megasonic;./lvgl;./Icons;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -61,7 +61,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <ClCompile Include="Core\main.c" />
+    <ClCompile Include="main.c" />
     <ClCompile Include="Core\startup_stm32f407igtx.s" />
     <ClCompile Include="Core\stm32f4xx_hal_msp.c" />
     <ClCompile Include="Core\stm32f4xx_it.c" />
@@ -103,7 +103,7 @@
     <ClCompile Include="Megasonic\SPI\sw_spi.c" />
     <ClCompile Include="Megasonic\SPI\w25qxx.c" />
     <ClCompile Include="Megasonic\SPI\xpt2046.c" />
-    <ClCompile Include="Megasonic\taskmanager.c" />
+    <ClCompile Include="taskmanager.c" />
     <ClCompile Include="Megasonic\Timer\timer_pwm.c" />
     <ClCompile Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.c" />
     <ClCompile Include="Megasonic\TouchLCD\Drivers\SSD1963.c" />
@@ -125,7 +125,7 @@
     <ClCompile Include="Megasonic\TouchLCD\Widgets\panel.c" />
     <ClCompile Include="Megasonic\TouchLCD\Widgets\tabcontrol.c" />
     <ClCompile Include="Megasonic\TouchLCD\Widgets\widget.c" />
-    <ClInclude Include="Core\main.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Core\stm32f4xx_hal_conf.h" />
     <ClInclude Include="Core\stm32f4xx_it.h" />
     <ClInclude Include="Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h" />
@@ -202,13 +202,13 @@
     <ClInclude Include="Megasonic\GPIO\pininit.h" />
     <ClInclude Include="Megasonic\GPIO\pinout.h" />
     <ClInclude Include="Megasonic\GPIO\pins.h" />
-    <ClInclude Include="Megasonic\RevisionHistory.h" />
+    <ClInclude Include="RevisionHistory.h" />
     <ClInclude Include="Megasonic\SECS1\secs1.h" />
     <ClInclude Include="Megasonic\SPI\spi.h" />
     <ClInclude Include="Megasonic\SPI\sw_spi.h" />
     <ClInclude Include="Megasonic\SPI\w25qxx.h" />
     <ClInclude Include="Megasonic\SPI\xpt2046.h" />
-    <ClInclude Include="Megasonic\taskmanager.h" />
+    <ClInclude Include="taskmanager.h" />
     <ClInclude Include="Megasonic\Timer\timer_pwm.h" />
     <ClInclude Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.h" />
     <ClInclude Include="Megasonic\TouchLCD\Drivers\SSD1963.h" />
@@ -232,8 +232,6 @@
     <ClInclude Include="Megasonic\TouchLCD\Widgets\panel.h" />
     <ClInclude Include="Megasonic\TouchLCD\Widgets\tabcontrol.h" />
     <ClInclude Include="Megasonic\TouchLCD\Widgets\widget.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="resource1.h" />
     <None Include="BiquOperatorPanel-Debug.vgdbsettings" />
     <None Include="BiquOperatorPanel-Release.vgdbsettings" />
     <None Include="stm32.props" />
