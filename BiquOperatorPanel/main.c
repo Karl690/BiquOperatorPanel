@@ -16,6 +16,7 @@ uint32_t HeartBeat = 0;
 SCREEN_TYPE CurretScreenType = SCREEN_MAIN;
 SCREEN_TYPE NewScreenType = SCREEN_MAIN;
 Panel* ActivPanel = NULL;
+uint8_t eraseStorageFlag = 0;//may not be needed
 
 uint16_t Refresh = 0;
 uint16_t CalibrateScreenFlag = 0;//calibration flag 0= none, 1=first corner,2=second corner, 3=3rd corner
@@ -90,8 +91,10 @@ int main(void)
 
 		panel_on_paint((Panel*)ActivPanel, Root_Panel.Location, Root_Panel.BackColor, 0); //redraw as required..
 		Refresh = 0;		
-		if(touchScreenIsPress)
-			panel_touch_event_to_control(ActivPanel, (Point){0, 0});
+		if (touchScreenIsPress)
+		{
+			panel_touch_event_to_control(ActivPanel, (Point){ 0, 0 });
+		}
 		
 		HeartBeat++;
 		if (BarValue > 3.3) BarValue = 0;

@@ -56,7 +56,7 @@ typedef enum
 extern SCREEN_TYPE CurretScreenType;
 extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.
 
-	
+extern uint8_t eraseStorageFlag;
 extern uint8_t SoapStringBuffer[SOAPSTRING_BLOCKSIZE];
 extern TouchCalibrationInfo touchCalibrationInfo;
 extern Numeric* SoapNudsList[30];

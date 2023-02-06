@@ -1,5 +1,6 @@
 VisualGDB/Debug/Core/stm32f4xx_hal_msp.o: Core/stm32f4xx_hal_msp.c \
- Core/main.h Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
+ C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/main.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Core/stm32f4xx_hal_conf.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
@@ -39,23 +40,23 @@ VisualGDB/Debug/Core/stm32f4xx_hal_msp.o: Core/stm32f4xx_hal_msp.c \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- Pheonix/configure.h Pheonix/FLASH/4xx/flash_4xx.h \
- Pheonix/RevisionHistory.h Pheonix/global.h Pheonix/GPIO/pins.h \
- Pheonix/GPIO/GPIO_Init.h Pheonix/GPIO/pins.h Pheonix/GPIO/pinout.h \
- Pheonix/TouchLCD/lcd.h Pheonix/TouchLCD/Drivers/SSD1963.h \
- Pheonix/TouchLCD/lcd_touch.h Pheonix/TouchLCD/GUI/gui.h \
- Pheonix/SPI/spi.h Pheonix/SPI/w25qxx.h \
- Pheonix/TouchLCD/GUI/PanelMain.designer.h \
- Pheonix/TouchLCD/GUI/../Widgets/Widget.h \
- Pheonix/TouchLCD/GUI/../Widgets/panel.h \
- Pheonix/TouchLCD/GUI/../Widgets/label.h \
- Pheonix/TouchLCD/GUI/../Widgets/edit.h \
- Pheonix/TouchLCD/GUI/../Widgets/button.h \
- Pheonix/TouchLCD/GUI/../Widgets/listbox.h \
- Pheonix/TouchLCD/GUI/../Widgets/tabcontrol.h \
- Pheonix/TouchLCD/GUI/../Widgets/numeric.h \
- Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h
-Core/main.h:
+ Megasonic/configure.h Megasonic/FLASH/4xx/flash_4xx.h \
+ C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h \
+ Megasonic/global.h Megasonic/GPIO/pins.h Megasonic/GPIO/GPIO_Init.h \
+ Megasonic/GPIO/pins.h Megasonic/GPIO/pinout.h Megasonic/TouchLCD/lcd.h \
+ Megasonic/TouchLCD/Drivers/SSD1963.h Megasonic/TouchLCD/lcd_touch.h \
+ Megasonic/TouchLCD/GUI/gui.h Megasonic/SPI/spi.h Megasonic/SPI/w25qxx.h \
+ Megasonic/TouchLCD/GUI/PanelMain.designer.h \
+ Megasonic/TouchLCD/GUI/../Widgets/Widget.h \
+ Megasonic/TouchLCD/GUI/../Widgets/panel.h \
+ Megasonic/TouchLCD/GUI/../Widgets/label.h \
+ Megasonic/TouchLCD/GUI/../Widgets/edit.h \
+ Megasonic/TouchLCD/GUI/../Widgets/button.h \
+ Megasonic/TouchLCD/GUI/../Widgets/listbox.h \
+ Megasonic/TouchLCD/GUI/../Widgets/tabcontrol.h \
+ Megasonic/TouchLCD/GUI/../Widgets/numeric.h \
+ Megasonic/TouchLCD/GUI/../Widgets/dropdownlist.h
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/main.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/stm32f4xx_hal_conf.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -97,27 +98,27 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
-Pheonix/configure.h:
-Pheonix/FLASH/4xx/flash_4xx.h:
-Pheonix/RevisionHistory.h:
-Pheonix/global.h:
-Pheonix/GPIO/pins.h:
-Pheonix/GPIO/GPIO_Init.h:
-Pheonix/GPIO/pins.h:
-Pheonix/GPIO/pinout.h:
-Pheonix/TouchLCD/lcd.h:
-Pheonix/TouchLCD/Drivers/SSD1963.h:
-Pheonix/TouchLCD/lcd_touch.h:
-Pheonix/TouchLCD/GUI/gui.h:
-Pheonix/SPI/spi.h:
-Pheonix/SPI/w25qxx.h:
-Pheonix/TouchLCD/GUI/PanelMain.designer.h:
-Pheonix/TouchLCD/GUI/../Widgets/Widget.h:
-Pheonix/TouchLCD/GUI/../Widgets/panel.h:
-Pheonix/TouchLCD/GUI/../Widgets/label.h:
-Pheonix/TouchLCD/GUI/../Widgets/edit.h:
-Pheonix/TouchLCD/GUI/../Widgets/button.h:
-Pheonix/TouchLCD/GUI/../Widgets/listbox.h:
-Pheonix/TouchLCD/GUI/../Widgets/tabcontrol.h:
-Pheonix/TouchLCD/GUI/../Widgets/numeric.h:
-Pheonix/TouchLCD/GUI/../Widgets/dropdownlist.h:
+Megasonic/configure.h:
+Megasonic/FLASH/4xx/flash_4xx.h:
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h:
+Megasonic/global.h:
+Megasonic/GPIO/pins.h:
+Megasonic/GPIO/GPIO_Init.h:
+Megasonic/GPIO/pins.h:
+Megasonic/GPIO/pinout.h:
+Megasonic/TouchLCD/lcd.h:
+Megasonic/TouchLCD/Drivers/SSD1963.h:
+Megasonic/TouchLCD/lcd_touch.h:
+Megasonic/TouchLCD/GUI/gui.h:
+Megasonic/SPI/spi.h:
+Megasonic/SPI/w25qxx.h:
+Megasonic/TouchLCD/GUI/PanelMain.designer.h:
+Megasonic/TouchLCD/GUI/../Widgets/Widget.h:
+Megasonic/TouchLCD/GUI/../Widgets/panel.h:
+Megasonic/TouchLCD/GUI/../Widgets/label.h:
+Megasonic/TouchLCD/GUI/../Widgets/edit.h:
+Megasonic/TouchLCD/GUI/../Widgets/button.h:
+Megasonic/TouchLCD/GUI/../Widgets/listbox.h:
+Megasonic/TouchLCD/GUI/../Widgets/tabcontrol.h:
+Megasonic/TouchLCD/GUI/../Widgets/numeric.h:
+Megasonic/TouchLCD/GUI/../Widgets/dropdownlist.h:

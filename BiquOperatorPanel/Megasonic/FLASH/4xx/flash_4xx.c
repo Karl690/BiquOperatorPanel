@@ -372,7 +372,7 @@ void eraseSoapStringData_copyCalibrationDataTobeginning()
 	//so we need to 
 //1. take a deep breath  :-)
 	//2. copyLastCalibrationDataToRamBuffer // we dont need this because we have already the buffer in Flash.  touchCalibrationInfo is load on Power on.
-	eraseStorage();//3. erase flash
+	eraseRamStorage();//3. erase flash
 	save_LCD_Touch_Calibration_Data(); //4. writeTempCalibrationDataToFlash(START_OF_CALIBRATION_DATA);
 }
 void eraseSoapStringData_CopySoapstringbeginning()
@@ -380,7 +380,7 @@ void eraseSoapStringData_CopySoapstringbeginning()
 	//so we need to 
 	//1. take a deep breath  :-)
 	LoadSoapStringFromStorage();	//2. copyLastSoapStringToRamBuffer
-	eraseStorage();					//3. erase flash
+	eraseRamStorage();					//3. erase flash
 	WriteSoapStringToStorage();		//4. writeTempSoapStringToFlash(SOAPSTRING_STARTADDRESS);
 	
 }
@@ -516,10 +516,19 @@ void LoadSoapStringFromStorage()
 	}
 }
 
-
 void eraseStorage()
+{//determines if we are using RAM or Flash for storage, then erases correct secotors
+	if (STORAGE_IN_FLASH)
+	{	
+		eraseFlashStorage();//normal operation from Flash storage
+		return;//
+	}
+	eraseRamStorage();//working with Ram storage, so erase the ram.
+}
+void eraseRamStorage()
 {
 	/// Erase storaage .. to do
+
 	currentCalibrationAddress = CALIBRATIONDATA_STARTADDRESS;
 	currentSoapStringAddress = SOAPSTRING_STARTADDRESS;
 	
@@ -532,7 +541,7 @@ void eraseStorage()
 void saveSoapStringandEraseSector11() // I think this function name is not correct.
 {
 	saveSoapStringTobuffer(); //backup soapstring in storage to buffer
-	eraseStorage(); //erase the storage and set the address as start.
+	eraseRamStorage(); //erase the storage and set the address as start.
 	MoveData(currentCalibrationAddress, &touchCalibrationInfo, CALIBRATIONDATA_BLOCKSIZE); //copy calibration buffer  to storage
 	MoveData(currentSoapStringAddress, &SoapStringBuffer, SOAPSTRING_BLOCKSIZE); //copy soapstring buffer to storage
 	//writeOldsoapstringFromBuffertoflashblock[1] ;//todo

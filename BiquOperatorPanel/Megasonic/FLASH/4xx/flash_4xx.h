@@ -16,6 +16,29 @@ typedef enum
 	FLASH_COMPLETE
 }FLASH_Status;
 
+#define STORAGE_IN_FLASH 1
+#ifndef STORAGE_IN_FLASH
+/* Macro and function for operating(save/load) Calibration data in Ram */
+#define CALIBRATIONDATA_STARTADDRESS 0x20000000 + 0x10000   //we use RAM after 64kbye because the ram before 64k could be already use.
+#define CALIBRATIONDATA_BLOCKSIZE	64
+#define CALIBRATIONDATA_SIZE		4096	//4k
+/* Macro and function for operating(save/load) Calibration data */
+#define SOAPSTRING_STARTADDRESS 0x20000000 + 0x11000   //Soapstring address would be started from 68K(0x11000) range of RAM.
+#define SOAPSTRING_BLOCKSIZE	4096					//4k
+#define SOAPSTRING_MAXBLOCKS     2                      //2 blocks for ram, 120 or flash
+#define SOAPSTRING_ENDADDRESS	SOAPSTRING_STARTADDRESS + 0x2000	// for 407, RAM size is 128K. 
+#else
+/* Macro and function for operating(save/load) Calibration data in Flash */
+#define CALIBRATIONDATA_STARTADDRESS 0x800E0000    //we use Flash starting at beginning of last 128k block of memory
+#define CALIBRATIONDATA_BLOCKSIZE	64
+#define CALIBRATIONDATA_SIZE		0x1000	//4k
+/* Macro and function for operating(save/load) Calibration data */
+#define SOAPSTRING_STARTADDRESS 0x800E0000 + 0x1000   //Soapstring address would be started from 68K(0x11000) range of RAM.
+#define SOAPSTRING_BLOCKSIZE	0x1000					//4k
+#define SOAPSTRING_MAXBLOCKS    15                     //2 blocks for ram, 120 or flash
+#define SOAPSTRING_ENDADDRESS	SOAPSTRING_STARTADDRESS + 0xE000	// for 407, RAM size is 128K. 
+#endif
+
 #define VoltageRange_1        ((uint8_t)0x00)  /*!< Device operating range: 1.8V to 2.1V */
 #define VoltageRange_2        ((uint8_t)0x01)  /*!<Device operating range: 2.1V to 2.7V */
 #define VoltageRange_3        ((uint8_t)0x02)  /*!<Device operating range: 2.7V to 3.6V */
@@ -76,20 +99,12 @@ uint32_t ReadFlash(uint32_t addr);
 uint8_t WriteFlash8Bytes(uint32_t addr, uint8_t* data);
 uint8_t WriteFlash(uint32_t address, uint32_t data);
 uint8_t EraseFlash(uint32_t sector);
-
-
-/* Macro and function for operating(save/load) Calibration data */
-#define CALIBRATIONDATA_STARTADDRESS 0x20000000 + 0x10000   //we use RAM after 64kbye because the ram before 64k could be already use.
-#define CALIBRATIONDATA_BLOCKSIZE	64
-#define CALIBRATIONDATA_SIZE		4096	//4k
 uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 
-/* Macro and function for operating(save/load) Calibration data */
-#define SOAPSTRING_STARTADDRESS 0x20000000 + 0x11000   //Soapstring address would be started from 68K(0x11000) range of RAM.
-#define SOAPSTRING_BLOCKSIZE	4096					//4k
-#define SOAPSTRING_MAXBLOCKS     2                      //2 blocks for ram, 120 or flash
-#define SOAPSTRING_ENDADDRESS	SOAPSTRING_STARTADDRESS + 0x2000	// for 407, RAM size is 128K. 
-#define SOAPSTRING_USABLE_RANGE				8 * 1024	//8k for ram test  128-8k(forcalibration) = 120K
+
+
+
+
 
 #define EOT			0x04	//End of Transmission. we use this as the first byte of var pairs 's block
 #define FOV			0x0A	//First byte of Var	pair
@@ -106,6 +121,8 @@ void save_LCD_Touch_Calibration_Data(void);
 uint8_t checkForValidLCDCalibrationData(void);
 void saveSoapStringandEraseSector11(void);
 void eraseStorage();
+void eraseRamStorage();
+void eraseFlashStorage();
 void WriteSoapStringToStorage();
 void LoadSoapStringFromStorage();
 //#endif
