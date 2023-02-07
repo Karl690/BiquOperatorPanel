@@ -1,5 +1,13 @@
 #include "main.h"
 
+typedef enum
+{
+	RAM,			/*Ram Storage           */
+	Onchip_Flash,	/*onchip flash, usually last sector of flash*/
+	W25Q,			/*wqw25 serial flash chip*/
+	SDCard
+} storageTypeDef;
+
 //#define STORAGE_IN_FLASH 1
 #ifndef STORAGE_IN_FLASH
 /* Macro and function for operating(save/load) Calibration data in Ram */
@@ -25,7 +33,7 @@
 
 
 uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
-
+uint8_t storageIndex;//used to control WHERE storage is taking place, ram, onchipflash, wq,sdio
 
 
 
@@ -40,7 +48,7 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 //#define SOAPSTRING_USABLE_RANGE				12 * 1024 //for flash
 uint8_t* FindNexSaveSoapstringAddress(); //get the availabe address of soapstring
 uint8_t* FindCurrentSoapstringAddress(); //get the current soap string's address
-void MoveData(uint8_t* address, uint8_t* data, uint16_t datasize);
+void MoveDataToRam(uint8_t* address, uint8_t* data, uint16_t datasize);
 
 void save_LCD_Touch_Calibration_Data(void);
 uint8_t checkForValidLCDCalibrationData(void);

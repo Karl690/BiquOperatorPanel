@@ -40,14 +40,49 @@ VisualGDB/Debug/Megasonic/TouchLCD/GUI/PanelMain.event.o: \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- Megasonic/FLASH/4xx/flash_4xx.h \
+ Megasonic/STORAGE/FLASH/flash_4xx.h \
  C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/main.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdio.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdarg.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\endian.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_endian.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\select.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_sigset.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timeval.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\timespec.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timespec.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_pthreadtypes.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\sched.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\stdio.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\ctype.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\string.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\strings.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\string.h Megasonic/global.h \
  C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h \
- Megasonic/global.h Megasonic/GPIO/pins.h Megasonic/GPIO/GPIO_Init.h \
- Megasonic/GPIO/pins.h Megasonic/GPIO/pinout.h Megasonic/TouchLCD/lcd.h \
- Megasonic/TouchLCD/Drivers/SSD1963.h Megasonic/TouchLCD/lcd_touch.h \
- Megasonic/TouchLCD/GUI/gui.h Megasonic/SPI/spi.h Megasonic/SPI/w25qxx.h \
- Megasonic/TouchLCD/GUI/PanelMain.designer.h \
+ C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/taskmanager.h \
+ Megasonic/GPIO/pins.h Megasonic/GPIO/GPIO_Init.h Megasonic/GPIO/pins.h \
+ Megasonic/GPIO/pinout.h Megasonic/TouchLCD/lcd.h \
+ Megasonic/TouchLCD/Drivers/SSD1963.h \
+ Megasonic/TouchLCD/4xx/TouchLCD_4xx.h Megasonic/TouchLCD/lcd_touch.h \
+ Megasonic/TouchLCD/GUI/gui.h Megasonic/SPI/spi.h \
+ Megasonic/STORAGE/FLASH/w25qxx.h Megasonic/SPI/xpt2046.h \
+ Megasonic/STORAGE/storage.h Megasonic/TouchLCD/GUI/PanelMain.designer.h \
  Megasonic/TouchLCD/GUI/../Widgets/Widget.h \
  Megasonic/TouchLCD/GUI/../Widgets/panel.h \
  Megasonic/TouchLCD/GUI/../Widgets/label.h \
@@ -101,20 +136,56 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
-Megasonic/FLASH/4xx/flash_4xx.h:
+Megasonic/STORAGE/FLASH/flash_4xx.h:
 C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/main.h:
-C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdio.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdarg.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\endian.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_endian.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\select.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_sigset.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timeval.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\timespec.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timespec.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_pthreadtypes.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\sched.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\stdio.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\ctype.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\string.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\strings.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\string.h:
 Megasonic/global.h:
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h:
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/taskmanager.h:
 Megasonic/GPIO/pins.h:
 Megasonic/GPIO/GPIO_Init.h:
 Megasonic/GPIO/pins.h:
 Megasonic/GPIO/pinout.h:
 Megasonic/TouchLCD/lcd.h:
 Megasonic/TouchLCD/Drivers/SSD1963.h:
+Megasonic/TouchLCD/4xx/TouchLCD_4xx.h:
 Megasonic/TouchLCD/lcd_touch.h:
 Megasonic/TouchLCD/GUI/gui.h:
 Megasonic/SPI/spi.h:
-Megasonic/SPI/w25qxx.h:
+Megasonic/STORAGE/FLASH/w25qxx.h:
+Megasonic/SPI/xpt2046.h:
+Megasonic/STORAGE/storage.h:
 Megasonic/TouchLCD/GUI/PanelMain.designer.h:
 Megasonic/TouchLCD/GUI/../Widgets/Widget.h:
 Megasonic/TouchLCD/GUI/../Widgets/panel.h:

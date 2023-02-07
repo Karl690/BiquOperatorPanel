@@ -43,7 +43,7 @@ VisualGDB/Debug/Megasonic/TouchLCD/4xx/TouchLCD_4xx.o: \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
- Megasonic/FLASH/4xx/flash_4xx.h
+ Megasonic/STORAGE/FLASH/flash_4xx.h
 C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h:
 Drivers/CMSIS/Include/core_cm4.h:
 c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h:
@@ -91,4 +91,4 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
-Megasonic/FLASH/4xx/flash_4xx.h:
+Megasonic/STORAGE/FLASH/flash_4xx.h:
