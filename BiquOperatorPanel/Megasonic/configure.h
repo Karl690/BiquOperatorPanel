@@ -54,3 +54,6 @@
 	#define LCD_BTN_PIN    PC8
 	#define LCD_ENC_EN_PIN PC6
 #endif
+
+//Storage configuration
+#define DEFAULT_STORAGE STORAGE_RAM

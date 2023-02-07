@@ -47,9 +47,10 @@ extern "C" {
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/lcd_touch.h"
 #include "SPI/spi.h"
+#include "STORAGE/storage.h"
 #include "STORAGE/FLASH/w25qxx.h"
 #include "SPI/xpt2046.h"
-#include "STORAGE/storage.h"
+
 #include "TouchLCD/GUI/PanelMain.designer.h"	
 	
 #define VECT_TAB_FLASH 0x08008000UL
@@ -61,6 +62,7 @@ typedef enum
 }SCREEN_TYPE;
 	
 	
+
 	
 extern SCREEN_TYPE CurretScreenType;
 extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.

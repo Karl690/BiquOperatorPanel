@@ -68,13 +68,13 @@ void MoveData(uint8_t* target, uint8_t* source, uint16_t datasize)
 {//moves data to storage device
 	switch (storageIndex)
 	{
-	case RAM :
+	case STORAGE_RAM :
 		MoveDataToRam(target, source, datasize);break;
-	case Onchip_Flash :
+	case STORAGE_ONCHIP_FLASH:
 		MoveDataToOnChipFlash(target, source, datasize); break;	
-	case W25Q :
+	case STORAGE_W25Q :
 		MoveDataToW25Q(target, source, datasize); break;
-	case SDCard :
+	case STORAGE_SDCARD :
 		MoveDataToSDIOCard(target, source, datasize); break;
 	}
 }
@@ -89,10 +89,17 @@ void MoveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize)
 }
 void MoveDataToOnChipFlash(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
-	write_flash(target, source, datasize);//write the data to the flash module
+	write_flash((uint32_t)target, source, datasize);//write the data to the flash module
 }
 
+void MoveDataToW25Q(uint8_t* target, uint8_t* source, uint16_t datasize)
+{
+	
+}
 
+void MoveDataToSDIOCard(uint8_t* target, uint8_t* source, uint16_t datasize)
+{
+}
 
 
 uint8_t* currentCalibrationAddress = NULL;

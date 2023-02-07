@@ -65,6 +65,8 @@ int main(void)
 	Init_LCD();   // their code
 	
 	Init_GPIO();
+	
+	storageIndex = DEFAULT_STORAGE; //initialize the storage type.
 	InitPanelMain();//set up gid widgets
 	
 	//erase_memory(); //at first time, erase and all byte would be 0xff.

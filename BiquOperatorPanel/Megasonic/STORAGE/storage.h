@@ -1,12 +1,13 @@
+#pragma once
 #include "main.h"
 
 typedef enum
 {
-	RAM,			/*Ram Storage           */
-	Onchip_Flash,	/*onchip flash, usually last sector of flash*/
-	W25Q,			/*wqw25 serial flash chip*/
-	SDCard
-} storageTypeDef;
+	STORAGE_RAM,			/*Ram Storage           */
+	STORAGE_ONCHIP_FLASH,	/*onchip flash, usually last sector of flash*/
+	STORAGE_W25Q,			/*wqw25 serial flash chip*/
+	STORAGE_SDCARD
+} STORAGTYPEDEF ;
 
 //#define STORAGE_IN_FLASH 1
 #ifndef STORAGE_IN_FLASH
@@ -32,8 +33,10 @@ typedef enum
 #endif
 
 
+extern uint8_t storageIndex; //used to control WHERE storage is taking place, ram, onchipflash, wq,sdio
+
 uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
-uint8_t storageIndex;//used to control WHERE storage is taking place, ram, onchipflash, wq,sdio
+
 
 
 
@@ -58,4 +61,9 @@ void eraseRamStorage();
 void eraseFlashStorage();
 void WriteSoapStringToStorage();
 void LoadSoapStringFromStorage();
+
+void MoveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize);
+void MoveDataToOnChipFlash(uint8_t* target, uint8_t* source, uint16_t datasize);
+void MoveDataToW25Q(uint8_t* target, uint8_t* source, uint16_t datasize);
+void MoveDataToSDIOCard(uint8_t* target, uint8_t* source, uint16_t datasize);
 //#endif
