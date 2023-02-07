@@ -9,7 +9,7 @@ typedef enum
 	STORAGE_SDCARD
 } STORAGTYPEDEF ;
 
-//#define STORAGE_IN_FLASH 1
+#define STORAGE_IN_FLASH 1
 #ifndef STORAGE_IN_FLASH
 /* Macro and function for operating(save/load) Calibration data in Ram */
 #define CALIBRATIONDATA_STARTADDRESS (uint8_t*)(0x20000000 + 0x10000)   //we use RAM after 64kbye because the ram before 64k could be already use.
@@ -51,7 +51,7 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 //#define SOAPSTRING_USABLE_RANGE				12 * 1024 //for flash
 uint8_t* FindNexSaveSoapstringAddress(); //get the availabe address of soapstring
 uint8_t* FindCurrentSoapstringAddress(); //get the current soap string's address
-void MoveDataToRam(uint8_t* address, uint8_t* data, uint16_t datasize);
+void SaveData(uint8_t* address, uint8_t* data, uint16_t datasize);
 
 void save_LCD_Touch_Calibration_Data(void);
 uint8_t checkForValidLCDCalibrationData(void);
@@ -62,8 +62,9 @@ void eraseFlashStorage();
 void WriteSoapStringToStorage();
 void LoadSoapStringFromStorage();
 
-void MoveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize);
-void MoveDataToOnChipFlash(uint8_t* target, uint8_t* source, uint16_t datasize);
-void MoveDataToW25Q(uint8_t* target, uint8_t* source, uint16_t datasize);
-void MoveDataToSDIOCard(uint8_t* target, uint8_t* source, uint16_t datasize);
+void SaveData(uint8_t* target, uint8_t* source, uint16_t datasize);
+void SaveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize);
+void SaveDataToOnChipFlash(uint8_t* target, uint8_t* source, uint16_t datasize);
+void SaveDataToW25Q(uint8_t* target, uint8_t* source, uint16_t datasize);
+void SaveDataToSDIOCard(uint8_t* target, uint8_t* source, uint16_t datasize);
 //#endif

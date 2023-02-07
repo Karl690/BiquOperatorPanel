@@ -1,0 +1,196 @@
+VisualGDB/Debug/Megasonic/TouchLCD/Widgets/widget.o: \
+ Megasonic/TouchLCD/Widgets/widget.c \
+ C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/main.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdio.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_newlib_version.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\features.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_default_types.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stddef.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdarg.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_stdint.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\endian.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_endian.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\select.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_sigset.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timeval.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\timespec.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timespec.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_pthreadtypes.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\sched.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\types.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\stdio.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\ctype.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_intsup.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\string.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\strings.h \
+ c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\string.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
+ Core/stm32f4xx_hal_conf.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
+ C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f4xx.h \
+ C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h \
+ Drivers/CMSIS/Include/core_cm4.h Drivers/CMSIS/Include/cmsis_version.h \
+ Drivers/CMSIS/Include/cmsis_compiler.h Drivers/CMSIS/Include/cmsis_gcc.h \
+ Drivers/CMSIS/Include/mpu_armv7.h \
+ C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
+ Megasonic/configure.h Megasonic/STORAGE/FLASH/flash_4xx.h \
+ Megasonic/global.h \
+ C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h \
+ C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/taskmanager.h \
+ Megasonic/GPIO/pins.h Megasonic/GPIO/GPIO_Init.h Megasonic/GPIO/pins.h \
+ Megasonic/GPIO/pinout.h Megasonic/TouchLCD/lcd.h \
+ Megasonic/TouchLCD/Drivers/SSD1963.h \
+ Megasonic/TouchLCD/4xx/TouchLCD_4xx.h Megasonic/TouchLCD/lcd_touch.h \
+ Megasonic/TouchLCD/GUI/gui.h Megasonic/SPI/spi.h \
+ Megasonic/STORAGE/storage.h Megasonic/STORAGE/FLASH/w25qxx.h \
+ Megasonic/SPI/xpt2046.h Megasonic/TouchLCD/GUI/PanelMain.designer.h \
+ Megasonic/TouchLCD/GUI/../Widgets/Widget.h \
+ Megasonic/TouchLCD/GUI/../Widgets/panel.h \
+ Megasonic/TouchLCD/GUI/../Widgets/label.h \
+ Megasonic/TouchLCD/GUI/../Widgets/edit.h \
+ Megasonic/TouchLCD/GUI/../Widgets/button.h \
+ Megasonic/TouchLCD/GUI/../Widgets/listbox.h \
+ Megasonic/TouchLCD/GUI/../Widgets/tabcontrol.h \
+ Megasonic/TouchLCD/GUI/../Widgets/numeric.h \
+ Megasonic/TouchLCD/GUI/../Widgets/dropdownlist.h
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/main.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdio.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\newlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_newlib_version.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\config.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\ieeefp.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\features.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\cdefs.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_default_types.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stddef.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdarg.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\reent.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\_ansi.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\lock.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_stdint.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\endian.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\_endian.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\select.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_sigset.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timeval.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\timespec.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_timespec.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_pthreadtypes.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\sched.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\types.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\stdio.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\ctype.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_locale.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\machine\stdlib.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\alloca.h:
+c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\_intsup.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\string.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\strings.h:
+c:\sysgcc\arm-eabi\arm-none-eabi\include\sys\string.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
+Core/stm32f4xx_hal_conf.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:
+C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f4xx.h:
+C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h:
+Drivers/CMSIS/Include/core_cm4.h:
+Drivers/CMSIS/Include/cmsis_version.h:
+Drivers/CMSIS/Include/cmsis_compiler.h:
+Drivers/CMSIS/Include/cmsis_gcc.h:
+Drivers/CMSIS/Include/mpu_armv7.h:
+C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_exti.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_cortex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_adc.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_adc_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dac_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
+Megasonic/configure.h:
+Megasonic/STORAGE/FLASH/flash_4xx.h:
+Megasonic/global.h:
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/RevisionHistory.h:
+C:/Users/karl6/Documents/GitHub/BiquOperatorPanel/BiquOperatorPanel/taskmanager.h:
+Megasonic/GPIO/pins.h:
+Megasonic/GPIO/GPIO_Init.h:
+Megasonic/GPIO/pins.h:
+Megasonic/GPIO/pinout.h:
+Megasonic/TouchLCD/lcd.h:
+Megasonic/TouchLCD/Drivers/SSD1963.h:
+Megasonic/TouchLCD/4xx/TouchLCD_4xx.h:
+Megasonic/TouchLCD/lcd_touch.h:
+Megasonic/TouchLCD/GUI/gui.h:
+Megasonic/SPI/spi.h:
+Megasonic/STORAGE/storage.h:
+Megasonic/STORAGE/FLASH/w25qxx.h:
+Megasonic/SPI/xpt2046.h:
+Megasonic/TouchLCD/GUI/PanelMain.designer.h:
+Megasonic/TouchLCD/GUI/../Widgets/Widget.h:
+Megasonic/TouchLCD/GUI/../Widgets/panel.h:
+Megasonic/TouchLCD/GUI/../Widgets/label.h:
+Megasonic/TouchLCD/GUI/../Widgets/edit.h:
+Megasonic/TouchLCD/GUI/../Widgets/button.h:
+Megasonic/TouchLCD/GUI/../Widgets/listbox.h:
+Megasonic/TouchLCD/GUI/../Widgets/tabcontrol.h:
+Megasonic/TouchLCD/GUI/../Widgets/numeric.h:
+Megasonic/TouchLCD/GUI/../Widgets/dropdownlist.h:

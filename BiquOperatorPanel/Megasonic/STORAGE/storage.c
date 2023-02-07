@@ -64,22 +64,22 @@ uint8_t* FindNexSaveSoapstringAddress()  //get the current soap string's address
 	return NULL; // it need to erase flash.
 }
 
-void MoveData(uint8_t* target, uint8_t* source, uint16_t datasize)
+void SaveData(uint8_t* target, uint8_t* source, uint16_t datasize)
 {//moves data to storage device
 	switch (storageIndex)
 	{
 	case STORAGE_RAM :
-		MoveDataToRam(target, source, datasize);break;
+		SaveDataToRam(target, source, datasize);break;
 	case STORAGE_ONCHIP_FLASH:
-		MoveDataToOnChipFlash(target, source, datasize); break;	
+		SaveDataToOnChipFlash(target, source, datasize); break;	
 	case STORAGE_W25Q :
-		MoveDataToW25Q(target, source, datasize); break;
+		SaveDataToW25Q(target, source, datasize); break;
 	case STORAGE_SDCARD :
-		MoveDataToSDIOCard(target, source, datasize); break;
+		SaveDataToSDIOCard(target, source, datasize); break;
 	}
 }
 //move the data from the source address to the target address.
-void MoveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize)
+void SaveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
 	for (uint16_t i = 0; i < datasize; i++)
 	{
@@ -87,17 +87,17 @@ void MoveDataToRam(uint8_t* target, uint8_t* source, uint16_t datasize)
 		target++;
 	}
 }
-void MoveDataToOnChipFlash(uint8_t* target, uint8_t* source, uint16_t datasize)
+void SaveDataToOnChipFlash(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
 	write_flash((uint32_t)target, source, datasize);//write the data to the flash module
 }
 
-void MoveDataToW25Q(uint8_t* target, uint8_t* source, uint16_t datasize)
+void SaveDataToW25Q(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
 	
 }
 
-void MoveDataToSDIOCard(uint8_t* target, uint8_t* source, uint16_t datasize)
+void SaveDataToSDIOCard(uint8_t* target, uint8_t* source, uint16_t datasize)
 {
 }
 
@@ -130,7 +130,7 @@ void save_LCD_Touch_Calibration_Data(void)
 		}
 	}
 	//ok, when you get here, we should be pointing to 0xff values in the target storage memory
-	MoveDataToRam(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
+	SaveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, sizeof(TouchCalibrationInfo));
 }
 
 
@@ -140,7 +140,7 @@ void saveSoapStringTobuffer() //backup Soapstring from storage to FLASH.
 	if (!currentSoapStringAddress) //Soapstring is not exsit in storage.		
 	return; 
 	
-	MoveDataToRam(SoapStringBuffer, currentSoapStringAddress, SOAPSTRING_BLOCKSIZE); // SoapString copy from storage's currentSoapStringAddress.
+	SaveData(SoapStringBuffer, currentSoapStringAddress, SOAPSTRING_BLOCKSIZE); // SoapString copy from storage's currentSoapStringAddress.
 }
 
 void writeOldsoapstringFromBuffertoflashblock() //save the soapstring in storage
@@ -162,7 +162,7 @@ void writeOldsoapstringFromBuffertoflashblock() //save the soapstring in storage
 		}
 	}	
 	//copy the SoapstringBuffer to storage.
-	MoveDataToRam(currentSoapstringAddress, (uint8_t*)&SoapStringBuffer, SOAPSTRING_BLOCKSIZE); 
+	SaveData(currentSoapstringAddress, (uint8_t*)&SoapStringBuffer, SOAPSTRING_BLOCKSIZE); 
 }
 
 	
@@ -179,7 +179,7 @@ uint16_t WriteSoapValuePair(uint16_t pairIndex, uint8_t* address)
 	uint16_t len = strlen(stringValuePair);
 	if (address + len >= (uint8_t*)SOAPSTRING_ENDADDRESS) return 0; //out of memory
 	//memcpy(address, stringValuePair, len); // copy the var pair's string to the address	
-	MoveDataToRam(address, (uint8_t*)stringValuePair, len);
+	SaveData(address, (uint8_t*)stringValuePair, len);
 	return len;
 	
 }
@@ -364,8 +364,8 @@ void saveSoapStringandEraseSector11() // I think this function name is not corre
 {
 	saveSoapStringTobuffer(); //backup soapstring in storage to buffer
 	eraseRamStorage(); //erase the storage and set the address as start.
-	MoveDataToRam(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, CALIBRATIONDATA_BLOCKSIZE); //copy calibration buffer  to storage
-	MoveDataToRam(currentSoapStringAddress, (uint8_t*)&SoapStringBuffer, SOAPSTRING_BLOCKSIZE); //copy soapstring buffer to storage
+	SaveData(currentCalibrationAddress, (uint8_t*)&touchCalibrationInfo, CALIBRATIONDATA_BLOCKSIZE); //copy calibration buffer  to storage
+	SaveData(currentSoapStringAddress, (uint8_t*)&SoapStringBuffer, SOAPSTRING_BLOCKSIZE); //copy soapstring buffer to storage
 	//writeOldsoapstringFromBuffertoflashblock[1] ;//todo
 }
 
@@ -389,7 +389,7 @@ uint8_t checkForValidLCDCalibrationData(void)
 	if (*currentCalibrationAddress == 0x80)
 	{
 		//it is valid data, so lets update
-		MoveDataToRam((uint8_t*)&touchCalibrationInfo, currentCalibrationAddress, sizeof(TouchCalibrationInfo)); //update working variables from storage
+		SaveData((uint8_t*)&touchCalibrationInfo, currentCalibrationAddress, sizeof(TouchCalibrationInfo)); //update working variables from storage
 		return 1;//updated so report successfully found and updated
 	}
 	return 0; //invalid address

@@ -80,8 +80,8 @@ VisualGDB/Debug/Core/stm32f4xx_hal_msp.o: Core/stm32f4xx_hal_msp.c \
  Megasonic/TouchLCD/Drivers/SSD1963.h \
  Megasonic/TouchLCD/4xx/TouchLCD_4xx.h Megasonic/TouchLCD/lcd_touch.h \
  Megasonic/TouchLCD/GUI/gui.h Megasonic/SPI/spi.h \
- Megasonic/STORAGE/FLASH/w25qxx.h Megasonic/SPI/xpt2046.h \
- Megasonic/STORAGE/storage.h Megasonic/TouchLCD/GUI/PanelMain.designer.h \
+ Megasonic/STORAGE/storage.h Megasonic/STORAGE/FLASH/w25qxx.h \
+ Megasonic/SPI/xpt2046.h Megasonic/TouchLCD/GUI/PanelMain.designer.h \
  Megasonic/TouchLCD/GUI/../Widgets/Widget.h \
  Megasonic/TouchLCD/GUI/../Widgets/panel.h \
  Megasonic/TouchLCD/GUI/../Widgets/label.h \
@@ -180,9 +180,9 @@ Megasonic/TouchLCD/4xx/TouchLCD_4xx.h:
 Megasonic/TouchLCD/lcd_touch.h:
 Megasonic/TouchLCD/GUI/gui.h:
 Megasonic/SPI/spi.h:
+Megasonic/STORAGE/storage.h:
 Megasonic/STORAGE/FLASH/w25qxx.h:
 Megasonic/SPI/xpt2046.h:
-Megasonic/STORAGE/storage.h:
 Megasonic/TouchLCD/GUI/PanelMain.designer.h:
 Megasonic/TouchLCD/GUI/../Widgets/Widget.h:
 Megasonic/TouchLCD/GUI/../Widgets/panel.h:

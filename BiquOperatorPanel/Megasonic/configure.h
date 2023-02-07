@@ -56,4 +56,4 @@
 #endif
 
 //Storage configuration
-#define DEFAULT_STORAGE STORAGE_RAM
+#define DEFAULT_STORAGE STORAGE_ONCHIP_FLASH //STORAGE_RAM
