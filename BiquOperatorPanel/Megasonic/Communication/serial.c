@@ -3,8 +3,11 @@
 #include "global.h"
 #include "RevisionHistory.h"
 #include "taskmanager.h"
+#include "configure.h"
 UART_HandleTypeDef huart2;
 UART_HandleTypeDef huart3;
+UART_HandleTypeDef huart4;
+UART_HandleTypeDef huart6;
 
 //declare a new buffer
 uint8_t NewBuffer[10];
@@ -99,7 +102,11 @@ void SendUsbVcpString(char* stringToSend) {
 	addStringToBuffer(&COMUSB.TxBuffer, stringToSend);
 }
 
-void SendUartString(char* stringToSend)
+void SendUart2String(char* stringToSend)
+{
+	addStringToBuffer(&COM2.TxBuffer, stringToSend);
+}
+void SendUart3String(char* stringToSend)
 {
 	addStringToBuffer(&COM3.TxBuffer, stringToSend);
 }
@@ -217,7 +224,8 @@ void Init_Serial(void)
 	//ResetAsciParsePointers(&COMUSB.RxBuffer);
 	//ResetAsciParsePointers(&COMUSB.RxUrgentBuffer);
 
-	USART3_Init();
+	
+	USART234_Init();
 	//USART4_Init();
 }
 
@@ -440,53 +448,85 @@ void ResetAsciParsePointers(ComBuffer* BufferToReset)
 //	ResetGcodeParseBuffer(BufferToReset); //clean up the asc buffer pointers, so they can start at the beginning
 //	GCodeArgsReadyToConvert = 0; //release the gcodeargs[char] so they can process the next one
 }
-void USART2_Init(void)
+void USART234_Init(void)
 {
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 }; /* Init the low level hardware : GPIO, CLOCK */
+	
 	huart2.Instance = USART2;
-	huart2.Init.BaudRate = 9600;
+	huart2.Init.BaudRate = USART2_BAUDRATE; //USART2_BAUDRATE;
 	huart2.Init.WordLength = UART_WORDLENGTH_8B;
 	huart2.Init.StopBits = UART_STOPBITS_1;
 	huart2.Init.Parity = UART_PARITY_NONE;
 	huart2.Init.Mode = UART_MODE_TX_RX;
 	huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 	huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-
-	huart2.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
-	HAL_UART_Init(&huart2);
+	if (huart2.Init.BaudRate > 0)
+	{
+		__HAL_RCC_USART2_CLK_ENABLE(); /* Peripheral clock enable */
+		huart2.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
+		HAL_UART_Init(&huart2);
+		/**USART2 GPIO Configuration
+		PA2     ------> USART3_TX
+		PA3     ------> USART3_RX
+		*/	
+		__HAL_RCC_GPIOA_CLK_ENABLE();
+		GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
+		GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+		GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+		__HAL_UART_ENABLE(&huart2);
+	}
+	//now uart3
+	huart3.Instance = USART3;
+	huart3.Init.BaudRate = USART3_BAUDRATE; //USART2_BAUDRATE;
+	huart3.Init.WordLength = UART_WORDLENGTH_8B;
+	huart3.Init.StopBits = UART_STOPBITS_1;
+	huart3.Init.Parity = UART_PARITY_NONE;
+	huart3.Init.Mode = UART_MODE_TX_RX;
+	huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+	if (huart3.Init.BaudRate > 0)
+	{
+		__HAL_RCC_USART3_CLK_ENABLE(); /* Peripheral clock enable must be done BEFORE tring to iInit*/
+		huart3.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
+		HAL_UART_Init(&huart3);
+		/**USART2 GPIO Configuration
+		PB10     ------> USART4_TX
+		PB11     ------> USART4_RX
+		*/
+		__HAL_RCC_GPIOB_CLK_ENABLE();
+		GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11;
+		GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
+		HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+		__HAL_UART_ENABLE(&huart3);
+	}
+	//now uart4
+	huart4.Instance = UART4;
+	huart4.Init.BaudRate = USART4_BAUDRATE; //USART2_BAUDRATE;
+	huart4.Init.WordLength = UART_WORDLENGTH_8B;
+	huart4.Init.StopBits = UART_STOPBITS_1;
+	huart4.Init.Parity = UART_PARITY_NONE;
+	huart4.Init.Mode = UART_MODE_TX_RX;
+	huart4.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	huart4.Init.OverSampling = UART_OVERSAMPLING_16;
+	if (huart4.Init.BaudRate > 0)
+	{
+		__HAL_RCC_UART4_CLK_ENABLE(); /* Peripheral clock enable must be done BEFORE tring to i
+		huart4.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
+		HAL_UART_Init(&huart4);
+		/**USART2 GPIO Configuration
+		PC10     ------> USART3_TX
+		PC11     ------> USART3_RX
+		*/
+		__HAL_RCC_GPIOC_CLK_ENABLE(); /* Peripheral clock enable */
+		GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11;
+		GPIO_InitStruct.Alternate = GPIO_AF8_UART4;
+		HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+		__HAL_UART_ENABLE(&huart4);
+	}
 	
-
-	GPIO_InitTypeDef GPIO_InitStruct = { 0 }; /* Init the low level hardware : GPIO, CLOCK */
-
-	__HAL_RCC_USART2_CLK_ENABLE(); /* Peripheral clock enable */
-	__HAL_RCC_GPIOA_CLK_DISABLE();
-	/**USART3 GPIO Configuration
-	PA2     ------> USART3_TX
-	PA3     ------> USART3_RX
-	*/
-	GPIO_InitStruct.Pin = GPIO_PIN_2 | GPIO_PIN_3;
-	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-	//huart2.gState = HAL_UART_STATE_BUSY;
-	//__HAL_UART_DISABLE(&huart2);
-
-	//UART_SetConfig(&huart2);  /* Set the UART Communication parameters */
-
-	//if (huart3.AdvancedInit.AdvFeatureInit != UART_ADVFEATURE_NO_INIT) UART_AdvFeatureConfig(&huart3);
-
-	/* In asynchronous mode, the following bits must be kept cleared:
-	- LINEN and CLKEN bits in the USART_CR2 register,
-	- SCEN, HDSEL and IREN  bits in the USART_CR3 register.*/
-	//CLEAR_BIT(huart2.Instance->CR2, (USART_CR2_LINEN | USART_CR2_CLKEN));
-	//CLEAR_BIT(huart2.Instance->CR3, (USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN));
-
-	//h750 gets this code to enable fifos
-	//HAL_UARTEx_SetTxFifoThreshold(&huart3, UART_TXFIFO_THRESHOLD_1_8) ;
-	//HAL_UARTEx_SetRxFifoThreshold(&huart3, UART_RXFIFO_THRESHOLD_1_8) ;
-	__HAL_UART_ENABLE(&huart2);
 }
 
 
@@ -511,15 +551,17 @@ void USART3_Init(void)
 
 	__HAL_RCC_GPIOC_CLK_ENABLE();
 	/**USART6 GPIO Configuration
-	PC10     ------> USART3_TX
-	PC11     ------> USART3_RX
+	PB10     ------> USART3_TX
+	PB11     ------> USART3_RX
+	//PC10     ------> USART3_TX
+	//PC11     ------> USART3_RX
 	*/
 	GPIO_InitStruct.Pin = GPIO_PIN_10 | GPIO_PIN_11;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
-	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 
 	huart3.gState = HAL_UART_STATE_BUSY;

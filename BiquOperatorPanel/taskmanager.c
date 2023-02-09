@@ -21,6 +21,7 @@ uint16_t TaskTime[32]={0};			// last execution time
 uint16_t MaxTaskTime[32]={0};       // Maximum execution time
 uint16_t SliceOffset=0;
 
+char* TestString;
 uint32_t EncoderPressed = 0;
 const PFUNC F1000HZ[NUM_1000HZ] =
 {
@@ -78,7 +79,8 @@ const PFUNC F1HZ[NUM_1HZ] =
 void func_SystickCallback()
 {
 
-	
+	CheckForUart2TxRx();
+	CheckForUart3TxRx();
 	SliceCnt++;
 	SliceOffset=SliceCnt&0x0007;  //precalculate the slice index into the jump table
 	if(SliceOffset)
@@ -110,7 +112,12 @@ void func_SystickCallback()
 }
 void TestUart()
 {
-	USART3->DR = (uint32_t)('A' & 0x00ff);
+
+	SendUart2String("A");
+	SendUart3String("AB");
+//	USART2->DR = (uint32_t)('A' & 0x00ff);
+//	USART3->DR = (uint32_t)('A' & 0x00ff);
+	UART4->DR = (uint32_t)('A' & 0x00ff);
 	//USART3->DR = 'A';
 	//SendUartString("A");
 }

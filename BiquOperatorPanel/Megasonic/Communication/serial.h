@@ -138,7 +138,8 @@ extern void sendChar(uint8_t SerialIndex, uint8_t ch);
 extern void sendString(char* text, uint8_t SerialIndex);
 extern void sendStringCR(char* stringToSend, uint8_t SerialIndex);
 extern void SendUsbVcpString(char* stringToSend);
-void SendUartString(char* stringToSend);
+void SendUart2String(char* stringToSend);
+void SendUart3String(char* stringToSend);
 extern void USBD_CDC_ReceivePacketCallback(uint8_t*Buf, uint32_t Len); //Callback function for recieving thru USB VCP
 
 
@@ -154,6 +155,7 @@ extern void CheckForUart3Receive(void);
 extern void CheckForUart6Receive(void);
 void CheckForUart2TxRx(void);
 void CheckForUart3TxRx(void);
-extern void USART2_Init(void);
+extern void USART234_Init(void);
+//extern void USART2_Init(void);
 extern void USART3_Init(void);
 extern void ResetAsciParsePointers(ComBuffer* BufferToReset);
