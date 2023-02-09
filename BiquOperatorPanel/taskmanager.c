@@ -42,7 +42,7 @@ const PFUNC F100HZ[NUM_100HZ] =
 	Spare,
 	Spare,
 	Spare,
-	CheckForUart3TxRx,
+	TestUart,//Spare,//CheckForUart3TxRx,
 	CheckEncoderButton,
 	LCD_ProcessTouchEvent,
 };
@@ -55,7 +55,7 @@ const PFUNC F10HZ[NUM_10HZ] =
 	Spare,
 	Spare,
 	Spare,
-	TestUart, //TestUart,
+	Spare, //TestUart, //TestUart,
 	BlinkButtonsTask,
 };
 
@@ -110,7 +110,8 @@ void func_SystickCallback()
 }
 void TestUart()
 {
-	USART3->DR = 'A';
+	USART3->DR = (uint32_t)('A' & 0x00ff);
+	//USART3->DR = 'A';
 	//SendUartString("A");
 }
 void Spare (void)

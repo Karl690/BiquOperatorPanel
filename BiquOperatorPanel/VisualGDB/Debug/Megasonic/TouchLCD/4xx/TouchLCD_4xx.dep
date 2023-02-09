@@ -1,6 +1,6 @@
 VisualGDB/Debug/Megasonic/TouchLCD/4xx/TouchLCD_4xx.o: \
  Megasonic/TouchLCD/4xx/TouchLCD_4xx.c \
- C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h \
+ Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h \
  Drivers/CMSIS/Include/core_cm4.h \
  c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h \
  c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h \
@@ -12,15 +12,15 @@ VisualGDB/Debug/Megasonic/TouchLCD/4xx/TouchLCD_4xx.o: \
  Drivers/CMSIS/Include/cmsis_version.h \
  Drivers/CMSIS/Include/cmsis_compiler.h Drivers/CMSIS/Include/cmsis_gcc.h \
  Drivers/CMSIS/Include/mpu_armv7.h \
- C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
+ Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h \
  Megasonic/TouchLCD/4xx/TouchLCD_4xx.h Megasonic/GPIO/pins.h \
  Megasonic/GPIO/GPIO_Init.h Megasonic/GPIO/pins.h Megasonic/configure.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  Core/stm32f4xx_hal_conf.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
- C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f4xx.h \
- C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h \
+ Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h \
+ Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stddef.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h \
@@ -40,11 +40,12 @@ VisualGDB/Debug/Megasonic/TouchLCD/4xx/TouchLCD_4xx.o: \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
+ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  Megasonic/STORAGE/FLASH/flash_4xx.h
-C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h:
+Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
 Drivers/CMSIS/Include/core_cm4.h:
 c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stdint.h:
 c:\sysgcc\arm-eabi\arm-none-eabi\include\stdint.h:
@@ -57,7 +58,7 @@ Drivers/CMSIS/Include/cmsis_version.h:
 Drivers/CMSIS/Include/cmsis_compiler.h:
 Drivers/CMSIS/Include/cmsis_gcc.h:
 Drivers/CMSIS/Include/mpu_armv7.h:
-C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
+Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h:
 Megasonic/TouchLCD/4xx/TouchLCD_4xx.h:
 Megasonic/GPIO/pins.h:
 Megasonic/GPIO/GPIO_Init.h:
@@ -67,8 +68,8 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 Core/stm32f4xx_hal_conf.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:
-C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f4xx.h:
-C:/Users/karl6/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F4xxxx/CMSIS_HAL/Device/ST/STM32F4xx/Include/stm32f407xx.h:
+Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
+Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 c:\sysgcc\arm-eabi\lib\gcc\arm-none-eabi\10.3.1\include\stddef.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc_ex.h:
@@ -88,6 +89,7 @@ Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ex.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_flash_ramfunc.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
+Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h:
 Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:

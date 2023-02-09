@@ -502,11 +502,10 @@ void USART3_Init(void)
 	huart3.Init.OverSampling = UART_OVERSAMPLING_16;
 	//huart6.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
 	//huart6.Init.ClockPrescaler = UART_PRESCALER_DIV1;
-	//huart6.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-
+	//huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+	__HAL_RCC_USART3_CLK_ENABLE(); /* Peripheral clock enable must be done BEFORE tring to init uart*/
 	huart3.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
 
-	__HAL_RCC_USART3_CLK_ENABLE(); /* Peripheral clock enable must be done BEFORE tring to init uart*/
 	HAL_UART_Init(&huart3);
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 }; /* Init the low level hardware : GPIO, CLOCK */
 
