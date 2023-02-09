@@ -13,8 +13,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{555A85A7-F635-44CB-AA1C-F660DD02BF02}</ProjectGuid>
-    <BSP_ID>com.sysprogs.arm.stm32</BSP_ID>
-    <BSP_VERSION>2022.08</BSP_VERSION>
+    <BSP_ID>com.visualgdb.bsp.in-place</BSP_ID>
+    <BSP_VERSION>1.0</BSP_VERSION>
     <InPlaceBSPSubdir />
     <RelativeBSPPath />
     <ProjectName>BiquOperatorPanel</ProjectName>
@@ -44,7 +44,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
-      <AdditionalIncludeDirectories>./;./Core;./Drivers/CMSIS/Device/ST.STM32F4xx/Include;./Drivers/CMSIS/Include;./Drivers/STM32F4xx_HAL_Driver/Inc;./Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;./HAL;./Megasonic;./lvgl;./Icons;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./;./Core;./Drivers/CMSIS/Device/ST/STM32F4xx/Include;./Drivers/CMSIS/Include;./Drivers/STM32F4xx_HAL_Driver/Inc;./Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;./HAL;./Megasonic;./Icons;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DEBUG=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -61,6 +61,7 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
+    <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Core\startup_stm32f407igtx.s" />
     <ClCompile Include="Core\stm32f4xx_hal_msp.c" />
@@ -94,6 +95,7 @@
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c" />
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c" />
     <ClCompile Include="ICONS\icon_start.c" />
+    <ClCompile Include="Megasonic\Communication\serial.c" />
     <ClCompile Include="Megasonic\global.c" />
     <ClCompile Include="Megasonic\GPIO\GPIO_Init.c" />
     <ClCompile Include="Megasonic\GPIO\pininit.c" />
@@ -195,6 +197,7 @@
     <ClInclude Include="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h" />
     <ClInclude Include="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_utils.h" />
     <ClInclude Include="ICONS\icons.h" />
+    <ClInclude Include="Megasonic\Communication\serial.h" />
     <ClInclude Include="Megasonic\configure.h" />
     <ClInclude Include="Megasonic\global.h" />
     <ClInclude Include="Megasonic\GPIO\GPIO_Init.h" />

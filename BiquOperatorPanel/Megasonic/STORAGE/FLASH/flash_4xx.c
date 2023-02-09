@@ -182,7 +182,7 @@ uint8_t read_flash(uint32_t addr, uint8_t* data, uint32_t len) {
 uint8_t write_flash( uint32_t addr, uint8_t* data, uint32_t len )
 {
 	//
-	uint8_t* targetdataAddress = (uint32_t) addr ;
+	uint8_t* targetdataAddress = (uint8_t*) addr;
 	for (uint32_t count = 0; count < len; count++)
 	{//check for empty flash, to avoid errors
 		if (*targetdataAddress != 0xff) return ERROR;//leave if the flash is corrupted.
@@ -192,13 +192,13 @@ uint8_t write_flash( uint32_t addr, uint8_t* data, uint32_t len )
 	
 	//
 	uint8_t result = SUCCESS;
-	targetdataAddress = (uint32_t) addr;
+	targetdataAddress = (uint8_t*) addr;
 	FLASH_Unlock();
 	FLASH_Status status;	
 	for(uint8_t i = 0; i < len; i ++)
 	{
 		//if(data[i] == 0x0 || data[i] == 0xff) break;
-		status  = FLASH_ProgramByte(targetdataAddress, data[i]);
+		status  = FLASH_ProgramByte((uint32_t)targetdataAddress, data[i]);
 		if (status != FLASH_COMPLETE)
 		{//make sure we had no problems writing
 			result = ERROR;			

@@ -26,7 +26,7 @@ typedef enum
 #define CALIBRATIONDATA_BLOCKSIZE	64
 #define CALIBRATIONDATA_SIZE		0x1000	//4k
 /* Macro and function for operating(save/load) Calibration data */
-#define SOAPSTRING_STARTADDRESS 0x80E0000 + 0x1000   //Soapstring address would be started from 68K(0x11000) range of RAM.
+#define SOAPSTRING_STARTADDRESS (uint8_t*)(0x80E0000 + 0x1000)   //Soapstring address would be started from 68K(0x11000) range of RAM.
 #define SOAPSTRING_BLOCKSIZE	0x1000					//4k
 #define SOAPSTRING_MAXBLOCKS    15                     //2 blocks for ram, 120 or flash
 #define SOAPSTRING_ENDADDRESS	SOAPSTRING_STARTADDRESS + 0xE000	// for 407, RAM size is 128K. 

@@ -14,7 +14,7 @@
 #include "TouchLCD/lcd_encoder.h"
 #include "TouchLCD/Widgets/widget.h"
 #include "TouchLCD/Widgets/button.h"
-
+#include "Communication/serial.h"
 uint32_t Seconds = 0;               // needed for heartbeat (number of seconds since boot)
 uint16_t SliceCnt = 0;              // current slice being processed
 uint16_t TaskTime[32]={0};			// last execution time
@@ -31,8 +31,9 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 	EncoderWheelMove,
 	Spare,
 	Spare,
-	Spare,
+	Spare, //CheckForUart3TxRx,
 };
+
 
 const PFUNC F100HZ[NUM_100HZ] =
 {
@@ -41,7 +42,7 @@ const PFUNC F100HZ[NUM_100HZ] =
 	Spare,
 	Spare,
 	Spare,
-	Spare,
+	CheckForUart3TxRx,
 	CheckEncoderButton,
 	LCD_ProcessTouchEvent,
 };
@@ -54,7 +55,7 @@ const PFUNC F10HZ[NUM_10HZ] =
 	Spare,
 	Spare,
 	Spare,
-	Spare,
+	TestUart, //TestUart,
 	BlinkButtonsTask,
 };
 
@@ -107,7 +108,11 @@ void func_SystickCallback()
 	return;//toggle pin so we can see on Oscillosclope and exit
 
 }
-
+void TestUart()
+{
+	USART3->DR = 'A';
+	//SendUartString("A");
+}
 void Spare (void)
 {
 	// placeholder call for empty slice

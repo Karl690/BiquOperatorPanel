@@ -1,6 +1,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "GPIO/pininit.h"
+#include "Communication/serial.h"
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/GUI/gui.h"
 #include "TouchLCD/lcd_touch.h"
@@ -65,6 +66,7 @@ int main(void)
 	Init_LCD();   // their code
 	
 	Init_GPIO();
+	Init_Serial();
 	
 	storageIndex = DEFAULT_STORAGE; //initialize the storage type.
 	InitPanelMain();//set up gid widgets
@@ -74,7 +76,7 @@ int main(void)
 //	uint8_t data[10] = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9 };	
 //	write_memory(FLASH_LAST_ADDRESS, data, 10); //Please put a breakpoint. and here you can check the memory map with Memory View.
 //	
-//	return 0;
+	printf(stderr, "Start program");
 	//clearcalibrtionData();
 	InitializeCalibrationParameters();
 	initializeSoapNudList();
