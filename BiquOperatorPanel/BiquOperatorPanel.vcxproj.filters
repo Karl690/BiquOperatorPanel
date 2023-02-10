@@ -41,9 +41,6 @@
     <Filter Include="Megasonic\TouchLCD\Widgets">
       <UniqueIdentifier>{053ea268-dcc7-4384-9ade-07d8295c696c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Megasonic\SECS1">
-      <UniqueIdentifier>{b68a327a-26bd-468e-b562-b596b8871273}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Drivers">
       <UniqueIdentifier>{439eea9c-1975-4132-a0c1-1ef525bc060b}</UniqueIdentifier>
     </Filter>
@@ -436,9 +433,6 @@
     <ClInclude Include="Megasonic\TouchLCD\Widgets\dropdownlist.h">
       <Filter>Megasonic\TouchLCD\Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Megasonic\SECS1\secs1.h">
-      <Filter>Megasonic\SECS1</Filter>
-    </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="RevisionHistory.h" />
     <ClInclude Include="taskmanager.h" />
@@ -455,6 +449,12 @@
       <Filter>Megasonic\STORAGE\FLASH</Filter>
     </ClInclude>
     <ClInclude Include="Megasonic\Communication\serial.h">
+      <Filter>Megasonic\Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\Communication\secsserial.h">
+      <Filter>Megasonic\Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\Communication\simpleserial.h">
       <Filter>Megasonic\Communication</Filter>
     </ClInclude>
   </ItemGroup>
@@ -630,9 +630,6 @@
     <ClCompile Include="Megasonic\global.c">
       <Filter>Megasonic</Filter>
     </ClCompile>
-    <ClCompile Include="Megasonic\SECS1\secs1.c">
-      <Filter>Megasonic\SECS1</Filter>
-    </ClCompile>
     <ClCompile Include="main.c" />
     <ClCompile Include="taskmanager.c" />
     <ClCompile Include="Megasonic\STORAGE\storage.c">
@@ -652,6 +649,12 @@
     </ClCompile>
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c">
       <Filter>Drivers\STM32F4xx_HAL_Driver\Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Communication\secsserial.c">
+      <Filter>Megasonic\Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Communication\simpleserial.c">
+      <Filter>Megasonic\Communication</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

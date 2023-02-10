@@ -28,11 +28,11 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 	Spare,    // keep as last call in this array
 	Spare,
 	Spare,
-	Spare,
 	EncoderWheelMove,
-	Spare,
-	Spare,
-	Spare, //CheckForUart3TxRx,
+	CheckForSecsTxRx,//CheckForUart2TxRx,
+	CheckForSimplesTxRx,//CheckForUart3TxRx,
+	ParseIncommingLineToSecsString,
+	ParseIncommingLineToSimpleData,
 };
 
 
@@ -79,8 +79,7 @@ const PFUNC F1HZ[NUM_1HZ] =
 void func_SystickCallback()
 {
 
-	CheckForUart2TxRx();
-	CheckForUart3TxRx();
+	
 	SliceCnt++;
 	SliceOffset=SliceCnt&0x0007;  //precalculate the slice index into the jump table
 	if(SliceOffset)
@@ -113,7 +112,7 @@ void func_SystickCallback()
 void TestUart()
 {
 
-	SendUart2String("A");
+	SendUartSecsString("A");
 	SendUart3String("AB");
 //	USART2->DR = (uint32_t)('A' & 0x00ff);
 //	USART3->DR = (uint32_t)('A' & 0x00ff);

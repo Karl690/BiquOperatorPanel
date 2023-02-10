@@ -15,18 +15,18 @@ uint8_t Rx3Data[20];
 uint8_t Rx6Data[20];
 
 //USB SERIAL PORT
-uint8_t  Rx_BufferUSB[RX_BUFFER_SIZE] = { 0 }; //serial port receive buffer
-uint8_t  Rx_UrgentBufferUSB[RX_URGENT_BUFFER_SIZE] = { 0 };
-uint8_t  Tx_BufferUSB[0xfff] = { 0 };
+uint8_t  Rx_BufferUSB[SERIAL_BUFFER_SIZE] = { 0 }; //serial port receive buffer
+uint8_t  Rx_UrgentBufferUSB[SERIAL_BUFFER_SIZE] = { 0 };
+uint8_t  Tx_BufferUSB[SERIAL_BUFFER_SIZE] = { 0 };
 //serial port 6
-uint8_t  RX_Buffer3[RX_BUFFER_SIZE] = { 0 }; //serial port receive buffer
-uint8_t  Rx_UrgentBuffer3[RX_URGENT_BUFFER_SIZE] = { 0 };
+uint8_t  RX_Buffer3[SERIAL_BUFFER_SIZE] = { 0 }; //serial port receive buffer
+uint8_t  Rx_UrgentBuffer3[SERIAL_BUFFER_SIZE] = { 0 };
 uint8_t  Tx_Buffer3[0xfff] = { 0 };
  ;
 //usb port
-uint8_t  RX_Buffer6[RX_BUFFER_SIZE] = { 0 }; //serial port receive buffer
-uint8_t  Rx_UrgentBuffer6[RX_URGENT_BUFFER_SIZE] = { 0 };
-uint8_t  Tx_Buffer6[0xfff] = { 0 };
+uint8_t  RX_Buffer6[SERIAL_BUFFER_SIZE] = { 0 }; //serial port receive buffer
+uint8_t  Rx_UrgentBuffer6[SERIAL_BUFFER_SIZE] = { 0 };
+uint8_t  Tx_Buffer6[SERIAL_BUFFER_SIZE] = { 0 };
  ;
 //
 
@@ -429,7 +429,6 @@ void CheckForUart3TxRx()
 		}
 	}
 	//now check for receive
-	//now check for receive
 	while (USART3->SR & USART_SR_RXNE)
 	{
 		*COM3.TxBuffer.Head = (char)(uint8_t)(USART3->DR & 0xff);
@@ -583,3 +582,107 @@ void USART3_Init(void)
 	__HAL_UART_ENABLE(&huart3);
 }
 
+
+
+////////////////////////////////////////////////////////////////
+/*              write by lvana */
+
+static volatile uint32_t* const rcc_uart_rst[] = {
+	&RCC->APB2RSTR,
+	&RCC->APB1RSTR,
+	&RCC->APB1RSTR,
+	&RCC->APB1RSTR,
+	&RCC->APB1RSTR,
+	&RCC->APB2RSTR,
+};
+
+static volatile uint32_t* const rcc_uart_en[] = {
+	&RCC->APB2ENR,
+	&RCC->APB1ENR,
+	&RCC->APB1ENR,
+	&RCC->APB1ENR,
+	&RCC->APB1ENR,
+	&RCC->APB2ENR,
+};
+
+static const uint32_t rcc_uart_bit[] = {
+	0x00000010, // RCC_APB2  bit 4
+	0x00020000, // RCC_APB1  bit 17
+	0x00040000, // RCC_APB1  bit 18
+	0x00080000, // RCC_APB1  bit 19
+	0x00100000, // RCC_APB1  bit 20
+	0x00000020, // RCC_APB2  bit 5
+};
+static USART_TypeDef* const uart[] = {
+	USART1, // TX--PA9  RX--PA10
+	USART2, // TX--PA2  RX--PA3
+	USART3, // TX--PB10 RX--PB11
+	UART4, // TX--PC10 RX--PC11
+	UART5, // TX--PC12 RX--PD2
+	USART6
+ }; // TX--PG14 RX--PG9
+
+static const uint16_t uart_tx[] = { USART1_TX_PIN, USART2_TX_PIN, USART3_TX_PIN, UART4_TX_PIN, UART5_TX_PIN, USART6_TX_PIN }; // TX
+static const uint16_t uart_rx[] = { USART1_RX_PIN, USART2_RX_PIN, USART3_RX_PIN, UART4_RX_PIN, UART5_RX_PIN, USART6_RX_PIN }; // RX
+
+void UART_GPIO_Init(uint8_t port)
+{
+	uint8_t UART_AF_NUM[] = { GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6 };
+
+	GPIO_InitSet(uart_tx[port], MGPIO_MODE_AF_PP, UART_AF_NUM[port]);
+	GPIO_InitSet(uart_rx[port], MGPIO_MODE_AF_PP, UART_AF_NUM[port]);
+}
+
+void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* RxUrgentBuffer, uint8_t* TxBuffer)
+{
+	UartIndex -= 1; //0: UART1, 1: UART2 ......
+	//Initialize Secs serial's buffers
+	ComPort->UartHandler = uart[UartIndex]; //USART2;
+	ComPort->ComType                = COMTYPE_AUX; //primary control port for PC and REPETREL comm
+	ComPort->RxBuffer.buffer     	= RxBuffer;
+	ComPort->RxBuffer.BufferStart   = &RxBuffer[0];
+	ComPort->RxBuffer.BufferEnd     = &RxBuffer[0] + SERIAL_BUFFER_SIZE - 1; //end of the que
+	ComPort->RxBuffer.Head          = &RxBuffer[0]; //start of que
+	ComPort->RxBuffer.Tail          = &RxBuffer[0]; //end of the que
+	ComPort->RxBuffer.CharsInBuf	= 0; // total valid chars in buffer
+	ComPort->RxBuffer.RxLineCount = 0; // if there is a valid command waiting
+	ComPort->UrgentFlag			    = 0;
+	ComPort->AcksWaiting            = 0;
+
+	ComPort->RxUrgentBuffer.buffer        = RxUrgentBuffer;
+	ComPort->RxUrgentBuffer.BufferStart   = &RxUrgentBuffer[0];
+	ComPort->RxUrgentBuffer.BufferEnd     = &RxUrgentBuffer[0] + SERIAL_BUFFER_SIZE - 1; //end of the que
+	ComPort->RxUrgentBuffer.Head          = &RxUrgentBuffer[0]; //start of que
+	ComPort->RxUrgentBuffer.Tail          = &RxUrgentBuffer[0]; //end of the que
+	ComPort->RxUrgentBuffer.CharsInBuf	   = 0; // total valid chars in buffer
+	ComPort->RxUrgentBuffer.RxLineCount = 0; // if there is a valid command waiting
+	ComPort->UrgentFlag			       = 0;
+	ComPort->AcksWaiting               = 0;
+
+	ComPort->TxBuffer.buffer     	= TxBuffer;
+	ComPort->TxBuffer.BufferStart   = &TxBuffer[0];
+	ComPort->TxBuffer.BufferEnd     = &TxBuffer[0] + sizeof(SERIAL_BUFFER_SIZE) - 1; //end of the que
+	ComPort->TxBuffer.Head		    = &TxBuffer[0]; // index of where to put the next char
+	ComPort->TxBuffer.Tail	        = &TxBuffer[0]; // index of where to pull the next char
+	ComPort->TxBuffer.CharsInBuf	= 0; // total valid chars in buffer
+	
+	//Initalize Uart hardware.
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 }; /* Init the low level hardware : GPIO, CLOCK */
+	UART_HandleTypeDef huart;
+	huart.Instance = uart[UartIndex]; //USART2;
+	huart.Init.BaudRate = USART2_BAUDRATE; //USART2_BAUDRATE;
+	huart.Init.WordLength = UART_WORDLENGTH_8B;
+	huart.Init.StopBits = UART_STOPBITS_1;
+	huart.Init.Parity = UART_PARITY_NONE;
+	huart.Init.Mode = UART_MODE_TX_RX;
+	huart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	huart.Init.OverSampling = UART_OVERSAMPLING_16;
+	if (huart.Init.BaudRate > 0)
+	{	
+		*rcc_uart_en[UartIndex] |= rcc_uart_bit[UartIndex]; // Enable clock  //__HAL_RCC_USART2_CLK_ENABLE(); /* Peripheral clock enable */
+		huart.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
+		HAL_UART_Init(&huart);
+		UART_GPIO_Init(UartIndex);
+		__HAL_UART_ENABLE(&huart);
+	}
+}

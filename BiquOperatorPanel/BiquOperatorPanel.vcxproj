@@ -95,11 +95,12 @@
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c" />
     <ClCompile Include="Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c" />
     <ClCompile Include="ICONS\icon_start.c" />
+    <ClCompile Include="Megasonic\Communication\secsserial.c" />
     <ClCompile Include="Megasonic\Communication\serial.c" />
+    <ClCompile Include="Megasonic\Communication\simpleserial.c" />
     <ClCompile Include="Megasonic\global.c" />
     <ClCompile Include="Megasonic\GPIO\GPIO_Init.c" />
     <ClCompile Include="Megasonic\GPIO\pininit.c" />
-    <ClCompile Include="Megasonic\SECS1\secs1.c" />
     <ClCompile Include="Megasonic\SPI\spi.c" />
     <ClCompile Include="Megasonic\SPI\sw_spi.c" />
     <ClCompile Include="Megasonic\SPI\xpt2046.c" />
@@ -197,7 +198,9 @@
     <ClInclude Include="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h" />
     <ClInclude Include="Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_utils.h" />
     <ClInclude Include="ICONS\icons.h" />
+    <ClInclude Include="Megasonic\Communication\secsserial.h" />
     <ClInclude Include="Megasonic\Communication\serial.h" />
+    <ClInclude Include="Megasonic\Communication\simpleserial.h" />
     <ClInclude Include="Megasonic\configure.h" />
     <ClInclude Include="Megasonic\global.h" />
     <ClInclude Include="Megasonic\GPIO\GPIO_Init.h" />
@@ -209,7 +212,6 @@
     <ClInclude Include="Megasonic\STORAGE\FLASH\w25qxx.h" />
     <ClInclude Include="Megasonic\STORAGE\storage.h" />
     <ClInclude Include="RevisionHistory.h" />
-    <ClInclude Include="Megasonic\SECS1\secs1.h" />
     <ClInclude Include="Megasonic\SPI\spi.h" />
     <ClInclude Include="Megasonic\SPI\sw_spi.h" />
     <ClInclude Include="Megasonic\SPI\xpt2046.h" />

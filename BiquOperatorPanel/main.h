@@ -51,7 +51,10 @@ extern "C" {
 #include "STORAGE/FLASH/w25qxx.h"
 #include "SPI/xpt2046.h"
 
-#include "TouchLCD/GUI/PanelMain.designer.h"	
+#include "TouchLCD/GUI/PanelMain.designer.h"
+#include "Communication/serial.h"
+#include "Communication/secsserial.h"
+#include "Communication/simpleserial.h"
 	
 #define VECT_TAB_FLASH 0x08008000UL
 

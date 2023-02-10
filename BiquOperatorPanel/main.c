@@ -66,7 +66,8 @@ int main(void)
 	Init_LCD();   // their code
 	
 	Init_GPIO();
-	Init_Serial();
+	Init_SecsSerial(3);
+	Init_SimpleSerial(2);
 	
 	storageIndex = DEFAULT_STORAGE; //initialize the storage type.
 	InitPanelMain();//set up gid widgets

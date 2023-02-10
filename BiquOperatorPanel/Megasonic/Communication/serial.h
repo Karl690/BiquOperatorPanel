@@ -35,14 +35,15 @@
 
 
 
-#define RX_BUFFER_SIZE 			(0x7ff)
-#define RX_URGENT_BUFFER_SIZE 	(0x7ff)
+#define SERIAL_BUFFER_SIZE 			(0x7ff)
+
 
 typedef enum {
 	COMTYPE_MAIN   = 0,
 	COMTYPE_AUX    = 1,
 	COMTYPE_EQUIP  = 2,
-	COMTYPE_CUSTOM = 3
+	COMTYPE_CUSTOM = 3,
+	COMTYPE_SECS   = 4,
 } ComPortType;
 
 typedef enum {
@@ -102,6 +103,7 @@ typedef struct {
 } ComBuffer;
 
 typedef struct {
+	USART_TypeDef* UartHandler;
 	ComBuffer       RxBuffer; //standard incoming receive buffer, circular
 	ComBuffer RxUrgentBuffer; //Priority Gocode rx buffer, bypasses big input que to execute in front of qued commands
 	ComBuffer       TxBuffer; //outgoing characters in que
@@ -159,3 +161,6 @@ extern void USART234_Init(void);
 //extern void USART2_Init(void);
 extern void USART3_Init(void);
 extern void ResetAsciParsePointers(ComBuffer* BufferToReset);
+
+
+void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* RxUrgentBuffer, uint8_t* TxBuffer);
