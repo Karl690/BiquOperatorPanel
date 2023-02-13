@@ -112,11 +112,11 @@ void func_SystickCallback()
 void TestUart()
 {
 
-	SendUartSecsString("A");
-	SendUart3String("AB");
+	//SendUartSecsString("A");
+	//SendUartSimpleString("AB");
 //	USART2->DR = (uint32_t)('A' & 0x00ff);
 //	USART3->DR = (uint32_t)('A' & 0x00ff);
-	UART4->DR = (uint32_t)('A' & 0x00ff);
+	//UART4->DR = (uint32_t)('A' & 0x00ff);
 	//USART3->DR = 'A';
 	//SendUartString("A");
 }

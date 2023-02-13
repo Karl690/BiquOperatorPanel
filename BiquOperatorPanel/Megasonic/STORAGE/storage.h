@@ -42,10 +42,7 @@ uint8_t* getCalibrationDataBlockAddress(); //get the Current calibration address
 
 
 
-#define EOT			0x04	//End of Transmission. we use this as the first byte of var pairs 's block
-#define FOV			0x0A	//First byte of Var	pair
-#define EOV			0x0D	//End byte of var pair
-#define FOC			0xFF	//Formatted byte of Charactor
+
 
 
 //#define SOAPSTRING_USABLE_RANGE				12 * 1024 //for flash

@@ -105,9 +105,7 @@ typedef struct {
 typedef struct {
 	USART_TypeDef* UartHandler;
 	ComBuffer       RxBuffer; //standard incoming receive buffer, circular
-	ComBuffer RxUrgentBuffer; //Priority Gocode rx buffer, bypasses big input que to execute in front of qued commands
 	ComBuffer       TxBuffer; //outgoing characters in que
-	uint32_t      UrgentFlag; //set when 911 character is received, signifying the beginning of a priority gcode line
 	uint32_t     AcksWaiting; //acknowledge waiting to implement Handshake
 	ComPortType      ComType; // Main com, aux com, machine interface
 } COMPORT;
@@ -148,9 +146,10 @@ extern void USBD_CDC_ReceivePacketCallback(uint8_t*Buf, uint32_t Len); //Callbac
 extern void parseIncomingCommand(ComBuffer * WorkRxBuffer);
 extern void ResetGcodeParseBuffer();
 extern void SplitCurrentGcodeLine2Arguments(ComBuffer * WorkingBuffer);
-extern void addStringToBuffer(ComBuffer *targetBuffer, uint8_t* stringToAddToBuffer);
 extern void USBTxProcessor(void);
-extern void addCharToBuffer(ComBuffer *targetBuffer, uint8_t RawChar);
+void AddSerialBufferToBuffer(ComBuffer *targetBuffer, uint8_t* buf, uint16_t size);
+void AddSerialStringToBuffer(ComBuffer *targetBuffer, char*);
+void AddSerialCharToBuffer(ComBuffer *targetBuffer, uint8_t RawChar);
 extern void GetCharFromBuffer(ComBuffer *SourceBuffer);
 extern void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 extern void CheckForUart3Receive(void);
@@ -163,4 +162,4 @@ extern void USART3_Init(void);
 extern void ResetAsciParsePointers(ComBuffer* BufferToReset);
 
 
-void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* RxUrgentBuffer, uint8_t* TxBuffer);
+void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* TxBuffer);

@@ -77,7 +77,6 @@ int main(void)
 //	uint8_t data[10] = { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9 };	
 //	write_memory(FLASH_LAST_ADDRESS, data, 10); //Please put a breakpoint. and here you can check the memory map with Memory View.
 //	
-	printf(stderr, "Start program");
 	//clearcalibrtionData();
 	InitializeCalibrationParameters();
 	initializeSoapNudList();

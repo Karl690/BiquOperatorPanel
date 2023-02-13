@@ -71,44 +71,47 @@ uint32_t Uart6numberOfXmitCharactersToSend = 0;
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void addStringToBuffer(ComBuffer *targetBuffer, uint8_t* SourceString)
+void AddSerialBufferToBuffer(ComBuffer *targetBuffer, uint8_t* buf, uint16_t size)
 {
-	int StringLength = strlen(SourceString);
-	int index = 0;
-
-	for (index = 0; index < StringLength; index++)
+	uint16_t index = 0;
+	for (index = 0; index < size; index++)
 	{
-		*targetBuffer->Head = SourceString[index];
+		*targetBuffer->Head = buf[index];
 		targetBuffer->Head++;
 		if (targetBuffer->Head > targetBuffer->BufferEnd)
 		  {targetBuffer->Head = targetBuffer->BufferStart; }
 		targetBuffer->CharsInBuf++;
 	}
 }
+void AddSerialStringToBuffer(ComBuffer *targetBuffer, char* SourceString)
+{
+	uint16_t size = strlen(SourceString);
+	AddSerialBufferToBuffer(targetBuffer, (uint8_t*)SourceString, size);
+}
 
-void addCharToBuffer(ComBuffer *targetBuffer, uint8_t RawChar)
+void AddSerialCharToBuffer(ComBuffer *targetBuffer, uint8_t RawChar)
 {
 	*targetBuffer->Head = RawChar;
 	targetBuffer->CharsInBuf++;
 	targetBuffer->Head++;
 	if (targetBuffer->Head > targetBuffer->BufferEnd)
 	  {targetBuffer->Head = targetBuffer->BufferStart; }
-	if (RawChar == CMD_END_CHAR) targetBuffer->RxLineCount++; //tell them there is a cmd waiting to process.
+	//if (RawChar == CMD_END_CHAR) targetBuffer->RxLineCount++; //tell them there is a cmd waiting to process.
 	//add buffer full check and report overrun
 }
 
 
 void SendUsbVcpString(char* stringToSend) {
-	addStringToBuffer(&COMUSB.TxBuffer, stringToSend);
+	AddSerialStringToBuffer(&COMUSB.TxBuffer, stringToSend);
 }
 
 void SendUart2String(char* stringToSend)
 {
-	addStringToBuffer(&COM2.TxBuffer, stringToSend);
+	AddSerialStringToBuffer(&COM2.TxBuffer, stringToSend);
 }
 void SendUart3String(char* stringToSend)
 {
-	addStringToBuffer(&COM3.TxBuffer, stringToSend);
+	AddSerialStringToBuffer(&COM3.TxBuffer, stringToSend);
 }
 void GetCharFromBuffer(ComBuffer *SourceBuffer)
 {
@@ -129,17 +132,8 @@ void InitSerialBuffers()
 	COMUSB.RxBuffer.Tail        = &Rx_BufferUSB[0]; //end of the que
 	COMUSB.RxBuffer.CharsInBuf	= 0; // total valid chars in buffer
 	COMUSB.RxBuffer.RxLineCount = 0; // if there is a valid command waiting
-	COMUSB.UrgentFlag			= 0;
 	COMUSB.AcksWaiting          = 0;
 
-	COMUSB.RxUrgentBuffer.buffer      = Rx_UrgentBufferUSB;
-	COMUSB.RxUrgentBuffer.BufferStart = &Rx_UrgentBufferUSB[0];
-	COMUSB.RxUrgentBuffer.BufferEnd   = &Rx_UrgentBufferUSB[0] + sizeof(Rx_UrgentBufferUSB) - 1; //end of the que
-	COMUSB.RxUrgentBuffer.Head        = &Rx_UrgentBufferUSB[0]; //start of que
-	COMUSB.RxUrgentBuffer.Tail        = &Rx_UrgentBufferUSB[0]; //end of the que
-	COMUSB.RxUrgentBuffer.CharsInBuf	= 0; // total valid chars in buffer
-	COMUSB.RxUrgentBuffer.RxLineCount = 0; // if there is a valid command waiting
-	COMUSB.UrgentFlag			= 0;
 	COMUSB.AcksWaiting          = 0;
 
 
@@ -159,17 +153,8 @@ void InitSerialBuffers()
 	COM2.RxBuffer.Tail          = &RX_Buffer3[0]; //end of the que
 	COM2.RxBuffer.CharsInBuf	= 0; // total valid chars in buffer
 	COM2.RxBuffer.RxLineCount = 0; // if there is a valid command waiting
-	COM2.UrgentFlag			    = 0;
 	COM2.AcksWaiting            = 0;
 
-	COM2.RxUrgentBuffer.buffer        = Rx_UrgentBuffer3;
-	COM2.RxUrgentBuffer.BufferStart   = &Rx_UrgentBuffer3[0];
-	COM2.RxUrgentBuffer.BufferEnd     = &Rx_UrgentBuffer3[0] + sizeof(Rx_UrgentBuffer3) - 1; //end of the que
-	COM2.RxUrgentBuffer.Head          = &Rx_UrgentBuffer3[0]; //start of que
-	COM2.RxUrgentBuffer.Tail          = &Rx_UrgentBuffer3[0]; //end of the que
-	COM2.RxUrgentBuffer.CharsInBuf	   = 0; // total valid chars in buffer
-	COM2.RxUrgentBuffer.RxLineCount = 0; // if there is a valid command waiting
-	COM2.UrgentFlag			       = 0;
 	COM2.AcksWaiting               = 0;
 
 	COM2.TxBuffer.buffer     	= Tx_Buffer3;
@@ -188,17 +173,8 @@ void InitSerialBuffers()
 	COM3.RxBuffer.Tail          = &RX_Buffer6[0]; //end of the que
 	COM3.RxBuffer.CharsInBuf	= 0; // total valid chars in buffer
 	COM3.RxBuffer.RxLineCount = 0; // if there is a valid command waiting
-	COM3.UrgentFlag			    = 0;
 	COM3.AcksWaiting            = 0;
 
-	COM3.RxUrgentBuffer.buffer        = Rx_UrgentBuffer6;
-	COM3.RxUrgentBuffer.BufferStart   = &Rx_UrgentBuffer6[0];
-	COM3.RxUrgentBuffer.BufferEnd     = &Rx_UrgentBuffer6[0] + sizeof(Rx_UrgentBuffer6) - 1; //end of the que
-	COM3.RxUrgentBuffer.Head          = &Rx_UrgentBuffer6[0]; //start of que
-	COM3.RxUrgentBuffer.Tail          = &Rx_UrgentBuffer6[0]; //end of the que
-	COM3.RxUrgentBuffer.CharsInBuf	   = 0; // total valid chars in buffer
-	COM3.RxUrgentBuffer.RxLineCount = 0; // if there is a valid command waiting
-	COM3.UrgentFlag			       = 0;
 	COM3.AcksWaiting               = 0;
 
 	COM3.TxBuffer.buffer     	= Tx_Buffer6;
@@ -292,7 +268,7 @@ void USBD_CDC_ReceivePacketCallback(uint8_t*Buf, uint32_t Len)
 	USBPacketLength = Len;
 	USBPacketAddress = Buf; //address of the usb string buffer
 	if (Len > 2) LastMessageTail = COMUSB.RxBuffer.Head;
-	RawRxWorkBuff = COMUSB.UrgentFlag ? &COMUSB.RxUrgentBuffer : &COMUSB.RxBuffer; //point to the correct buffer
+	RawRxWorkBuff = &COMUSB.RxBuffer; //point to the correct buffer
 	while (Index < Len)
 	{
 		if (Buf[Index] > 0x19)
@@ -333,22 +309,21 @@ void USBD_CDC_ReceivePacketCallback(uint8_t*Buf, uint32_t Len)
 			break;
 
 		case PING_CHAR:     //if (rawChar==7)
-			addStringToBuffer(&COMUSB.TxBuffer, (uint8_t*)ConnectionString);
-			addStringToBuffer(&COMUSB.TxBuffer, (uint8_t*)"COMUSB\n");
+			AddSerialStringToBuffer(&COMUSB.TxBuffer, ConnectionString);
+			AddSerialStringToBuffer(&COMUSB.TxBuffer, "COMUSB\n");
 			break;
 
 		case ABORT_CHAR:   requestToAbortAtEndOfMove = 1; break;  //if (rawChar==8)
 			//this is a job abort, flush buffer NOW!!!!
 
 		case URGENT_911_CMD_CHAR:     //if (rawChar==9)
-			COMUSB.UrgentFlag = 1; //tell them this is a hot inject command line
 			break;
 
 		case CMD_END_CHAR:  //if (rawChar==10) 0xA or 0xD  can trigger the end of line
 		case  13:
 			gcodeCmdsReceived++;
-			addCharToBuffer(RawRxWorkBuff, CMD_END_CHAR);
-			COMUSB.UrgentFlag = 0; return;
+			//addCharToBuffer(RawRxWorkBuff, CMD_END_CHAR);
+			return;
 		case JOG_Z_TABLE_UP:    JogMotorZFlag = 1; break;   //if (rawChar==11)
 
 		case JOG_Z_TABLE_DOWN:  JogMotorZFlag = -1; break;   //if (rawChar==12)
@@ -633,7 +608,7 @@ void UART_GPIO_Init(uint8_t port)
 	GPIO_InitSet(uart_rx[port], MGPIO_MODE_AF_PP, UART_AF_NUM[port]);
 }
 
-void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* RxUrgentBuffer, uint8_t* TxBuffer)
+void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* TxBuffer)
 {
 	UartIndex -= 1; //0: UART1, 1: UART2 ......
 	//Initialize Secs serial's buffers
@@ -646,17 +621,8 @@ void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t*
 	ComPort->RxBuffer.Tail          = &RxBuffer[0]; //end of the que
 	ComPort->RxBuffer.CharsInBuf	= 0; // total valid chars in buffer
 	ComPort->RxBuffer.RxLineCount = 0; // if there is a valid command waiting
-	ComPort->UrgentFlag			    = 0;
 	ComPort->AcksWaiting            = 0;
 
-	ComPort->RxUrgentBuffer.buffer        = RxUrgentBuffer;
-	ComPort->RxUrgentBuffer.BufferStart   = &RxUrgentBuffer[0];
-	ComPort->RxUrgentBuffer.BufferEnd     = &RxUrgentBuffer[0] + SERIAL_BUFFER_SIZE - 1; //end of the que
-	ComPort->RxUrgentBuffer.Head          = &RxUrgentBuffer[0]; //start of que
-	ComPort->RxUrgentBuffer.Tail          = &RxUrgentBuffer[0]; //end of the que
-	ComPort->RxUrgentBuffer.CharsInBuf	   = 0; // total valid chars in buffer
-	ComPort->RxUrgentBuffer.RxLineCount = 0; // if there is a valid command waiting
-	ComPort->UrgentFlag			       = 0;
 	ComPort->AcksWaiting               = 0;
 
 	ComPort->TxBuffer.buffer     	= TxBuffer;
@@ -685,4 +651,10 @@ void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t*
 		UART_GPIO_Init(UartIndex);
 		__HAL_UART_ENABLE(&huart);
 	}
+}
+
+void addStringToBuffer(ComBuffer *targetBuffer, 
+	uint8_t* buf, 
+	uint16_t size)
+{
 }
