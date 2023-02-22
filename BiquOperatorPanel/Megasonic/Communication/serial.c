@@ -562,57 +562,64 @@ void USART3_Init(void)
 ////////////////////////////////////////////////////////////////
 /*              write by lvana */
 
-static volatile uint32_t* const rcc_uart_rst[] = {
-	&RCC->APB2RSTR,
-	&RCC->APB1RSTR,
-	&RCC->APB1RSTR,
-	&RCC->APB1RSTR,
-	&RCC->APB1RSTR,
-	&RCC->APB2RSTR,
-};
+#include "uart.h"
+#include "stm32f4xx_usart.h"
 
-static volatile uint32_t* const rcc_uart_en[] = {
-	&RCC->APB2ENR,
-	&RCC->APB1ENR,
-	&RCC->APB1ENR,
-	&RCC->APB1ENR,
-	&RCC->APB1ENR,
-	&RCC->APB2ENR,
-};
-
-static const uint32_t rcc_uart_bit[] = {
-	0x00000010, // RCC_APB2  bit 4
-	0x00020000, // RCC_APB1  bit 17
-	0x00040000, // RCC_APB1  bit 18
-	0x00080000, // RCC_APB1  bit 19
-	0x00100000, // RCC_APB1  bit 20
-	0x00000020, // RCC_APB2  bit 5
-};
-static USART_TypeDef* const uart[] = {
-	USART1, // TX--PA9  RX--PA10
-	USART2, // TX--PA2  RX--PA3
-	USART3, // TX--PB10 RX--PB11
-	UART4, // TX--PC10 RX--PC11
-	UART5, // TX--PC12 RX--PD2
-	USART6
- }; // TX--PG14 RX--PG9
-
-static const uint16_t uart_tx[] = { USART1_TX_PIN, USART2_TX_PIN, USART3_TX_PIN, UART4_TX_PIN, UART5_TX_PIN, USART6_TX_PIN }; // TX
-static const uint16_t uart_rx[] = { USART1_RX_PIN, USART2_RX_PIN, USART3_RX_PIN, UART4_RX_PIN, UART5_RX_PIN, USART6_RX_PIN }; // RX
-
-void UART_GPIO_Init(uint8_t port)
+DMA_CIRCULAR_BUFFER dmaL1Data[_UART_CNT] = { 0 };
+uint8_t rx_ok[_UART_CNT] = { 0 };
+typedef struct
 {
-	uint8_t UART_AF_NUM[] = { GPIO_AF_USART1, GPIO_AF_USART2, GPIO_AF_USART3, GPIO_AF_UART4, GPIO_AF_UART5, GPIO_AF_USART6 };
+	USART_TypeDef *uart;
+	uint32_t dma_rcc;
+	uint8_t dma_channel;
+	DMA_Stream_TypeDef *dma_stream;
+} SERIAL_CFG;
 
-	GPIO_InitSet(uart_tx[port], MGPIO_MODE_AF_PP, UART_AF_NUM[port]);
-	GPIO_InitSet(uart_rx[port], MGPIO_MODE_AF_PP, UART_AF_NUM[port]);
+static const SERIAL_CFG Serial[_UART_CNT] = {
+	{ USART1, RCC_AHB1Periph_DMA2, 4, DMA2_Stream2 },
+	{ USART2, RCC_AHB1Periph_DMA1, 4, DMA1_Stream5 },
+	{ USART3, RCC_AHB1Periph_DMA1, 4, DMA1_Stream1 },
+	{ UART4, RCC_AHB1Periph_DMA1, 4, DMA1_Stream2 },
+	{ UART5, RCC_AHB1Periph_DMA1, 4, DMA1_Stream0 },
+	{ USART6, RCC_AHB1Periph_DMA2, 5, DMA2_Stream1 },
+};
+
+void Serial_DMAClearFlag(uint8_t port)
+{
+	switch (port)
+	{
+	case _USART1: DMA2->LIFCR = (0x3F << 16); break;  // DMA2_Stream2 low  bits:16-21
+	case _USART2: DMA1->HIFCR = (0xFC << 4); break;  // DMA1_Stream5 high bits: 6-11
+	case _USART3: DMA1->LIFCR = (0xFC << 4); break;  // DMA1_Stream1 low  bits: 6-11
+	case _UART4:  DMA1->LIFCR = (0x3F << 16); break;  // DMA1_Stream2 low  bits:16-21
+	case _UART5:  DMA1->LIFCR = (0x3F << 0); break;  // DMA1_Stream0 low  bits: 0-5
+	case _USART6: DMA2->LIFCR = (0xFC << 4); break;  // DMA2_Stream1 low  bits: 6-11
+	}
+}
+
+
+
+void RCC_AHB1PeriphClockCmd(uint32_t RCC_AHB1Periph, FunctionalState NewState)
+{
+	/* Check the parameters */
+	assert_param(IS_RCC_AHB1_CLOCK_PERIPH(RCC_AHB1Periph));
+
+	assert_param(IS_FUNCTIONAL_STATE(NewState));
+	if (NewState != DISABLE)
+	{
+		RCC->AHB1ENR |= RCC_AHB1Periph;
+	}
+	else
+	{
+		RCC->AHB1ENR &= ~RCC_AHB1Periph;
+	}
 }
 
 void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t* TxBuffer)
 {
 	UartIndex -= 1; //0: UART1, 1: UART2 ......
 	//Initialize Secs serial's buffers
-	ComPort->UartHandler = uart[UartIndex]; //USART2;
+	ComPort->UartHandler =			Serial[UartIndex].uart; //USART2;
 	ComPort->ComType                = COMTYPE_AUX; //primary control port for PC and REPETREL comm
 	ComPort->RxBuffer.buffer     	= RxBuffer;
 	ComPort->RxBuffer.BufferStart   = &RxBuffer[0];
@@ -632,29 +639,124 @@ void InitSerial(uint8_t UartIndex, COMPORT* ComPort, uint8_t* RxBuffer, uint8_t*
 	ComPort->TxBuffer.Tail	        = &TxBuffer[0]; // index of where to pull the next char
 	ComPort->TxBuffer.CharsInBuf	= 0; // total valid chars in buffer
 	
-	//Initalize Uart hardware.
-	GPIO_InitTypeDef GPIO_InitStruct = { 0 }; /* Init the low level hardware : GPIO, CLOCK */
-	UART_HandleTypeDef huart;
-	huart.Instance = uart[UartIndex]; //USART2;
-	huart.Init.BaudRate = USART2_BAUDRATE; //USART2_BAUDRATE;
-	huart.Init.WordLength = UART_WORDLENGTH_8B;
-	huart.Init.StopBits = UART_STOPBITS_1;
-	huart.Init.Parity = UART_PARITY_NONE;
-	huart.Init.Mode = UART_MODE_TX_RX;
-	huart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-	huart.Init.OverSampling = UART_OVERSAMPLING_16;
-	if (huart.Init.BaudRate > 0)
-	{	
-		*rcc_uart_en[UartIndex] |= rcc_uart_bit[UartIndex]; // Enable clock  //__HAL_RCC_USART2_CLK_ENABLE(); /* Peripheral clock enable */
-		huart.Lock = HAL_UNLOCKED; /* Allocate lock resource and initialize it */
-		HAL_UART_Init(&huart);
-		UART_GPIO_Init(UartIndex);
-		__HAL_UART_ENABLE(&huart);
+	Serial_Config(UartIndex, SERIAL_BUFFER_SIZE, 9600);
+}
+void Serial_DMA_Config(uint8_t port)
+{
+	const SERIAL_CFG * cfg = &Serial[port];
+
+	RCC_AHB1PeriphClockCmd(cfg->dma_rcc, ENABLE); // DMA RCC EN
+
+	cfg->dma_stream->CR &= ~(1 << 0); // Disable DMA
+	Serial_DMAClearFlag(port);
+	cfg->uart->CR3 |= 1 << 6; // DMA enable receiver
+
+	cfg->dma_stream->PAR = (uint32_t)(&cfg->uart->DR);
+	cfg->dma_stream->M0AR = (uint32_t)(dmaL1Data[port].cache);
+	cfg->dma_stream->NDTR = dmaL1Data[port].cacheSize;
+
+	cfg->dma_stream->CR = cfg->dma_channel << 25;
+	cfg->dma_stream->CR |= 3 << 16; // Priority level: Very high
+	cfg->dma_stream->CR |= 0 << 13; // Memory data size: 8
+	cfg->dma_stream->CR |= 0 << 11; // Peripheral data size: 8
+	cfg->dma_stream->CR |= 1 << 10; // Memory increment mode
+	cfg->dma_stream->CR |= 0 << 9; // Peripheral not increment mrrode
+	cfg->dma_stream->CR |= 1 << 8; // Circular mode enabled
+	cfg->dma_stream->CR |= 0 << 6; // Data transfer direction: Peripheral-to-memory
+	cfg->dma_stream->CR |= 1 << 0; // Enable DMA
+}
+
+void Serial_ClearData(uint8_t port)
+{
+	dmaL1Data[port].rIndex = dmaL1Data[port].wIndex = dmaL1Data[port].cacheSize = 0;
+
+	if (dmaL1Data[port].cache != NULL)
+	{
+		free(dmaL1Data[port].cache);
+		dmaL1Data[port].cache = NULL;
+	}
+
+	rx_ok[port] = 0;
+}
+
+void Serial_Config(uint8_t port, uint16_t cacheSize, uint32_t baudrate)
+{
+	Serial_ClearData(port);
+
+	dmaL1Data[port].cacheSize = cacheSize;
+	dmaL1Data[port].cache = malloc(cacheSize);
+	while (!dmaL1Data[port].cache) ;              // malloc failed
+
+	UART_Config(port, baudrate, USART_IT_IDLE); // IDLE interrupt
+	Serial_DMA_Config(port);
+}
+
+void Serial_DeConfig(uint8_t port)
+{
+	Serial_ClearData(port);
+
+	Serial[port].dma_stream->CR &= ~(1 << 0); // Disable DMA
+	Serial_DMAClearFlag(port);
+	UART_DeConfig(port);
+}
+
+void USART_IRQHandler(uint8_t port)
+{
+	if ((Serial[port].uart->SR & (1 << 4)) != 0)
+	{
+		Serial[port].uart->SR;
+		Serial[port].uart->DR;
+
+		dmaL1Data[port].wIndex = dmaL1Data[port].cacheSize - Serial[port].dma_stream->NDTR;
+		uint16_t wIndex = (dmaL1Data[port].wIndex == 0) ? dmaL1Data[port].cacheSize : dmaL1Data[port].wIndex;
+		if (dmaL1Data[port].cache[wIndex - 1] == '\n')  // Receive completed
+		{
+			rx_ok[port] = 1;
+		}
 	}
 }
 
-void addStringToBuffer(ComBuffer *targetBuffer, 
-	uint8_t* buf, 
-	uint16_t size)
+void USART1_IRQHandler(void)
 {
+	USART_IRQHandler(_USART1);
+}
+
+void USART2_IRQHandler(void)
+{
+	USART_IRQHandler(_USART2);
+}
+
+void USART3_IRQHandler(void)
+{
+	USART_IRQHandler(_USART3);
+}
+
+void UART4_IRQHandler(void)
+{
+	USART_IRQHandler(_UART4);
+}
+
+void UART5_IRQHandler(void)
+{
+	USART_IRQHandler(_UART5);
+}
+
+void USART6_IRQHandler(void)
+{
+	USART_IRQHandler(_USART6);
+}
+
+void Serial_Puts(uint8_t port, const char *s)
+{
+	while (*s)
+	{
+		while ((Serial[port].uart->SR & USART_FLAG_TC) == (uint16_t)RESET) ;
+		Serial[port].uart->DR = ((uint16_t)*s++ & (uint16_t)0x01FF);
+	}
+}
+
+void Serial_Putchar(uint8_t port, const char ch)
+{
+	while ((Serial[port].uart->SR & USART_FLAG_TC) == (uint16_t)RESET) ;
+	Serial[port].uart->DR = (uint8_t) ch;
 }

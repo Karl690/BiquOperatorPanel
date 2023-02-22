@@ -122,6 +122,9 @@
     <Filter Include="Drivers\STM32F4xx_HAL_Driver\src">
       <UniqueIdentifier>{93c4e8ca-de26-49f0-b635-38f52509dc9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Megasonic\Utils">
+      <UniqueIdentifier>{24dc17f1-8090-4a57-8d5f-91f1e662dbad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="BiquOperatorPanel-Debug.vgdbsettings">
@@ -457,6 +460,21 @@
     <ClInclude Include="Megasonic\Communication\simpleserial.h">
       <Filter>Megasonic\Communication</Filter>
     </ClInclude>
+    <ClInclude Include="Megasonic\Utils\list.h">
+      <Filter>Megasonic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\Utils\secshelper.h">
+      <Filter>Megasonic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\Utils\stack.h">
+      <Filter>Megasonic\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\Communication\uart.h">
+      <Filter>Megasonic\Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\Communication\stm32f4xx_usart.h">
+      <Filter>Megasonic\Communication</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.c">
@@ -654,6 +672,21 @@
       <Filter>Megasonic\Communication</Filter>
     </ClCompile>
     <ClCompile Include="Megasonic\Communication\simpleserial.c">
+      <Filter>Megasonic\Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Utils\list.c">
+      <Filter>Megasonic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Utils\secshelper.c">
+      <Filter>Megasonic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Utils\stack.c">
+      <Filter>Megasonic\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Communication\uart.c">
+      <Filter>Megasonic\Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\Communication\stm32f4xx_usart.c">
       <Filter>Megasonic\Communication</Filter>
     </ClCompile>
   </ItemGroup>

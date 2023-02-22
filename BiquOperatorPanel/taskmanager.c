@@ -27,10 +27,10 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 {
 	Spare,    // keep as last call in this array
 	Spare,
-	Spare,
+	Spare, //CheckForSecsTxRx,
 	EncoderWheelMove,
-	CheckForSecsTxRx,//CheckForUart2TxRx,
-	CheckForSimplesTxRx,//CheckForUart3TxRx,
+	Spare,//CheckForUart2TxRx,
+	Spare,//CheckForUart3TxRx,
 	Spare,
 	ParseIncommingLineToSimpleData,
 };

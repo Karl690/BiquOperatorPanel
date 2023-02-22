@@ -98,6 +98,8 @@
     <ClCompile Include="Megasonic\Communication\secsserial.c" />
     <ClCompile Include="Megasonic\Communication\serial.c" />
     <ClCompile Include="Megasonic\Communication\simpleserial.c" />
+    <ClCompile Include="Megasonic\Communication\stm32f4xx_usart.c" />
+    <ClCompile Include="Megasonic\Communication\uart.c" />
     <ClCompile Include="Megasonic\global.c" />
     <ClCompile Include="Megasonic\GPIO\GPIO_Init.c" />
     <ClCompile Include="Megasonic\GPIO\pininit.c" />
@@ -108,6 +110,9 @@
     <ClCompile Include="Megasonic\STORAGE\FLASH\sdcard.c" />
     <ClCompile Include="Megasonic\STORAGE\FLASH\w25qxx.c" />
     <ClCompile Include="Megasonic\STORAGE\storage.c" />
+    <ClCompile Include="Megasonic\Utils\list.c" />
+    <ClCompile Include="Megasonic\Utils\secshelper.c" />
+    <ClCompile Include="Megasonic\Utils\stack.c" />
     <ClCompile Include="taskmanager.c" />
     <ClCompile Include="Megasonic\Timer\timer_pwm.c" />
     <ClCompile Include="Megasonic\TouchLCD\4xx\TouchLCD_4xx.c" />
@@ -201,6 +206,8 @@
     <ClInclude Include="Megasonic\Communication\secsserial.h" />
     <ClInclude Include="Megasonic\Communication\serial.h" />
     <ClInclude Include="Megasonic\Communication\simpleserial.h" />
+    <ClInclude Include="Megasonic\Communication\stm32f4xx_usart.h" />
+    <ClInclude Include="Megasonic\Communication\uart.h" />
     <ClInclude Include="Megasonic\configure.h" />
     <ClInclude Include="Megasonic\global.h" />
     <ClInclude Include="Megasonic\GPIO\GPIO_Init.h" />
@@ -211,6 +218,9 @@
     <ClInclude Include="Megasonic\STORAGE\FLASH\sdcard.h" />
     <ClInclude Include="Megasonic\STORAGE\FLASH\w25qxx.h" />
     <ClInclude Include="Megasonic\STORAGE\storage.h" />
+    <ClInclude Include="Megasonic\Utils\list.h" />
+    <ClInclude Include="Megasonic\Utils\secshelper.h" />
+    <ClInclude Include="Megasonic\Utils\stack.h" />
     <ClInclude Include="RevisionHistory.h" />
     <ClInclude Include="Megasonic\SPI\spi.h" />
     <ClInclude Include="Megasonic\SPI\sw_spi.h" />
