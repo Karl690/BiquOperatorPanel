@@ -2,6 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-.visualgdb/
-.vs
-.bin
+/.visualgdb
+/.vs
+/bin
+/BiquOperatorPanel/.visualgdb
+/BiquOperatorPanel/VisualGDB
+/BiquOperatorPanel/*.user
+/png2c/obj
+/png2c/bin
