@@ -78,9 +78,9 @@ uint16_t systembytes = 0;
 uint16_t systembyte34 = 0;
 uint16_t receiveid = 0;
 uint16_t my_device_id = 1;
-uint8_t SecsRetrys_ReloadValue = 3* 50; //in c# project it is on 50ms timer
-uint8_t Secs1Timer1_ReLoadValue = 3 * 50;
-uint8_t Secs1Timer2_ReLoadValue = 3 * 50;
+uint8_t SecsRetrys_ReloadValue = 3; //in c# project it is on 50ms timer
+uint8_t Secs1Timer1_ReLoadValue = 3;
+uint8_t Secs1Timer2_ReLoadValue = 3;
 
 uint8_t ReceivedSecsMessageUpdateReadyFlag = 0;
 uint16_t SentSecsMessageUpdateReadyFlag = 0;
@@ -426,4 +426,21 @@ void ParseIncommingLineToSecsString()
 	case 12: waiting_for_ack(); return;
 	default: secs1_flag = 0; return;
 	}
+}
+uint16_t SecsTimerPrescaler = 5;
+void SecsTimers(void)
+{
+	//decrements the secs timers every 50ms
+	if (SecsTimerPrescaler)
+	{
+		SecsTimerPrescaler--;
+		return;//not time to count down yet
+	}
+	SecsTimerPrescaler = 5;
+	if (secstimer1) secstimer1--;
+	if (secstimer2) secstimer2--;
+	if (secstimer3) secstimer3--;
+	if (secstimer5) secstimer5--;
+	if (secstimer6) secstimer6--;
+	if (secstimer7) secstimer7--;
 }

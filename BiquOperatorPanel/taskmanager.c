@@ -31,7 +31,7 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 	EncoderWheelMove,
 	CheckForSecsTxRx,//CheckForUart2TxRx,
 	CheckForSimplesTxRx,//CheckForUart3TxRx,
-	ParseIncommingLineToSecsString,
+	Spare,
 	ParseIncommingLineToSimpleData,
 };
 
@@ -42,7 +42,7 @@ const PFUNC F100HZ[NUM_100HZ] =
 	Spare,
 	Spare,
 	Spare,
-	Spare,
+	ParseIncommingLineToSecsString,
 	TestUart,//Spare,//CheckForUart3TxRx,
 	CheckEncoderButton,
 	LCD_ProcessTouchEvent,
@@ -55,8 +55,8 @@ const PFUNC F10HZ[NUM_10HZ] =
 	Spare,
 	Spare,
 	Spare,
-	Spare,
-	Spare, //TestUart, //TestUart,
+	SecsTimers,
+	ParseIncommingLineToSecsString, //TestUart, //TestUart,
 	BlinkButtonsTask,
 };
 
