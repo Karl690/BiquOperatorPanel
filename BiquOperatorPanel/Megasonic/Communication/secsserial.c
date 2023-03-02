@@ -3,54 +3,7 @@
 #include "Utils/secshelper.h"
 COMPORT* COMSECS = NULL; //Secs Serial Class
 
-uint8_t  RX_SecsBufferSecs[SERIAL_BUFFER_SIZE] = { 0 }; //serial port receive buffer
-uint8_t  Tx_SecsBufferSecs[SERIAL_BUFFER_SIZE] = { 0 };
-void Init_SecsSerial(uint8_t UartIndex)
-{
-	//Initialize Secs serial's buffers
-	switch (UartIndex)
-	{
-	case 2: COMSECS = &COM2; break;
-	case 3: COMSECS = &COM3; break;
-	default: COMSECS = NULL;
-	}
-	InitSerial(UartIndex, COMSECS, RX_SecsBufferSecs, Tx_SecsBufferSecs);
-}
 
-void SendUartSecsString(char* stringToSend)
-{
-	AddSerialStringToBuffer(&COMSECS->TxBuffer, stringToSend);
-}
-void CheckForSecsTxRx()
-{
-	uint8_t WorkCharacter;
-	//todo, need to put a check in here to see if usb is busy or not.
-		//transmit first
-	if (COMSECS->UartHandler->SR & USART_SR_TXE)//is transmit buffer empty
-	{//yes, then lets see if there is a character waiting to send
-		if (COMSECS->TxBuffer.CharsInBuf)
-		{//yes, so send it
-			WorkCharacter = *COMSECS->TxBuffer.Tail;//get character
-			COMSECS->UartHandler->DR = (uint32_t)(WorkCharacter & 0x00ff); //cast for data register
-			COMSECS->TxBuffer.CharsInBuf--;//one less character to send			
-			COMSECS->TxBuffer.Tail++;//point to next character to send...
-			if (COMSECS->TxBuffer.Tail > COMSECS->TxBuffer.BufferEnd)
-			{COMSECS->TxBuffer.Tail = COMSECS->TxBuffer.BufferStart; }//reset set the pointer
-		}
-	}
-	//now check for receive
-	while (COMSECS->UartHandler->SR & USART_SR_RXNE)
-	{
-		*COMSECS->RxBuffer.Head = (uint8_t)(COMSECS->UartHandler->DR & 0xff);
-		COMSECS->RxBuffer.CharsInBuf++;
-		COMSECS->RxBuffer.Head++;
-		if (COMSECS->RxBuffer.Head > COMSECS->RxBuffer.BufferEnd)
-		{COMSECS->RxBuffer.Head = COMSECS->RxBuffer.BufferStart; }
-	}
-}
-
-
-/////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
 uint8_t SecsMessageWaiting = 0;
@@ -113,6 +66,12 @@ SecsMsgPacket LastSentMessage = { 0 };
 char ReceivedSecsCmd[10] = { 0 };
 char SentSecsCmd[10] = { 0 };
 
+void SendUartSecsString(char* stringToSend)
+{
+	AddSerialStringToBuffer(&COMSECS->TxBuffer, stringToSend);
+}
+
+/////////////////////////////////////////////////////////////////////
 uint8_t ParseSecsMessage(uint8_t* RawData)
 {
 	uint16_t len = RawData[0] + 3;
@@ -184,18 +143,10 @@ void TestForSecsMessageReadyToSend()
 uint8_t GetLastChar()
 {
 	if (COMSECS == NULL) return 0;
-	if (COMSECS->RxBuffer.CharsInBuf == 0) return 0;
-	uint8_t RawRxChar = *COMSECS->RxBuffer.Tail;
+	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail ) return 0;
+	uint8_t RawRxChar = COMSECS->RxBuffer.buffer[COMSECS->RxBuffer.Tail];
 	COMSECS->RxBuffer.Tail++;
-	
-	if (COMSECS->RxBuffer.Tail > COMSECS->RxBuffer.BufferEnd)
-	{COMSECS->RxBuffer.Tail = COMSECS->RxBuffer.BufferStart; }
-	COMSECS->RxBuffer.CharsInBuf--;
-	
-	//	if (LastCharacterRecieved == LastCharacterRead) return character;
-	//	character = Receivebuffer[LastCharacterRead];
-	//	LastCharacterRead++;
-	//	LastCharacterRead &= 4095; // lastcharacter2 % 4095;
+	COMSECS->RxBuffer.Tail &= COMSECS->RxBuffer.Buffer_Size;	
 	return RawRxChar;
 }
 
@@ -204,7 +155,7 @@ void secs1_idle()
 	//check for any charcters waiting, if no then out of here
 	//if (LastCharacterRecieved == LastCharacterRead) return;   //if (nextcharacter2 == lastcharacter2) return;
 	if (!COMSECS) return;
-	if (COMSECS->RxBuffer.CharsInBuf == 0) return;
+	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail) return;
 	//we do have a character
 	uint8_t temp = GetLastChar();
 	//is ita enq, a start secs1 request
@@ -236,7 +187,7 @@ void waiting_for_length()
 		//reportError("Waiting for Length byte TimeOut");
 		return;         //if you found timer2 is zero we have failed
 	}
-	if (COMSECS->RxBuffer.CharsInBuf == 0) return; //if (LastCharacterRecieved == LastCharacterRead) return;//check to see if any characers have been received
+	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail) return ; //if (LastCharacterRecieved == LastCharacterRead) return;//check to see if any characers have been received
 	uint8_t temp2 = GetLastChar();
 	secs1receivebuffer[0] = temp2; //store the length for future use
 	secs1bytesleft = temp2; //number of bytes in string
@@ -285,8 +236,7 @@ void read_me_a_character()
 	while (secs1bytesleft != 0)
 	{
 		//if (LastCharacterRecieved == LastCharacterRead) return;  // if (nextcharacter2 == lastcharacter2) 
-		if (COMSECS->RxBuffer.CharsInBuf == 0) 
-			return; //if no character yet, bye
+		if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail) return;//if no character yet, bye
 		uint8_t temp = GetLastChar(); //get me a character
 		secs1receivebuffer[secs1receivepointer] = temp; //store the character
 		secs1receivepointer++; // point to next character buffer location
@@ -380,7 +330,7 @@ void waiting_for_eot()
 		return;
 	}
 	//if (LastCharacterRecieved == LastCharacterRead) return;   //if (nextcharacter2 == lastcharacter2) return;
-	if (COMSECS->RxBuffer.CharsInBuf == 0) return; 
+	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail) return;
 	uint8_t temp2 = GetLastChar();
 	if (temp2 != EOT) return; //it must be a eot otherwise bye bye
 	//ok now you are here it is time to send that actual stream and function
@@ -422,7 +372,7 @@ void waiting_for_ack()
 		secs1_flag = 10;
 		return;
 	}
-	if (COMSECS->RxBuffer.CharsInBuf == 0) return; //if (LastCharacterRecieved == LastCharacterRead) return;   //if (nextcharacter2 == lastcharacter2) return;
+	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail) return; //if (LastCharacterRecieved == LastCharacterRead) return;   //if (nextcharacter2 == lastcharacter2) return;
 	uint8_t temp2 = GetLastChar(); //            byte temp2 = getchar2();
 	if (temp2 == ACK)
 	{

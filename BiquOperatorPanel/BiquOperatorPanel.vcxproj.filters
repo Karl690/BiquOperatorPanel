@@ -125,6 +125,12 @@
     <Filter Include="Megasonic\Utils">
       <UniqueIdentifier>{24dc17f1-8090-4a57-8d5f-91f1e662dbad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Megasonic\RCC">
+      <UniqueIdentifier>{e760384e-eeb4-41cf-8e5b-33247f65c7a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Megasonic\GPIO\4xx">
+      <UniqueIdentifier>{cd140df0-b15d-4e08-bbd6-58b6457aee37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="BiquOperatorPanel-Debug.vgdbsettings">
@@ -469,11 +475,20 @@
     <ClInclude Include="Megasonic\Utils\stack.h">
       <Filter>Megasonic\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Megasonic\Communication\uart.h">
-      <Filter>Megasonic\Communication</Filter>
-    </ClInclude>
     <ClInclude Include="Megasonic\Communication\stm32f4xx_usart.h">
       <Filter>Megasonic\Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\GPIO\4xx\pins_4xx.h">
+      <Filter>Megasonic\GPIO\4xx</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\GPIO\4xx\pinout_BIQU_407.h">
+      <Filter>Megasonic\GPIO\4xx</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\GPIO\4xx\pininit.h">
+      <Filter>Megasonic\GPIO\4xx</Filter>
+    </ClInclude>
+    <ClInclude Include="Megasonic\RCC\rcc_4xx.h">
+      <Filter>Megasonic\RCC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -683,11 +698,17 @@
     <ClCompile Include="Megasonic\Utils\stack.c">
       <Filter>Megasonic\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Megasonic\Communication\uart.c">
-      <Filter>Megasonic\Communication</Filter>
-    </ClCompile>
     <ClCompile Include="Megasonic\Communication\stm32f4xx_usart.c">
       <Filter>Megasonic\Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\GPIO\4xx\pins_4xx.c">
+      <Filter>Megasonic\GPIO\4xx</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\GPIO\4xx\pininit.c">
+      <Filter>Megasonic\GPIO\4xx</Filter>
+    </ClCompile>
+    <ClCompile Include="Megasonic\RCC\rcc_4xx.c">
+      <Filter>Megasonic\RCC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

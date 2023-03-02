@@ -45,7 +45,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
     <ClCompile>
       <AdditionalIncludeDirectories>./;./Core;./Drivers/CMSIS/Device/ST/STM32F4xx/Include;./Drivers/CMSIS/Include;./Drivers/STM32F4xx_HAL_Driver/Inc;./Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;./HAL;./Megasonic;./Icons;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>DEBUG=1;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG=1;BIQU_407;%(ClCompile.PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLinkerInputs>;%(Link.AdditionalLinkerInputs)</AdditionalLinkerInputs>
@@ -99,10 +99,12 @@
     <ClCompile Include="Megasonic\Communication\serial.c" />
     <ClCompile Include="Megasonic\Communication\simpleserial.c" />
     <ClCompile Include="Megasonic\Communication\stm32f4xx_usart.c" />
-    <ClCompile Include="Megasonic\Communication\uart.c" />
     <ClCompile Include="Megasonic\global.c" />
+    <ClCompile Include="Megasonic\GPIO\4xx\pininit.c" />
+    <ClCompile Include="Megasonic\GPIO\4xx\pins_4xx.c" />
     <ClCompile Include="Megasonic\GPIO\GPIO_Init.c" />
     <ClCompile Include="Megasonic\GPIO\pininit.c" />
+    <ClCompile Include="Megasonic\RCC\rcc_4xx.c" />
     <ClCompile Include="Megasonic\SPI\spi.c" />
     <ClCompile Include="Megasonic\SPI\sw_spi.c" />
     <ClCompile Include="Megasonic\SPI\xpt2046.c" />
@@ -207,13 +209,16 @@
     <ClInclude Include="Megasonic\Communication\serial.h" />
     <ClInclude Include="Megasonic\Communication\simpleserial.h" />
     <ClInclude Include="Megasonic\Communication\stm32f4xx_usart.h" />
-    <ClInclude Include="Megasonic\Communication\uart.h" />
     <ClInclude Include="Megasonic\configure.h" />
     <ClInclude Include="Megasonic\global.h" />
+    <ClInclude Include="Megasonic\GPIO\4xx\pininit.h" />
+    <ClInclude Include="Megasonic\GPIO\4xx\pinout_BIQU_407.h" />
+    <ClInclude Include="Megasonic\GPIO\4xx\pins_4xx.h" />
     <ClInclude Include="Megasonic\GPIO\GPIO_Init.h" />
     <ClInclude Include="Megasonic\GPIO\pininit.h" />
     <ClInclude Include="Megasonic\GPIO\pinout.h" />
     <ClInclude Include="Megasonic\GPIO\pins.h" />
+    <ClInclude Include="Megasonic\RCC\rcc_4xx.h" />
     <ClInclude Include="Megasonic\STORAGE\FLASH\flash_4xx.h" />
     <ClInclude Include="Megasonic\STORAGE\FLASH\sdcard.h" />
     <ClInclude Include="Megasonic\STORAGE\FLASH\w25qxx.h" />

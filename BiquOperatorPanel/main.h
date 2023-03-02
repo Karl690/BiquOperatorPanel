@@ -43,6 +43,11 @@ extern "C" {
 #include "GPIO/pins.h"
 #include "GPIO/GPIO_Init.h"
 #include "GPIO/pinout.h"
+#include "GPIO/4xx/pins_4xx.h"
+#include "GPIO/4xx/pininit.h"
+#include "GPIO/4xx/pinout_BIQU_407.h"
+
+#include "RCC/rcc_4xx.h"
 	
 #include "TouchLCD/lcd.h"
 #include "TouchLCD/lcd_touch.h"

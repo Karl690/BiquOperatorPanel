@@ -62,11 +62,11 @@ typedef struct
 /** @defgroup RCC_HSE_configuration 
   * @{
   */
-#define RCC_HSE_OFF                      ((uint8_t)0x00)
-#define RCC_HSE_ON                       ((uint8_t)0x01)
-#define RCC_HSE_Bypass                   ((uint8_t)0x05)
-#define IS_RCC_HSE(HSE) (((HSE) == RCC_HSE_OFF) || ((HSE) == RCC_HSE_ON) || \
-                         ((HSE) == RCC_HSE_Bypass))
+//#define RCC_HSE_OFF                      ((uint8_t)0x00)
+//#define RCC_HSE_ON                       ((uint8_t)0x01)
+//#define RCC_HSE_Bypass                   ((uint8_t)0x05)
+//#define IS_RCC_HSE(HSE) (((HSE) == RCC_HSE_OFF) || ((HSE) == RCC_HSE_ON) || \
+//                         ((HSE) == RCC_HSE_Bypass))
 /**
   * @}
   */ 
@@ -104,18 +104,18 @@ typedef struct
 #define RCC_PLLSource_HSE                ((uint32_t)0x00400000)
 #define IS_RCC_PLL_SOURCE(SOURCE) (((SOURCE) == RCC_PLLSource_HSI) || \
                                    ((SOURCE) == RCC_PLLSource_HSE))
-#define IS_RCC_PLLM_VALUE(VALUE) ((VALUE) <= 63)
-#define IS_RCC_PLLN_VALUE(VALUE) ((50 <= (VALUE)) && ((VALUE) <= 432))
-#define IS_RCC_PLLP_VALUE(VALUE) (((VALUE) == 2) || ((VALUE) == 4) || ((VALUE) == 6) || ((VALUE) == 8))
-#define IS_RCC_PLLQ_VALUE(VALUE) ((4 <= (VALUE)) && ((VALUE) <= 15))
-#if defined(STM32F410xx) || defined(STM32F412xG) || defined(STM32F413_423xx) || defined(STM32F446xx) || defined(STM32F469_479xx)
-#define IS_RCC_PLLR_VALUE(VALUE) ((2 <= (VALUE)) && ((VALUE) <= 7))
-#endif /* STM32F410xx || STM32F412xG || STM32F413_423xx || STM32F446xx || STM32F469_479xx */
-
-#define IS_RCC_PLLI2SN_VALUE(VALUE) ((50 <= (VALUE)) && ((VALUE) <= 432))
-#define IS_RCC_PLLI2SR_VALUE(VALUE) ((2 <= (VALUE))  && ((VALUE) <= 7))
-#define IS_RCC_PLLI2SM_VALUE(VALUE) ((2 <= (VALUE))  && ((VALUE) <= 63))
-#define IS_RCC_PLLI2SQ_VALUE(VALUE) ((2 <= (VALUE))  && ((VALUE) <= 15))
+//#define IS_RCC_PLLM_VALUE(VALUE) ((VALUE) <= 63)
+//#define IS_RCC_PLLN_VALUE(VALUE) ((50 <= (VALUE)) && ((VALUE) <= 432))
+//#define IS_RCC_PLLP_VALUE(VALUE) (((VALUE) == 2) || ((VALUE) == 4) || ((VALUE) == 6) || ((VALUE) == 8))
+//#define IS_RCC_PLLQ_VALUE(VALUE) ((4 <= (VALUE)) && ((VALUE) <= 15))
+//#if defined(STM32F410xx) || defined(STM32F412xG) || defined(STM32F413_423xx) || defined(STM32F446xx) || defined(STM32F469_479xx)
+//#define IS_RCC_PLLR_VALUE(VALUE) ((2 <= (VALUE)) && ((VALUE) <= 7))
+//#endif /* STM32F410xx || STM32F412xG || STM32F413_423xx || STM32F446xx || STM32F469_479xx */
+//
+//#define IS_RCC_PLLI2SN_VALUE(VALUE) ((50 <= (VALUE)) && ((VALUE) <= 432))
+//#define IS_RCC_PLLI2SR_VALUE(VALUE) ((2 <= (VALUE))  && ((VALUE) <= 7))
+//#define IS_RCC_PLLI2SM_VALUE(VALUE) ((2 <= (VALUE))  && ((VALUE) <= 63))
+//#define IS_RCC_PLLI2SQ_VALUE(VALUE) ((2 <= (VALUE))  && ((VALUE) <= 15))
 #if defined(STM32F446xx) 
 #define IS_RCC_PLLI2SP_VALUE(VALUE) (((VALUE) == 2) || ((VALUE) == 4) || ((VALUE) == 6) || ((VALUE) == 8))
 #define IS_RCC_PLLSAIM_VALUE(VALUE) ((VALUE) <= 63)
@@ -182,11 +182,7 @@ typedef struct
 #define RCC_SYSCLK_Div128                ((uint32_t)0x000000D0)
 #define RCC_SYSCLK_Div256                ((uint32_t)0x000000E0)
 #define RCC_SYSCLK_Div512                ((uint32_t)0x000000F0)
-#define IS_RCC_HCLK(HCLK) (((HCLK) == RCC_SYSCLK_Div1) || ((HCLK) == RCC_SYSCLK_Div2) || \
-                           ((HCLK) == RCC_SYSCLK_Div4) || ((HCLK) == RCC_SYSCLK_Div8) || \
-                           ((HCLK) == RCC_SYSCLK_Div16) || ((HCLK) == RCC_SYSCLK_Div64) || \
-                           ((HCLK) == RCC_SYSCLK_Div128) || ((HCLK) == RCC_SYSCLK_Div256) || \
-                           ((HCLK) == RCC_SYSCLK_Div512))
+
 /**
   * @}
   */ 
@@ -199,9 +195,6 @@ typedef struct
 #define RCC_HCLK_Div4                    ((uint32_t)0x00001400)
 #define RCC_HCLK_Div8                    ((uint32_t)0x00001800)
 #define RCC_HCLK_Div16                   ((uint32_t)0x00001C00)
-#define IS_RCC_PCLK(PCLK) (((PCLK) == RCC_HCLK_Div1) || ((PCLK) == RCC_HCLK_Div2) || \
-                           ((PCLK) == RCC_HCLK_Div4) || ((PCLK) == RCC_HCLK_Div8) || \
-                           ((PCLK) == RCC_HCLK_Div16))
 /**
   * @}
   */ 
@@ -229,14 +222,6 @@ typedef struct
   * @}
   */ 
   
-/** @defgroup RCC_LSE_Configuration 
-  * @{
-  */
-#define RCC_LSE_OFF                      ((uint8_t)0x00)
-#define RCC_LSE_ON                       ((uint8_t)0x01)
-#define RCC_LSE_Bypass                   ((uint8_t)0x04)
-#define IS_RCC_LSE(LSE) (((LSE) == RCC_LSE_OFF) || ((LSE) == RCC_LSE_ON) || \
-                         ((LSE) == RCC_LSE_Bypass))
 /**
   * @}
   */ 
@@ -276,38 +261,7 @@ typedef struct
 #define RCC_RTCCLKSource_HSE_Div29       ((uint32_t)0x001D0300)
 #define RCC_RTCCLKSource_HSE_Div30       ((uint32_t)0x001E0300)
 #define RCC_RTCCLKSource_HSE_Div31       ((uint32_t)0x001F0300)
-#define IS_RCC_RTCCLK_SOURCE(SOURCE) (((SOURCE) == RCC_RTCCLKSource_LSE) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_LSI) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div2) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div3) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div4) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div5) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div6) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div7) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div8) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div9) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div10) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div11) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div12) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div13) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div14) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div15) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div16) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div17) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div18) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div19) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div20) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div21) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div22) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div23) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div24) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div25) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div26) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div27) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div28) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div29) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div30) || \
-                                      ((SOURCE) == RCC_RTCCLKSource_HSE_Div31))
+
 /**
   * @}
   */ 
@@ -815,8 +769,6 @@ typedef struct
 #define RCC_MCO1Div_3                    ((uint32_t)0x05000000)
 #define RCC_MCO1Div_4                    ((uint32_t)0x06000000)
 #define RCC_MCO1Div_5                    ((uint32_t)0x07000000)
-#define IS_RCC_MCO1SOURCE(SOURCE) (((SOURCE) == RCC_MCO1Source_HSI) || ((SOURCE) == RCC_MCO1Source_LSE) || \
-                                   ((SOURCE) == RCC_MCO1Source_HSE) || ((SOURCE) == RCC_MCO1Source_PLLCLK))
                                    
 #define IS_RCC_MCO1DIV(DIV) (((DIV) == RCC_MCO1Div_1) || ((DIV) == RCC_MCO1Div_2) || \
                              ((DIV) == RCC_MCO1Div_3) || ((DIV) == RCC_MCO1Div_4) || \
@@ -837,8 +789,6 @@ typedef struct
 #define RCC_MCO2Div_3                    ((uint32_t)0x28000000)
 #define RCC_MCO2Div_4                    ((uint32_t)0x30000000)
 #define RCC_MCO2Div_5                    ((uint32_t)0x38000000)
-#define IS_RCC_MCO2SOURCE(SOURCE) (((SOURCE) == RCC_MCO2Source_SYSCLK) || ((SOURCE) == RCC_MCO2Source_PLLI2SCLK)|| \
-                                   ((SOURCE) == RCC_MCO2Source_HSE) || ((SOURCE) == RCC_MCO2Source_PLLCLK))
                                    
 #define IS_RCC_MCO2DIV(DIV) (((DIV) == RCC_MCO2Div_1) || ((DIV) == RCC_MCO2Div_2) || \
                              ((DIV) == RCC_MCO2Div_3) || ((DIV) == RCC_MCO2Div_4) || \
@@ -873,7 +823,7 @@ typedef struct
                            ((FLAG) == RCC_FLAG_WWDGRST)  || ((FLAG) == RCC_FLAG_LPWRRST)|| \
                            ((FLAG) == RCC_FLAG_PLLI2SRDY)|| ((FLAG) == RCC_FLAG_PLLSAIRDY))
 
-#define IS_RCC_CALIBRATION_VALUE(VALUE) ((VALUE) <= 0x1F)
+
 /**
   * @}
   */ 

@@ -59,11 +59,9 @@ extern uint16_t receiveid;
 
 extern char ReceivedSecsCmd[10];
 extern char SentSecsCmd[10];
-void Init_SecsSerial(uint8_t UartIndex);
-void CheckForSecsTxRx();
+
 void SendUartSecsString(char* stringToSend);
 void ParseIncommingLineToSecsString();
 
 void SecsTimers(void);
-
 void PrcessSecsReceivedMessage();

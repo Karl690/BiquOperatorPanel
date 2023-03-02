@@ -8,6 +8,11 @@
 #define USART4_BAUDRATE 38400U;
 #define USART6_BAUDRATE 0000U;
 
+#define RX_BUFFER_SIZE 0x7ff			//2k
+#define RX_URGENT_BUFFER_SIZE 0x3ff	//1k
+#define TX_BUFFER_SIZE 0x3ff			 //1k
+
+#define USE_SERIAL_DMA
 
 // LCD interface
 // Supported LCD drivers: [ST7789, SSD1963, RM68042, NT35310, ILI9488, ILI9341, ILI9325, HX8558]

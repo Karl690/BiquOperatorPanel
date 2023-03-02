@@ -48,26 +48,33 @@ int main(void)
   /* Configure the system clock */
     SystemClock_Config();
 	
-	SysTick_Config(SystemCoreClock / SYSTICKS_PER_SECOND);
-	//SCB->VTOR = VECT_TAB_FLASH;
 	
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_GPIOB_CLK_ENABLE();
-	__HAL_RCC_GPIOC_CLK_ENABLE();
-	__HAL_RCC_GPIOD_CLK_ENABLE();
-	__HAL_RCC_GPIOF_CLK_ENABLE();
-	__HAL_RCC_GPIOG_CLK_ENABLE();
+	//SCB->VTOR = VECT_TAB_FLASH;
+//	
+//	__HAL_RCC_GPIOA_CLK_ENABLE();
+//	__HAL_RCC_GPIOB_CLK_ENABLE();
+//	__HAL_RCC_GPIOC_CLK_ENABLE();
+//	__HAL_RCC_GPIOD_CLK_ENABLE();
+//	__HAL_RCC_GPIOF_CLK_ENABLE();
+//	__HAL_RCC_GPIOG_CLK_ENABLE();
 
   /* Initialize all configured peripherals */
-    MX_GPIO_Init();
+    //MX_GPIO_Init();
 
 	XPT2046_Init();
 	W25Qxx_Init();
 	Init_LCD();   // their code
 	
 	Init_GPIO();
-	Init_SecsSerial(3);
-	Init_SimpleSerial(2);
+	
+	InitSerialBuffers();	
+	COMSECS = &COM2;
+	
+	//Init_Uart(SERIAL_UART2);
+	Init_Uart(SERIAL_UART3);
+	Init_Uart(SERIAL_UART4);
+	
+	SysTick_Config(SystemCoreClock / 8000);//;SYSTICKS_PER_SECOND);
 	
 	storageIndex = DEFAULT_STORAGE; //initialize the storage type.
 	InitPanelMain();//set up gid widgets

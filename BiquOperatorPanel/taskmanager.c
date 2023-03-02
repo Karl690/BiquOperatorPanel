@@ -29,9 +29,9 @@ const PFUNC F1000HZ[NUM_1000HZ] =
 	Spare,
 	Spare, //CheckForSecsTxRx,
 	EncoderWheelMove,
-	Spare,//CheckForUart2TxRx,
-	Spare,//CheckForUart3TxRx,
-	Spare,
+	CheckForUart2TxRx,
+	CheckForUart3TxRx,
+	CheckForUart4TxRx,
 	ParseIncommingLineToSimpleData,
 };
 

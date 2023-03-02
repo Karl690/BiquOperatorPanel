@@ -8,6 +8,8 @@ void EncoderButtonDownEvent()
 	//CalibrateScreenFlag = 1;
 	FiredEncodeButtonEvent = 1;
 	panel_set_focus_widget(NULL, 0);
+	
+	AddSerialStringToBuffer(&COM3.TxBuffer, "AAA");
 }
 
 int EncoderCount = 0;
