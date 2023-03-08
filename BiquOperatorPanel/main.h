@@ -71,7 +71,7 @@ typedef enum
 	
 	
 
-	
+extern uint8_t IsInitialized;
 extern SCREEN_TYPE CurretScreenType;
 extern SCREEN_TYPE NewScreenType; //it would be used when transforing screen.
 

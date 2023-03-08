@@ -21,7 +21,13 @@ typedef enum
 	S7F4  = 704,
 	S7F5  = 705,
 	S7F6  = 706,
-	S9F1  = 901
+	S9F1  = 901,
+	S9F3  = 903,
+	S9F5  = 905,
+	S9F7  = 907,
+	S9F9  = 909,
+	S9F11  = 911,
+	S9F13  = 913,
 }SECSCOMMAND;
 
 typedef struct tagSecsMsgPacket
@@ -60,8 +66,31 @@ extern uint16_t receiveid;
 extern char ReceivedSecsCmd[10];
 extern char SentSecsCmd[10];
 
+extern uint8_t s1f1message[13];
+extern uint8_t s1f2message[29];
+extern uint8_t s1f5message[16];
+extern uint8_t s1f6message[26];
+extern uint8_t s1f6VerteqSRDmessage[52];
+extern uint8_t s2f20message[13];
+extern uint8_t s2f20VerteqSRDmessage[16];
+extern uint8_t s2f21message[16];
+extern uint8_t s2f22message[16];
+extern uint8_t s7f1message[];
+extern uint8_t s7f2message[];
+extern uint8_t s7f4message[];
+extern uint8_t s7f6message[];
+extern uint8_t s9f1message[];
+extern uint8_t s9f3message[];
+extern uint8_t s9f5message[];
+extern uint8_t s9f7message[];
+extern uint8_t s9f9message[];
+extern uint8_t s9f11message[];
+extern uint8_t s9f13message[];
+
+
 void SendUartSecsString(char* stringToSend);
 void ParseIncommingLineToSecsString();
 
 void SecsTimers(void);
 void PrcessSecsReceivedMessage();
+void SendSecsCommand(uint8_t* secsbuf, uint16_t size);

@@ -12,6 +12,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 
+uint8_t IsInitialized = 0;
 uint32_t HeartBeat = 0;
 SCREEN_TYPE CurretScreenType = SCREEN_MAIN;
 SCREEN_TYPE NewScreenType = SCREEN_MAIN;
@@ -70,11 +71,11 @@ int main(void)
 	InitSerialBuffers();	
 	COMSECS = &COM2;
 	
-	//Init_Uart(SERIAL_UART2);
+	Init_Uart(SERIAL_UART2);
 	Init_Uart(SERIAL_UART3);
 	Init_Uart(SERIAL_UART4);
 	
-	SysTick_Config(SystemCoreClock / 8000);//;SYSTICKS_PER_SECOND);
+	SysTick_Config(SystemCoreClock / 8000); //SYSTICKS_PER_SECOND);
 	
 	storageIndex = DEFAULT_STORAGE; //initialize the storage type.
 	InitPanelMain();//set up gid widgets
@@ -90,6 +91,8 @@ int main(void)
 	if (!checkForValidLCDCalibrationData()) CalibrateScreenFlag = 1; //if stored data is not good, please force calibration screen
 		
 	ActivPanel = &Root_Panel; //set the top panel as boot screen
+	
+	IsInitialized = 1; //all units was initialzed
 	
 	while (1)
 	{

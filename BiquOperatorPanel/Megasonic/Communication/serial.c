@@ -6,18 +6,18 @@
 #include "configure.h"
 #include "stm32f4xx_usart.h"
 //USB SERIAL PORT
-uint8_t Rx_BufferUSB[RX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
-uint8_t Tx_BufferUSB[TX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
+uint8_t Rx_BufferUSB[RX_BUFFER_SIZE] __attribute__((aligned(RX_BUFFER_SIZE))); //2k boundry
+uint8_t Tx_BufferUSB[TX_BUFFER_SIZE] __attribute__((aligned(TX_BUFFER_SIZE))); //2k boundry
 ////serial port 2
-uint8_t Rx_Buffer2[RX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
-uint8_t Tx_Buffer2[TX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
+uint8_t Rx_Buffer2[RX_BUFFER_SIZE] __attribute__((aligned(RX_BUFFER_SIZE))); //2k boundry
+uint8_t Tx_Buffer2[TX_BUFFER_SIZE] __attribute__((aligned(TX_BUFFER_SIZE))); //2k boundry
 //
 ////serial port 3
-uint8_t Rx_Buffer3[RX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
-uint8_t Tx_Buffer3[TX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
+uint8_t Rx_Buffer3[RX_BUFFER_SIZE] __attribute__((aligned(RX_BUFFER_SIZE))); //2k boundry
+uint8_t Tx_Buffer3[TX_BUFFER_SIZE] __attribute__((aligned(TX_BUFFER_SIZE))); //2k boundry
 ////serial port 4
-uint8_t Rx_Buffer4[RX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
-uint8_t Tx_Buffer4[TX_BUFFER_SIZE] __attribute__((aligned(1024))); //2k boundry
+uint8_t Rx_Buffer4[RX_BUFFER_SIZE] __attribute__((aligned(RX_BUFFER_SIZE))); //2k boundry
+uint8_t Tx_Buffer4[TX_BUFFER_SIZE] __attribute__((aligned(TX_BUFFER_SIZE))); //2k boundry
 //
 
 COMPORT COMUSB; //normal comport for com to pc
@@ -59,10 +59,12 @@ uint32_t Uart3numberOfXmitCharactersToSend = 0;
 uint8_t Uart6XmitBuffer[1024];
 uint32_t Uart6numberOfXmitCharactersToSend = 0;
 
+uint32_t NumberOfCharactersSent = 0;
+uint32_t NumberOfCharactersReceived = 0;
 
 static const Uart_configuration Uart_Configurations[SERIAL_UART_NUM] = {
 	{ NULL },
-	{USART2, 38400, &RCC->APB1ENR, RCC_APB1Periph_USART2,
+	{USART2, 9600, &RCC->APB1ENR, RCC_APB1Periph_USART2,
 			PIN_NUM_02, PIN_NUM_03, PIN_PORT_A, PIN_AF_USART2, &RCC->AHB1ENR, RCC_AHB1Periph_GPIOA,
 			&RCC->AHB1ENR, RCC_AHB1Periph_DMA1, 4, DMA1_Stream5, &COM2 },
 	{ USART3, 9600, &RCC->APB1ENR, RCC_APB1Periph_USART3, //uart
@@ -82,7 +84,7 @@ void AddSerialBufferToBuffer(ComBuffer *targetBuffer, uint8_t* buf, uint16_t siz
 	{
 		targetBuffer->buffer[targetBuffer->Head] = buf[index];
 		targetBuffer->Head++;
-		targetBuffer->Head &= targetBuffer->Buffer_Size;
+		targetBuffer->Head &= (targetBuffer->Buffer_Size - 1);
 	}
 }
 
@@ -97,7 +99,7 @@ void AddSerialCharToBuffer(ComBuffer *targetBuffer, uint8_t RawChar)
 {
 	targetBuffer->buffer[targetBuffer->Head] = RawChar;
 	targetBuffer->Head++;
-	targetBuffer->Head &= targetBuffer->Buffer_Size;
+	targetBuffer->Head &= (targetBuffer->Buffer_Size - 1);
 }
 
 void SendUsbVcpString(char* stringToSend) {
@@ -140,7 +142,7 @@ void CheckForUart2TxRx()
 			WorkCharacter = COM2.TxBuffer.buffer[COM2.TxBuffer.Tail];
 			COM2.UartHandler->DR = (uint32_t)(WorkCharacter & 0x00ff);
 			COM2.TxBuffer.Tail++;
-			COM2.TxBuffer.Head &= COM2.TxBuffer.Buffer_Size;
+			COM2.TxBuffer.Tail &= (COM2.TxBuffer.Buffer_Size - 1);
 		}
 	}
 	//now check for receive
@@ -151,15 +153,19 @@ void CheckForUart2TxRx()
 		//this is polled mode
 		COM2.RxBuffer.buffer[COM2.TxBuffer.Head] = (char)(uint8_t)(Uart_Configurations[SERIAL_UART2].uart->DR & 0xff); //rad the character
 		COM2.RxBuffer.Head++;
-		COM2.RxBuffer.Head &= COM2.RxBuffer.Buffer_Size;
+		COM2.RxBuffer.Head &= (COM2.RxBuffer.Buffer_Size -1);
 	}
 #else
 	//data from the uart triggers DMA transfer
-	COM2.RxBuffer.Head = COM2.RxBuffer.Buffer_Size - Uart_Configurations[SERIAL_UART3].dma_stream->NDTR;
-	if (COM3.RxBuffer.Head > 0)
+	uint16_t oldHead = COM2.RxBuffer.Head;
+	COM2.RxBuffer.Head = COM2.RxBuffer.Buffer_Size - Uart_Configurations[SERIAL_UART2].dma_stream->NDTR;	
+	if (COM2.RxBuffer.Head - oldHead > 0)
 	{
-		static int p = 0;
-		p++;
+		NumberOfCharactersReceived += COM2.RxBuffer.Head - oldHead;
+	}
+	else if (COM2.RxBuffer.Head - oldHead < 0)
+	{
+		NumberOfCharactersReceived += COM2.RxBuffer.Head + (COM2.RxBuffer.Buffer_Size - oldHead);
 	}
 #endif
 }
@@ -178,7 +184,7 @@ void CheckForUart3TxRx()
 			WorkCharacter = COM3.TxBuffer.buffer[COM3.TxBuffer.Tail];
 			USART3->DR = (uint32_t)(WorkCharacter & 0x00ff);
 			COM3.TxBuffer.Tail++;
-			COM3.TxBuffer.Head &= COM3.TxBuffer.Buffer_Size;
+			COM3.TxBuffer.Tail &= (COM3.TxBuffer.Buffer_Size - 1);
 		}
 	}
 	//now check for receive
@@ -189,11 +195,20 @@ void CheckForUart3TxRx()
 		//this is polled mode
 		COM3.RxBuffer.buffer[COM3.TxBuffer.Head] = (char)(uint8_t)(Uart_Configurations[SERIAL_UART3].uart->DR & 0xff); //rad the character
 		COM3.RxBuffer.Head++;
-		COM3.RxBuffer.Head &= COM3.RxBuffer.Buffer_Size;
+		COM3.RxBuffer.Head &= (COM3.RxBuffer.Buffer_Size - 1);
 	}
 #else
 	//data from the uart triggers DMA transfer
+	uint32_t oldHead = COM3.RxBuffer.Head;
 	COM3.RxBuffer.Head = COM3.RxBuffer.Buffer_Size - Uart_Configurations[SERIAL_UART3].dma_stream->NDTR;
+	if (COM3.RxBuffer.Head - oldHead > 0)
+	{
+		NumberOfCharactersReceived += COM2.RxBuffer.Head - oldHead;
+	}
+	else if (COM3.RxBuffer.Head - oldHead < 0)
+	{
+		NumberOfCharactersReceived += COM3.RxBuffer.Head + (COM3.RxBuffer.Buffer_Size - oldHead);
+	}
 #endif
 }
 
@@ -212,7 +227,7 @@ void CheckForUart4TxRx()
 			WorkCharacter = COM4.TxBuffer.buffer[COM4.TxBuffer.Tail];
 			UART4->DR = (uint32_t)(WorkCharacter & 0x00ff);
 			COM4.TxBuffer.Tail++;
-			COM4.TxBuffer.Head &= COM4.TxBuffer.Buffer_Size;
+			COM4.TxBuffer.Tail &= (COM4.TxBuffer.Buffer_Size - 1);
 		}
 	}
 	//now check for receive
@@ -223,15 +238,19 @@ void CheckForUart4TxRx()
 		//this is polled mode
 		COM4.RxBuffer.buffer[COM4.TxBuffer.Head] = (char)(uint8_t)(Uart_Configurations[SERIAL_UART4].uart->DR & 0xff); //rad the character
 		COM4.RxBuffer.Head++;
-		COM4.RxBuffer.Head &= COM4.RxBuffer.Buffer_Size;
+		COM4.RxBuffer.Head &= (COM4.RxBuffer.Buffer_Size - 1);
 	}
 #else
 	//data from the uart triggers DMA transfer
+	uint32_t oldHead = COM4.RxBuffer.Head;
 	COM4.RxBuffer.Head = COM4.RxBuffer.Buffer_Size - Uart_Configurations[SERIAL_UART4].dma_stream->NDTR;
-	if (COM4.RxBuffer.Head > 0)
+	if (COM4.RxBuffer.Head - oldHead > 0)
 	{
-		static int p = 0;
-		p++;
+		NumberOfCharactersReceived += COM4.RxBuffer.Head - oldHead;
+	}
+	else if (COM4.RxBuffer.Head - oldHead < 0)
+	{
+		NumberOfCharactersReceived += COM4.RxBuffer.Head + (COM4.RxBuffer.Buffer_Size - oldHead);
 	}
 #endif
 }

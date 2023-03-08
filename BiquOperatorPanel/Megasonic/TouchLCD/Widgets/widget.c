@@ -21,10 +21,9 @@ void widget_update_value_string(Widget* widget, char* value)
 	strcpy(widget->Text, value);
 	widget->RedrawMe = 1;
 }
-void widget_update_value_int(Widget* widget, char* value)
+void widget_update_value_int(Widget* widget, int value)
 {
 	sprintf(widget->Text, "%d", value);
-	#pragma GCC diagnostic pop
 	widget->RedrawMe = 1;
 }
 void widget_ToggleVisible(Widget* widget)

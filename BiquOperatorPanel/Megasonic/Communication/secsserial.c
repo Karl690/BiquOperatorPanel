@@ -41,7 +41,7 @@ uint16_t receiveid = 0;
 uint16_t my_device_id = 1;
 uint8_t SecsRetrys_ReloadValue = 3; //in c# project it is on 50ms timer
 uint8_t Secs1Timer1_ReLoadValue = 3;
-uint8_t Secs1Timer2_ReLoadValue = 3;
+uint8_t Secs1Timer2_ReLoadValue = 5;
 
 uint8_t ReceivedSecsMessageUpdateReadyFlag = 0;
 uint16_t SentSecsMessageUpdateReadyFlag = 0;
@@ -65,6 +65,9 @@ SecsMsgPacket LastReceivedMessage = { 0 };
 SecsMsgPacket LastSentMessage = { 0 };
 char ReceivedSecsCmd[10] = { 0 };
 char SentSecsCmd[10] = { 0 };
+
+uint32_t NumberOfSentMessage = 0;
+uint32_t NumberOfReceivedMessage = 0;
 
 void SendUartSecsString(char* stringToSend)
 {
@@ -146,7 +149,7 @@ uint8_t GetLastChar()
 	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail ) return 0;
 	uint8_t RawRxChar = COMSECS->RxBuffer.buffer[COMSECS->RxBuffer.Tail];
 	COMSECS->RxBuffer.Tail++;
-	COMSECS->RxBuffer.Tail &= COMSECS->RxBuffer.Buffer_Size;	
+	COMSECS->RxBuffer.Tail &= (COMSECS->RxBuffer.Buffer_Size - 1);	
 	return RawRxChar;
 }
 
@@ -228,6 +231,8 @@ void read_me_a_character()
 		//serialPort.Write(((char)NAK).ToString());//send the you failed sucker message 
 		SecsReceivedMessageTotalErrorNum++;
 		SecsReceivedMessageTimeoutErrorNum++;
+		widget_update_value_int((Widget*)&etTimoutErrors, SecsReceivedMessageTimeoutErrorNum);
+		widget_update_value_int((Widget*)&etRCVFails, SecsReceivedMessageTotalErrorNum);
 		//reportError("TimeOut waiting for characters in message");
 		return;         //if you found timer2 is zero we have failed
 	}
@@ -256,6 +261,8 @@ void read_me_a_character()
 		//serialPort.Write(((char)NAK).ToString());//send the you failed sucker message  
 		SecsReceivedMessageTotalErrorNum++;
 		SecsReceivedMessageCheckSumErrorNum++;
+		widget_update_value_int((Widget*)&etCheckSumErrors, SecsReceivedMessageCheckSumErrorNum);
+		widget_update_value_int((Widget*)&etRCVFails, SecsReceivedMessageTotalErrorNum);
 		//reportError("Rcv Cksum Err");
 		//textBox48.Text = checksumfailed.ToString();
 		return;         //if you found timer2 is zero we have failed
@@ -286,11 +293,17 @@ void have_secs_message()
 		memcpy(&LastReceivedMessage, &CurrentSecsMessage, sizeof(SecsMsgPacket)); //save the latest received message 
 		ConvertSecsBinaryToStringList(secs1receivebuffer, secsstringReceiveList[0]); //convert the secs buffer to string list.
 		SecsMessageWaiting = 1;
+		NumberOfReceivedMessage++;		
+		widget_update_value_int((Widget*)&etRcvNum, NumberOfReceivedMessage);
+		widget_update_value_string((Widget*)&etLastRecv, ReceivedSecsCmd);
+		memset(secs1receivebuffer, 0, SECS_BUFFER_LENGTH);
 	}
 	else
 	{
 		SecsReceivedMessageTotalErrorNum++;
 		SecsReceivedMessageParsingErrorNum++;
+		widget_update_value_int((Widget*)&etRCVFails, SecsReceivedMessageTotalErrorNum);
+		
 		//reportError("Secs message Parsing error.");
 		return;
 	}            
@@ -303,6 +316,9 @@ void initiate_block_transmit()
 	//serialPort.Write(((char)ENQ).ToString());//start the block xfer with "are you ready"  
 	secstimer2 = Secs1Timer2_ReLoadValue * 20; //  secstimer2default;//set the reply timeout timer 
 	secs1_flag = 11; //point to the next state for the secs1 processor
+	NumberOfSentMessage++;
+	widget_update_value_int((Widget*)&etXmtNum, NumberOfSentMessage);
+	widget_update_value_string((Widget*)&etLastXMT, SentSecsCmd);
 	return;         //
 }
 
@@ -320,11 +336,12 @@ void waiting_for_eot()
 			//add failure code hereurnn 
 			secs1_flag = 0; //turn off the secs flag
 			secssendfail++;
+			widget_update_value_int((Widget*)&etXMTFails, secssendfail);
 			//AppendLog ? .Invoke(LOGTYPE.ERROR, LOGSESSION.SECS1, DIRECTION.NONE, "SECSII Send TIMEOUT");
 			//logBox1.scrollToBottom();
 			return;
 		}
-		numberofretriesleft--; //count down and restart the process again
+		numberofretriesleft--; //count down and restart the process agai n
 
 		secs1_flag = 10;
 		return;
@@ -332,7 +349,12 @@ void waiting_for_eot()
 	//if (LastCharacterRecieved == LastCharacterRead) return;   //if (nextcharacter2 == lastcharacter2) return;
 	if (COMSECS->RxBuffer.Head  == COMSECS->RxBuffer.Tail) return;
 	uint8_t temp2 = GetLastChar();
-	if (temp2 != EOT) return; //it must be a eot otherwise bye bye
+	if (temp2 != EOT) {
+		secs1_flag = 0; //turn off the secs flag
+		secssendfail++;
+		widget_update_value_int((Widget*)&etXMTFails, secssendfail);
+		return; //it must be a eot otherwise bye bye
+	}
 	//ok now you are here it is time to send that actual stream and function
 	int number_of_characters_to_send = secs_transmit_buffer[0];
 	//now we have the message length; but do we have the overall length
@@ -442,6 +464,11 @@ void SecsTimers(void)
 	if (secstimer5) secstimer5--;
 	if (secstimer6) secstimer6--;
 	if (secstimer7) secstimer7--;
+	
+	widget_update_value_int((Widget*)&etSecsTimer1, secstimer1);
+	widget_update_value_int((Widget*)&etSecsTimer2, secstimer2);
+	widget_update_value_int((Widget*)&etSecsRetries, numberofretriesleft);
+	widget_update_value_int((Widget*)&etSecsFlag, secs1_flag);
 }
 
 
@@ -845,38 +872,86 @@ uint8_t s7f6message[24] =
 	 0
 };
         
+        
+//Message Error by Unrecognized device id
+uint8_t s9f1message[25] =
+{
+	22,	//length byte 3 less than total byte array
+	0,	 0x80,	//device id template
+	9,	1,	0x80,1,	 //stream1 function2, last block
+	0, 0, 0, 0,	//system bytes dummy field
+	0x21, 10, //unspcified binary 10 bytes
+	0,0,0,0,0,0,0,0,0, 0,
+	0,0             //checksum
+};
+//Message Error by Unrecognized stream type
+uint8_t s9f3message[25] =
+{
+	22, //length byte 3 less than total byte array
+	0, 0x80, //device id template
+	9, 3,0x80,1, //stream1 function2, last block
+	0,0,0,0, //system bytes dummy field
+	0x21,10,//unspcified binary 10 bytes
+	0, 0,0,0,0, 0,0,0,0,0,
+	0,0             //checksum
+};
+//Message Error by Unrecognized Function type
+uint8_t s9f5message[25] =
+{
+	22, //length byte 3 less than total byte array
+	0, 0x80, //device id template
+	9, 5,0x80,1, //stream1 function2, last block
+	0,0,0,0, //system bytes dummy field
+	0x21,10,//unspcified binary 10 bytes
+	0, 0,0,0,0, 0,0,0,0,0,
+	0,0             //checksum
+};
+//Message Error by Unrecognized Data type
 uint8_t s9f7message[25] =
 {
-	22,
-	//length byte 3 less than total byte array
-	0,
-	 0x80,
-	//device id template
-	9,
-	7,
-	0x80,
-	 1,
-	 //stream1 function2, last block
-	0,
-	 0,
-	 0,
-	 0,
-	//system bytes dummy field
-	0x21,
-	 10,
-	//unspcified binary 10 bytes
-	0, 
-	0,
-	0,
-	 0,
-	 0,
-	0,
-	 0, 
-	0, 
-	0, 
-	0,
-	0,
-	 0             //checksum
+	22, //length byte 3 less than total byte array
+	0,0x80, //device id template
+	9, 7, 0x80,1,//stream1 function2, last block
+	0,0,0,0, //system bytes dummy field
+	0x21,10, //unspcified binary 10 bytes
+	0,0, 0,0,0, 0,0,0,0,0,
+	0,0             //checksum
+};
+
+//Message Error by Transaction Time-out
+uint8_t s9f9message[25] =
+{
+	22, //length byte 3 less than total byte array
+	0,0x80, //device id template
+	9, 7, 0x80,1,//stream1 function2, last block
+	0,0,0,0, //system bytes dummy field
+	0x21,10, //unspcified binary 10 bytes
+	0,0, 0,0,0, 0,0,0,0,0,
+	0,0             //checksum
+};
+
+//Message Error by Excessive Data size
+uint8_t s9f11message[25] =
+{
+	22, //length byte 3 less than total byte array
+	0,0x80, //device id template
+	9, 7, 0x80,1,//stream1 function2, last block
+	0,0,0,0, //system bytes dummy field
+	0x21,10, //unspcified binary 10 bytes
+	0,0, 0,0,0, 0,0,0,0,0,
+	0,0             //checksum
+};
+
+//Message Error by Communications Time-out
+uint8_t s9f13message[25] =
+{
+	22, //length byte 3 less than total byte array
+	0,0x80, //device id template
+	9, 7, 0x80,1,//stream1 function2, last block
+	0,0,0,0, //system bytes dummy field
+	0x21,10, //unspcified binary 10 bytes
+	0,0, 0,0,0, 0,0,0,0,0,
+	0,0             //checksum
 };
 
 

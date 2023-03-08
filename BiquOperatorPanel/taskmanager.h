@@ -74,3 +74,5 @@ void CheckEncoderButton(void);
 void blink(void);
 void BlinkButtonsTask(void);
 void TestUart();
+
+void SendSecsS1F1();

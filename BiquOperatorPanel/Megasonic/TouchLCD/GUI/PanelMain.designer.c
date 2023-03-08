@@ -64,6 +64,31 @@ Label gL_Label9;
 Label gL_Label8;
 Label gL_Label5;
 Label gL_Label4;
+Button glTabMainTab_3;
+Panel glTabMainPanel_3;
+Label gL_Label19;
+Label gL_Label18;
+Label gL_Label27;
+Label gL_Label26;
+Label gL_Label24;
+Label gL_Label28;
+Label gL_Label25;
+Label gL_Label23;
+Label gL_Label22;
+Label gL_Label20;
+Edit etSecsRetries;
+Label gL_Label21;
+Edit etSecsTimer2;
+Edit etSecsFlag;
+Edit etLastXMT;
+Edit etSecsTimer1;
+Edit etTimoutErrors;
+Edit etCheckSumErrors;
+Edit etLastRecv;
+Edit etXMTFails;
+Edit etRCVFails;
+Edit etXmtNum;
+Edit etRcvNum;
 
 
 void  InitPanelMain()
@@ -121,7 +146,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Button1.Type = BUTTON;
 	strcpy(gL_Button1.Name, "gL_Button1");
 	gL_Button1.Event_Down = NULL;
@@ -150,7 +174,6 @@ void  InitPanelMain()
 	gL_Button1.Checked = 0;
 
 	panel_add_child(&Root_Panel, &gL_Button1); //add to the panel
-
 
 
 
@@ -185,7 +208,6 @@ void  InitPanelMain()
 
 
 
-
 	glBtnMinus.Type = BUTTON;
 	strcpy(glBtnMinus.Name, "glBtnMinus");
 	glBtnMinus.Event_Down = NULL;
@@ -214,7 +236,6 @@ void  InitPanelMain()
 	glBtnMinus.Checked = 0;
 
 	panel_add_child(&Root_Panel, &glBtnMinus); //add to the panel
-
 
 
 
@@ -253,21 +274,20 @@ void  InitPanelMain()
 	glDropdownDisplayMode.RedrawMe = 1;
 	glDropdownDisplayMode.Location = (Point){ .x = 354, .y = 14 };
 	glDropdownDisplayMode.Size = (Size){ .width = 76, .height = 25 };
-	glDropdownDisplayMode.FocusBackColor = RGB16(0, 175, 255);
-	glDropdownDisplayMode.FocusForeColor = RGB16(0, 0, 0); 
+	glDropdownDisplayMode.FocusBackColor = RGB16(0, 175, 255); 
+	;
+	glDropdownDisplayMode.FocusForeColor = RGB16(0, 0, 0);
+	 ;
 	glDropdownDisplayMode.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
 	glDropdownDisplayMode.HasFocus = 0;
 	glDropdownDisplayMode.ValueType = DROPDOWNLIST_STRING;
-	glDropdownDisplayMode.Event_ChangedValue = ChangeDisplayModeListEvent;
-	dropdownlist_add_item(&glDropdownDisplayMode, "ASCII");	
-	dropdownlist_add_item(&glDropdownDisplayMode, "RAW");
 	dropdownlist_add_item(&glDropdownDisplayMode, "HEX");
-	dropdownlist_add_item(&glDropdownDisplayMode, "VARPAIR");
+	dropdownlist_add_item(&glDropdownDisplayMode, "RAW");
 	glDropdownDisplayMode.SelectedIndex = 1;
 	dropdownlist_update(&glDropdownDisplayMode);
 
 	panel_add_child(&gL_Panel4, &glDropdownDisplayMode); //add to the panel
-
 
 
 	gL_Listbox1.Type = LISTBOX;
@@ -292,10 +312,7 @@ void  InitPanelMain()
 
 
 
-
 	panel_add_child(&Root_Panel, &gL_Panel4); //add to the panel
-
-
 
 
 
@@ -324,8 +341,6 @@ void  InitPanelMain()
 
 
 
-
-
 	lblTitle.Type = LABEL;
 	strcpy(lblTitle.Name, "lblTitle");
 	lblTitle.BackColor = RGB16(0, 22, 34);
@@ -350,7 +365,6 @@ void  InitPanelMain()
 
 
 
-
 	glTabMain.Type = TABCONTROL;
 	strcpy(glTabMain.Name, "glTabMain");
 	glTabMain.BackColor = RGB16(0, 22, 34);
@@ -360,7 +374,7 @@ void  InitPanelMain()
 	glTabMain.RedrawMe = 1;
 	glTabMain.Location = (Point){ .x = 11, .y = 42 };
 	glTabMain.Size = (Size){ .width = 330, .height = 425 };
-	glTabMain.ItemSize = (Size){ .width = 100, .height = 30 };
+	glTabMain.ItemSize = (Size){ .width = 70, .height = 30 };
 	glTabMain.StackIndex = 0;
 
 	glTabMainTab_0.Type = BUTTON;
@@ -379,13 +393,13 @@ void  InitPanelMain()
 	glTabMainTab_0.FocusBorderColor = RGB16(0, 0, 0);
 	glTabMainTab_0.BorderWidth = 1;
 	glTabMainTab_0.CornerRadius = 0;
-	glTabMainTab_0.Font = &Font20;
+	glTabMainTab_0.Font = &Font16;
 	glTabMainTab_0.Padding = (PADDING) { 4, 4, 4, 4 };
 	glTabMainTab_0.TextAlign = MiddleCenter;
 	glTabMainTab_0.Visible = 1;
 	glTabMainTab_0.RedrawMe = 1;
 	glTabMainTab_0.Location = (Point){ .x = 0, .y = 0 };
-	glTabMainTab_0.Size = (Size){ .width = 100, .height = 30 };
+	glTabMainTab_0.Size = (Size){ .width = 70, .height = 30 };
 	strcpy(glTabMainTab_0.Text, "CONN");
 	strcpy(glTabMainTab_0.CheckedText, "");
 	glTabMainTab_0.Checked = 0;
@@ -428,10 +442,10 @@ void  InitPanelMain()
 	gL_DropdownList1.Size = (Size){ .width = 120, .height = 32 };
 	gL_DropdownList1.FocusBackColor = RGB16(0, 175, 255);
 	 ;
-	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0);
-	 ;
-	gL_DropdownList1.FocusBorderColor = RGB16(2, 49, 72); 
+	gL_DropdownList1.FocusForeColor = RGB16(0, 0, 0); 
 	;
+	gL_DropdownList1.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
 	gL_DropdownList1.HasFocus = 0;
 	gL_DropdownList1.ValueType = DROPDOWNLIST_INT;
 	dropdownlist_add_item(&gL_DropdownList1, "9600");
@@ -444,7 +458,6 @@ void  InitPanelMain()
 	dropdownlist_update(&gL_DropdownList1);
 
 	panel_add_child(&gL_Panel7, &gL_DropdownList1); //add to the panel
-
 
 
 
@@ -472,7 +485,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label2.Type = LABEL;
 	strcpy(gL_Label2.Name, "gL_Label2");
 	gL_Label2.BackColor = RGB16(0, 22, 34);
@@ -497,21 +509,14 @@ void  InitPanelMain()
 
 
 
-
 	gL_Numeric2.Type = NUMERIC;
 	strcpy(gL_Numeric2.Name, "gL_Numeric2");
 	gL_Numeric2.BackColor = RGB16(0, 22, 34);
-	 ;
 	gL_Numeric2.ForeColor = RGB16(122, 225, 255);
-	 ;
-	gL_Numeric2.BorderColor = RGB16(1, 103, 137); 
-	;
+	gL_Numeric2.BorderColor = RGB16(1, 103, 137);
 	gL_Numeric2.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	gL_Numeric2.FocusForeColor = RGB16(0, 0, 0);
-	 ;
-	gL_Numeric2.FocusBorderColor = RGB16(2, 49, 72); 
-	;
+	gL_Numeric2.FocusBorderColor = RGB16(2, 49, 72);
 	gL_Numeric2.BorderWidth = 1;
 	gL_Numeric2.CornerRadius = 0;
 	gL_Numeric2.Font = &Font20;
@@ -532,10 +537,7 @@ void  InitPanelMain()
 
 
 
-
 	panel_add_child(&glTabMainPanel_0, &gL_Panel7); //add to the panel
-
-
 
 
 
@@ -574,12 +576,12 @@ void  InitPanelMain()
 	gL_DropdownList2.RedrawMe = 1;
 	gL_DropdownList2.Location = (Point){ .x = 172, .y = 70 };
 	gL_DropdownList2.Size = (Size){ .width = 120, .height = 32 };
-	gL_DropdownList2.FocusBackColor = RGB16(0, 175, 255);
-	 ;
+	gL_DropdownList2.FocusBackColor = RGB16(0, 175, 255); 
+	;
 	gL_DropdownList2.FocusForeColor = RGB16(0, 0, 0);
 	 ;
-	gL_DropdownList2.FocusBorderColor = RGB16(2, 49, 72); 
-	;
+	gL_DropdownList2.FocusBorderColor = RGB16(2, 49, 72);
+	 ;
 	gL_DropdownList2.HasFocus = 0;
 	gL_DropdownList2.ValueType = DROPDOWNLIST_INT;
 	dropdownlist_add_item(&gL_DropdownList2, "9600");
@@ -592,7 +594,6 @@ void  InitPanelMain()
 	dropdownlist_update(&gL_DropdownList2);
 
 	panel_add_child(&gL_Panel5, &gL_DropdownList2); //add to the panel
-
 
 
 
@@ -620,7 +621,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label16.Type = LABEL;
 	strcpy(gL_Label16.Name, "gL_Label16");
 	gL_Label16.BackColor = RGB16(0, 22, 34);
@@ -645,21 +645,14 @@ void  InitPanelMain()
 
 
 
-
 	glNumeric_SimplePort.Type = NUMERIC;
 	strcpy(glNumeric_SimplePort.Name, "glNumeric_SimplePort");
-	glNumeric_SimplePort.BackColor = RGB16(0, 22, 34); 
-	;
+	glNumeric_SimplePort.BackColor = RGB16(0, 22, 34);
 	glNumeric_SimplePort.ForeColor = RGB16(122, 225, 255);
-	 ;
-	glNumeric_SimplePort.BorderColor = RGB16(1, 103, 137); 
-	;
+	glNumeric_SimplePort.BorderColor = RGB16(1, 103, 137);
 	glNumeric_SimplePort.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	glNumeric_SimplePort.FocusForeColor = RGB16(0, 0, 0);
-	 ;
 	glNumeric_SimplePort.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNumeric_SimplePort.BorderWidth = 1;
 	glNumeric_SimplePort.CornerRadius = 0;
 	glNumeric_SimplePort.Font = &Font20;
@@ -680,10 +673,7 @@ void  InitPanelMain()
 
 
 
-
 	panel_add_child(&glTabMainPanel_0, &gL_Panel5); //add to the panel
-
-
 
 
 
@@ -726,13 +716,13 @@ void  InitPanelMain()
 	glTabMainTab_1.FocusBorderColor = RGB16(0, 0, 0);
 	glTabMainTab_1.BorderWidth = 1;
 	glTabMainTab_1.CornerRadius = 0;
-	glTabMainTab_1.Font = &Font20;
+	glTabMainTab_1.Font = &Font16;
 	glTabMainTab_1.Padding = (PADDING) { 4, 4, 4, 4 };
 	glTabMainTab_1.TextAlign = MiddleCenter;
 	glTabMainTab_1.Visible = 1;
 	glTabMainTab_1.RedrawMe = 1;
-	glTabMainTab_1.Location = (Point){ .x = 100, .y = 0 };
-	glTabMainTab_1.Size = (Size){ .width = 100, .height = 30 };
+	glTabMainTab_1.Location = (Point){ .x = 70, .y = 0 };
+	glTabMainTab_1.Size = (Size){ .width = 70, .height = 30 };
 	strcpy(glTabMainTab_1.Text, "FUNC");
 	strcpy(glTabMainTab_1.CheckedText, "");
 	glTabMainTab_1.Checked = 0;
@@ -769,7 +759,6 @@ void  InitPanelMain()
 
 
 
-
 	glBtnSaveSoapstring.Type = BUTTON;
 	strcpy(glBtnSaveSoapstring.Name, "glBtnSaveSoapstring");
 	glBtnSaveSoapstring.Event_Down = SaveSoapstringButtonEvent;
@@ -798,7 +787,6 @@ void  InitPanelMain()
 	glBtnSaveSoapstring.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &glBtnSaveSoapstring); //add to the panel
-
 
 
 
@@ -833,10 +821,9 @@ void  InitPanelMain()
 
 
 
-
 	gL_Button5.Type = BUTTON;
 	strcpy(gL_Button5.Name, "gL_Button5");
-	gL_Button5.Event_Down = (void (*)(void *, long unsigned int,  long unsigned int))displayCalibrationButtonEvent;
+	gL_Button5.Event_Down = displayCalibrationButtonEvent;
 	gL_Button5.Event_Hold = NULL;
 	gL_Button5.Event_Up   = NULL;
 	gL_Button5.BackColor = RGB16(0, 0, 0);
@@ -862,7 +849,6 @@ void  InitPanelMain()
 	gL_Button5.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &gL_Button5); //add to the panel
-
 
 
 
@@ -897,7 +883,6 @@ void  InitPanelMain()
 
 
 
-
 	glBtnEraseStorage.Type = BUTTON;
 	strcpy(glBtnEraseStorage.Name, "glBtnEraseStorage");
 	glBtnEraseStorage.Event_Down = eraseFlashButonEvent;
@@ -926,7 +911,6 @@ void  InitPanelMain()
 	glBtnEraseStorage.Checked = 0;
 
 	panel_add_child(&glTabMainPanel_1, &glBtnEraseStorage); //add to the panel
-
 
 
 
@@ -969,13 +953,13 @@ void  InitPanelMain()
 	glTabMainTab_2.FocusBorderColor = RGB16(0, 0, 0);
 	glTabMainTab_2.BorderWidth = 1;
 	glTabMainTab_2.CornerRadius = 0;
-	glTabMainTab_2.Font = &Font20;
+	glTabMainTab_2.Font = &Font16;
 	glTabMainTab_2.Padding = (PADDING) { 4, 4, 4, 4 };
 	glTabMainTab_2.TextAlign = MiddleCenter;
 	glTabMainTab_2.Visible = 1;
 	glTabMainTab_2.RedrawMe = 1;
-	glTabMainTab_2.Location = (Point){ .x = 200, .y = 0 };
-	glTabMainTab_2.Size = (Size){ .width = 100, .height = 30 };
+	glTabMainTab_2.Location = (Point){ .x = 140, .y = 0 };
+	glTabMainTab_2.Size = (Size){ .width = 70, .height = 30 };
 	strcpy(glTabMainTab_2.Text, "VARS");
 	strcpy(glTabMainTab_2.CheckedText, "");
 	glTabMainTab_2.Checked = 0;
@@ -1005,17 +989,11 @@ void  InitPanelMain()
 	glNudVars10.Type = NUMERIC;
 	strcpy(glNudVars10.Name, "glNudVars10");
 	glNudVars10.BackColor = RGB16(0, 22, 34);
-	 ;
 	glNudVars10.ForeColor = RGB16(122, 225, 255);
-	 ;
-	glNudVars10.BorderColor = RGB16(1, 103, 137); 
-	;
+	glNudVars10.BorderColor = RGB16(1, 103, 137);
 	glNudVars10.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	glNudVars10.FocusForeColor = RGB16(0, 0, 0);
-	 ;
 	glNudVars10.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars10.BorderWidth = 1;
 	glNudVars10.CornerRadius = 1;
 	glNudVars10.Font = &Font20;
@@ -1036,21 +1014,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars09.Type = NUMERIC;
 	strcpy(glNudVars09.Name, "glNudVars09");
-	glNudVars09.BackColor = RGB16(0, 22, 34); 
-	;
+	glNudVars09.BackColor = RGB16(0, 22, 34);
 	glNudVars09.ForeColor = RGB16(122, 225, 255);
-	 ;
-	glNudVars09.BorderColor = RGB16(1, 103, 137); 
-	;
+	glNudVars09.BorderColor = RGB16(1, 103, 137);
 	glNudVars09.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	glNudVars09.FocusForeColor = RGB16(0, 0, 0);
-	 ;
 	glNudVars09.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars09.BorderWidth = 1;
 	glNudVars09.CornerRadius = 1;
 	glNudVars09.Font = &Font20;
@@ -1071,21 +1042,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars08.Type = NUMERIC;
 	strcpy(glNudVars08.Name, "glNudVars08");
 	glNudVars08.BackColor = RGB16(0, 22, 34);
-	 ;
-	glNudVars08.ForeColor = RGB16(122, 225, 255); 
-	;
+	glNudVars08.ForeColor = RGB16(122, 225, 255);
 	glNudVars08.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars08.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	glNudVars08.FocusForeColor = RGB16(0, 0, 0);
-	 ;
 	glNudVars08.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars08.BorderWidth = 1;
 	glNudVars08.CornerRadius = 1;
 	glNudVars08.Font = &Font20;
@@ -1106,21 +1070,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars07.Type = NUMERIC;
 	strcpy(glNudVars07.Name, "glNudVars07");
 	glNudVars07.BackColor = RGB16(0, 22, 34);
-	 ;
 	glNudVars07.ForeColor = RGB16(122, 225, 255);
-	 ;
 	glNudVars07.BorderColor = RGB16(1, 103, 137);
-	 ;
-	glNudVars07.FocusBackColor = RGB16(0, 175, 255); 
-	;
-	glNudVars07.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	glNudVars07.FocusBackColor = RGB16(0, 175, 255);
+	glNudVars07.FocusForeColor = RGB16(0, 0, 0);
 	glNudVars07.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars07.BorderWidth = 1;
 	glNudVars07.CornerRadius = 1;
 	glNudVars07.Font = &Font20;
@@ -1141,21 +1098,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars06.Type = NUMERIC;
 	strcpy(glNudVars06.Name, "glNudVars06");
 	glNudVars06.BackColor = RGB16(0, 22, 34);
-	 ;
 	glNudVars06.ForeColor = RGB16(122, 225, 255);
-	 ;
 	glNudVars06.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars06.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	glNudVars06.FocusForeColor = RGB16(0, 0, 0); 
-	;
-	glNudVars06.FocusBorderColor = RGB16(2, 49, 72); 
-	;
+	glNudVars06.FocusForeColor = RGB16(0, 0, 0);
+	glNudVars06.FocusBorderColor = RGB16(2, 49, 72);
 	glNudVars06.BorderWidth = 1;
 	glNudVars06.CornerRadius = 1;
 	glNudVars06.Font = &Font20;
@@ -1176,21 +1126,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars05.Type = NUMERIC;
 	strcpy(glNudVars05.Name, "glNudVars05");
 	glNudVars05.BackColor = RGB16(0, 22, 34);
-	 ;
 	glNudVars05.ForeColor = RGB16(122, 225, 255);
-	 ;
 	glNudVars05.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars05.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	glNudVars05.FocusForeColor = RGB16(0, 0, 0); 
-	;
-	glNudVars05.FocusBorderColor = RGB16(2, 49, 72); 
-	;
+	glNudVars05.FocusForeColor = RGB16(0, 0, 0);
+	glNudVars05.FocusBorderColor = RGB16(2, 49, 72);
 	glNudVars05.BorderWidth = 1;
 	glNudVars05.CornerRadius = 1;
 	glNudVars05.Font = &Font20;
@@ -1211,21 +1154,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars04.Type = NUMERIC;
 	strcpy(glNudVars04.Name, "glNudVars04");
-	glNudVars04.BackColor = RGB16(0, 22, 34); 
-	;
+	glNudVars04.BackColor = RGB16(0, 22, 34);
 	glNudVars04.ForeColor = RGB16(122, 225, 255);
-	 ;
 	glNudVars04.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars04.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	glNudVars04.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	glNudVars04.FocusForeColor = RGB16(0, 0, 0);
 	glNudVars04.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars04.BorderWidth = 1;
 	glNudVars04.CornerRadius = 1;
 	glNudVars04.Font = &Font20;
@@ -1246,21 +1182,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars03.Type = NUMERIC;
 	strcpy(glNudVars03.Name, "glNudVars03");
-	glNudVars03.BackColor = RGB16(0, 22, 34); 
-	;
+	glNudVars03.BackColor = RGB16(0, 22, 34);
 	glNudVars03.ForeColor = RGB16(122, 225, 255);
-	 ;
 	glNudVars03.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars03.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	glNudVars03.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	glNudVars03.FocusForeColor = RGB16(0, 0, 0);
 	glNudVars03.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars03.BorderWidth = 1;
 	glNudVars03.CornerRadius = 1;
 	glNudVars03.Font = &Font20;
@@ -1281,21 +1210,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars02.Type = NUMERIC;
 	strcpy(glNudVars02.Name, "glNudVars02");
 	glNudVars02.BackColor = RGB16(0, 22, 34);
-	 ;
 	glNudVars02.ForeColor = RGB16(122, 225, 255);
-	 ;
-	glNudVars02.BorderColor = RGB16(1, 103, 137); 
-	;
+	glNudVars02.BorderColor = RGB16(1, 103, 137);
 	glNudVars02.FocusBackColor = RGB16(0, 175, 255);
-	 ;
 	glNudVars02.FocusForeColor = RGB16(0, 0, 0);
-	 ;
 	glNudVars02.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars02.BorderWidth = 1;
 	glNudVars02.CornerRadius = 1;
 	glNudVars02.Font = &Font20;
@@ -1316,21 +1238,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars01.Type = NUMERIC;
 	strcpy(glNudVars01.Name, "glNudVars01");
 	glNudVars01.BackColor = RGB16(0, 22, 34);
-	 ;
-	glNudVars01.ForeColor = RGB16(122, 225, 255); 
-	;
+	glNudVars01.ForeColor = RGB16(122, 225, 255);
 	glNudVars01.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars01.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	glNudVars01.FocusForeColor = RGB16(0, 0, 0); 
-	;
+	glNudVars01.FocusForeColor = RGB16(0, 0, 0);
 	glNudVars01.FocusBorderColor = RGB16(2, 49, 72);
-	 ;
 	glNudVars01.BorderWidth = 1;
 	glNudVars01.CornerRadius = 1;
 	glNudVars01.Font = &Font20;
@@ -1351,21 +1266,14 @@ void  InitPanelMain()
 
 
 
-
 	glNudVars00.Type = NUMERIC;
 	strcpy(glNudVars00.Name, "glNudVars00");
 	glNudVars00.BackColor = RGB16(0, 22, 34);
-	 ;
-	glNudVars00.ForeColor = RGB16(122, 225, 255); 
-	;
+	glNudVars00.ForeColor = RGB16(122, 225, 255);
 	glNudVars00.BorderColor = RGB16(1, 103, 137);
-	 ;
 	glNudVars00.FocusBackColor = RGB16(0, 175, 255);
-	 ;
-	glNudVars00.FocusForeColor = RGB16(0, 0, 0); 
-	;
-	glNudVars00.FocusBorderColor = RGB16(2, 49, 72); 
-	;
+	glNudVars00.FocusForeColor = RGB16(0, 0, 0);
+	glNudVars00.FocusBorderColor = RGB16(2, 49, 72);
 	glNudVars00.BorderWidth = 1;
 	glNudVars00.CornerRadius = 1;
 	glNudVars00.Font = &Font20;
@@ -1383,7 +1291,6 @@ void  InitPanelMain()
 	numeric_update(&glNudVars00);
 
 	panel_add_child(&gL_Panel1, &glNudVars00); //add to the panel
-
 
 
 
@@ -1411,7 +1318,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label3.Type = LABEL;
 	strcpy(gL_Label3.Name, "gL_Label3");
 	gL_Label3.BackColor = RGB16(0, 22, 34);
@@ -1433,7 +1339,6 @@ void  InitPanelMain()
 	gL_Label3.Event_Up = NULL;
 
 	panel_add_child(&gL_Panel1, &gL_Label3); //add to the panel
-
 
 
 
@@ -1461,7 +1366,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label13.Type = LABEL;
 	strcpy(gL_Label13.Name, "gL_Label13");
 	gL_Label13.BackColor = RGB16(0, 22, 34);
@@ -1483,7 +1387,6 @@ void  InitPanelMain()
 	gL_Label13.Event_Up = NULL;
 
 	panel_add_child(&gL_Panel1, &gL_Label13); //add to the panel
-
 
 
 
@@ -1511,7 +1414,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label11.Type = LABEL;
 	strcpy(gL_Label11.Name, "gL_Label11");
 	gL_Label11.BackColor = RGB16(0, 22, 34);
@@ -1533,7 +1435,6 @@ void  InitPanelMain()
 	gL_Label11.Event_Up = NULL;
 
 	panel_add_child(&gL_Panel1, &gL_Label11); //add to the panel
-
 
 
 
@@ -1561,7 +1462,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label9.Type = LABEL;
 	strcpy(gL_Label9.Name, "gL_Label9");
 	gL_Label9.BackColor = RGB16(0, 22, 34);
@@ -1583,7 +1483,6 @@ void  InitPanelMain()
 	gL_Label9.Event_Up = NULL;
 
 	panel_add_child(&gL_Panel1, &gL_Label9); //add to the panel
-
 
 
 
@@ -1611,7 +1510,6 @@ void  InitPanelMain()
 
 
 
-
 	gL_Label5.Type = LABEL;
 	strcpy(gL_Label5.Name, "gL_Label5");
 	gL_Label5.BackColor = RGB16(0, 22, 34);
@@ -1633,7 +1531,6 @@ void  InitPanelMain()
 	gL_Label5.Event_Up = NULL;
 
 	panel_add_child(&gL_Panel1, &gL_Label5); //add to the panel
-
 
 
 
@@ -1661,10 +1558,7 @@ void  InitPanelMain()
 
 
 
-
 	panel_add_child(&glTabMainPanel_2, &gL_Panel1); //add to the panel
-
-
 
 
 
@@ -1690,11 +1584,613 @@ void  InitPanelMain()
 	panel_update(&glTabMainPanel_2);
 
 	tabcontrol_add_child(&glTabMain, &glTabMainTab_2, &glTabMainPanel_2);
+
+	glTabMainTab_3.Type = BUTTON;
+	strcpy(glTabMainTab_3.Name, "glTabMainTab_3");
+	glTabMainTab_3.Event_Down = NULL;
+	glTabMainTab_3.Event_Hold = NULL;
+	glTabMainTab_3.Event_Up   = NULL;
+	glTabMainTab_3.BackColor = RGB16(2, 46, 61);
+	glTabMainTab_3.ForeColor = RGB16(132, 225, 255);
+	glTabMainTab_3.BorderColor = RGB16(1, 103, 137);
+	glTabMainTab_3.CheckedBackColor = RGB16(62, 209, 255);
+	glTabMainTab_3.CheckedForeColor = RGB16(2, 46, 61);
+	glTabMainTab_3.CheckedBorderColor = RGB16(0, 0, 0);
+	glTabMainTab_3.FocusBackColor = RGB16(0, 0, 0);
+	glTabMainTab_3.FocusForeColor = RGB16(0, 0, 0);
+	glTabMainTab_3.FocusBorderColor = RGB16(0, 0, 0);
+	glTabMainTab_3.BorderWidth = 1;
+	glTabMainTab_3.CornerRadius = 0;
+	glTabMainTab_3.Font = &Font16;
+	glTabMainTab_3.Padding = (PADDING) { 4, 4, 4, 4 };
+	glTabMainTab_3.TextAlign = MiddleCenter;
+	glTabMainTab_3.Visible = 1;
+	glTabMainTab_3.RedrawMe = 1;
+	glTabMainTab_3.Location = (Point){ .x = 210, .y = 0 };
+	glTabMainTab_3.Size = (Size){ .width = 70, .height = 30 };
+	strcpy(glTabMainTab_3.Text, "SECS");
+	strcpy(glTabMainTab_3.CheckedText, "");
+	glTabMainTab_3.Checked = 0;
+
+
+	gL_Label19.Type = LABEL;
+	strcpy(gL_Label19.Name, "gL_Label19");
+	gL_Label19.BackColor = RGB16(0, 22, 34);
+	gL_Label19.ForeColor = RGB16(122, 225, 255);
+	gL_Label19.BorderColor = RGB16(0, 0, 0);
+	gL_Label19.BorderWidth = 0;
+	gL_Label19.CornerRadius = 0;
+	gL_Label19.Font = &Font16;
+	gL_Label19.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label19.TextAlign = MiddleCenter;
+	gL_Label19.Visible = 1;
+	gL_Label19.RedrawMe = 1;
+	gL_Label19.Location = (Point){ .x = 192, .y = 15 };
+	gL_Label19.Size = (Size){ .width = 76, .height = 22 };
+	strcpy(gL_Label19.Text, "XMT");
+	//add click event callbacks
+	gL_Label19.Event_Down = NULL;
+	gL_Label19.Event_Hold = NULL;
+	gL_Label19.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label19); //add to the panel
+
+
+
+	gL_Label18.Type = LABEL;
+	strcpy(gL_Label18.Name, "gL_Label18");
+	gL_Label18.BackColor = RGB16(0, 22, 34);
+	gL_Label18.ForeColor = RGB16(122, 225, 255);
+	gL_Label18.BorderColor = RGB16(0, 0, 0);
+	gL_Label18.BorderWidth = 0;
+	gL_Label18.CornerRadius = 0;
+	gL_Label18.Font = &Font16;
+	gL_Label18.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label18.TextAlign = MiddleCenter;
+	gL_Label18.Visible = 1;
+	gL_Label18.RedrawMe = 1;
+	gL_Label18.Location = (Point){ .x = 25, .y = 15 };
+	gL_Label18.Size = (Size){ .width = 76, .height = 22 };
+	strcpy(gL_Label18.Text, "RCV");
+	//add click event callbacks
+	gL_Label18.Event_Down = NULL;
+	gL_Label18.Event_Hold = NULL;
+	gL_Label18.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label18); //add to the panel
+
+
+
+	gL_Label27.Type = LABEL;
+	strcpy(gL_Label27.Name, "gL_Label27");
+	gL_Label27.BackColor = RGB16(0, 22, 34);
+	gL_Label27.ForeColor = RGB16(122, 225, 255);
+	gL_Label27.BorderColor = RGB16(0, 0, 0);
+	gL_Label27.BorderWidth = 0;
+	gL_Label27.CornerRadius = 0;
+	gL_Label27.Font = &Font16;
+	gL_Label27.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label27.TextAlign = MiddleCenter;
+	gL_Label27.Visible = 1;
+	gL_Label27.RedrawMe = 1;
+	gL_Label27.Location = (Point){ .x = 108, .y = 332 };
+	gL_Label27.Size = (Size){ .width = 74, .height = 22 };
+	strcpy(gL_Label27.Text, "Retries");
+	//add click event callbacks
+	gL_Label27.Event_Down = NULL;
+	gL_Label27.Event_Hold = NULL;
+	gL_Label27.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label27); //add to the panel
+
+
+
+	gL_Label26.Type = LABEL;
+	strcpy(gL_Label26.Name, "gL_Label26");
+	gL_Label26.BackColor = RGB16(0, 22, 34);
+	gL_Label26.ForeColor = RGB16(122, 225, 255);
+	gL_Label26.BorderColor = RGB16(0, 0, 0);
+	gL_Label26.BorderWidth = 0;
+	gL_Label26.CornerRadius = 0;
+	gL_Label26.Font = &Font16;
+	gL_Label26.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label26.TextAlign = MiddleCenter;
+	gL_Label26.Visible = 1;
+	gL_Label26.RedrawMe = 1;
+	gL_Label26.Location = (Point){ .x = 107, .y = 294 };
+	gL_Label26.Size = (Size){ .width = 75, .height = 22 };
+	strcpy(gL_Label26.Text, "Timer 2");
+	//add click event callbacks
+	gL_Label26.Event_Down = NULL;
+	gL_Label26.Event_Hold = NULL;
+	gL_Label26.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label26); //add to the panel
+
+
+
+	gL_Label24.Type = LABEL;
+	strcpy(gL_Label24.Name, "gL_Label24");
+	gL_Label24.BackColor = RGB16(0, 22, 34);
+	gL_Label24.ForeColor = RGB16(122, 225, 255);
+	gL_Label24.BorderColor = RGB16(0, 0, 0);
+	gL_Label24.BorderWidth = 0;
+	gL_Label24.CornerRadius = 0;
+	gL_Label24.Font = &Font16;
+	gL_Label24.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label24.TextAlign = MiddleCenter;
+	gL_Label24.Visible = 1;
+	gL_Label24.RedrawMe = 1;
+	gL_Label24.Location = (Point){ .x = 107, .y = 201 };
+	gL_Label24.Size = (Size){ .width = 141, .height = 22 };
+	strcpy(gL_Label24.Text, "Timeout Error #");
+	//add click event callbacks
+	gL_Label24.Event_Down = NULL;
+	gL_Label24.Event_Hold = NULL;
+	gL_Label24.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label24); //add to the panel
+
+
+
+	gL_Label28.Type = LABEL;
+	strcpy(gL_Label28.Name, "gL_Label28");
+	gL_Label28.BackColor = RGB16(0, 22, 34);
+	gL_Label28.ForeColor = RGB16(122, 225, 255);
+	gL_Label28.BorderColor = RGB16(0, 0, 0);
+	gL_Label28.BorderWidth = 0;
+	gL_Label28.CornerRadius = 0;
+	gL_Label28.Font = &Font16;
+	gL_Label28.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label28.TextAlign = MiddleCenter;
+	gL_Label28.Visible = 1;
+	gL_Label28.RedrawMe = 1;
+	gL_Label28.Location = (Point){ .x = 214, .y = 246 };
+	gL_Label28.Size = (Size){ .width = 74, .height = 22 };
+	strcpy(gL_Label28.Text, "FLAG");
+	//add click event callbacks
+	gL_Label28.Event_Down = NULL;
+	gL_Label28.Event_Hold = NULL;
+	gL_Label28.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label28); //add to the panel
+
+
+
+	gL_Label25.Type = LABEL;
+	strcpy(gL_Label25.Name, "gL_Label25");
+	gL_Label25.BackColor = RGB16(0, 22, 34);
+	gL_Label25.ForeColor = RGB16(122, 225, 255);
+	gL_Label25.BorderColor = RGB16(0, 0, 0);
+	gL_Label25.BorderWidth = 0;
+	gL_Label25.CornerRadius = 0;
+	gL_Label25.Font = &Font16;
+	gL_Label25.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label25.TextAlign = MiddleCenter;
+	gL_Label25.Visible = 1;
+	gL_Label25.RedrawMe = 1;
+	gL_Label25.Location = (Point){ .x = 108, .y = 255 };
+	gL_Label25.Size = (Size){ .width = 74, .height = 22 };
+	strcpy(gL_Label25.Text, "Timer 1");
+	//add click event callbacks
+	gL_Label25.Event_Down = NULL;
+	gL_Label25.Event_Hold = NULL;
+	gL_Label25.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label25); //add to the panel
+
+
+
+	gL_Label23.Type = LABEL;
+	strcpy(gL_Label23.Name, "gL_Label23");
+	gL_Label23.BackColor = RGB16(0, 22, 34);
+	gL_Label23.ForeColor = RGB16(122, 225, 255);
+	gL_Label23.BorderColor = RGB16(0, 0, 0);
+	gL_Label23.BorderWidth = 0;
+	gL_Label23.CornerRadius = 0;
+	gL_Label23.Font = &Font16;
+	gL_Label23.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label23.TextAlign = MiddleCenter;
+	gL_Label23.Visible = 1;
+	gL_Label23.RedrawMe = 1;
+	gL_Label23.Location = (Point){ .x = 108, .y = 162 };
+	gL_Label23.Size = (Size){ .width = 141, .height = 22 };
+	strcpy(gL_Label23.Text, "CheckSum Error#");
+	//add click event callbacks
+	gL_Label23.Event_Down = NULL;
+	gL_Label23.Event_Hold = NULL;
+	gL_Label23.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label23); //add to the panel
+
+
+
+	gL_Label22.Type = LABEL;
+	strcpy(gL_Label22.Name, "gL_Label22");
+	gL_Label22.BackColor = RGB16(0, 22, 34);
+	gL_Label22.ForeColor = RGB16(122, 225, 255);
+	gL_Label22.BorderColor = RGB16(0, 0, 0);
+	gL_Label22.BorderWidth = 0;
+	gL_Label22.CornerRadius = 0;
+	gL_Label22.Font = &Font16;
+	gL_Label22.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label22.TextAlign = MiddleCenter;
+	gL_Label22.Visible = 1;
+	gL_Label22.RedrawMe = 1;
+	gL_Label22.Location = (Point){ .x = 108, .y = 125 };
+	gL_Label22.Size = (Size){ .width = 76, .height = 22 };
+	strcpy(gL_Label22.Text, "Stm/Func");
+	//add click event callbacks
+	gL_Label22.Event_Down = NULL;
+	gL_Label22.Event_Hold = NULL;
+	gL_Label22.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label22); //add to the panel
+
+
+
+	gL_Label20.Type = LABEL;
+	strcpy(gL_Label20.Name, "gL_Label20");
+	gL_Label20.BackColor = RGB16(0, 22, 34);
+	gL_Label20.ForeColor = RGB16(122, 225, 255);
+	gL_Label20.BorderColor = RGB16(0, 0, 0);
+	gL_Label20.BorderWidth = 0;
+	gL_Label20.CornerRadius = 0;
+	gL_Label20.Font = &Font16;
+	gL_Label20.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label20.TextAlign = MiddleCenter;
+	gL_Label20.Visible = 1;
+	gL_Label20.RedrawMe = 1;
+	gL_Label20.Location = (Point){ .x = 108, .y = 81 };
+	gL_Label20.Size = (Size){ .width = 76, .height = 22 };
+	strcpy(gL_Label20.Text, "FAIL # ");
+	//add click event callbacks
+	gL_Label20.Event_Down = NULL;
+	gL_Label20.Event_Hold = NULL;
+	gL_Label20.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label20); //add to the panel
+
+
+
+	etSecsRetries.Type = EDIT;
+	strcpy(etSecsRetries.Name, "etSecsRetries");
+	etSecsRetries.BackColor = RGB16(0, 22, 34);
+	etSecsRetries.ForeColor = RGB16(122, 225, 255);
+	etSecsRetries.BorderColor = RGB16(1, 103, 137);
+	etSecsRetries.FocusBackColor = RGB16(0, 175, 255);
+	etSecsRetries.FocusForeColor = RGB16(0, 0, 0);
+	etSecsRetries.FocusBorderColor = RGB16(2, 49, 72);
+	etSecsRetries.BorderWidth = 1;
+	etSecsRetries.CornerRadius = 0;
+	etSecsRetries.Font = &Font16;
+	etSecsRetries.Padding = (PADDING) { 0, 0, 0, 0 };
+	etSecsRetries.TextAlign = MiddleCenter;
+	etSecsRetries.Visible = 1;
+	etSecsRetries.RedrawMe = 1;
+	etSecsRetries.Location = (Point){ .x = 27, .y = 326 };
+	etSecsRetries.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etSecsRetries.Text, "0");
+	edit_update(&etSecsRetries);
+
+	panel_add_child(&glTabMainPanel_3, &etSecsRetries); //add to the panel
+
+
+
+	gL_Label21.Type = LABEL;
+	strcpy(gL_Label21.Name, "gL_Label21");
+	gL_Label21.BackColor = RGB16(0, 22, 34);
+	gL_Label21.ForeColor = RGB16(122, 225, 255);
+	gL_Label21.BorderColor = RGB16(0, 0, 0);
+	gL_Label21.BorderWidth = 0;
+	gL_Label21.CornerRadius = 0;
+	gL_Label21.Font = &Font16;
+	gL_Label21.Padding = (PADDING) { 0, 0, 0, 0 };
+	gL_Label21.TextAlign = MiddleCenter;
+	gL_Label21.Visible = 1;
+	gL_Label21.RedrawMe = 1;
+	gL_Label21.Location = (Point){ .x = 108, .y = 44 };
+	gL_Label21.Size = (Size){ .width = 76, .height = 22 };
+	strcpy(gL_Label21.Text, "PASS # ");
+	//add click event callbacks
+	gL_Label21.Event_Down = NULL;
+	gL_Label21.Event_Hold = NULL;
+	gL_Label21.Event_Up = NULL;
+
+	panel_add_child(&glTabMainPanel_3, &gL_Label21); //add to the panel
+
+
+
+	etSecsTimer2.Type = EDIT;
+	strcpy(etSecsTimer2.Name, "etSecsTimer2");
+	etSecsTimer2.BackColor = RGB16(0, 22, 34);
+	etSecsTimer2.ForeColor = RGB16(122, 225, 255);
+	etSecsTimer2.BorderColor = RGB16(1, 103, 137);
+	etSecsTimer2.FocusBackColor = RGB16(0, 175, 255);
+	etSecsTimer2.FocusForeColor = RGB16(0, 0, 0);
+	etSecsTimer2.FocusBorderColor = RGB16(2, 49, 72);
+	etSecsTimer2.BorderWidth = 1;
+	etSecsTimer2.CornerRadius = 0;
+	etSecsTimer2.Font = &Font16;
+	etSecsTimer2.Padding = (PADDING) { 0, 0, 0, 0 };
+	etSecsTimer2.TextAlign = MiddleCenter;
+	etSecsTimer2.Visible = 1;
+	etSecsTimer2.RedrawMe = 1;
+	etSecsTimer2.Location = (Point){ .x = 26, .y = 288 };
+	etSecsTimer2.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etSecsTimer2.Text, "0");
+	edit_update(&etSecsTimer2);
+
+	panel_add_child(&glTabMainPanel_3, &etSecsTimer2); //add to the panel
+
+
+
+	etSecsFlag.Type = EDIT;
+	strcpy(etSecsFlag.Name, "etSecsFlag");
+	etSecsFlag.BackColor = RGB16(0, 22, 34);
+	etSecsFlag.ForeColor = RGB16(122, 225, 255);
+	etSecsFlag.BorderColor = RGB16(1, 103, 137);
+	etSecsFlag.FocusBackColor = RGB16(0, 175, 255);
+	etSecsFlag.FocusForeColor = RGB16(0, 0, 0);
+	etSecsFlag.FocusBorderColor = RGB16(2, 49, 72);
+	etSecsFlag.BorderWidth = 1;
+	etSecsFlag.CornerRadius = 0;
+	etSecsFlag.Font = &Font16;
+	etSecsFlag.Padding = (PADDING) { 0, 0, 0, 0 };
+	etSecsFlag.TextAlign = MiddleCenter;
+	etSecsFlag.Visible = 1;
+	etSecsFlag.RedrawMe = 1;
+	etSecsFlag.Location = (Point){ .x = 215, .y = 268 };
+	etSecsFlag.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etSecsFlag.Text, "0");
+	edit_update(&etSecsFlag);
+
+	panel_add_child(&glTabMainPanel_3, &etSecsFlag); //add to the panel
+
+
+
+	etLastXMT.Type = EDIT;
+	strcpy(etLastXMT.Name, "etLastXMT");
+	etLastXMT.BackColor = RGB16(0, 22, 34);
+	etLastXMT.ForeColor = RGB16(122, 225, 255);
+	etLastXMT.BorderColor = RGB16(1, 103, 137);
+	etLastXMT.FocusBackColor = RGB16(0, 175, 255);
+	etLastXMT.FocusForeColor = RGB16(0, 0, 0);
+	etLastXMT.FocusBorderColor = RGB16(2, 49, 72);
+	etLastXMT.BorderWidth = 1;
+	etLastXMT.CornerRadius = 0;
+	etLastXMT.Font = &Font16;
+	etLastXMT.Padding = (PADDING) { 0, 0, 0, 0 };
+	etLastXMT.TextAlign = MiddleCenter;
+	etLastXMT.Visible = 1;
+	etLastXMT.RedrawMe = 1;
+	etLastXMT.Location = (Point){ .x = 202, .y = 119 };
+	etLastXMT.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etLastXMT.Text, "0");
+	edit_update(&etLastXMT);
+
+	panel_add_child(&glTabMainPanel_3, &etLastXMT); //add to the panel
+
+
+
+	etSecsTimer1.Type = EDIT;
+	strcpy(etSecsTimer1.Name, "etSecsTimer1");
+	etSecsTimer1.BackColor = RGB16(0, 22, 34);
+	etSecsTimer1.ForeColor = RGB16(122, 225, 255);
+	etSecsTimer1.BorderColor = RGB16(1, 103, 137);
+	etSecsTimer1.FocusBackColor = RGB16(0, 175, 255);
+	etSecsTimer1.FocusForeColor = RGB16(0, 0, 0);
+	etSecsTimer1.FocusBorderColor = RGB16(2, 49, 72);
+	etSecsTimer1.BorderWidth = 1;
+	etSecsTimer1.CornerRadius = 0;
+	etSecsTimer1.Font = &Font16;
+	etSecsTimer1.Padding = (PADDING) { 0, 0, 0, 0 };
+	etSecsTimer1.TextAlign = MiddleCenter;
+	etSecsTimer1.Visible = 1;
+	etSecsTimer1.RedrawMe = 1;
+	etSecsTimer1.Location = (Point){ .x = 27, .y = 249 };
+	etSecsTimer1.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etSecsTimer1.Text, "0");
+	edit_update(&etSecsTimer1);
+
+	panel_add_child(&glTabMainPanel_3, &etSecsTimer1); //add to the panel
+
+
+
+	etTimoutErrors.Type = EDIT;
+	strcpy(etTimoutErrors.Name, "etTimoutErrors");
+	etTimoutErrors.BackColor = RGB16(0, 22, 34);
+	etTimoutErrors.ForeColor = RGB16(122, 225, 255);
+	etTimoutErrors.BorderColor = RGB16(1, 103, 137);
+	etTimoutErrors.FocusBackColor = RGB16(0, 175, 255);
+	etTimoutErrors.FocusForeColor = RGB16(0, 0, 0);
+	etTimoutErrors.FocusBorderColor = RGB16(2, 49, 72);
+	etTimoutErrors.BorderWidth = 1;
+	etTimoutErrors.CornerRadius = 0;
+	etTimoutErrors.Font = &Font16;
+	etTimoutErrors.Padding = (PADDING) { 0, 0, 0, 0 };
+	etTimoutErrors.TextAlign = MiddleCenter;
+	etTimoutErrors.Visible = 1;
+	etTimoutErrors.RedrawMe = 1;
+	etTimoutErrors.Location = (Point){ .x = 26, .y = 195 };
+	etTimoutErrors.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etTimoutErrors.Text, "0");
+	edit_update(&etTimoutErrors);
+
+	panel_add_child(&glTabMainPanel_3, &etTimoutErrors); //add to the panel
+
+
+
+	etCheckSumErrors.Type = EDIT;
+	strcpy(etCheckSumErrors.Name, "etCheckSumErrors");
+	etCheckSumErrors.BackColor = RGB16(0, 22, 34);
+	etCheckSumErrors.ForeColor = RGB16(122, 225, 255);
+	etCheckSumErrors.BorderColor = RGB16(1, 103, 137);
+	etCheckSumErrors.FocusBackColor = RGB16(0, 175, 255);
+	etCheckSumErrors.FocusForeColor = RGB16(0, 0, 0);
+	etCheckSumErrors.FocusBorderColor = RGB16(2, 49, 72);
+	etCheckSumErrors.BorderWidth = 1;
+	etCheckSumErrors.CornerRadius = 0;
+	etCheckSumErrors.Font = &Font16;
+	etCheckSumErrors.Padding = (PADDING) { 0, 0, 0, 0 };
+	etCheckSumErrors.TextAlign = MiddleCenter;
+	etCheckSumErrors.Visible = 1;
+	etCheckSumErrors.RedrawMe = 1;
+	etCheckSumErrors.Location = (Point){ .x = 27, .y = 156 };
+	etCheckSumErrors.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etCheckSumErrors.Text, "0");
+	edit_update(&etCheckSumErrors);
+
+	panel_add_child(&glTabMainPanel_3, &etCheckSumErrors); //add to the panel
+
+
+
+	etLastRecv.Type = EDIT;
+	strcpy(etLastRecv.Name, "etLastRecv");
+	etLastRecv.BackColor = RGB16(0, 22, 34);
+	etLastRecv.ForeColor = RGB16(122, 225, 255);
+	etLastRecv.BorderColor = RGB16(1, 103, 137);
+	etLastRecv.FocusBackColor = RGB16(0, 175, 255);
+	etLastRecv.FocusForeColor = RGB16(0, 0, 0);
+	etLastRecv.FocusBorderColor = RGB16(2, 49, 72);
+	etLastRecv.BorderWidth = 1;
+	etLastRecv.CornerRadius = 0;
+	etLastRecv.Font = &Font16;
+	etLastRecv.Padding = (PADDING) { 0, 0, 0, 0 };
+	etLastRecv.TextAlign = MiddleCenter;
+	etLastRecv.Visible = 1;
+	etLastRecv.RedrawMe = 1;
+	etLastRecv.Location = (Point){ .x = 27, .y = 119 };
+	etLastRecv.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etLastRecv.Text, "0");
+	edit_update(&etLastRecv);
+
+	panel_add_child(&glTabMainPanel_3, &etLastRecv); //add to the panel
+
+
+
+	etXMTFails.Type = EDIT;
+	strcpy(etXMTFails.Name, "etXMTFails");
+	etXMTFails.BackColor = RGB16(0, 22, 34);
+	etXMTFails.ForeColor = RGB16(122, 225, 255);
+	etXMTFails.BorderColor = RGB16(1, 103, 137);
+	etXMTFails.FocusBackColor = RGB16(0, 175, 255);
+	etXMTFails.FocusForeColor = RGB16(0, 0, 0);
+	etXMTFails.FocusBorderColor = RGB16(2, 49, 72);
+	etXMTFails.BorderWidth = 1;
+	etXMTFails.CornerRadius = 0;
+	etXMTFails.Font = &Font16;
+	etXMTFails.Padding = (PADDING) { 0, 0, 0, 0 };
+	etXMTFails.TextAlign = MiddleCenter;
+	etXMTFails.Visible = 1;
+	etXMTFails.RedrawMe = 1;
+	etXMTFails.Location = (Point){ .x = 202, .y = 75 };
+	etXMTFails.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etXMTFails.Text, "0");
+	edit_update(&etXMTFails);
+
+	panel_add_child(&glTabMainPanel_3, &etXMTFails); //add to the panel
+
+
+
+	etRCVFails.Type = EDIT;
+	strcpy(etRCVFails.Name, "etRCVFails");
+	etRCVFails.BackColor = RGB16(0, 22, 34);
+	etRCVFails.ForeColor = RGB16(122, 225, 255);
+	etRCVFails.BorderColor = RGB16(1, 103, 137);
+	etRCVFails.FocusBackColor = RGB16(0, 175, 255);
+	etRCVFails.FocusForeColor = RGB16(0, 0, 0);
+	etRCVFails.FocusBorderColor = RGB16(2, 49, 72);
+	etRCVFails.BorderWidth = 1;
+	etRCVFails.CornerRadius = 0;
+	etRCVFails.Font = &Font16;
+	etRCVFails.Padding = (PADDING) { 0, 0, 0, 0 };
+	etRCVFails.TextAlign = MiddleCenter;
+	etRCVFails.Visible = 1;
+	etRCVFails.RedrawMe = 1;
+	etRCVFails.Location = (Point){ .x = 27, .y = 75 };
+	etRCVFails.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etRCVFails.Text, "0");
+	edit_update(&etRCVFails);
+
+	panel_add_child(&glTabMainPanel_3, &etRCVFails); //add to the panel
+
+
+
+	etXmtNum.Type = EDIT;
+	strcpy(etXmtNum.Name, "etXmtNum");
+	etXmtNum.BackColor = RGB16(0, 22, 34);
+	etXmtNum.ForeColor = RGB16(122, 225, 255);
+	etXmtNum.BorderColor = RGB16(1, 103, 137);
+	etXmtNum.FocusBackColor = RGB16(0, 175, 255);
+	etXmtNum.FocusForeColor = RGB16(0, 0, 0);
+	etXmtNum.FocusBorderColor = RGB16(2, 49, 72);
+	etXmtNum.BorderWidth = 1;
+	etXmtNum.CornerRadius = 0;
+	etXmtNum.Font = &Font16;
+	etXmtNum.Padding = (PADDING) { 0, 0, 0, 0 };
+	etXmtNum.TextAlign = MiddleCenter;
+	etXmtNum.Visible = 1;
+	etXmtNum.RedrawMe = 1;
+	etXmtNum.Location = (Point){ .x = 202, .y = 38 };
+	etXmtNum.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etXmtNum.Text, "0");
+	edit_update(&etXmtNum);
+
+	panel_add_child(&glTabMainPanel_3, &etXmtNum); //add to the panel
+
+
+
+	etRcvNum.Type = EDIT;
+	strcpy(etRcvNum.Name, "etRcvNum");
+	etRcvNum.BackColor = RGB16(0, 22, 34);
+	etRcvNum.ForeColor = RGB16(122, 225, 255);
+	etRcvNum.BorderColor = RGB16(1, 103, 137);
+	etRcvNum.FocusBackColor = RGB16(0, 175, 255);
+	etRcvNum.FocusForeColor = RGB16(0, 0, 0);
+	etRcvNum.FocusBorderColor = RGB16(2, 49, 72);
+	etRcvNum.BorderWidth = 1;
+	etRcvNum.CornerRadius = 0;
+	etRcvNum.Font = &Font16;
+	etRcvNum.Padding = (PADDING) { 0, 0, 0, 0 };
+	etRcvNum.TextAlign = MiddleCenter;
+	etRcvNum.Visible = 1;
+	etRcvNum.RedrawMe = 1;
+	etRcvNum.Location = (Point){ .x = 27, .y = 38 };
+	etRcvNum.Size = (Size){ .width = 74, .height = 28 };
+	strcpy(etRcvNum.Text, "0");
+	edit_update(&etRcvNum);
+
+	panel_add_child(&glTabMainPanel_3, &etRcvNum); //add to the panel
+
+
+
+	glTabMainPanel_3.Type = PANEL;
+	strcpy(glTabMainPanel_3.Name, "glTabMainPanel_3");
+	glTabMainPanel_3.BackColor = RGB16(0, 22, 34);
+	glTabMainPanel_3.ForeColor = RGB16(105, 105, 105);
+	glTabMainPanel_3.BorderColor = RGB16(13, 49, 61);
+	glTabMainPanel_3.BorderWidth = 1;
+	glTabMainPanel_3.Location = (Point){ .x = 0, .y = 30 };
+	glTabMainPanel_3.Size = (Size){ .width = 322, .height = 387 };
+	glTabMainPanel_3.StackIndex = -1;
+	glTabMainPanel_3.CornerRadius = 0;
+	glTabMainPanel_3.Font = &Font12;
+	strcpy(glTabMainPanel_3.Text, "");
+	glTabMainPanel_3.Visible = 1;
+	glTabMainPanel_3.RedrawMe = 1;
+	//add click event callbacks
+	glTabMainPanel_3.Event_Down = NULL;
+	glTabMainPanel_3.Event_Hold = NULL;
+	glTabMainPanel_3.Event_Up = NULL;
+	//Components in this panel
+	panel_update(&glTabMainPanel_3);
+
+	tabcontrol_add_child(&glTabMain, &glTabMainTab_3, &glTabMainPanel_3);
 	tabcontrol_update(&glTabMain);
 	tabcontrol_select_panel(&glTabMain, 0);
 
 	panel_add_child(&Root_Panel, &glTabMain); //add to the panel
-
 
 
 
@@ -1707,6 +2203,7 @@ void  InitPanelMain()
 	PanelHandleList[6] = (uint32_t*)&glTabMainPanel_1;
 	PanelHandleList[7] = (uint32_t*)&glTabMainPanel_2;
 	PanelHandleList[8] = (uint32_t*)&gL_Panel1;
+	PanelHandleList[9] = (uint32_t*)&glTabMainPanel_3;
 	sprintf(lblTitle.Text, " %s v%s", RevisionTitle, MajorStep);
 
 }

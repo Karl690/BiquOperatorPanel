@@ -15,6 +15,7 @@
 #include "TouchLCD/Widgets/widget.h"
 #include "TouchLCD/Widgets/button.h"
 #include "Communication/serial.h"
+#include "Communication/secsserial.h"
 uint32_t Seconds = 0;               // needed for heartbeat (number of seconds since boot)
 uint16_t SliceCnt = 0;              // current slice being processed
 uint16_t TaskTime[32]={0};			// last execution time
@@ -41,7 +42,7 @@ const PFUNC F100HZ[NUM_100HZ] =
 	Spare,//loop_100Hz_simple_work, // keep as last call in this array
 	Spare,
 	Spare,
-	Spare,
+	SecsTimers,//SecsTimers,
 	ParseIncommingLineToSecsString,
 	TestUart,//Spare,//CheckForUart3TxRx,
 	CheckEncoderButton,
@@ -55,8 +56,8 @@ const PFUNC F10HZ[NUM_10HZ] =
 	Spare,
 	Spare,
 	Spare,
-	SecsTimers,
-	ParseIncommingLineToSecsString, //TestUart, //TestUart,
+	Spare,
+	Spare, //TestUart, //TestUart,
 	BlinkButtonsTask,
 };
 
@@ -78,8 +79,7 @@ const PFUNC F1HZ[NUM_1HZ] =
 //void TaskManager()
 void func_SystickCallback()
 {
-
-	
+	if (!IsInitialized)	return; //if false, do nothing.
 	SliceCnt++;
 	SliceOffset=SliceCnt&0x0007;  //precalculate the slice index into the jump table
 	if(SliceOffset)
@@ -123,6 +123,16 @@ void TestUart()
 void Spare (void)
 {
 	// placeholder call for empty slice
+}
+
+uint32_t SecsSendNumber = 0;
+void SendSecsS1F1()
+{
+	SecsSendNumber++;
+	if (SecsSendNumber % 10 == 0) // send s1f1 every 10 seconds.
+	{
+		SendSecsCommand(s1f1message, sizeof(s1f1message));	
+	}
 }
 void blink(void)
 {

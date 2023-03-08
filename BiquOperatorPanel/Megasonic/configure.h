@@ -8,9 +8,9 @@
 #define USART4_BAUDRATE 38400U;
 #define USART6_BAUDRATE 0000U;
 
-#define RX_BUFFER_SIZE 0x7ff			//2k
+#define RX_BUFFER_SIZE 0x800 //7ff			//2k
 #define RX_URGENT_BUFFER_SIZE 0x3ff	//1k
-#define TX_BUFFER_SIZE 0x3ff			 //1k
+#define TX_BUFFER_SIZE 0x400  //3ff			 //1k
 
 #define USE_SERIAL_DMA
 
